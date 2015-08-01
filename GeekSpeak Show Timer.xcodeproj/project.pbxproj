@@ -13,6 +13,14 @@
 		D340CC801B6D3E7600BB17E3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */; };
 		D340CC831B6D3E7600BB17E3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D340CC811B6D3E7600BB17E3 /* LaunchScreen.xib */; };
 		D340CC8F1B6D3E7600BB17E3 /* GeekSpeak_Show_TimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CC8E1B6D3E7600BB17E3 /* GeekSpeak_Show_TimerTests.swift */; };
+		D340CC9E1B6D504500BB17E3 /* PieShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CC9B1B6D504500BB17E3 /* PieShapeView.swift */; };
+		D340CC9F1B6D504500BB17E3 /* PieShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D340CC9D1B6D504500BB17E3 /* PieShapeLayer.m */; };
+		D340CCA31B6D556D00BB17E3 /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCA01B6D556D00BB17E3 /* Angle.swift */; };
+		D340CCA41B6D556D00BB17E3 /* AccumulatedAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCA11B6D556D00BB17E3 /* AccumulatedAngle.swift */; };
+		D340CCA51B6D556D00BB17E3 /* AngularType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCA21B6D556D00BB17E3 /* AngularType.swift */; };
+		D340CCAA1B6D6AD300BB17E3 /* RingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D340CCA91B6D6AD300BB17E3 /* RingLayer.m */; };
+		D340CCAC1B6D711700BB17E3 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCAB1B6D711700BB17E3 /* RingView.swift */; };
+		D340CCB11B6D8B9600BB17E3 /* PartialRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB01B6D8B9600BB17E3 /* PartialRingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +44,17 @@
 		D340CC881B6D3E7600BB17E3 /* GeekSpeak Show TimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GeekSpeak Show TimerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D340CC8D1B6D3E7600BB17E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D340CC8E1B6D3E7600BB17E3 /* GeekSpeak_Show_TimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeekSpeak_Show_TimerTests.swift; sourceTree = "<group>"; };
+		D340CC9A1B6D504400BB17E3 /* GeekSpeak Show Timer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GeekSpeak Show Timer-Bridging-Header.h"; sourceTree = "<group>"; };
+		D340CC9B1B6D504500BB17E3 /* PieShapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieShapeView.swift; sourceTree = "<group>"; };
+		D340CC9C1B6D504500BB17E3 /* PieShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieShapeLayer.h; sourceTree = "<group>"; };
+		D340CC9D1B6D504500BB17E3 /* PieShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieShapeLayer.m; sourceTree = "<group>"; };
+		D340CCA01B6D556D00BB17E3 /* Angle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Angle.swift; sourceTree = "<group>"; };
+		D340CCA11B6D556D00BB17E3 /* AccumulatedAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccumulatedAngle.swift; sourceTree = "<group>"; };
+		D340CCA21B6D556D00BB17E3 /* AngularType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AngularType.swift; sourceTree = "<group>"; };
+		D340CCA81B6D6AD300BB17E3 /* RingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RingLayer.h; sourceTree = "<group>"; };
+		D340CCA91B6D6AD300BB17E3 /* RingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RingLayer.m; sourceTree = "<group>"; };
+		D340CCAB1B6D711700BB17E3 /* RingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
+		D340CCB01B6D8B9600BB17E3 /* PartialRingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartialRingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,12 +96,17 @@
 		D340CC751B6D3E7600BB17E3 /* GeekSpeak Show Timer */ = {
 			isa = PBXGroup;
 			children = (
+				D340CC7C1B6D3E7600BB17E3 /* Main.storyboard */,
 				D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */,
 				D340CC7A1B6D3E7600BB17E3 /* ViewController.swift */,
-				D340CC7C1B6D3E7600BB17E3 /* Main.storyboard */,
+				D340CCA61B6D5CC100BB17E3 /* Rotation & Angle Types */,
+				D340CCB01B6D8B9600BB17E3 /* PartialRingView.swift */,
+				D340CCAD1B6D712700BB17E3 /* RingView */,
+				D340CCA71B6D5CE600BB17E3 /* PieShapeView */,
 				D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */,
 				D340CC811B6D3E7600BB17E3 /* LaunchScreen.xib */,
 				D340CC761B6D3E7600BB17E3 /* Supporting Files */,
+				D340CC9A1B6D504400BB17E3 /* GeekSpeak Show Timer-Bridging-Header.h */,
 			);
 			path = "GeekSpeak Show Timer";
 			sourceTree = "<group>";
@@ -110,6 +134,36 @@
 				D340CC8D1B6D3E7600BB17E3 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D340CCA61B6D5CC100BB17E3 /* Rotation & Angle Types */ = {
+			isa = PBXGroup;
+			children = (
+				D340CCA01B6D556D00BB17E3 /* Angle.swift */,
+				D340CCA11B6D556D00BB17E3 /* AccumulatedAngle.swift */,
+				D340CCA21B6D556D00BB17E3 /* AngularType.swift */,
+			);
+			name = "Rotation & Angle Types";
+			sourceTree = "<group>";
+		};
+		D340CCA71B6D5CE600BB17E3 /* PieShapeView */ = {
+			isa = PBXGroup;
+			children = (
+				D340CC9B1B6D504500BB17E3 /* PieShapeView.swift */,
+				D340CC9C1B6D504500BB17E3 /* PieShapeLayer.h */,
+				D340CC9D1B6D504500BB17E3 /* PieShapeLayer.m */,
+			);
+			name = PieShapeView;
+			sourceTree = "<group>";
+		};
+		D340CCAD1B6D712700BB17E3 /* RingView */ = {
+			isa = PBXGroup;
+			children = (
+				D340CCAB1B6D711700BB17E3 /* RingView.swift */,
+				D340CCA81B6D6AD300BB17E3 /* RingLayer.h */,
+				D340CCA91B6D6AD300BB17E3 /* RingLayer.m */,
+			);
+			name = RingView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,7 +266,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D340CCAC1B6D711700BB17E3 /* RingView.swift in Sources */,
+				D340CCAA1B6D6AD300BB17E3 /* RingLayer.m in Sources */,
+				D340CCA51B6D556D00BB17E3 /* AngularType.swift in Sources */,
+				D340CCA31B6D556D00BB17E3 /* Angle.swift in Sources */,
+				D340CCA41B6D556D00BB17E3 /* AccumulatedAngle.swift in Sources */,
+				D340CC9E1B6D504500BB17E3 /* PieShapeView.swift in Sources */,
 				D340CC7B1B6D3E7600BB17E3 /* ViewController.swift in Sources */,
+				D340CC9F1B6D504500BB17E3 /* PieShapeLayer.m in Sources */,
+				D340CCB11B6D8B9600BB17E3 /* PartialRingView.swift in Sources */,
 				D340CC791B6D3E7600BB17E3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,9 +404,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "GeekSpeak Show Timer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GeekSpeak Show Timer/GeekSpeak Show Timer-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -352,9 +417,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "GeekSpeak Show Timer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GeekSpeak Show Timer/GeekSpeak Show Timer-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -411,6 +478,7 @@
 				D340CC941B6D3E7600BB17E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D340CC951B6D3E7600BB17E3 /* Build configuration list for PBXNativeTarget "GeekSpeak Show TimerTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +487,7 @@
 				D340CC971B6D3E7600BB17E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
