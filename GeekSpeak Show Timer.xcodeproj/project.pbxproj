@@ -23,6 +23,7 @@
 		D340CCB31B6D91FF00BB17E3 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */; };
 		D340CCB51B6D939F00BB17E3 /* UIColor+DrakenColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB41B6D939F00BB17E3 /* UIColor+DrakenColor.swift */; };
 		D340CCB71B6D9C6400BB17E3 /* FillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB61B6D9C6400BB17E3 /* FillView.swift */; };
+		D340CCBA1B6DDD5400BB17E3 /* TimerViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB91B6DDD5400BB17E3 /* TimerViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		D340CCB41B6D939F00BB17E3 /* UIColor+DrakenColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+DrakenColor.swift"; sourceTree = "<group>"; };
 		D340CCB61B6D9C6400BB17E3 /* FillView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillView.swift; sourceTree = "<group>"; };
+		D340CCB91B6DDD5400BB17E3 /* TimerViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */,
 				D340CCB41B6D939F00BB17E3 /* UIColor+DrakenColor.swift */,
 				D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */,
+				D340CCB91B6DDD5400BB17E3 /* TimerViews.swift */,
 				D340CCA61B6D5CC100BB17E3 /* Rotation & Angle Types */,
 				D340CCB81B6DA8DA00BB17E3 /* Timer Views */,
 				D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */,
@@ -284,6 +287,7 @@
 				D340CCAC1B6D711700BB17E3 /* RingView.swift in Sources */,
 				D340CCAA1B6D6AD300BB17E3 /* RingLayer.m in Sources */,
 				D340CCA51B6D556D00BB17E3 /* AngularType.swift in Sources */,
+				D340CCBA1B6DDD5400BB17E3 /* TimerViews.swift in Sources */,
 				D340CCA31B6D556D00BB17E3 /* Angle.swift in Sources */,
 				D340CCA41B6D556D00BB17E3 /* AccumulatedAngle.swift in Sources */,
 				D340CC9E1B6D504500BB17E3 /* PieShapeView.swift in Sources */,

@@ -37,6 +37,22 @@ class PieShapeView: FillView {
     }
   }
   
+  var percent: CGFloat {
+    get {
+      let minAngle = min(startAngle,endAngle)
+      let maxAngle = max(startAngle,endAngle)
+      let diff     = maxAngle - minAngle
+      let percent  = CGFloat(Rotation(degrees: 360)) / CGFloat(diff)
+      
+      return percent
+    }
+    set(newPercentage) {
+      let additional = Rotation(degrees: 360 * newPercentage)
+      endAngle = startAngle + additional
+    }
+  }
+  
+
   var color: UIColor {
     get {
       return pieLayer.fillColor

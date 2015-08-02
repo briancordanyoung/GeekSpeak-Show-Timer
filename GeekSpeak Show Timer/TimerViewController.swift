@@ -8,31 +8,6 @@
 
 import UIKit
 
-struct TimerViews {
-  let ring1bg: RingView
-  let ring1fg: PartialRingView
-  let ring2bg: RingView
-  let ring2fg: PartialRingView
-  let ring3bg: RingView
-  let ring3fg: PartialRingView
-  
-  
-  func layoutSubviewsWithLineWidth(lineWidth: CGFloat) {
-    ring1fg.updateMaskFrame()
-    ring2fg.updateMaskFrame()
-    ring3fg.updateMaskFrame()
-    ring1fg.ringMask.lineWidth = lineWidth
-    ring2fg.ringMask.lineWidth = lineWidth
-    ring3fg.ringMask.lineWidth = lineWidth
-    ring1bg.lineWidth = lineWidth
-    ring2bg.lineWidth = lineWidth
-    ring3bg.lineWidth = lineWidth
-    ring1bg.lineWidth = lineWidth
-    ring2bg.lineWidth = lineWidth
-    ring3bg.lineWidth = lineWidth
-  }
-}
-
 
 final class TimerViewController: UIViewController {
 
@@ -46,15 +21,26 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var testSlider: UISlider!
   
   var lineWidth: CGFloat {
-    let testWidth   = CGFloat(90)
-    let testSize    = CGFloat(736)
-    let currentSize = (timerCirclesView.frame.size.width +
-      timerCirclesView.frame.size.height  ) / 2
-    return (currentSize / testSize) * testWidth
+    return self.dynamicType.lineWidthForSize(timerCirclesView.frame.size)
   }
 
+  class func lineWidthForSize(size: CGSize) -> CGFloat {
+    let testWidth   = CGFloat(90)
+    let testSize    = CGFloat(736)
+    let currentSize = (size.width + size.height  ) / 2
+    return (currentSize / testSize) * testWidth
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupContraints()
+    let fillView  = PieShapeView()
+    fillView.opaque = false
+    fillView.startAngle = Rotation(degrees: 0)
+    fillView.endAngle   = Rotation(degrees: 0)
+    fillView.color      = UIColor(red: 0.75, green: 0.0, blue: 0.0, alpha: 1.0)
+    fillView.pieLayer.clipToCircle = true
+    timerCirclesView.addSubview(fillView)
     
     let ring1bg   = configureBGRing(RingView(), withColor: ring1Color)
     let ring1fg   = configureFGRing(PartialRingView(), withColor: ring1Color)
@@ -76,37 +62,17 @@ final class TimerViewController: UIViewController {
                               ring2bg: ring2bg,
                               ring2fg: ring2fg,
                               ring3bg: ring3bg,
-                              ring3fg: ring3fg)
+                              ring3fg: ring3fg,
+                                 fill: fillView)
     
-    testSlider.value = Float(ring3fg.endAngle.value)
-  }
-  
-  func configureFGRing(ringView: PartialRingView, withColor color: UIColor)
-                                                            -> PartialRingView {
-    ringView.color               = color
-    ringView.startAngle          = Rotation(degrees: 0)
-    ringView.endAngle            = Rotation(degrees: 10)
-    ringView.ringMask.lineWidth  = lineWidth
-    configureRing(ringView)
-    return ringView
-  }
-  
-  func configureBGRing(ringView: RingView, withColor color: UIColor)
-                                                                   -> RingView {
-    ringView.lineColor   = color.darkenColorWithMultiplier(0.1)
-    ringView.lineWidth   = lineWidth
-    configureRing(ringView)
-    return ringView
-  }
-  
-  func configureRing(ringView: UIView) {
-    timerCirclesView.addSubview(ringView)
-    ringView.opaque              = false
+    sliderChanged(testSlider)
   }
   
   
   
-
+  
+  // MARK: -
+  // MARK: ViewController
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     timerViews?.layoutSubviewsWithLineWidth(lineWidth)
@@ -120,12 +86,86 @@ final class TimerViewController: UIViewController {
   @IBAction func sliderChanged(sender: UISlider) {
     if let timerViews = timerViews {
       let value = CGFloat(sender.value)
-      timerViews.ring1fg.endAngle = Rotation(degrees: value)
-      timerViews.ring2fg.endAngle = Rotation(degrees: value)
-      timerViews.ring3fg.endAngle = Rotation(degrees: value)
+      timerViews.ring1fg.percent = value
+      timerViews.ring2fg.percent = value
+      timerViews.ring3fg.percent = value
+      timerViews.fill.percent = value / 2
     }
   }
   
+
+
+  // MARK: -
+  // MARK: Setup
+  func configureFGRing(ringView: PartialRingView, withColor color: UIColor)
+    -> PartialRingView {
+      ringView.color               = color
+      ringView.startAngle          = Rotation(degrees: 0)
+      ringView.endAngle            = Rotation(degrees: 10)
+      ringView.ringMask.lineWidth  = lineWidth
+      configureRing(ringView)
+      return ringView
+  }
+  
+  func configureBGRing(ringView: RingView, withColor color: UIColor)
+    -> RingView {
+      ringView.lineColor   = color.darkenColorWithMultiplier(0.1)
+      ringView.lineWidth   = lineWidth
+      configureRing(ringView)
+      return ringView
+  }
+  
+  func configureRing(ringView: UIView) {
+    timerCirclesView.addSubview(ringView)
+    ringView.opaque              = false
+  }
+
+  
+  func setupContraints() {
+    // Contrain the timerCirclesView so that it is
+    // lessThat the smaller of ViewController view height and width AND
+    // at least as wide and high as the smaller of ViewController view 
+    // height and width
+    let height = NSLayoutConstraint(item: timerCirclesView,
+                               attribute: .Height,
+                               relatedBy: .LessThanOrEqual,
+                                  toItem: view,
+                               attribute: .Height,
+                              multiplier: 1.0,
+                                constant: -32)
+    height.priority = 1000
+    view.addConstraint(height)
+
+    let width =  NSLayoutConstraint(item: timerCirclesView,
+                               attribute: .Width,
+                               relatedBy: .LessThanOrEqual,
+                                  toItem: view,
+                               attribute: .Width,
+                              multiplier: 1.0,
+                                constant: -32)
+    width.priority = 1000
+    view.addConstraint(width)
+  
+    let minHeight = NSLayoutConstraint(item: timerCirclesView,
+                               attribute: .Height,
+                               relatedBy: .GreaterThanOrEqual,
+                                  toItem: view,
+                               attribute: .Height,
+                              multiplier: 1.0,
+                                constant: -32)
+    minHeight.priority = 250
+    view.addConstraint(minHeight)
+
+    let minWidth =  NSLayoutConstraint(item: timerCirclesView,
+                               attribute: .Width,
+                               relatedBy: .GreaterThanOrEqual,
+                                  toItem: view,
+                               attribute: .Width,
+                              multiplier: 1.0,
+                                constant: -32)
+    minWidth.priority = 250
+    view.addConstraint(minWidth)
+  }
 
 }
 

@@ -30,6 +30,7 @@ class FillView: UIView {
   override func didMoveToSuperview() {
     addSelfContraints()
   }
+
   
   func addSelfContraints() {
     self.setTranslatesAutoresizingMaskIntoConstraints(false)
