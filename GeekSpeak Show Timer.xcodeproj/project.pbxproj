@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D340CC791B6D3E7600BB17E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */; };
-		D340CC7B1B6D3E7600BB17E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CC7A1B6D3E7600BB17E3 /* ViewController.swift */; };
 		D340CC7E1B6D3E7600BB17E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D340CC7C1B6D3E7600BB17E3 /* Main.storyboard */; };
 		D340CC801B6D3E7600BB17E3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */; };
 		D340CC831B6D3E7600BB17E3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D340CC811B6D3E7600BB17E3 /* LaunchScreen.xib */; };
@@ -40,7 +39,6 @@
 		D340CC731B6D3E7600BB17E3 /* GeekSpeak Show Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GeekSpeak Show Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D340CC771B6D3E7600BB17E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D340CC7A1B6D3E7600BB17E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D340CC7D1B6D3E7600BB17E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D340CC821B6D3E7600BB17E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -104,7 +102,6 @@
 			children = (
 				D340CC7C1B6D3E7600BB17E3 /* Main.storyboard */,
 				D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */,
-				D340CC7A1B6D3E7600BB17E3 /* ViewController.swift */,
 				D340CCB41B6D939F00BB17E3 /* UIColor+DrakenColor.swift */,
 				D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */,
 				D340CCA61B6D5CC100BB17E3 /* Rotation & Angle Types */,
@@ -290,7 +287,6 @@
 				D340CCA31B6D556D00BB17E3 /* Angle.swift in Sources */,
 				D340CCA41B6D556D00BB17E3 /* AccumulatedAngle.swift in Sources */,
 				D340CC9E1B6D504500BB17E3 /* PieShapeView.swift in Sources */,
-				D340CC7B1B6D3E7600BB17E3 /* ViewController.swift in Sources */,
 				D340CC9F1B6D504500BB17E3 /* PieShapeLayer.m in Sources */,
 				D340CCB11B6D8B9600BB17E3 /* PartialRingView.swift in Sources */,
 				D340CCB71B6D9C6400BB17E3 /* FillView.swift in Sources */,
