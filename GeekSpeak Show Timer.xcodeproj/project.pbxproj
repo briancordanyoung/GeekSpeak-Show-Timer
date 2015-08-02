@@ -21,6 +21,9 @@
 		D340CCAA1B6D6AD300BB17E3 /* RingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D340CCA91B6D6AD300BB17E3 /* RingLayer.m */; };
 		D340CCAC1B6D711700BB17E3 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCAB1B6D711700BB17E3 /* RingView.swift */; };
 		D340CCB11B6D8B9600BB17E3 /* PartialRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB01B6D8B9600BB17E3 /* PartialRingView.swift */; };
+		D340CCB31B6D91FF00BB17E3 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */; };
+		D340CCB51B6D939F00BB17E3 /* UIColor+DrakenColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB41B6D939F00BB17E3 /* UIColor+DrakenColor.swift */; };
+		D340CCB71B6D9C6400BB17E3 /* FillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB61B6D9C6400BB17E3 /* FillView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		D340CCA91B6D6AD300BB17E3 /* RingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RingLayer.m; sourceTree = "<group>"; };
 		D340CCAB1B6D711700BB17E3 /* RingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		D340CCB01B6D8B9600BB17E3 /* PartialRingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartialRingView.swift; sourceTree = "<group>"; };
+		D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		D340CCB41B6D939F00BB17E3 /* UIColor+DrakenColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+DrakenColor.swift"; sourceTree = "<group>"; };
+		D340CCB61B6D9C6400BB17E3 /* FillView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +105,11 @@
 				D340CC7C1B6D3E7600BB17E3 /* Main.storyboard */,
 				D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */,
 				D340CC7A1B6D3E7600BB17E3 /* ViewController.swift */,
+				D340CCB41B6D939F00BB17E3 /* UIColor+DrakenColor.swift */,
+				D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */,
 				D340CCA61B6D5CC100BB17E3 /* Rotation & Angle Types */,
 				D340CCB01B6D8B9600BB17E3 /* PartialRingView.swift */,
+				D340CCB61B6D9C6400BB17E3 /* FillView.swift */,
 				D340CCAD1B6D712700BB17E3 /* RingView */,
 				D340CCA71B6D5CE600BB17E3 /* PieShapeView */,
 				D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */,
@@ -266,6 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D340CCB51B6D939F00BB17E3 /* UIColor+DrakenColor.swift in Sources */,
 				D340CCAC1B6D711700BB17E3 /* RingView.swift in Sources */,
 				D340CCAA1B6D6AD300BB17E3 /* RingLayer.m in Sources */,
 				D340CCA51B6D556D00BB17E3 /* AngularType.swift in Sources */,
@@ -275,6 +285,8 @@
 				D340CC7B1B6D3E7600BB17E3 /* ViewController.swift in Sources */,
 				D340CC9F1B6D504500BB17E3 /* PieShapeLayer.m in Sources */,
 				D340CCB11B6D8B9600BB17E3 /* PartialRingView.swift in Sources */,
+				D340CCB71B6D9C6400BB17E3 /* FillView.swift in Sources */,
+				D340CCB31B6D91FF00BB17E3 /* TimerViewController.swift in Sources */,
 				D340CC791B6D3E7600BB17E3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

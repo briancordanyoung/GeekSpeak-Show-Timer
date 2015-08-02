@@ -1,6 +1,6 @@
 import UIKit
 
-class RingView: UIView {
+class RingView: FillView {
   
   convenience init() {
     self.init(frame: CGRectMake(0,0,100,100))
@@ -48,33 +48,4 @@ class RingView: UIView {
     return self.layer as! RingLayer
   }
   
-  
-  // MARK: UIView Methods
-  override func didMoveToSuperview() {
-    addSelfContraints()
-  }
-  
-  // MARK: Contraints
-  func addSelfContraints() {
-    self.setTranslatesAutoresizingMaskIntoConstraints(false)
-    if let superview = self.superview {
-      let viewsDictionary = ["wheel":self]
-      
-      let height:[AnyObject] =
-      NSLayoutConstraint.constraintsWithVisualFormat( "V:|[wheel]|",
-        options: NSLayoutFormatOptions(0),
-        metrics: nil,
-        views: viewsDictionary)
-      
-      let width:[AnyObject] =
-      NSLayoutConstraint.constraintsWithVisualFormat( "H:|[wheel]|",
-        options: NSLayoutFormatOptions(0),
-        metrics: nil,
-        views: viewsDictionary)
-      
-      superview.addConstraints(height)
-      superview.addConstraints(width)
-    }
-  }
-
 }

@@ -8,13 +8,13 @@
 
 import UIKit
 
-struct TimerViews {
-  let ring3bg: RingView
-  let ring3fg: PartialRingView
-}
+//struct TimerViews {
+//  let ring3bg: RingView
+//  let ring3fg: PartialRingView
+//}
 
 
-final class TimerViewController: UIViewController {
+final class ViewController: UIViewController {
 
   var timerViews: TimerViews?
   
@@ -45,8 +45,8 @@ final class TimerViewController: UIViewController {
     ring3fg.ringMask.lineWidth  = 100.0
     
 
-    timerViews = TimerViews(  ring3bg: ring3bg,
-                              ring3fg: ring3fg)
+//    timerViews = TimerViews(  ring3bg: ring3bg,
+//                              ring3fg: ring3fg)
 
     
     testSlider.value = Float(ring3fg.endAngle.value)
