@@ -19,8 +19,12 @@ class PartialRingView: PieShapeView {
   }
   
   func updateMaskFrame() {
+    updateMaskSize(frame.size)
+  }
+
+  func updateMaskSize(maskSize: CGSize) {
     var maskFrame = CGRect()
-    maskFrame.size = frame.size
+    maskFrame.size = maskSize
     ringMask.frame = maskFrame
   }
   

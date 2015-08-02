@@ -5,7 +5,6 @@
 
 @dynamic    startAngle;
 @dynamic    endAngle;
-//@dynamic    percentFromStart;
 @synthesize clipToCircle;
 @synthesize fillColor;
 
@@ -37,7 +36,6 @@
     if ([layer isKindOfClass:[PieShapeLayer class]]) {
       PieShapeLayer  *other = (PieShapeLayer *)layer;
       self.clipToCircle     = other.clipToCircle;
-//      self.percentFromStart = other.percentFromStart;
       self.startAngle       = other.startAngle;
       self.endAngle         = other.endAngle;
       self.fillColor        = other.fillColor;
@@ -74,7 +72,6 @@
   
   // Create the path
   CGPoint center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
-  //  CGPoint center = self.anchorPoint;
   CGFloat radius;
   if (clipToCircle) {
     radius = MIN(center.x, center.y);

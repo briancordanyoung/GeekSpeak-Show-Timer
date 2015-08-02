@@ -6,7 +6,6 @@
 
 @property (nonatomic) CGFloat startAngle;
 @property (nonatomic) CGFloat endAngle;
-//@property (nonatomic) CGFloat percentFromStart;
 
 @property (nonatomic) BOOL clipToCircle;
 @property (nonatomic, strong) UIColor *fillColor;

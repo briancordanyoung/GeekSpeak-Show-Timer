@@ -1,5 +1,7 @@
 import UIKit
 
+// Swift 2: Create protocal with methods
+
 class FillView: UIView {
   
   var sizeConstraints: [NSLayoutConstraint] = []
@@ -28,6 +30,7 @@ class FillView: UIView {
   override func didMoveToSuperview() {
     addSelfContraints()
   }
+
   
   func addSelfContraints() {
     self.setTranslatesAutoresizingMaskIntoConstraints(false)

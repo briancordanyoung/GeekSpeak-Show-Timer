@@ -24,7 +24,7 @@
                                     <constraint firstAttribute="width" secondItem="tY2-lc-OlN" secondAttribute="height" multiplier="1:1" id="az5-AX-nZ5"/>
                                 </constraints>
                             </view>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="180" minValue="0.0" maxValue="360" translatesAutoresizingMaskIntoConstraints="NO" id="Zd2-1j-kEp">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.10000000000000001" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Zd2-1j-kEp">
                                 <rect key="frame" x="14" y="962" width="740" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Ma1-zG-4XB"/>
@@ -41,7 +41,7 @@
                             <constraint firstItem="Zd2-1j-kEp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="E0I-6j-aVn"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Zd2-1j-kEp" secondAttribute="trailing" id="U4Q-7c-YTB"/>
                             <constraint firstItem="tY2-lc-OlN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="16" id="b5I-QT-R6p"/>
-                            <constraint firstAttribute="trailing" secondItem="tY2-lc-OlN" secondAttribute="trailing" constant="16" id="fQ4-E4-lf5"/>
+                            <constraint firstAttribute="trailing" secondItem="tY2-lc-OlN" secondAttribute="trailing" constant="16" placeholder="YES" id="fQ4-E4-lf5"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Zd2-1j-kEp" secondAttribute="bottom" constant="32" id="mdo-PF-ug5"/>
                             <constraint firstItem="tY2-lc-OlN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="oUn-Ry-axO"/>
                         </constraints>
