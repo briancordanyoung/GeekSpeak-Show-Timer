@@ -108,10 +108,7 @@
 				D340CCB41B6D939F00BB17E3 /* UIColor+DrakenColor.swift */,
 				D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */,
 				D340CCA61B6D5CC100BB17E3 /* Rotation & Angle Types */,
-				D340CCB01B6D8B9600BB17E3 /* PartialRingView.swift */,
-				D340CCB61B6D9C6400BB17E3 /* FillView.swift */,
-				D340CCAD1B6D712700BB17E3 /* RingView */,
-				D340CCA71B6D5CE600BB17E3 /* PieShapeView */,
+				D340CCB81B6DA8DA00BB17E3 /* Timer Views */,
 				D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */,
 				D340CC811B6D3E7600BB17E3 /* LaunchScreen.xib */,
 				D340CC761B6D3E7600BB17E3 /* Supporting Files */,
@@ -173,6 +170,17 @@
 				D340CCA91B6D6AD300BB17E3 /* RingLayer.m */,
 			);
 			name = RingView;
+			sourceTree = "<group>";
+		};
+		D340CCB81B6DA8DA00BB17E3 /* Timer Views */ = {
+			isa = PBXGroup;
+			children = (
+				D340CCB01B6D8B9600BB17E3 /* PartialRingView.swift */,
+				D340CCB61B6D9C6400BB17E3 /* FillView.swift */,
+				D340CCAD1B6D712700BB17E3 /* RingView */,
+				D340CCA71B6D5CE600BB17E3 /* PieShapeView */,
+			);
+			name = "Timer Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
