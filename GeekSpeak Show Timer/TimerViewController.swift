@@ -167,42 +167,49 @@ final class TimerViewController: UIViewController {
         timerViews?.ring1fg.percent = 0.0
         timerViews?.ring2fg.percent = 0.0
         timerViews?.ring3fg.percent = 0.0
+        segmentLabel.text = " Pre Show"
 
       case .Section1:
         timerViews?.fill.percent    = 0.0
         timerViews?.ring1fg.percent = timer.percentageComplete
         timerViews?.ring2fg.percent = 0.0
         timerViews?.ring3fg.percent = 0.0
+        segmentLabel.text = "Segment 1"
 
       case .Break1:
         timerViews?.ring1fg.percent = 1.0
         timerViews?.fill.percent    = timer.percentageComplete
         timerViews?.ring2fg.percent = 0.0
         timerViews?.ring3fg.percent = 0.0
+        segmentLabel.text = "    Break"
 
       case .Section2:
         timerViews?.fill.percent    = 0.0
         timerViews?.ring1fg.percent = 1.0
         timerViews?.ring2fg.percent = timer.percentageComplete
         timerViews?.ring3fg.percent = 0.0
+        segmentLabel.text = "Segment 2"
 
       case .Break2:
         timerViews?.ring1fg.percent = 1.0
         timerViews?.ring2fg.percent = 1.0
         timerViews?.fill.percent    = timer.percentageComplete
         timerViews?.ring3fg.percent = 0.0
+        segmentLabel.text = "    Break"
 
       case .Section3:
         timerViews?.fill.percent    = 0.0
         timerViews?.ring1fg.percent = 1.0
         timerViews?.ring2fg.percent = 1.0
         timerViews?.ring3fg.percent = timer.percentageComplete
+        segmentLabel.text = "Segment 3"
 
       case .PostShow:
         timerViews?.ring1fg.percent = 1.0
         timerViews?.ring2fg.percent = 1.0
         timerViews?.ring3fg.percent = 1.0
         timerViews?.fill.percent = 0.0
+        segmentLabel.text = "Post Show"
       }
       
       NSNotificationCenter.defaultCenter()
@@ -268,7 +275,7 @@ final class TimerViewController: UIViewController {
   
   func configureBGRing(ringView: RingView, withColor color: UIColor)
                                                                    -> RingView {
-      ringView.lineColor   = color.darkenColorWithMultiplier(0.1)
+      ringView.lineColor   = color.darkenColorWithMultiplier(0.2)
       ringView.lineWidth   = lineWidth
       configureRing(ringView)
       return ringView
