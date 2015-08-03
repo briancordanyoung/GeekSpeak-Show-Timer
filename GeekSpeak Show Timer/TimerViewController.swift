@@ -9,17 +9,21 @@
 import UIKit
 
 
-// TODO: 
-//   - setup timer callbacks to update
-//      - time labels
-//      - timeViews
-//   - swap names of start/pause button based on CountingState
+enum TimerLabelDisplay: String, Printable {
+  case Remaining = "Remaining"
+  case Elapsed   = "Elapsed"
+  
+  var description: String {
+    return self.rawValue
+  }
+}
 
 final class TimerViewController: UIViewController {
 
   var timerViews: TimerViews?
   let timer = Timer()
   let formatter = NSNumberFormatter()
+  var timerLabelDisplay: TimerLabelDisplay = .Remaining
 
   let ring1Color = UIColor(red: 0.5,  green: 0.5,  blue: 1.0,  alpha: 1.0)
   let ring2Color = UIColor(red: 1.0,  green: 0.5,  blue: 0.5,  alpha: 1.0)
@@ -34,6 +38,7 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var nextSegmentButton: UIButton!
   @IBOutlet weak var resetButton: UIButton!
   @IBOutlet weak var addButton: UIButton!
+  @IBOutlet weak var remainingToggleButton: UIButton!
   
   var lineWidth: CGFloat {
     return self.dynamicType.lineWidthForSize(timerCirclesView.frame.size)
@@ -58,10 +63,11 @@ final class TimerViewController: UIViewController {
     setupTimeLabelContraints(sectionTimeLabel)
     setupDescriptionLabelContraints(totalLabel)
     setupDescriptionLabelContraints(segmentLabel)
+    setupRemainingToggleButtonContraints()
     styleButtons()
     
     let fillView  = PieShapeView()
-    fillView.opaque = false
+    fillView.opaque     = false
     fillView.startAngle = Rotation(degrees: 0)
     fillView.endAngle   = Rotation(degrees: 0)
     fillView.color      = UIColor(red: 0.75, green: 0.0, blue: 0.0, alpha: 1.0)
@@ -78,8 +84,10 @@ final class TimerViewController: UIViewController {
     let ring3fg   = configureFGRing(PartialRingView(), withColor: ring3Color)
 
 
-    ring2bg.percentageOfSuperviewSize = 0.66
-    ring2fg.percentageOfSuperviewSize = 0.66
+    ring3bg.percentageOfSuperviewSize = 0.95
+    ring3fg.percentageOfSuperviewSize = 0.95
+    ring2bg.percentageOfSuperviewSize = 0.64
+    ring2fg.percentageOfSuperviewSize = 0.64
     ring1bg.percentageOfSuperviewSize = 0.33
     ring1fg.percentageOfSuperviewSize = 0.33
     
@@ -91,39 +99,8 @@ final class TimerViewController: UIViewController {
                               ring3fg: ring3fg,
                                  fill: fillView)
     
-  }
-  
-  
-  @IBAction func slider(sender: UISlider) {
-    switch timer.timing.phase {
-    case .PreShow:
-      timerViews?.fill.percent    = CGFloat(sender.value)
-      break
-      
-    case .Section1:
-      timerViews?.ring1fg.percent = CGFloat(sender.value)
-      break
-      
-    case .Break1:
-      timerViews?.fill.percent    = CGFloat(sender.value)
-      break
-      
-    case .Section2:
-      timerViews?.ring2fg.percent = CGFloat(sender.value)
-      break
-      
-    case .Break2:
-      timerViews?.fill.percent    = CGFloat(sender.value)
-      break
-      
-    case .Section3:
-      timerViews?.ring3fg.percent = CGFloat(sender.value)
-      break
-      
-    case .PostShow:
-      timerViews?.fill.percent = CGFloat(sender.value)
-      break
-    }
+    timerCirclesView.bringSubviewToFront(remainingToggleButton)
+    timer.reset()
   }
   
   
@@ -237,9 +214,16 @@ final class TimerViewController: UIViewController {
   }
   
   func updateTimerLabels(timer: Timer) {
-    totalTimeLabel.text =
-                     stringFromTimeInterval(timer.totalShowTimeRemaining)
-    sectionTimeLabel.text = stringFromTimeInterval(timer.secondsRemaining)
+    switch timerLabelDisplay {
+    case .Remaining:
+      totalTimeLabel.text =
+        stringFromTimeInterval(timer.totalShowTimeRemaining)
+      sectionTimeLabel.text = stringFromTimeInterval(timer.secondsRemaining)
+    case .Elapsed:
+      totalTimeLabel.text =
+        stringFromTimeInterval(timer.totalShowTimeElapsed)
+      sectionTimeLabel.text = stringFromTimeInterval(timer.secondsElapsed)
+    }
   }
   
   
@@ -268,6 +252,15 @@ final class TimerViewController: UIViewController {
     timer.duration += 10.0 // Add 10 seconds
   }
  
+  @IBAction func remainingTimeToggled(sender: UIButton) {
+    switch timerLabelDisplay {
+      case .Remaining:
+      timerLabelDisplay = .Elapsed
+    case .Elapsed:
+      timerLabelDisplay = .Remaining
+    }
+    updateTimerLabels(timer)
+  }
   
   // MARK: -
   // MARK: Setup
@@ -306,6 +299,7 @@ final class TimerViewController: UIViewController {
     button.layer.cornerRadius = 15
     button.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).CGColor
     button.titleLabel?.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+
   }
   
   private func setupNumberFormatter() {
@@ -369,7 +363,7 @@ final class TimerViewController: UIViewController {
                                relatedBy: .Equal,
                                   toItem: label.superview,
                                attribute: .Width,
-                              multiplier: 0.27,
+                              multiplier: 199 / 736,
                                 constant: 0.0)
     width.priority = 1000
     label.superview?.addConstraint(width)
@@ -383,10 +377,24 @@ final class TimerViewController: UIViewController {
                                relatedBy: .Equal,
                                   toItem: label.superview,
                                attribute: .Height,
-                              multiplier: 0.03260869565,
+                              multiplier: 24 / 736,
                                 constant: 0.0)
     height.priority = 1000
     label.superview?.addConstraint(height)
+    
+  }
+  
+  func setupRemainingToggleButtonContraints() {
+    
+    let height =  NSLayoutConstraint(item: remainingToggleButton,
+                               attribute: .Height,
+                               relatedBy: .Equal,
+                                  toItem: remainingToggleButton.superview,
+                               attribute: .Height,
+                              multiplier: 93 / 736,
+                                constant: 0.0)
+    height.priority = 1000
+    remainingToggleButton.superview?.addConstraint(height)
     
   }
 }

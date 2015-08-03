@@ -2,6 +2,7 @@ import UIKit
 
 extension Timer {
   
+  
   // MARK: - Enums
   enum CountingState: String, Printable {
     case Ready          = "Ready"

@@ -75,6 +75,15 @@ final class Timer: NSObject {
     }
   }
   
+  var totalShowTimeElapsed: NSTimeInterval {
+    switch timing.phase {
+    case .PreShow, .Break1, .Break2, .PostShow:
+      return max(timing.totalShowTimeElapsed,0)
+    case .Section1, .Section2, .Section3:
+      return max(timing.totalShowTimeElapsed + secondsElapsed,0)
+    }
+  }
+  
   var percentageRemaining: CGFloat {
     return secondsToPercentage(secondsRemaining)
   }
