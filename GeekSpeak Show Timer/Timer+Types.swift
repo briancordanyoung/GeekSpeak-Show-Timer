@@ -7,7 +7,6 @@ extension Timer {
     case Ready          = "Ready"
     case Counting       = "Counting"
     case Paused         = "Paused"
-    case Completed      = "Completed"
     
     var description: String {
       return self.rawValue

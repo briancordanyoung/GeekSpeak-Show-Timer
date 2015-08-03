@@ -56,19 +56,12 @@ final class Timer: NSObject {
   }
   
   var secondsRemaining: NSTimeInterval {
-    var seconds = duration - secondsElapsed
-    if seconds < 0 || state == .Completed {
-      seconds = 0
-    }
-    return seconds
+    let seconds = duration - secondsElapsed
+    return max(seconds,0)
   }
   
   var percentageRemaining: CGFloat {
-    var percentage = secondsToPercentage(secondsRemaining)
-    if state == .Completed {
-      percentage = 0
-    }
-    return percentage
+    return secondsToPercentage(secondsRemaining)
   }
   
   // MARK: Internal Properties
@@ -124,8 +117,6 @@ final class Timer: NSObject {
       start()
     case .Paused:
       pause()
-    case .Completed:
-      complete()
     }
   }
   
@@ -147,11 +138,9 @@ final class Timer: NSObject {
     _state = .Paused
     storeElapsedTimeAtPause()
   }
-  
-  func complete() {
-    _state = .Completed
-    storeElapsedTimeAtPause()
-    notifyTimerUpdated()
+
+  func next() {
+    timing.incrementPhase()
   }
   
   
@@ -159,13 +148,11 @@ final class Timer: NSObject {
     timing.duration += seconds
     
     switch state {
-    case .Ready, .Paused:
+    case .Ready,
+         .Paused:
       notifyTimerUpdated()
     case .Counting:
       break
-    case .Completed:
-      _state = .Paused
-      notifyTimerUpdated()
     }
   }
   
@@ -180,8 +167,6 @@ final class Timer: NSObject {
       storeElapsedTimeAtPause()
     case .Counting:
       increment()
-    case .Completed:
-      break
     }
   }
   

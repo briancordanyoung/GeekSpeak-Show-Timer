@@ -9,9 +9,16 @@
 import UIKit
 
 
+// TODO: 
+//   - setup timer callbacks to update
+//      - time labels
+//      - timeViews
+//   - swap names of start/pause button based on CountingState
+
 final class TimerViewController: UIViewController {
 
   var timerViews: TimerViews?
+  let timer = Timer()
 
   let ring1Color = UIColor(red: 0.5,  green: 0.5,  blue: 1.0,  alpha: 1.0)
   let ring2Color = UIColor(red: 1.0,  green: 0.5,  blue: 0.5,  alpha: 1.0)
@@ -101,13 +108,38 @@ final class TimerViewController: UIViewController {
       timerViews.fill.percent = value / 2
     }
   }
+
   
+  // MARK: -
+  // MARK: Actions
+  
+  @IBAction func resetButtonPressed(sender: UIButton) {
+    timer.reset()
+  }
 
+  @IBAction func startPauseButtonPressed(sender: UIButton) {
+    switch timer.state {
+    case .Ready,
+         .Paused:
+      timer.start()
+    case .Counting:
+      timer.pause()
+    }
+  }
 
+  @IBAction func nextSegmentButtonPressed(sender: UIButton) {
+    timer.next()
+  }
+  
+  @IBAction func addTimeButtonPressed(sender: UIButton) {
+    timer.timing.duration += 10.0 // Add 10 seconds
+  }
+ 
+  
   // MARK: -
   // MARK: Setup
   func configureFGRing(ringView: PartialRingView, withColor color: UIColor)
-    -> PartialRingView {
+                                                            -> PartialRingView {
       ringView.color               = color
       ringView.startAngle          = Rotation(degrees: 0)
       ringView.endAngle            = Rotation(degrees: 10)
@@ -117,7 +149,7 @@ final class TimerViewController: UIViewController {
   }
   
   func configureBGRing(ringView: RingView, withColor color: UIColor)
-    -> RingView {
+                                                                   -> RingView {
       ringView.lineColor   = color.darkenColorWithMultiplier(0.1)
       ringView.lineWidth   = lineWidth
       configureRing(ringView)
