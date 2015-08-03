@@ -171,15 +171,14 @@ final class Timer: NSObject {
     storeElapsedTimeAtPause()
     countingStartTime = .None
     timing.incrementPhase()
-    if _state == .Counting {
-    }
-    
+
     switch _state {
     case .Ready:
       reset()
     case .Counting:
       start()
     case .Paused:
+      notifyTimerUpdated()
       break
     }
   }

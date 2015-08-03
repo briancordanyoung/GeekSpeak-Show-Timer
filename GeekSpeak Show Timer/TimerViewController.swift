@@ -247,9 +247,6 @@ final class TimerViewController: UIViewController {
 
   @IBAction func nextSegmentButtonPressed(sender: UIButton) {
     timer.next()
-    if timer.state == .Paused {
-      
-    }
   }
   
   @IBAction func remainingTimeToggled(sender: UIButton) {
