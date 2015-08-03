@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    // Override point for customization after application launch.
+    registerUserDefaults()
     return true
   }
 
@@ -50,4 +50,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+
+
+
+extension AppDelegate {
+  
+  func registerUserDefaults() {
+    let defaults: [String:AnyObject] = [
+      kAppTimerDurationInSecondsKey:   51
+    ]
+    
+    NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
+  }
+  
+}
+
 
