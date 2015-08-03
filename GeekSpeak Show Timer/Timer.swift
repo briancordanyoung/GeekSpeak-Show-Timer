@@ -3,7 +3,7 @@ import CoreGraphics
 
 let kAppTimerDurationInSecondsKey = "defaultDurationInSeconds"
 let oneMinute                     = NSTimeInterval(60)
-let timerUpdateInterval           = NSTimeInterval(0.25)
+let timerUpdateInterval           = NSTimeInterval(0.01)
 
 // MARK: -
 // MARK: Timer class
@@ -41,7 +41,13 @@ final class Timer: NSObject {
   }
   
   var duration: NSTimeInterval {
-    return timing.duration
+    get {
+      return timing.duration
+    }
+    set(newDuration) {
+      timing.duration = newDuration
+      notifyTimerUpdated()
+    }
   }
   
   var secondsElapsed: NSTimeInterval {
@@ -58,6 +64,15 @@ final class Timer: NSObject {
   var secondsRemaining: NSTimeInterval {
     let seconds = duration - secondsElapsed
     return max(seconds,0)
+  }
+  
+  var totalShowTimeRemaining: NSTimeInterval {
+    switch timing.phase {
+    case .PreShow, .Break1, .Break2, .PostShow:
+      return max(timing.totalShowTimeRemaining,0)
+    case .Section1, .Section2, .Section3:
+      return max(timing.totalShowTimeRemaining - secondsElapsed,0)
+    }
   }
   
   var percentageRemaining: CGFloat {
@@ -144,7 +159,12 @@ final class Timer: NSObject {
   }
 
   func next() {
+    storeElapsedTimeAtPause()
+    countingStartTime = .None
     timing.incrementPhase()
+    if _state == .Counting {
+      start()
+    }
   }
   
   

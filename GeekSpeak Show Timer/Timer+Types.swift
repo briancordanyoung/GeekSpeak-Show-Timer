@@ -55,7 +55,11 @@ extension Timer {
     var break2:   NSTimeInterval = 0.0
     var section3: NSTimeInterval = 0.0
     var postShow: NSTimeInterval = 0.0
-  }
+
+    var totalShowTime: NSTimeInterval {
+      return section1 + section2 + section3
+    }
+}
   
   
   
@@ -66,10 +70,10 @@ extension Timer {
     var phase       = ShowPhase.PreShow
     
     var totalShowTimeElapsed: NSTimeInterval {
-      return timeElapsed.section1 + timeElapsed.section2 + timeElapsed.section3
+      return timeElapsed.totalShowTime
     }
     var totalShowTimeRemaining: NSTimeInterval {
-      return durations.totalShowTime - totalShowTimeElapsed
+      return durations.totalShowTime - timeElapsed.totalShowTime
     }
     
     var elapsed: NSTimeInterval {
@@ -162,7 +166,9 @@ extension Timer {
         // Before moving to the next phase of the show,
         // get the difference between the planned duration and the elapsed time
         // and add that to the next show section.
-        durations.section2 += duration - elapsed
+        let difference = duration - elapsed
+        durations.section1 -= difference
+        durations.section2 += difference
         phase = .Break1
       case .Break1:
         phase = .Section2
@@ -170,7 +176,9 @@ extension Timer {
         // Before moving to the next phase of the show,
         // get the difference between the planned duration and the elapsed time
         // and add that to the next show section.
-        durations.section3 += duration - elapsed
+        let difference = duration - elapsed
+        durations.section2 -= difference
+        durations.section3 += difference
         phase = .Break2
       case .Break2:
         phase = .Section3

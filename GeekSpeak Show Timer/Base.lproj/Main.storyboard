@@ -108,6 +108,12 @@
                                     <action selector="startPauseButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tgr-GL-D60"/>
                                 </connections>
                             </button>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lG9-AG-4h9">
+                                <rect key="frame" x="20" y="952" width="726" height="31"/>
+                                <connections>
+                                    <action selector="slider:" destination="BYZ-38-t0r" eventType="valueChanged" id="KoF-xz-rt2"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>

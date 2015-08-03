@@ -19,6 +19,7 @@ final class TimerViewController: UIViewController {
 
   var timerViews: TimerViews?
   let timer = Timer()
+  let formatter = NSNumberFormatter()
 
   let ring1Color = UIColor(red: 0.5,  green: 0.5,  blue: 1.0,  alpha: 1.0)
   let ring2Color = UIColor(red: 1.0,  green: 0.5,  blue: 0.5,  alpha: 1.0)
@@ -51,6 +52,7 @@ final class TimerViewController: UIViewController {
     timer.countingStateChangedHandler = timerChangedCountingStatus
     timer.timerUpdatedHandler         = timerUpdatedTime
 
+    setupNumberFormatter()
     setupContraints()
     setupTimeLabelContraints(totalTimeLabel)
     setupTimeLabelContraints(sectionTimeLabel)
@@ -92,6 +94,37 @@ final class TimerViewController: UIViewController {
   }
   
   
+  @IBAction func slider(sender: UISlider) {
+    switch timer.timing.phase {
+    case .PreShow:
+      timerViews?.fill.percent    = CGFloat(sender.value)
+      break
+      
+    case .Section1:
+      timerViews?.ring1fg.percent = CGFloat(sender.value)
+      break
+      
+    case .Break1:
+      timerViews?.fill.percent    = CGFloat(sender.value)
+      break
+      
+    case .Section2:
+      timerViews?.ring2fg.percent = CGFloat(sender.value)
+      break
+      
+    case .Break2:
+      timerViews?.fill.percent    = CGFloat(sender.value)
+      break
+      
+    case .Section3:
+      timerViews?.ring3fg.percent = CGFloat(sender.value)
+      break
+      
+    case .PostShow:
+      timerViews?.fill.percent = CGFloat(sender.value)
+      break
+    }
+  }
   
   
   // MARK: -
@@ -134,9 +167,7 @@ final class TimerViewController: UIViewController {
         if timer.percentageComplete == 1.0 {
           timer.next()
         }
-      case .Section1, .Section2, .Section3:
-        break
-      case .PostShow:
+      case .Section1, .Section2, .Section3, .PostShow:
         break
       }
       
@@ -197,16 +228,17 @@ final class TimerViewController: UIViewController {
   }
 
   func stringFromTimeInterval(interval: NSTimeInterval) -> String {
-    let interval = Int(interval)
-    let seconds = interval % 60
-    let minutes = (interval / 60) % 60
-    let hours = (interval / 3600)
-    return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    let roundedInterval = Int(interval)
+    let seconds = roundedInterval % 60
+    let minutes = (roundedInterval / 60) % 60
+    let hours   = (roundedInterval / 3600)
+    let subSeconds = formatter.stringFromNumber(interval * 100)!
+    return String(format: "%02d:%02d:\(subSeconds)",  minutes, seconds)
   }
   
   func updateTimerLabels(timer: Timer) {
     totalTimeLabel.text =
-                     stringFromTimeInterval(timer.timing.totalShowTimeRemaining)
+                     stringFromTimeInterval(timer.totalShowTimeRemaining)
     sectionTimeLabel.text = stringFromTimeInterval(timer.secondsRemaining)
   }
   
@@ -233,7 +265,7 @@ final class TimerViewController: UIViewController {
   }
   
   @IBAction func addTimeButtonPressed(sender: UIButton) {
-    timer.timing.duration += 10.0 // Add 10 seconds
+    timer.duration += 10.0 // Add 10 seconds
   }
  
   
@@ -276,7 +308,15 @@ final class TimerViewController: UIViewController {
     button.titleLabel?.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
   }
   
-  func setupContraints() {
+  private func setupNumberFormatter() {
+    formatter.minimumIntegerDigits  = 2
+    formatter.maximumIntegerDigits  = 2
+    formatter.minimumFractionDigits = 0
+    formatter.maximumFractionDigits = 0
+    formatter.negativePrefix = ""
+  }
+  
+  private func setupContraints() {
     // Contrain the timerCirclesView so that it is
     // lessThat the smaller of ViewController view height and width AND
     // at least as wide and high as the smaller of ViewController view 
