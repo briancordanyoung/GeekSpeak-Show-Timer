@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="y01-ak-zO4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -54,6 +54,73 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1063" y="1672"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="wC3-PL-p7M">
+            <objects>
+                <viewController id="UEF-px-LpL" customClass="Settings" customModule="GeekSpeak_Show_Timer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SrK-SO-lmg"/>
+                        <viewControllerLayoutGuide type="bottom" id="hFy-xq-Ehk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oiW-vz-1PI">
+                        <rect key="frame" x="0.0" y="0.0" width="308" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eal-fe-nSn">
+                                <rect key="frame" x="0.0" y="0.0" width="308" height="1024"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="eal-fe-nSn" secondAttribute="trailing" id="Fnv-iu-d8k"/>
+                            <constraint firstItem="hFy-xq-Ehk" firstAttribute="top" secondItem="eal-fe-nSn" secondAttribute="bottom" id="dW3-wi-nGL"/>
+                            <constraint firstItem="eal-fe-nSn" firstAttribute="leading" secondItem="oiW-vz-1PI" secondAttribute="leading" id="snE-4j-dvi"/>
+                            <constraint firstItem="eal-fe-nSn" firstAttribute="top" secondItem="oiW-vz-1PI" secondAttribute="top" id="zXS-yU-5Wk"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="eC9-0S-DLt">
+                        <barButtonItem key="rightBarButtonItem" title="Hide" id="4Vd-hZ-s2C">
+                            <connections>
+                                <action selector="hideSettingButton:" destination="UEF-px-LpL" id="XvZ-Wa-vPS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tBI-zJ-Era" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1293" y="552"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="HWP-k5-fQJ">
+            <objects>
+                <navigationController id="TOL-hK-koz" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r20-br-OZI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="UEF-px-LpL" kind="relationship" relationship="rootViewController" id="XWp-CT-59b"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eWV-ZM-oCz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="793" y="552"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="O7A-gW-31j">
+            <objects>
+                <splitViewController id="y01-ak-zO4" customClass="SplitViewController" customModule="GeekSpeak_Show_Timer" customModuleProvider="target" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <segue destination="TOL-hK-koz" kind="relationship" relationship="masterViewController" id="qSR-o9-nNq"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="detailViewController" id="49W-xH-rXj"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sdM-PK-VYN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="19" y="1040"/>
         </scene>
     </scenes>
 </document>
