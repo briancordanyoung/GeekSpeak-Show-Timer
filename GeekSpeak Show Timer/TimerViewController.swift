@@ -23,7 +23,11 @@ final class TimerViewController: UIViewController {
   var timerViews: TimerViews?
   let timer = Timer()
   let formatter = NSNumberFormatter()
-  var timerLabelDisplay: TimerLabelDisplay = .Remaining
+  var timerLabelDisplay: TimerLabelDisplay = .Remaining {
+    didSet {
+      updateTimerLabels(timer)
+    }
+  }
 
   let ring1Color = UIColor(red: 0.5,  green: 0.5,  blue: 1.0,  alpha: 1.0)
   let ring2Color = UIColor(red: 1.0,  green: 0.5,  blue: 0.5,  alpha: 1.0)
@@ -140,11 +144,17 @@ final class TimerViewController: UIViewController {
       updateTimerLabels(timer)
       
       switch timer.timing.phase {
-      case .PreShow, .Break1, .Break2:
+      case .PreShow,
+           .Break1,
+           .Break2,
+           .Section3:
         if timer.percentageComplete == 1.0 {
           timer.next()
+          timerLabelDisplay = .Elapsed
         }
-      case .Section1, .Section2, .Section3, .PostShow:
+      case .Section1,
+           .Section2,
+           .PostShow:
         break
       }
       
@@ -259,7 +269,6 @@ final class TimerViewController: UIViewController {
     case .Elapsed:
       timerLabelDisplay = .Remaining
     }
-    updateTimerLabels(timer)
   }
   
   // MARK: -
