@@ -58,7 +58,10 @@
 
 
 -(void)drawInContext:(CGContextRef)ctx {
-  CGContextClipToMask(ctx, self.bounds, self.maskImage);
+  CGImageRef mask = [self maskImage];
+  CGContextClipToMask(ctx, self.bounds, mask);
+  CGImageRelease(mask);
+
   CGContextSetFillColorWithColor(ctx, self.fillColor.CGColor);
   CGContextFillRect(ctx, self.bounds);
 }

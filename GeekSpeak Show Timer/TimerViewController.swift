@@ -8,22 +8,48 @@
 
 import UIKit
 
+let timerNotificationKey = "com.geekspeak.timerNotificationKey"
+
+
+
+enum TimerLabelDisplay: String, Printable {
+  case Remaining = "Remaining"
+  case Elapsed   = "Elapsed"
+  
+  var description: String {
+    return self.rawValue
+  }
+}
 
 final class TimerViewController: UIViewController {
 
   var timerViews: TimerViews?
+  let timer = Timer()
+  var timerLabelDisplay: TimerLabelDisplay = .Remaining {
+    didSet {
+      updateTimerLabels(timer)
+    }
+  }
 
+  
   let ring1Color = UIColor(red: 0.5,  green: 0.5,  blue: 1.0,  alpha: 1.0)
   let ring2Color = UIColor(red: 1.0,  green: 0.5,  blue: 0.5,  alpha: 1.0)
   let ring3Color = UIColor(red: 0.5,  green: 1.0,  blue: 0.5,  alpha: 1.0)
   
   @IBOutlet weak var timerCirclesView: UIView!
-  @IBOutlet weak var testSlider: UISlider!
+  @IBOutlet weak var totalTimeLabel: UILabel!
+  @IBOutlet weak var sectionTimeLabel: UILabel!
+  @IBOutlet weak var totalLabel: UILabel!
+  @IBOutlet weak var segmentLabel: UILabel!
+  @IBOutlet weak var startPauseButton: UIButton!
+  @IBOutlet weak var nextSegmentButton: UIButton!
+  @IBOutlet weak var remainingToggleButton: UIButton!
   
   var lineWidth: CGFloat {
     return self.dynamicType.lineWidthForSize(timerCirclesView.frame.size)
   }
-
+  
+  
   class func lineWidthForSize(size: CGSize) -> CGFloat {
     let testWidth   = CGFloat(90)
     let testSize    = CGFloat(736)
@@ -33,9 +59,19 @@ final class TimerViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    timer.countingStateChangedHandler = timerChangedCountingStatus
+    timer.timerUpdatedHandler         = timerUpdatedTime
+
     setupContraints()
+    setupTimeLabelContraints(totalTimeLabel)
+    setupTimeLabelContraints(sectionTimeLabel)
+    setupDescriptionLabelContraints(totalLabel)
+    setupDescriptionLabelContraints(segmentLabel)
+    setupRemainingToggleButtonContraints()
+    styleButtons()
+    
     let fillView  = PieShapeView()
-    fillView.opaque = false
+    fillView.opaque     = false
     fillView.startAngle = Rotation(degrees: 0)
     fillView.endAngle   = Rotation(degrees: 0)
     fillView.color      = UIColor(red: 0.75, green: 0.0, blue: 0.0, alpha: 1.0)
@@ -52,8 +88,10 @@ final class TimerViewController: UIViewController {
     let ring3fg   = configureFGRing(PartialRingView(), withColor: ring3Color)
 
 
-    ring2bg.percentageOfSuperviewSize = 0.66
-    ring2fg.percentageOfSuperviewSize = 0.66
+    ring3bg.percentageOfSuperviewSize = 0.95
+    ring3fg.percentageOfSuperviewSize = 0.95
+    ring2bg.percentageOfSuperviewSize = 0.64
+    ring2fg.percentageOfSuperviewSize = 0.64
     ring1bg.percentageOfSuperviewSize = 0.33
     ring1fg.percentageOfSuperviewSize = 0.33
     
@@ -65,10 +103,10 @@ final class TimerViewController: UIViewController {
                               ring3fg: ring3fg,
                                  fill: fillView)
     
-    sliderChanged(testSlider)
+    timerCirclesView.bringSubviewToFront(remainingToggleButton)
+    timer.reset()
+    
   }
-  
-  
   
   
   // MARK: -
@@ -83,22 +121,147 @@ final class TimerViewController: UIViewController {
     super.didReceiveMemoryWarning()
   }
 
-  @IBAction func sliderChanged(sender: UISlider) {
-    if let timerViews = timerViews {
-      let value = CGFloat(sender.value)
-      timerViews.ring1fg.percent = value
-      timerViews.ring2fg.percent = value
-      timerViews.ring3fg.percent = value
-      timerViews.fill.percent = value / 2
+
+  
+  // MARK: -
+  // MARK: Timer callback funtions
+  func timerChangedCountingStatus(state: Timer.CountingState) {
+    var buttonText: String
+    switch state {
+    case .Ready:
+      buttonText = "Start"
+    case .Counting:
+      buttonText = "Pause"
+    case .Paused:
+      buttonText = "Continue"
+    }
+    startPauseButton.setTitle(buttonText, forState: UIControlState.Normal)
+  }
+  
+  
+  
+  func timerUpdatedTime(timer: Timer?) {
+    if let timer = timer {
+      updateTimerLabels(timer)
+      
+      switch timer.timing.phase {
+      case .PreShow,
+           .Break1,
+           .Break2,
+           .Section3:
+        if timer.percentageComplete == 1.0 {
+          timer.next()
+          timerLabelDisplay = .Elapsed
+        }
+      case .Section1,
+           .Section2,
+           .PostShow:
+        break
+      }
+      
+
+      
+      switch timer.timing.phase {
+      case .PreShow:
+        timerViews?.fill.percent    = timer.percentageComplete
+        timerViews?.ring1fg.percent = 0.0
+        timerViews?.ring2fg.percent = 0.0
+        timerViews?.ring3fg.percent = 0.0
+        segmentLabel.text = " Pre Show"
+
+      case .Section1:
+        timerViews?.fill.percent    = 0.0
+        timerViews?.ring1fg.percent = timer.percentageComplete
+        timerViews?.ring2fg.percent = 0.0
+        timerViews?.ring3fg.percent = 0.0
+        segmentLabel.text = "Segment 1"
+
+      case .Break1:
+        timerViews?.ring1fg.percent = 1.0
+        timerViews?.fill.percent    = timer.percentageComplete
+        timerViews?.ring2fg.percent = 0.0
+        timerViews?.ring3fg.percent = 0.0
+        segmentLabel.text = "    Break"
+
+      case .Section2:
+        timerViews?.fill.percent    = 0.0
+        timerViews?.ring1fg.percent = 1.0
+        timerViews?.ring2fg.percent = timer.percentageComplete
+        timerViews?.ring3fg.percent = 0.0
+        segmentLabel.text = "Segment 2"
+
+      case .Break2:
+        timerViews?.ring1fg.percent = 1.0
+        timerViews?.ring2fg.percent = 1.0
+        timerViews?.fill.percent    = timer.percentageComplete
+        timerViews?.ring3fg.percent = 0.0
+        segmentLabel.text = "    Break"
+
+      case .Section3:
+        timerViews?.fill.percent    = 0.0
+        timerViews?.ring1fg.percent = 1.0
+        timerViews?.ring2fg.percent = 1.0
+        timerViews?.ring3fg.percent = timer.percentageComplete
+        segmentLabel.text = "Segment 3"
+
+      case .PostShow:
+        timerViews?.ring1fg.percent = 1.0
+        timerViews?.ring2fg.percent = 1.0
+        timerViews?.ring3fg.percent = 1.0
+        timerViews?.fill.percent = 0.0
+        segmentLabel.text = "Post Show"
+      }
+      
+      NSNotificationCenter.defaultCenter()
+                          .postNotificationName( timerNotificationKey,
+                                         object: nil)
+
+    }
+  }
+
+  func updateTimerLabels(timer: Timer) {
+    let timing = timer.timing
+    switch timerLabelDisplay {
+    case .Remaining:
+      totalTimeLabel.text = timing.asString(timer.totalShowTimeRemaining)
+      sectionTimeLabel.text = timing.asString(timer.secondsRemaining)
+    case .Elapsed:
+      totalTimeLabel.text = timing.asString(timer.totalShowTimeElapsed)
+      sectionTimeLabel.text = timing.asString(timer.secondsElapsed)
     }
   }
   
+  
+  // MARK: -
+  // MARK: Actions
+  
+  @IBAction func startPauseButtonPressed(sender: UIButton) {
+    switch timer.state {
+    case .Ready,
+         .Paused:
+      timer.start()
+    case .Counting:
+      timer.pause()
+    }
+  }
 
-
+  @IBAction func nextSegmentButtonPressed(sender: UIButton) {
+    timer.next()
+  }
+  
+  @IBAction func remainingTimeToggled(sender: UIButton) {
+    switch timerLabelDisplay {
+      case .Remaining:
+      timerLabelDisplay = .Elapsed
+    case .Elapsed:
+      timerLabelDisplay = .Remaining
+    }
+  }
+  
   // MARK: -
   // MARK: Setup
   func configureFGRing(ringView: PartialRingView, withColor color: UIColor)
-    -> PartialRingView {
+                                                            -> PartialRingView {
       ringView.color               = color
       ringView.startAngle          = Rotation(degrees: 0)
       ringView.endAngle            = Rotation(degrees: 10)
@@ -108,8 +271,8 @@ final class TimerViewController: UIViewController {
   }
   
   func configureBGRing(ringView: RingView, withColor color: UIColor)
-    -> RingView {
-      ringView.lineColor   = color.darkenColorWithMultiplier(0.1)
+                                                                   -> RingView {
+      ringView.lineColor   = color.darkenColorWithMultiplier(0.2)
       ringView.lineWidth   = lineWidth
       configureRing(ringView)
       return ringView
@@ -120,8 +283,20 @@ final class TimerViewController: UIViewController {
     ringView.opaque              = false
   }
 
+  private func styleButtons() {
+    styleButton(startPauseButton)
+    styleButton(nextSegmentButton)
+  }
   
-  func setupContraints() {
+  private func styleButton(button: UIButton)  {
+    button.layer.borderWidth = 1
+    button.layer.cornerRadius = 15
+    button.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).CGColor
+    button.titleLabel?.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+
+  }
+  
+  private func setupContraints() {
     // Contrain the timerCirclesView so that it is
     // lessThat the smaller of ViewController view height and width AND
     // at least as wide and high as the smaller of ViewController view 
@@ -167,5 +342,46 @@ final class TimerViewController: UIViewController {
     view.addConstraint(minWidth)
   }
 
+  func setupTimeLabelContraints(label: UILabel) {
+    
+    let width =  NSLayoutConstraint(item: label,
+                               attribute: .Width,
+                               relatedBy: .Equal,
+                                  toItem: label.superview,
+                               attribute: .Width,
+                              multiplier: 199 / 736,
+                                constant: 0.0)
+    width.priority = 1000
+    label.superview?.addConstraint(width)
+    
+  }
+  
+  func setupDescriptionLabelContraints(label: UILabel) {
+    
+    let height =  NSLayoutConstraint(item: label,
+                               attribute: .Height,
+                               relatedBy: .Equal,
+                                  toItem: label.superview,
+                               attribute: .Height,
+                              multiplier: 24 / 736,
+                                constant: 0.0)
+    height.priority = 1000
+    label.superview?.addConstraint(height)
+    
+  }
+  
+  func setupRemainingToggleButtonContraints() {
+    
+    let height =  NSLayoutConstraint(item: remainingToggleButton,
+                               attribute: .Height,
+                               relatedBy: .Equal,
+                                  toItem: remainingToggleButton.superview,
+                               attribute: .Height,
+                              multiplier: 93 / 736,
+                                constant: 0.0)
+    height.priority = 1000
+    remainingToggleButton.superview?.addConstraint(height)
+    
+  }
 }
 
