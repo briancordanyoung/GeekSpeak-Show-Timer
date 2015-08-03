@@ -172,7 +172,15 @@ final class Timer: NSObject {
     countingStartTime = .None
     timing.incrementPhase()
     if _state == .Counting {
+    }
+    
+    switch _state {
+    case .Ready:
+      reset()
+    case .Counting:
       start()
+    case .Paused:
+      break
     }
   }
   

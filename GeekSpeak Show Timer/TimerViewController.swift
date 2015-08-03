@@ -256,10 +256,13 @@ final class TimerViewController: UIViewController {
 
   @IBAction func nextSegmentButtonPressed(sender: UIButton) {
     timer.next()
+    if timer.state == .Paused {
+      
+    }
   }
   
   @IBAction func addTimeButtonPressed(sender: UIButton) {
-    timer.duration += 10.0 // Add 10 seconds
+    timer.duration += 1.0 // Add 1 seconds
   }
  
   @IBAction func remainingTimeToggled(sender: UIButton) {
