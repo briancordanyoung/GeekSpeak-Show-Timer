@@ -64,6 +64,10 @@ final class Timer: NSObject {
     return secondsToPercentage(secondsRemaining)
   }
   
+  var percentageComplete: CGFloat {
+    return 1.0 - percentageRemaining
+  }
+  
   // MARK: Internal Properties
   var _state: CountingState = .Ready {
     didSet {
@@ -166,22 +170,9 @@ final class Timer: NSObject {
     case .Paused:
       storeElapsedTimeAtPause()
     case .Counting:
-      increment()
+      notifyTimerUpdated()
+      incrementTimerAgain()
     }
-  }
-  
-//  private func incrementOrComplete() {
-//    if secondsElapsed > duration {
-//      complete()
-//    } else {
-//      notifyTimerUpdated()
-//      incrementTimerAgain()
-//    }
-//  }
-  
-  private func increment() {
-    notifyTimerUpdated()
-    incrementTimerAgain()
   }
   
   private func incrementTimerAgain() {

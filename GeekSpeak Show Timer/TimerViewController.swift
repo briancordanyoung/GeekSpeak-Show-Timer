@@ -25,16 +25,20 @@ final class TimerViewController: UIViewController {
   let ring3Color = UIColor(red: 0.5,  green: 1.0,  blue: 0.5,  alpha: 1.0)
   
   @IBOutlet weak var timerCirclesView: UIView!
-  @IBOutlet weak var testSlider: UISlider!
   @IBOutlet weak var totalTimeLabel: UILabel!
   @IBOutlet weak var sectionTimeLabel: UILabel!
   @IBOutlet weak var totalLabel: UILabel!
   @IBOutlet weak var segmentLabel: UILabel!
+  @IBOutlet weak var startPauseButton: UIButton!
+  @IBOutlet weak var nextSegmentButton: UIButton!
+  @IBOutlet weak var resetButton: UIButton!
+  @IBOutlet weak var addButton: UIButton!
   
   var lineWidth: CGFloat {
     return self.dynamicType.lineWidthForSize(timerCirclesView.frame.size)
   }
-
+  
+  
   class func lineWidthForSize(size: CGSize) -> CGFloat {
     let testWidth   = CGFloat(90)
     let testSize    = CGFloat(736)
@@ -44,11 +48,15 @@ final class TimerViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    timer.countingStateChangedHandler = timerChangedCountingStatus
+    timer.timerUpdatedHandler         = timerUpdatedTime
+
     setupContraints()
     setupTimeLabelContraints(totalTimeLabel)
     setupTimeLabelContraints(sectionTimeLabel)
     setupDescriptionLabelContraints(totalLabel)
     setupDescriptionLabelContraints(segmentLabel)
+    styleButtons()
     
     let fillView  = PieShapeView()
     fillView.opaque = false
@@ -81,7 +89,6 @@ final class TimerViewController: UIViewController {
                               ring3fg: ring3fg,
                                  fill: fillView)
     
-    sliderChanged(testSlider)
   }
   
   
@@ -99,16 +106,110 @@ final class TimerViewController: UIViewController {
     super.didReceiveMemoryWarning()
   }
 
-  @IBAction func sliderChanged(sender: UISlider) {
-    if let timerViews = timerViews {
-      let value = CGFloat(sender.value)
-      timerViews.ring1fg.percent = value
-      timerViews.ring2fg.percent = value
-      timerViews.ring3fg.percent = value
-      timerViews.fill.percent = value / 2
+
+  
+  // MARK: -
+  // MARK: Timer callback funtions
+  func timerChangedCountingStatus(state: Timer.CountingState) {
+    var buttonText: String
+    switch state {
+    case .Ready:
+      buttonText = "Start"
+    case .Counting:
+      buttonText = "Pause"
+    case .Paused:
+      buttonText = "Continue"
+    }
+    startPauseButton.setTitle(buttonText, forState: UIControlState.Normal)
+  }
+  
+  
+  
+  func timerUpdatedTime(timer: Timer?) {
+    if let timer = timer {
+      updateTimerLabels(timer)
+      
+      switch timer.timing.phase {
+      case .PreShow, .Break1, .Break2:
+        if timer.percentageComplete == 1.0 {
+          timer.next()
+        }
+      case .Section1, .Section2, .Section3:
+        break
+      case .PostShow:
+        break
+      }
+      
+
+      
+      switch timer.timing.phase {
+      case .PreShow:
+        timerViews?.fill.percent    = timer.percentageComplete
+        timerViews?.ring1fg.percent = 0.0
+        timerViews?.ring2fg.percent = 0.0
+        timerViews?.ring3fg.percent = 0.0
+        break
+
+      case .Section1:
+        timerViews?.fill.percent    = 0.0
+        timerViews?.ring1fg.percent = timer.percentageComplete
+        timerViews?.ring2fg.percent = 0.0
+        timerViews?.ring3fg.percent = 0.0
+        break
+
+      case .Break1:
+        timerViews?.ring1fg.percent = 1.0
+        timerViews?.fill.percent    = timer.percentageComplete
+        timerViews?.ring2fg.percent = 0.0
+        timerViews?.ring3fg.percent = 0.0
+        break
+
+      case .Section2:
+        timerViews?.fill.percent    = 0.0
+        timerViews?.ring1fg.percent = 1.0
+        timerViews?.ring2fg.percent = timer.percentageComplete
+        timerViews?.ring3fg.percent = 0.0
+        break
+
+      case .Break2:
+        timerViews?.ring1fg.percent = 1.0
+        timerViews?.ring2fg.percent = 1.0
+        timerViews?.fill.percent    = timer.percentageComplete
+        timerViews?.ring3fg.percent = 0.0
+        break
+
+      case .Section3:
+        timerViews?.fill.percent    = 0.0
+        timerViews?.ring1fg.percent = 1.0
+        timerViews?.ring2fg.percent = 1.0
+        timerViews?.ring3fg.percent = timer.percentageComplete
+        break
+
+      case .PostShow:
+        timerViews?.ring1fg.percent = 1.0
+        timerViews?.ring2fg.percent = 1.0
+        timerViews?.ring3fg.percent = 1.0
+        timerViews?.fill.percent = 0.0
+        break
+
+      }
     }
   }
 
+  func stringFromTimeInterval(interval: NSTimeInterval) -> String {
+    let interval = Int(interval)
+    let seconds = interval % 60
+    let minutes = (interval / 60) % 60
+    let hours = (interval / 3600)
+    return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+  }
+  
+  func updateTimerLabels(timer: Timer) {
+    totalTimeLabel.text =
+                     stringFromTimeInterval(timer.timing.totalShowTimeRemaining)
+    sectionTimeLabel.text = stringFromTimeInterval(timer.secondsRemaining)
+  }
+  
   
   // MARK: -
   // MARK: Actions
@@ -161,6 +262,19 @@ final class TimerViewController: UIViewController {
     ringView.opaque              = false
   }
 
+  private func styleButtons() {
+    styleButton(startPauseButton)
+    styleButton(nextSegmentButton)
+    styleButton(resetButton)
+    styleButton(addButton)
+  }
+  
+  private func styleButton(button: UIButton)  {
+    button.layer.borderWidth = 1
+    button.layer.cornerRadius = 15
+    button.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).CGColor
+    button.titleLabel?.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+  }
   
   func setupContraints() {
     // Contrain the timerCirclesView so that it is

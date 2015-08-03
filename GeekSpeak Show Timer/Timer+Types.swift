@@ -28,12 +28,18 @@ extension Timer {
   }
   
   struct Durations {
-    var preShow:           NSTimeInterval =  5.0 * oneMinute
-    var section1:          NSTimeInterval = 17.0 * oneMinute
-    var break1:            NSTimeInterval =  1.0 * oneMinute
-    var section2:          NSTimeInterval = 17.0 * oneMinute
-    var break2:            NSTimeInterval =  1.0 * oneMinute
-    var section3:          NSTimeInterval = 17.0 * oneMinute
+//    var preShow:           NSTimeInterval =  5.0 * oneMinute
+//    var section1:          NSTimeInterval = 17.0 * oneMinute
+//    var break1:            NSTimeInterval =  1.0 * oneMinute
+//    var section2:          NSTimeInterval = 17.0 * oneMinute
+//    var break2:            NSTimeInterval =  1.0 * oneMinute
+//    var section3:          NSTimeInterval = 17.0 * oneMinute
+    var preShow:           NSTimeInterval = 20.0
+    var section1:          NSTimeInterval = 10.0
+    var break1:            NSTimeInterval =  5.0
+    var section2:          NSTimeInterval = 10.0
+    var break2:            NSTimeInterval =  5.0
+    var section3:          NSTimeInterval = 10.0
     
     var totalShowTime: NSTimeInterval {
       return section1 + section2 + section3
@@ -153,10 +159,18 @@ extension Timer {
       case .PreShow:
         phase = .Section1
       case .Section1:
+        // Before moving to the next phase of the show,
+        // get the difference between the planned duration and the elapsed time
+        // and add that to the next show section.
+        durations.section2 += duration - elapsed
         phase = .Break1
       case .Break1:
         phase = .Section2
       case .Section2:
+        // Before moving to the next phase of the show,
+        // get the difference between the planned duration and the elapsed time
+        // and add that to the next show section.
+        durations.section3 += duration - elapsed
         phase = .Break2
       case .Break2:
         phase = .Section3

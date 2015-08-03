@@ -72,15 +72,6 @@
                                     <constraint firstItem="fhW-lj-LnF" firstAttribute="top" secondItem="tY2-lc-OlN" secondAttribute="top" id="xox-Q5-xJI"/>
                                 </constraints>
                             </view>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.10000000000000001" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Zd2-1j-kEp">
-                                <rect key="frame" x="14" y="962" width="740" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Ma1-zG-4XB"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="sliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="SFg-CM-WvC"/>
-                                </connections>
-                            </slider>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xff-Rc-yrb">
                                 <rect key="frame" x="16" y="924" width="40" height="30"/>
                                 <state key="normal" title="Reset">
@@ -114,27 +105,25 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="startPauseButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wSg-sc-MKR"/>
+                                    <action selector="startPauseButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tgr-GL-D60"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="Zd2-1j-kEp" secondAttribute="trailing" id="5xj-ff-Jnv"/>
-                            <constraint firstItem="Zd2-1j-kEp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="B1Z-UL-7Tr"/>
-                            <constraint firstItem="Zd2-1j-kEp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="E0I-6j-aVn"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Zd2-1j-kEp" secondAttribute="trailing" id="U4Q-7c-YTB"/>
                             <constraint firstItem="tY2-lc-OlN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="16" id="b5I-QT-R6p"/>
                             <constraint firstAttribute="trailing" secondItem="tY2-lc-OlN" secondAttribute="trailing" constant="16" placeholder="YES" id="fQ4-E4-lf5"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Zd2-1j-kEp" secondAttribute="bottom" constant="32" id="mdo-PF-ug5"/>
                             <constraint firstItem="tY2-lc-OlN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="oUn-Ry-axO"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
+                        <outlet property="addButton" destination="Tm6-vH-l20" id="VkD-yy-FB9"/>
+                        <outlet property="nextSegmentButton" destination="edy-5J-yaK" id="OHZ-MG-UGu"/>
+                        <outlet property="resetButton" destination="xff-Rc-yrb" id="2Y2-qX-8Tm"/>
                         <outlet property="sectionTimeLabel" destination="fhW-lj-LnF" id="PUl-lz-n33"/>
                         <outlet property="segmentLabel" destination="6Xz-Ti-gwy" id="NWJ-vr-NIE"/>
-                        <outlet property="testSlider" destination="Zd2-1j-kEp" id="2JK-Qk-Gk6"/>
+                        <outlet property="startPauseButton" destination="PdP-pn-H8o" id="wKF-n7-nGL"/>
                         <outlet property="timerCirclesView" destination="tY2-lc-OlN" id="Tzt-0B-3ti"/>
                         <outlet property="totalLabel" destination="vPK-rh-OhK" id="Bgz-Ou-WQO"/>
                         <outlet property="totalTimeLabel" destination="iLg-Ok-lxM" id="WkL-JZ-5QJ"/>
