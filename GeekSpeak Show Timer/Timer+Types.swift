@@ -69,7 +69,17 @@ extension Timer {
     var durations   = Durations()
     var timeElapsed = TimeElapsed()
     var phase       = ShowPhase.PreShow
-    
+
+    var formatter: NSNumberFormatter = {
+      let formatter = NSNumberFormatter()
+      formatter.minimumIntegerDigits  = 2
+      formatter.maximumIntegerDigits  = 2
+      formatter.minimumFractionDigits = 0
+      formatter.maximumFractionDigits = 0
+      formatter.negativePrefix = ""
+      return formatter
+    }()
+
     var totalShowTimeElapsed: NSTimeInterval {
       return timeElapsed.totalShowTime
     }
@@ -190,6 +200,16 @@ extension Timer {
       }
       return phase
     }
+    
+    func asString(interval: NSTimeInterval) -> String {
+      let roundedInterval = Int(interval)
+      let seconds = roundedInterval % 60
+      let minutes = (roundedInterval / 60) % 60
+      let hours   = (roundedInterval / 3600)
+      let subSeconds = formatter.stringFromNumber(interval * 100)!
+      return String(format: "%02d:%02d:\(subSeconds)",  minutes, seconds)
+    }
+
     
     
   } // ShowTiming

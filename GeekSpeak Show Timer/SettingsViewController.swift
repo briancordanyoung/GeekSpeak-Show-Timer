@@ -30,8 +30,20 @@ class SettingsViewController: UIViewController {
 
   override func viewWillAppear(animated: Bool) {
     generateBluredBackground()
+
   }
   
+  override func viewDidAppear(animated: Bool) {
+    NSNotificationCenter.defaultCenter()
+                        .addObserver( self,
+                            selector: "updateTimerLabels",
+                                name: timerNotificationKey,
+                              object: nil)
+  }
+  
+  override func viewWillDisappear(animated: Bool) {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
   
   @IBAction func hideSettingButton(sender: AnyObject) {
     self.splitViewController?.toggleMasterView()
@@ -64,11 +76,54 @@ class SettingsViewController: UIViewController {
     generateBluredBackground()
   }
   
+  func updateTimerLabels() {
+    if let timer = timerViewController?.timer {
+      
+      let timing = timer.timing
+      let elapsedTime = timer.secondsElapsed
+      
+      var segment1 = timing.asString(timing.timeElapsed.section1)
+      var segment2 = timing.asString(timing.timeElapsed.section2)
+      var segment3 = timing.asString(timing.timeElapsed.section3)
+      var postshow = timing.asString(timing.timeElapsed.postShow)
+      
+      switch timing.phase {
+      case .PreShow,
+           .Break1,
+           .Break2:
+        break
+        
+      case .Section1:
+        segment1 =
+               timing.asString(timing.timeElapsed.section1 + elapsedTime)
+      case .Section2:
+        segment2 =
+               timing.asString(timing.timeElapsed.section2 + elapsedTime)
+        
+      case .Section3:
+        segment3 =
+               timing.asString(timing.timeElapsed.section3 + elapsedTime)
+        
+      case .PostShow:
+        postshow =
+               timing.asString(timing.timeElapsed.postShow + elapsedTime)
+        break
+      }
+      
+      segment1Label.text = segment1
+      segment2Label.text = segment2
+      segment3Label.text = segment3
+      postShowLabel.text = postshow
+      
+      // TODO: Uncomment once this is on a background thread
+      //       generateBluredBackground()
+
+    }
+  }
   
+
   
-  
-  
-  
+  // TODO: Do this on a background thread
   func generateBluredBackground() {
     // https://uncorkedstudios.com/blog/ios-7-background-effects-and-split-view-controllers
     

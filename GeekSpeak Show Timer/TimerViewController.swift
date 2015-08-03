@@ -8,6 +8,9 @@
 
 import UIKit
 
+let timerNotificationKey = "com.geekspeak.timerNotificationKey"
+
+
 
 enum TimerLabelDisplay: String, Printable {
   case Remaining = "Remaining"
@@ -22,13 +25,13 @@ final class TimerViewController: UIViewController {
 
   var timerViews: TimerViews?
   let timer = Timer()
-  let formatter = NSNumberFormatter()
   var timerLabelDisplay: TimerLabelDisplay = .Remaining {
     didSet {
       updateTimerLabels(timer)
     }
   }
 
+  
   let ring1Color = UIColor(red: 0.5,  green: 0.5,  blue: 1.0,  alpha: 1.0)
   let ring2Color = UIColor(red: 1.0,  green: 0.5,  blue: 0.5,  alpha: 1.0)
   let ring3Color = UIColor(red: 0.5,  green: 1.0,  blue: 0.5,  alpha: 1.0)
@@ -59,7 +62,6 @@ final class TimerViewController: UIViewController {
     timer.countingStateChangedHandler = timerChangedCountingStatus
     timer.timerUpdatedHandler         = timerUpdatedTime
 
-    setupNumberFormatter()
     setupContraints()
     setupTimeLabelContraints(totalTimeLabel)
     setupTimeLabelContraints(sectionTimeLabel)
@@ -103,6 +105,7 @@ final class TimerViewController: UIViewController {
     
     timerCirclesView.bringSubviewToFront(remainingToggleButton)
     timer.reset()
+    
   }
   
   
@@ -164,73 +167,60 @@ final class TimerViewController: UIViewController {
         timerViews?.ring1fg.percent = 0.0
         timerViews?.ring2fg.percent = 0.0
         timerViews?.ring3fg.percent = 0.0
-        break
 
       case .Section1:
         timerViews?.fill.percent    = 0.0
         timerViews?.ring1fg.percent = timer.percentageComplete
         timerViews?.ring2fg.percent = 0.0
         timerViews?.ring3fg.percent = 0.0
-        break
 
       case .Break1:
         timerViews?.ring1fg.percent = 1.0
         timerViews?.fill.percent    = timer.percentageComplete
         timerViews?.ring2fg.percent = 0.0
         timerViews?.ring3fg.percent = 0.0
-        break
 
       case .Section2:
         timerViews?.fill.percent    = 0.0
         timerViews?.ring1fg.percent = 1.0
         timerViews?.ring2fg.percent = timer.percentageComplete
         timerViews?.ring3fg.percent = 0.0
-        break
 
       case .Break2:
         timerViews?.ring1fg.percent = 1.0
         timerViews?.ring2fg.percent = 1.0
         timerViews?.fill.percent    = timer.percentageComplete
         timerViews?.ring3fg.percent = 0.0
-        break
 
       case .Section3:
         timerViews?.fill.percent    = 0.0
         timerViews?.ring1fg.percent = 1.0
         timerViews?.ring2fg.percent = 1.0
         timerViews?.ring3fg.percent = timer.percentageComplete
-        break
 
       case .PostShow:
         timerViews?.ring1fg.percent = 1.0
         timerViews?.ring2fg.percent = 1.0
         timerViews?.ring3fg.percent = 1.0
         timerViews?.fill.percent = 0.0
-        break
-
       }
+      
+      NSNotificationCenter.defaultCenter()
+                          .postNotificationName( timerNotificationKey,
+                                         object: nil)
+
     }
   }
 
-  func stringFromTimeInterval(interval: NSTimeInterval) -> String {
-    let roundedInterval = Int(interval)
-    let seconds = roundedInterval % 60
-    let minutes = (roundedInterval / 60) % 60
-    let hours   = (roundedInterval / 3600)
-    let subSeconds = formatter.stringFromNumber(interval * 100)!
-    return String(format: "%02d:%02d:\(subSeconds)",  minutes, seconds)
-  }
-  
   func updateTimerLabels(timer: Timer) {
+    let timing = timer.timing
     switch timerLabelDisplay {
     case .Remaining:
-      totalTimeLabel.text =
-        stringFromTimeInterval(timer.totalShowTimeRemaining)
-      sectionTimeLabel.text = stringFromTimeInterval(timer.secondsRemaining)
+      totalTimeLabel.text = timing.asString(timer.totalShowTimeRemaining)
+      sectionTimeLabel.text = timing.asString(timer.secondsRemaining)
     case .Elapsed:
-      totalTimeLabel.text =
-        stringFromTimeInterval(timer.totalShowTimeElapsed)
-      sectionTimeLabel.text = stringFromTimeInterval(timer.secondsElapsed)
+      totalTimeLabel.text = timing.asString(timer.totalShowTimeElapsed)
+      sectionTimeLabel.text = timing.asString(timer.secondsElapsed)
     }
   }
   
@@ -300,14 +290,6 @@ final class TimerViewController: UIViewController {
     button.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).CGColor
     button.titleLabel?.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
 
-  }
-  
-  private func setupNumberFormatter() {
-    formatter.minimumIntegerDigits  = 2
-    formatter.maximumIntegerDigits  = 2
-    formatter.minimumFractionDigits = 0
-    formatter.maximumFractionDigits = 0
-    formatter.negativePrefix = ""
   }
   
   private func setupContraints() {
