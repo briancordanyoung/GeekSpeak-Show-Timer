@@ -40,8 +40,6 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var segmentLabel: UILabel!
   @IBOutlet weak var startPauseButton: UIButton!
   @IBOutlet weak var nextSegmentButton: UIButton!
-  @IBOutlet weak var resetButton: UIButton!
-  @IBOutlet weak var addButton: UIButton!
   @IBOutlet weak var remainingToggleButton: UIButton!
   
   var lineWidth: CGFloat {
@@ -240,10 +238,6 @@ final class TimerViewController: UIViewController {
   // MARK: -
   // MARK: Actions
   
-  @IBAction func resetButtonPressed(sender: UIButton) {
-    timer.reset()
-  }
-
   @IBAction func startPauseButtonPressed(sender: UIButton) {
     switch timer.state {
     case .Ready,
@@ -261,10 +255,6 @@ final class TimerViewController: UIViewController {
     }
   }
   
-  @IBAction func addTimeButtonPressed(sender: UIButton) {
-    timer.duration += 1.0 // Add 1 seconds
-  }
- 
   @IBAction func remainingTimeToggled(sender: UIButton) {
     switch timerLabelDisplay {
       case .Remaining:
@@ -302,8 +292,6 @@ final class TimerViewController: UIViewController {
   private func styleButtons() {
     styleButton(startPauseButton)
     styleButton(nextSegmentButton)
-    styleButton(resetButton)
-    styleButton(addButton)
   }
   
   private func styleButton(button: UIButton)  {
