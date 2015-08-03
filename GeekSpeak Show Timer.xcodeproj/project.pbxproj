@@ -21,7 +21,7 @@
 		D340CCAC1B6D711700BB17E3 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCAB1B6D711700BB17E3 /* RingView.swift */; };
 		D340CCB11B6D8B9600BB17E3 /* PartialRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB01B6D8B9600BB17E3 /* PartialRingView.swift */; };
 		D340CCB31B6D91FF00BB17E3 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */; };
-		D340CCB51B6D939F00BB17E3 /* UIColor+DrakenColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB41B6D939F00BB17E3 /* UIColor+DrakenColor.swift */; };
+		D340CCB51B6D939F00BB17E3 /* UIColor+DarkenColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB41B6D939F00BB17E3 /* UIColor+DarkenColor.swift */; };
 		D340CCB71B6D9C6400BB17E3 /* FillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB61B6D9C6400BB17E3 /* FillView.swift */; };
 		D340CCBA1B6DDD5400BB17E3 /* TimerViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB91B6DDD5400BB17E3 /* TimerViews.swift */; };
 		D340CCBE1B6DE30100BB17E3 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCBD1B6DE30100BB17E3 /* SplitViewController.swift */; };
@@ -63,7 +63,7 @@
 		D340CCAB1B6D711700BB17E3 /* RingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		D340CCB01B6D8B9600BB17E3 /* PartialRingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartialRingView.swift; sourceTree = "<group>"; };
 		D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
-		D340CCB41B6D939F00BB17E3 /* UIColor+DrakenColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+DrakenColor.swift"; sourceTree = "<group>"; };
+		D340CCB41B6D939F00BB17E3 /* UIColor+DarkenColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+DarkenColor.swift"; sourceTree = "<group>"; };
 		D340CCB61B6D9C6400BB17E3 /* FillView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillView.swift; sourceTree = "<group>"; };
 		D340CCB91B6DDD5400BB17E3 /* TimerViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViews.swift; sourceTree = "<group>"; };
 		D340CCBD1B6DE30100BB17E3 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
@@ -114,7 +114,6 @@
 			children = (
 				D340CC7C1B6D3E7600BB17E3 /* Main.storyboard */,
 				D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */,
-				D340CCB41B6D939F00BB17E3 /* UIColor+DrakenColor.swift */,
 				D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */,
 				D3912C721B6E9CED003B42F1 /* Timer.swift */,
 				D3912C761B6F1476003B42F1 /* Timer+Types.swift */,
@@ -122,6 +121,7 @@
 				D3912C701B6E93B7003B42F1 /* Settings.swift */,
 				D340CCB91B6DDD5400BB17E3 /* TimerViews.swift */,
 				D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */,
+				D340CCB41B6D939F00BB17E3 /* UIColor+DarkenColor.swift */,
 				D340CCA61B6D5CC100BB17E3 /* Rotation & Angle Types */,
 				D340CCB81B6DA8DA00BB17E3 /* Timer Views */,
 				D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */,
@@ -298,7 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D340CCB51B6D939F00BB17E3 /* UIColor+DrakenColor.swift in Sources */,
+				D340CCB51B6D939F00BB17E3 /* UIColor+DarkenColor.swift in Sources */,
 				D340CCBE1B6DE30100BB17E3 /* SplitViewController.swift in Sources */,
 				D340CCAC1B6D711700BB17E3 /* RingView.swift in Sources */,
 				D3912C771B6F1476003B42F1 /* Timer+Types.swift in Sources */,
