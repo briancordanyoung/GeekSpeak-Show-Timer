@@ -19,6 +19,10 @@ final class TimerViewController: UIViewController {
   
   @IBOutlet weak var timerCirclesView: UIView!
   @IBOutlet weak var testSlider: UISlider!
+  @IBOutlet weak var totalTimeLabel: UILabel!
+  @IBOutlet weak var sectionTimeLabel: UILabel!
+  @IBOutlet weak var totalLabel: UILabel!
+  @IBOutlet weak var segmentLabel: UILabel!
   
   var lineWidth: CGFloat {
     return self.dynamicType.lineWidthForSize(timerCirclesView.frame.size)
@@ -34,6 +38,11 @@ final class TimerViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupContraints()
+    setupTimeLabelContraints(totalTimeLabel)
+    setupTimeLabelContraints(sectionTimeLabel)
+    setupDescriptionLabelContraints(totalLabel)
+    setupDescriptionLabelContraints(segmentLabel)
+    
     let fillView  = PieShapeView()
     fillView.opaque = false
     fillView.startAngle = Rotation(degrees: 0)
@@ -167,5 +176,32 @@ final class TimerViewController: UIViewController {
     view.addConstraint(minWidth)
   }
 
+  func setupTimeLabelContraints(label: UILabel) {
+    
+    let width =  NSLayoutConstraint(item: label,
+                               attribute: .Width,
+                               relatedBy: .Equal,
+                                  toItem: label.superview,
+                               attribute: .Width,
+                              multiplier: 0.27,
+                                constant: 0.0)
+    width.priority = 1000
+    label.superview?.addConstraint(width)
+    
+  }
+  
+  func setupDescriptionLabelContraints(label: UILabel) {
+    
+    let height =  NSLayoutConstraint(item: label,
+                               attribute: .Height,
+                               relatedBy: .Equal,
+                                  toItem: label.superview,
+                               attribute: .Height,
+                              multiplier: 0.03260869565,
+                                constant: 0.0)
+    height.priority = 1000
+    label.superview?.addConstraint(height)
+    
+  }
 }
 

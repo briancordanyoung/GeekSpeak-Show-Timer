@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="y01-ak-zO4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -20,8 +20,56 @@
                         <subviews>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tY2-lc-OlN" userLabel="TimerCircles">
                                 <rect key="frame" x="16" y="16" width="736" height="736"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" lineBreakMode="tailTruncation" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="iLg-Ok-lxM" userLabel="totalTime">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="68"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="iLg-Ok-lxM" secondAttribute="height" multiplier="409:93" id="2o4-sA-lLG"/>
+                                            <constraint firstAttribute="width" constant="300" placeholder="YES" id="2yX-QC-Ri7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="200"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="fhW-lj-LnF" userLabel="segmentTime">
+                                        <rect key="frame" x="436" y="0.0" width="300" height="68"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" placeholder="YES" id="lFr-m0-8yo"/>
+                                            <constraint firstAttribute="width" secondItem="fhW-lj-LnF" secondAttribute="height" multiplier="409:93" id="qip-L3-pI6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="200"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" lineBreakMode="tailTruncation" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="vPK-rh-OhK" userLabel="total">
+                                        <rect key="frame" x="0.0" y="68" width="43" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="vPK-rh-OhK" secondAttribute="height" multiplier="43:24" id="ooG-hC-mve"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Segment" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="6Xz-Ti-gwy" userLabel="segment">
+                                        <rect key="frame" x="655" y="68" width="81" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="6Xz-Ti-gwy" secondAttribute="height" multiplier="27:8" id="Id1-WE-DuA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <constraints>
+                                    <constraint firstItem="vPK-rh-OhK" firstAttribute="top" secondItem="iLg-Ok-lxM" secondAttribute="bottom" id="5RV-jh-Yjo"/>
+                                    <constraint firstAttribute="trailing" secondItem="fhW-lj-LnF" secondAttribute="trailing" id="O8v-RL-dQ4"/>
                                     <constraint firstAttribute="width" secondItem="tY2-lc-OlN" secondAttribute="height" multiplier="1:1" id="az5-AX-nZ5"/>
+                                    <constraint firstItem="vPK-rh-OhK" firstAttribute="leading" secondItem="tY2-lc-OlN" secondAttribute="leading" id="c0N-6d-NNr"/>
+                                    <constraint firstAttribute="trailing" secondItem="6Xz-Ti-gwy" secondAttribute="trailing" id="gJz-aE-PpC"/>
+                                    <constraint firstItem="iLg-Ok-lxM" firstAttribute="leading" secondItem="tY2-lc-OlN" secondAttribute="leading" id="lE0-bf-I4V"/>
+                                    <constraint firstItem="6Xz-Ti-gwy" firstAttribute="top" secondItem="fhW-lj-LnF" secondAttribute="bottom" id="ndy-De-khM"/>
+                                    <constraint firstItem="iLg-Ok-lxM" firstAttribute="top" secondItem="tY2-lc-OlN" secondAttribute="top" id="odo-FQ-xt6"/>
+                                    <constraint firstItem="fhW-lj-LnF" firstAttribute="top" secondItem="tY2-lc-OlN" secondAttribute="top" id="xox-Q5-xJI"/>
                                 </constraints>
                             </view>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.10000000000000001" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Zd2-1j-kEp">
@@ -48,8 +96,12 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
+                        <outlet property="sectionTimeLabel" destination="fhW-lj-LnF" id="PUl-lz-n33"/>
+                        <outlet property="segmentLabel" destination="6Xz-Ti-gwy" id="NWJ-vr-NIE"/>
                         <outlet property="testSlider" destination="Zd2-1j-kEp" id="2JK-Qk-Gk6"/>
                         <outlet property="timerCirclesView" destination="tY2-lc-OlN" id="Tzt-0B-3ti"/>
+                        <outlet property="totalLabel" destination="vPK-rh-OhK" id="Bgz-Ou-WQO"/>
+                        <outlet property="totalTimeLabel" destination="iLg-Ok-lxM" id="WkL-JZ-5QJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
