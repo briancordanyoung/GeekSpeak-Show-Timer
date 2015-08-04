@@ -32,9 +32,12 @@ final class TimerViewController: UIViewController {
   }
 
   
-  let ring1Color = UIColor(red: 0.5,  green: 0.5,  blue: 1.0,  alpha: 1.0)
-  let ring2Color = UIColor(red: 1.0,  green: 0.5,  blue: 0.5,  alpha: 1.0)
-  let ring3Color = UIColor(red: 0.5,  green: 1.0,  blue: 0.5,  alpha: 1.0)
+//  let ring1Color = UIColor(red: 0.5,  green: 0.5,  blue: 1.0,  alpha: 1.0)
+//  let ring2Color = UIColor(red: 1.0,  green: 0.5,  blue: 0.5,  alpha: 1.0)
+//  let ring3Color = UIColor(red: 0.5,  green: 1.0,  blue: 0.5,  alpha: 1.0)
+  let ring1Color = UIColor(red: 14/256,  green: 115/256,  blue: 192/256,  alpha: 1.0)
+  let ring2Color = UIColor(red: 14/256,  green: 115/256,  blue: 192/256,  alpha: 1.0)
+  let ring3Color = UIColor(red: 14/256,  green: 115/256,  blue: 192/256,  alpha: 1.0)
   
   @IBOutlet weak var timerCirclesView: UIView!
   @IBOutlet weak var totalTimeLabel: UILabel!
