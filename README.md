@@ -11,6 +11,7 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly timed breaks 
 ## Todo:
 - Add test mode in settings app to switch between demo/testing and live show timer
 - Add keyArchivers to save time state between launches
+- iamges need to be scaled and optimized for: @1x,@2x,@3x
 - Fix labels under show times to scale based on text width
 - Create animating buttons for start/pause and Next Segment buttons
 - Create graphics for Add & Remove seconds buttons.
