@@ -65,7 +65,7 @@
                                             <rect key="frame" x="911" y="68" width="81" height="24"/>
                                         </variation>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6N7-hw-EdK" userLabel="RemainingToggle">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6N7-hw-EdK" userLabel="RemainingToggle">
                                         <rect key="frame" x="0.0" y="0.0" width="992" height="93"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="93" placeholder="YES" id="3nA-Cv-Bat"/>
