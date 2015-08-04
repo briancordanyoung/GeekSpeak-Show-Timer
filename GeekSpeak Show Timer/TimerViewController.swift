@@ -104,7 +104,7 @@ final class TimerViewController: UIViewController {
                                  fill: fillView)
     
     timerCirclesView.bringSubviewToFront(remainingToggleButton)
-    timer.reset()
+    resetTimer()
     
   }
   
@@ -275,6 +275,20 @@ final class TimerViewController: UIViewController {
     case .Elapsed:
       timerLabelDisplay = .Remaining
     }
+  }
+  
+  func resetTimer() {
+    timer.reset()
+    let useDemoDurations = NSUserDefaults
+                            .standardUserDefaults()
+                            .boolForKey(kAppUseDemoDurations)
+    if useDemoDurations {
+      timer.timing.durations.useDemoDurations()
+    }
+  }
+  
+  func setupTimingsToDemoDurations() {
+    
   }
   
   // MARK: -

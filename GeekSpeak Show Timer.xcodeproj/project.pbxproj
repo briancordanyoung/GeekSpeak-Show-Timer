@@ -26,6 +26,7 @@
 		D340CCB71B6D9C6400BB17E3 /* FillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB61B6D9C6400BB17E3 /* FillView.swift */; };
 		D340CCBA1B6DDD5400BB17E3 /* TimerViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB91B6DDD5400BB17E3 /* TimerViews.swift */; };
 		D340CCBE1B6DE30100BB17E3 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCBD1B6DE30100BB17E3 /* SplitViewController.swift */; };
+		D3463F681B713E0D002C68A8 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3463F671B713E0D002C68A8 /* Settings.bundle */; };
 		D3912C711B6E93B7003B42F1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */; };
 		D3912C731B6E9CED003B42F1 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C721B6E9CED003B42F1 /* Timer.swift */; };
 		D3912C751B6E9D73003B42F1 /* BCYStandardLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */; };
@@ -70,6 +71,7 @@
 		D340CCB61B6D9C6400BB17E3 /* FillView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillView.swift; sourceTree = "<group>"; };
 		D340CCB91B6DDD5400BB17E3 /* TimerViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViews.swift; sourceTree = "<group>"; };
 		D340CCBD1B6DE30100BB17E3 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		D3463F671B713E0D002C68A8 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D3912C721B6E9CED003B42F1 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCYStandardLibrary.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				D3912C761B6F1476003B42F1 /* Timer+Types.swift */,
 				D340CCBD1B6DE30100BB17E3 /* SplitViewController.swift */,
 				D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */,
+				D3463F671B713E0D002C68A8 /* Settings.bundle */,
 				D340CCB91B6DDD5400BB17E3 /* TimerViews.swift */,
 				D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */,
 				D340CCB41B6D939F00BB17E3 /* UIColor+DarkenColor.swift */,
@@ -283,6 +286,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3463F681B713E0D002C68A8 /* Settings.bundle in Resources */,
 				D340CC7E1B6D3E7600BB17E3 /* Main.storyboard in Resources */,
 				D340CC831B6D3E7600BB17E3 /* LaunchScreen.xib in Resources */,
 				D340CC801B6D3E7600BB17E3 /* Images.xcassets in Resources */,
