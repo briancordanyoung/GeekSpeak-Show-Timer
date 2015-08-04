@@ -211,6 +211,13 @@ extension Timer {
       return String(format: "%02d:%02d:\(subSeconds)",  minutes, seconds)
     }
 
+    func asShortString(interval: NSTimeInterval) -> String {
+      let roundedInterval = Int(interval)
+      let seconds = roundedInterval % 60
+      let minutes = (roundedInterval / 60) % 60
+      let hours   = (roundedInterval / 3600)
+      return String(format: "%02d:%02d",  minutes, seconds)
+    }
     
     
   } // ShowTiming

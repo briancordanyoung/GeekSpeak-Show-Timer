@@ -31,13 +31,10 @@ final class TimerViewController: UIViewController {
     }
   }
 
-  
-//  let ring1Color = UIColor(red: 0.5,  green: 0.5,  blue: 1.0,  alpha: 1.0)
-//  let ring2Color = UIColor(red: 1.0,  green: 0.5,  blue: 0.5,  alpha: 1.0)
-//  let ring3Color = UIColor(red: 0.5,  green: 1.0,  blue: 0.5,  alpha: 1.0)
-  let ring1Color = UIColor(red: 14/256,  green: 115/256,  blue: 192/256,  alpha: 1.0)
-  let ring2Color = UIColor(red: 14/256,  green: 115/256,  blue: 192/256,  alpha: 1.0)
-  let ring3Color = UIColor(red: 14/256,  green: 115/256,  blue: 192/256,  alpha: 1.0)
+  let geekSpeakBlueColor = UIColor(red: 14/256,
+                                 green: 115/256,
+                                  blue: 192/256,
+                                 alpha: 1.0)
   
   @IBOutlet weak var timerCirclesView: UIView!
   @IBOutlet weak var totalTimeLabel: UILabel!
@@ -54,10 +51,10 @@ final class TimerViewController: UIViewController {
   
   
   class func lineWidthForSize(size: CGSize) -> CGFloat {
-    let testWidth   = CGFloat(90)
-    let testSize    = CGFloat(736)
-    let currentSize = (size.width + size.height  ) / 2
-    return (currentSize / testSize) * testWidth
+    let developmentLineWidth    = CGFloat(90)
+    let developmentViewWidth    = CGFloat(736)
+    let currentViewWidth = (size.width + size.height) / 2
+    return (currentViewWidth / developmentViewWidth) * developmentLineWidth
   }
   
   override func viewDidLoad() {
@@ -81,14 +78,14 @@ final class TimerViewController: UIViewController {
     fillView.pieLayer.clipToCircle = true
     timerCirclesView.addSubview(fillView)
     
-    let ring1bg   = configureBGRing(RingView(), withColor: ring1Color)
-    let ring1fg   = configureFGRing(PartialRingView(), withColor: ring1Color)
+    let ring1bg   = configureBGRing(RingView(), withColor: geekSpeakBlueColor)
+    let ring1fg   = configureFGRing(PartialRingView(), withColor: geekSpeakBlueColor)
 
-    let ring2bg   = configureBGRing(RingView(), withColor: ring2Color)
-    let ring2fg   = configureFGRing(PartialRingView(), withColor: ring2Color)
+    let ring2bg   = configureBGRing(RingView(), withColor: geekSpeakBlueColor)
+    let ring2fg   = configureFGRing(PartialRingView(), withColor: geekSpeakBlueColor)
     
-    let ring3bg   = configureBGRing(RingView(), withColor: ring3Color)
-    let ring3fg   = configureFGRing(PartialRingView(), withColor: ring3Color)
+    let ring3bg   = configureBGRing(RingView(), withColor: geekSpeakBlueColor)
+    let ring3fg   = configureFGRing(PartialRingView(), withColor: geekSpeakBlueColor)
 
 
     ring3bg.percentageOfSuperviewSize = 0.95
@@ -142,24 +139,40 @@ final class TimerViewController: UIViewController {
   }
   
   
-  
+  // TODO: This fuction is being called at about 60fps,
+  //       everytime the timer updates.  It is setting values for many views
+  //       and I'm not sure if I should be concerned with doing too much.
+  //       look in to CPU usage and determine if it is worth doing something
+  //       'more clever'.
   func timerUpdatedTime(timer: Timer?) {
     if let timer = timer {
       updateTimerLabels(timer)
+      let timing    = timer.timing
+      let totalTime = timing.asShortString(timing.durations.totalShowTime)
+      totalLabel.text = "Total: \(totalTime)"
       
       switch timer.timing.phase {
       case .PreShow,
-           .Break1,
-           .Break2,
+           .Break1,    // When a break, or the last segment is complete,
+           .Break2,    // advance to the next segment
            .Section3:
-        if timer.percentageComplete == 1.0 {
-          timer.next()
-          timerLabelDisplay = .Elapsed
-        }
-      case .Section1,
-           .Section2,
-           .PostShow:
-        break
+        
+        if timer.percentageComplete == 1.0 { timer.next() }
+        timerLabelDisplay = .Remaining
+        sectionTimeLabel.textColor = UIColor.whiteColor()
+        totalTimeLabel.textColor   = UIColor.whiteColor()
+
+      case .Section1,  // When a segment is complete, don't advance.
+           .Section2:  // The user gets to do that
+        
+        timerLabelDisplay = .Remaining
+        sectionTimeLabel.textColor = UIColor.whiteColor()
+        totalTimeLabel.textColor   = UIColor.whiteColor()
+        
+      case .PostShow:
+        timerLabelDisplay = .Elapsed
+        sectionTimeLabel.textColor = geekSpeakBlueColor
+        totalTimeLabel.textColor   = geekSpeakBlueColor
       }
       
 
@@ -224,12 +237,12 @@ final class TimerViewController: UIViewController {
 
   func updateTimerLabels(timer: Timer) {
     let timing = timer.timing
+    totalTimeLabel.text     = timing.asString(timer.totalShowTimeElapsed)
+
     switch timerLabelDisplay {
     case .Remaining:
-      totalTimeLabel.text = timing.asString(timer.totalShowTimeRemaining)
       sectionTimeLabel.text = timing.asString(timer.secondsRemaining)
     case .Elapsed:
-      totalTimeLabel.text = timing.asString(timer.totalShowTimeElapsed)
       sectionTimeLabel.text = timing.asString(timer.secondsElapsed)
     }
   }
@@ -253,8 +266,11 @@ final class TimerViewController: UIViewController {
   }
   
   @IBAction func remainingTimeToggled(sender: UIButton) {
+    // This button is currently disabled in the storyboard to
+    // remove user control over toggling between remaining and
+    // completed time display.
     switch timerLabelDisplay {
-      case .Remaining:
+    case .Remaining:
       timerLabelDisplay = .Elapsed
     case .Elapsed:
       timerLabelDisplay = .Remaining
