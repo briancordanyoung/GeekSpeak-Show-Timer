@@ -29,24 +29,39 @@ extension Timer {
   }
   
   struct Durations {
-    var preShow:           NSTimeInterval =  1.0 * oneMinute
-    var section1:          NSTimeInterval = 14.0 * oneMinute
-    var break1:            NSTimeInterval =  1.0 * oneMinute
-    var section2:          NSTimeInterval = 18.0 * oneMinute
-    var break2:            NSTimeInterval =  1.0 * oneMinute
-    var section3:          NSTimeInterval = 19.0 * oneMinute
+    var preShow:           NSTimeInterval = 0
+    var section1:          NSTimeInterval = 0
+    var break1:            NSTimeInterval = 0
+    var section2:          NSTimeInterval = 0
+    var break2:            NSTimeInterval = 0
+    var section3:          NSTimeInterval = 0
 
-//    var preShow:           NSTimeInterval = 20.0
-//    var section1:          NSTimeInterval = 10.0
-//    var break1:            NSTimeInterval =  5.0
-//    var section2:          NSTimeInterval = 10.0
-//    var break2:            NSTimeInterval =  5.0
-//    var section3:          NSTimeInterval = 10.0
+    init() {
+      useGeekSpeakDurations()
+    }
     
     var totalShowTime: NSTimeInterval {
       return section1 + section2 + section3
     }
     
+    mutating func useDemoDurations() {
+      preShow  =  5.0
+      section1 = 10.0
+      break1   =  5.0
+      section2 = 10.0
+      break2   =  5.0
+      section3 = 10.0
+    }
+    
+    mutating func useGeekSpeakDurations() {
+      preShow  =  1.0 * oneMinute
+      section1 = 14.0 * oneMinute
+      break1   =  1.0 * oneMinute
+      section2 = 18.0 * oneMinute
+      break2   =  1.0 * oneMinute
+      section3 = 19.0 * oneMinute
+    }
+
   }
   
   struct TimeElapsed {

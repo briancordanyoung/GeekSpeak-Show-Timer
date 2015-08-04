@@ -1,9 +1,9 @@
 import Foundation
 import CoreGraphics
 
-let kAppTimerDurationInSecondsKey = "defaultDurationInSeconds"
-let oneMinute                     = NSTimeInterval(60)
-let timerUpdateInterval           = NSTimeInterval(0.01)
+let kAppUseDemoDurations  = "useDemoDurations"
+let oneMinute             = NSTimeInterval(60)
+let timerUpdateInterval   = NSTimeInterval(0.01)
 
 // MARK: -
 // MARK: Timer class
@@ -51,14 +51,14 @@ final class Timer: NSObject {
   }
   
   var secondsElapsed: NSTimeInterval {
-    var _secondsElapsed: NSTimeInterval
+    var secondsElapsed: NSTimeInterval
     if let countingStartTime = countingStartTime {
       let now = NSDate.timeIntervalSinceReferenceDate()
-      _secondsElapsed = now - countingStartTime + secondsElapsedAtPause
+      secondsElapsed = now - countingStartTime + secondsElapsedAtPause
     } else {
-      _secondsElapsed = secondsElapsedAtPause
+      secondsElapsed = secondsElapsedAtPause
     }
-    return _secondsElapsed
+    return secondsElapsed
   }
   
   var secondsRemaining: NSTimeInterval {

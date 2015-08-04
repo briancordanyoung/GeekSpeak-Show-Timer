@@ -55,12 +55,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 
-
+// Setup the default defaults in app memory
 extension AppDelegate {
   
   func registerUserDefaults() {
     let defaults: [String:AnyObject] = [
-      kAppTimerDurationInSecondsKey:   51
+      kAppUseDemoDurations: false
     ]
     
     NSUserDefaults.standardUserDefaults().registerDefaults(defaults)

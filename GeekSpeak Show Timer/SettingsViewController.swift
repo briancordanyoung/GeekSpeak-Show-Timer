@@ -34,6 +34,7 @@ class SettingsViewController: UIViewController {
   }
   
   override func viewDidAppear(animated: Bool) {
+    updateTimerLabels()
     NSNotificationCenter.defaultCenter()
                         .addObserver( self,
                             selector: "updateTimerLabels",
@@ -72,15 +73,14 @@ class SettingsViewController: UIViewController {
   }
   
   @IBAction func resetButtonPressed(sender: UIButton) {
-    timerViewController?.timer.reset()
+    timerViewController?.resetTimer()
     generateBluredBackground()
   }
   
   func updateTimerLabels() {
     if let timer = timerViewController?.timer {
       
-      let timing = timer.timing
-      let elapsedTime = timer.secondsElapsed
+      let timing   = timer.timing
       
       var segment1 = timing.asString(timing.timeElapsed.section1)
       var segment2 = timing.asString(timing.timeElapsed.section2)
@@ -94,20 +94,16 @@ class SettingsViewController: UIViewController {
         break
         
       case .Section1:
-        segment1 =
-               timing.asString(timing.timeElapsed.section1 + elapsedTime)
+        segment1 = timing.asString(timer.secondsElapsed)
+        
       case .Section2:
-        segment2 =
-               timing.asString(timing.timeElapsed.section2 + elapsedTime)
+        segment2 = timing.asString(timer.secondsElapsed)
         
       case .Section3:
-        segment3 =
-               timing.asString(timing.timeElapsed.section3 + elapsedTime)
+        segment3 = timing.asString(timer.secondsElapsed)
         
       case .PostShow:
-        postshow =
-               timing.asString(timing.timeElapsed.postShow + elapsedTime)
-        break
+        postshow = timing.asString(timer.secondsElapsed)
       }
       
       segment1Label.text = segment1
