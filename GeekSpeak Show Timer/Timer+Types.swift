@@ -29,18 +29,19 @@ extension Timer {
   }
   
   struct Durations {
-//    var preShow:           NSTimeInterval =  5.0 * oneMinute
-//    var section1:          NSTimeInterval = 17.0 * oneMinute
-//    var break1:            NSTimeInterval =  1.0 * oneMinute
-//    var section2:          NSTimeInterval = 17.0 * oneMinute
-//    var break2:            NSTimeInterval =  1.0 * oneMinute
-//    var section3:          NSTimeInterval = 17.0 * oneMinute
-    var preShow:           NSTimeInterval = 20.0
-    var section1:          NSTimeInterval = 10.0
-    var break1:            NSTimeInterval =  5.0
-    var section2:          NSTimeInterval = 10.0
-    var break2:            NSTimeInterval =  5.0
-    var section3:          NSTimeInterval = 10.0
+    var preShow:           NSTimeInterval =  1.0 * oneMinute
+    var section1:          NSTimeInterval = 14.0 * oneMinute
+    var break1:            NSTimeInterval =  1.0 * oneMinute
+    var section2:          NSTimeInterval = 18.0 * oneMinute
+    var break2:            NSTimeInterval =  1.0 * oneMinute
+    var section3:          NSTimeInterval = 19.0 * oneMinute
+
+//    var preShow:           NSTimeInterval = 20.0
+//    var section1:          NSTimeInterval = 10.0
+//    var break1:            NSTimeInterval =  5.0
+//    var section2:          NSTimeInterval = 10.0
+//    var break2:            NSTimeInterval =  5.0
+//    var section3:          NSTimeInterval = 10.0
     
     var totalShowTime: NSTimeInterval {
       return section1 + section2 + section3
