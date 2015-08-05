@@ -8,8 +8,8 @@
 
 import UIKit
 
-let timerNotificationKey = "com.geekspeak.timerNotificationKey"
-
+let timerNotificationKey      = "com.geekspeak.timerNotificationKey"
+let kTimerId                  = "timerId"
 
 
 enum TimerLabelDisplay: String, Printable {
@@ -21,7 +21,7 @@ enum TimerLabelDisplay: String, Printable {
   }
 }
 
-final class TimerViewController: UIViewController {
+final class TimerViewController: UIViewController, TimerDelegate {
 
   var timerViews: TimerViews?
   let timer = Timer()
@@ -59,8 +59,7 @@ final class TimerViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    timer.countingStateChangedHandler = timerChangedCountingStatus
-    timer.timerUpdatedHandler         = timerUpdatedTime
+    timer.delegate = self
 
     setupContraints()
     setupTimeLabelContraints(totalTimeLabel)
@@ -141,9 +140,10 @@ final class TimerViewController: UIViewController {
   
   // TODO: This fuction is being called at about 60fps,
   //       everytime the timer updates.  It is setting values for many views
-  //       and I'm not sure if I should be concerned with doing too much.
-  //       look in to CPU usage and determine if it is worth doing something
-  //       'more clever'.
+  //       that are not changing most of the time.   I'm not sure if I should
+  //       be concerned with doing too much. look in to CPU usage and determine
+  //       if it is worth doing something 'more clever'.
+
   func timerUpdatedTime(timer: Timer?) {
     if let timer = timer {
       updateTimerLabels(timer)
@@ -278,12 +278,14 @@ final class TimerViewController: UIViewController {
   }
   
   func resetTimer() {
-    timer.reset()
+    
     let useDemoDurations = NSUserDefaults
                             .standardUserDefaults()
-                            .boolForKey(kAppUseDemoDurations)
+                            .boolForKey(Timer.Constants.UseDemoDurations)
     if useDemoDurations {
-      timer.timing.durations.useDemoDurations()
+      timer.reset(usingDemoTiming: true)
+    } else {
+      timer.reset()
     }
   }
   
@@ -416,5 +418,25 @@ final class TimerViewController: UIViewController {
     remainingToggleButton.superview?.addConstraint(height)
     
   }
+  
+
+  // MARK: -
+  // MARK: State Preservation and Restoration
+  override func encodeRestorableStateWithCoder(coder: NSCoder) {
+    super.encodeRestorableStateWithCoder(coder)
+    coder.encodeObject(timer, forKey: kTimerId)
+  }
+  
+  override func decodeRestorableStateWithCoder(coder: NSCoder) {
+    super.decodeRestorableStateWithCoder(coder)
+    if let decodedTimer = coder.decodeObjectForKey(kTimerId) as? Timer {
+      timer.timing = decodedTimer.timing
+      timerUpdatedTime(Optional(timer))
+      timerChangedCountingStatus(timer.state)
+      println("Restored: Timer State")
+    }
+  }
+  
+
 }
 

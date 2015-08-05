@@ -10,7 +10,8 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly timed breaks 
 - Subtract 1 second button is adding seconds!!!
 
 ## Todo:
-- Add keyArchivers to save time state between launches
+- ~~Add keyArchivers to save state between launches~~
+	- track down arching bug when timer is running and state preservation kicks in
 - images need to be scaled and optimized for: @1x,@2x,@3x
 - Fix labels under show times to scale based on text width
 - Create animating buttons for start/pause and Next Segment buttons
@@ -23,7 +24,7 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly timed breaks 
 	- Add and remove buttons are disabled
 	- Next Segment button animates away (reset button animates it back)
 - Add GameKit discovery and networking between timers on multiple devices
-- Abstract out the hard coded definition of 3 segments with one minute breaks in to a definiting file. Auto generate views based on this definition, allowing multiple show formats
+- Abstract out the hard coded definition of 3 segments with one minute breaks in to a definition file. Auto generate views based on this definition, allowing multiple show formats
 - ~~Add test mode in settings app to switch between demo/testing and live show timer (done)~~
 
 ## Versions (tagged):

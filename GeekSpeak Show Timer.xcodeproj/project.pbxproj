@@ -31,6 +31,7 @@
 		D3912C731B6E9CED003B42F1 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C721B6E9CED003B42F1 /* Timer.swift */; };
 		D3912C751B6E9D73003B42F1 /* BCYStandardLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */; };
 		D3912C771B6F1476003B42F1 /* Timer+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C761B6F1476003B42F1 /* Timer+Types.swift */; };
+		D3C487B31B726F3300B8067E /* Timer+StatePreservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		D3912C721B6E9CED003B42F1 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCYStandardLibrary.swift; sourceTree = "<group>"; };
 		D3912C761B6F1476003B42F1 /* Timer+Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timer+Types.swift"; sourceTree = "<group>"; };
+		D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timer+StatePreservation.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,10 +123,10 @@
 				D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */,
 				D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */,
 				D3912C721B6E9CED003B42F1 /* Timer.swift */,
+				D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */,
 				D3912C761B6F1476003B42F1 /* Timer+Types.swift */,
 				D340CCBD1B6DE30100BB17E3 /* SplitViewController.swift */,
 				D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */,
-				D3463F671B713E0D002C68A8 /* Settings.bundle */,
 				D340CCB91B6DDD5400BB17E3 /* TimerViews.swift */,
 				D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */,
 				D340CCB41B6D939F00BB17E3 /* UIColor+DarkenColor.swift */,
@@ -132,6 +134,7 @@
 				D340CCB81B6DA8DA00BB17E3 /* Timer Views */,
 				D320C35F1B6FF5E90046F785 /* UIImage+ImageEffects.h */,
 				D320C3601B6FF5E90046F785 /* UIImage+ImageEffects.m */,
+				D3463F671B713E0D002C68A8 /* Settings.bundle */,
 				D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */,
 				D340CC811B6D3E7600BB17E3 /* LaunchScreen.xib */,
 				D340CC761B6D3E7600BB17E3 /* Supporting Files */,
@@ -216,6 +219,7 @@
 				D340CC6F1B6D3E7600BB17E3 /* Sources */,
 				D340CC701B6D3E7600BB17E3 /* Frameworks */,
 				D340CC711B6D3E7600BB17E3 /* Resources */,
+				D3C487B11B71BFF800B8067E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -302,6 +306,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D3C487B11B71BFF800B8067E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "TAGS=\"TODO:|FIXME:\"\nERRORTAG=\"ERROR:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$|($ERRORTAG).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\" | perl -p -e \"s/($ERRORTAG)/ error: \\$1/\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D340CC6F1B6D3E7600BB17E3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -310,6 +330,7 @@
 				D340CCB51B6D939F00BB17E3 /* UIColor+DarkenColor.swift in Sources */,
 				D340CCBE1B6DE30100BB17E3 /* SplitViewController.swift in Sources */,
 				D320C3611B6FF5E90046F785 /* UIImage+ImageEffects.m in Sources */,
+				D3C487B31B726F3300B8067E /* Timer+StatePreservation.swift in Sources */,
 				D340CCAC1B6D711700BB17E3 /* RingView.swift in Sources */,
 				D3912C771B6F1476003B42F1 /* Timer+Types.swift in Sources */,
 				D3912C751B6E9D73003B42F1 /* BCYStandardLibrary.swift in Sources */,
