@@ -23,7 +23,7 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly timed breaks 
 	- Add and remove buttons are disabled
 	- Next Segment button animates away (reset button animates it back)
 - Add GameKit discovery and networking between timers on multiple devices
-- Abstract out the hard coded definition of 3 segments with one minute breaks in to a definiting file. Auto generate views based on this definition, allowing multiple show formats
+- Abstract out the hard coded definition of 3 segments with one minute breaks in to a definition file. Auto generate views based on this definition, allowing multiple show formats
 - ~~Add test mode in settings app to switch between demo/testing and live show timer (done)~~
 
 ## Versions (tagged):

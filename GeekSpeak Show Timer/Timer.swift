@@ -1,25 +1,24 @@
 import Foundation
 import CoreGraphics
 
-let kAppUseDemoDurations  = "useDemoDurations"
+
 let oneMinute             = NSTimeInterval(60)
 let timerUpdateInterval   = NSTimeInterval(0.01)
 
+protocol TimerDelegate {
+  func timerChangedCountingStatus(state: Timer.CountingState)
+  func timerUpdatedTime(timer: Timer?)
+}
+
 // MARK: -
 // MARK: Timer class
-final class Timer: NSObject {
+final class Timer: NSObject, NSCoding {
   
   
   // MARK: Properties
   var countingStartTime: NSTimeInterval?
   var timing = ShowTiming()
-
-  // Callback Handler Properties (block based API)
-  // These should be used as call backs alerting a view controller
-  // that one of these events occurred.
-  var countingStateChangedHandler: (CountingState) -> ()
-  var timerUpdatedHandler:         (Timer?) -> ()
-  
+  var delegate: TimerDelegate?
   
   // MARK: Computed Properties
   var state: CountingState {
@@ -98,42 +97,16 @@ final class Timer: NSObject {
       onNextRunloopNotifyCountingStateUpdated()
     }
   }
-  
-  
   // MARK: -
-  // MARK: Init methods
-  convenience override init() {
-    // I couldn't figure out how to initilize a UIViewController
-    // with the nessesary functions as the time the Timer
-    // intance is created.  So, I made this convenience init which
-    // creates these stand-in println() functions.  These should be
-    // replaced in the timer class instance by the callbacks that
-    // update any controls like a UIButton or UILabel in the UIViewController.
-    
-    func printStatus(state: CountingState) {
-      #if DEBUG
-        println("Change Timer Control Text to: \(printStatus)")
-      #endif
-    }
-    
-    func printSecondsRemaining(timer: Timer?) {
-      #if DEBUG
-        if let timer = timer {
-        println("Seconds left: \(timer.secondsRemaining)")
-        }
-      #endif
-    }
-    
-    self.init(WithStatusChangedHandler: printStatus,
-      AndTimerUpdatedHandler: printSecondsRemaining)
+  // MARK: Initialization
+  override init() {
+    super.init()
   }
   
-  init( WithStatusChangedHandler countingStateChangedHandlerFunc: (CountingState) -> (),
-        AndTimerUpdatedHandler   timerUpdatedHandlerFunc:  (Timer?) -> ()    ) {
-      countingStateChangedHandler = countingStateChangedHandlerFunc
-      timerUpdatedHandler         = timerUpdatedHandlerFunc
+  init(coder aDecoder: NSCoder) {
+    super.init()
+    decodeWithCoder(coder: aDecoder)
   }
-  
   
   // MARK: -
   // MARK: Timer Actions
@@ -150,9 +123,16 @@ final class Timer: NSObject {
   
   
   func reset() {
+    reset(usingDemoTiming: false)
+  }
+
+  func reset(usingDemoTiming demoTimings: Bool) {
     _state            = .Ready
     countingStartTime = .None
     timing            = ShowTiming()
+    if demoTimings {
+      timing.durations.useDemoDurations()
+    }
     notifyTimerUpdated()
   }
   
@@ -196,6 +176,20 @@ final class Timer: NSObject {
     }
   }
   
+  // MARK: -
+  // MARK: Delegate callbacks
+  private func notifyTimerUpdated() {
+    if let delegate = delegate {
+      weak var weakSelf = self
+      delegate.timerUpdatedTime(weakSelf)
+    }
+  }
+  
+  func notifyCountingStateUpdated() {
+    if let delegate = delegate {
+      delegate.timerChangedCountingStatus(state)
+    }
+  }
   
   // MARK: -
   // MARK: Timer
@@ -231,15 +225,11 @@ final class Timer: NSObject {
     return CGFloat(secondsRemaining / duration)
   }
   
-  private func notifyTimerUpdated() {
-    weak var weakSelf = self
-    timerUpdatedHandler(weakSelf)
-  }
   
   
-  // The countingStateChangedHandler() is intended for acting on a change of state
+  // The timerChangedCountingStatus() is intended for acting on a change of state
   // only, and not intended as a callback to check property values of the
-  // Timer class. (hense, only the TimerStatus emun is passed as the sole argument.)
+  // Timer class. (hense, only the TimerStatus emum is passed as the sole argument.)
   // If this callback IS used to check properties, they may not represent
   // the state of the timer correctly since the state is changed first and
   // drives rest of the class.  Properties sensitive to this are:
@@ -254,10 +244,6 @@ final class Timer: NSObject {
                               selector: Selector("notifyCountingStateUpdated"),
                               userInfo: nil,
                                repeats: false)
-  }
-  
-  func notifyCountingStateUpdated() {
-    countingStateChangedHandler(state)
   }
   
 }

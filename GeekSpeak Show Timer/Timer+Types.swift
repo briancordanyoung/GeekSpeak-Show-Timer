@@ -1,5 +1,6 @@
 import UIKit
 
+
 extension Timer {
   
   
@@ -28,64 +29,14 @@ extension Timer {
     }
   }
   
-  struct Durations {
-    var preShow:           NSTimeInterval = 0
-    var section1:          NSTimeInterval = 0
-    var break1:            NSTimeInterval = 0
-    var section2:          NSTimeInterval = 0
-    var break2:            NSTimeInterval = 0
-    var section3:          NSTimeInterval = 0
-
-    init() {
-      useGeekSpeakDurations()
-    }
-    
-    var totalShowTime: NSTimeInterval {
-      return section1 + section2 + section3
-    }
-    
-    mutating func useDemoDurations() {
-      preShow  =  5.0
-      section1 = 10.0
-      break1   =  5.0
-      section2 = 10.0
-      break2   =  5.0
-      section3 = 10.0
-    }
-    
-    mutating func useGeekSpeakDurations() {
-      preShow  =  1.0 * oneMinute
-      section1 = 14.0 * oneMinute
-      break1   =  1.0 * oneMinute
-      section2 = 18.0 * oneMinute
-      break2   =  1.0 * oneMinute
-      section3 = 19.0 * oneMinute
-    }
-
-  }
   
-  struct TimeElapsed {
-    var preShow:  NSTimeInterval = 0.0
-    var section1: NSTimeInterval = 0.0
-    var break1:   NSTimeInterval = 0.0
-    var section2: NSTimeInterval = 0.0
-    var break2:   NSTimeInterval = 0.0
-    var section3: NSTimeInterval = 0.0
-    var postShow: NSTimeInterval = 0.0
-
-    var totalShowTime: NSTimeInterval {
-      return section1 + section2 + section3
-    }
-}
-  
-  
-  
+  // ShowTiming
   struct ShowTiming {
     
     var durations   = Durations()
     var timeElapsed = TimeElapsed()
     var phase       = ShowPhase.PreShow
-
+    
     var formatter: NSNumberFormatter = {
       let formatter = NSNumberFormatter()
       formatter.minimumIntegerDigits  = 2
@@ -94,8 +45,8 @@ extension Timer {
       formatter.maximumFractionDigits = 0
       formatter.negativePrefix = ""
       return formatter
-    }()
-
+      }()
+    
     var totalShowTimeElapsed: NSTimeInterval {
       return timeElapsed.totalShowTime
     }
@@ -225,7 +176,7 @@ extension Timer {
       let subSeconds = formatter.stringFromNumber(interval * 100)!
       return String(format: "%02d:%02d:\(subSeconds)",  minutes, seconds)
     }
-
+    
     func asShortString(interval: NSTimeInterval) -> String {
       let roundedInterval = Int(interval)
       let seconds = roundedInterval % 60
@@ -235,5 +186,62 @@ extension Timer {
     }
     
     
-  } // ShowTiming
+  }
+  
+  
+
+  // Durations
+  struct Durations {
+    var preShow:           NSTimeInterval = 0
+    var section1:          NSTimeInterval = 0
+    var break1:            NSTimeInterval = 0
+    var section2:          NSTimeInterval = 0
+    var break2:            NSTimeInterval = 0
+    var section3:          NSTimeInterval = 0
+
+    init() {
+      useGeekSpeakDurations()
+    }
+    
+    var totalShowTime: NSTimeInterval {
+      return section1 + section2 + section3
+    }
+    
+    mutating func useDemoDurations() {
+      preShow  =  5.0
+      section1 = 10.0
+      break1   =  5.0
+      section2 = 10.0
+      break2   =  5.0
+      section3 = 10.0
+    }
+    
+    mutating func useGeekSpeakDurations() {
+      preShow  =  1.0 * oneMinute
+      section1 = 14.0 * oneMinute
+      break1   =  1.0 * oneMinute
+      section2 = 18.0 * oneMinute
+      break2   =  1.0 * oneMinute
+      section3 = 19.0 * oneMinute
+    }
+
+  }
+  
+  
+  // TimeElapsed
+  struct TimeElapsed {
+    var preShow:  NSTimeInterval = 0.0
+    var section1: NSTimeInterval = 0.0
+    var break1:   NSTimeInterval = 0.0
+    var section2: NSTimeInterval = 0.0
+    var break2:   NSTimeInterval = 0.0
+    var section3: NSTimeInterval = 0.0
+    var postShow: NSTimeInterval = 0.0
+
+    var totalShowTime: NSTimeInterval {
+      return section1 + section2 + section3
+    }
+  }
+  
+  
 } // Timer Extention
