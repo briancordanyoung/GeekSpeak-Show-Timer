@@ -79,13 +79,13 @@ final class TimerViewController: UIViewController, TimerDelegate {
     fillView.pieLayer.clipToCircle = true
     timerCirclesView.addSubview(fillView)
     
-    let ring1bg   = configureBGRing(RingView(), withColor: geekSpeakBlueColor)
+    let ring1bg   = configureBGRing(PartialRingView(), withColor: geekSpeakBlueColor)
     let ring1fg   = configureFGRing(PartialRingView(), withColor: geekSpeakBlueColor)
 
-    let ring2bg   = configureBGRing(RingView(), withColor: geekSpeakBlueColor)
+    let ring2bg   = configureBGRing(PartialRingView(), withColor: geekSpeakBlueColor)
     let ring2fg   = configureFGRing(PartialRingView(), withColor: geekSpeakBlueColor)
     
-    let ring3bg   = configureBGRing(RingView(), withColor: geekSpeakBlueColor)
+    let ring3bg   = configureBGRing(PartialRingView(), withColor: geekSpeakBlueColor)
     let ring3fg   = configureFGRing(PartialRingView(), withColor: geekSpeakBlueColor)
 
 
@@ -309,18 +309,18 @@ final class TimerViewController: UIViewController, TimerDelegate {
   // MARK: Setup
   func configureFGRing(ringView: PartialRingView, withColor color: UIColor)
                                                             -> PartialRingView {
-      ringView.color               = color
-      ringView.startAngle          = Rotation(degrees: 0)
-      ringView.endAngle            = Rotation(degrees: 10)
-      ringView.ringMask.lineWidth  = lineWidth
+      ringView.color      = color
+      ringView.startAngle = Rotation(degrees: 0)
+      ringView.endAngle   = Rotation(degrees: 10)
+      ringView.ringWidth  = lineWidth
       configureRing(ringView)
       return ringView
   }
   
-  func configureBGRing(ringView: RingView, withColor color: UIColor)
-                                                                   -> RingView {
-      ringView.lineColor   = color.darkenColorWithMultiplier(0.2)
-      ringView.lineWidth   = lineWidth
+  func configureBGRing(ringView: PartialRingView, withColor color: UIColor)
+                                                            -> PartialRingView {
+      ringView.color     = color.darkenColorWithMultiplier(0.2)
+      ringView.ringWidth = lineWidth
       configureRing(ringView)
       return ringView
   }
