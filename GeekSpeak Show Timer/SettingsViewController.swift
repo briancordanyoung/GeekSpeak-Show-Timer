@@ -38,7 +38,7 @@ class SettingsViewController: UIViewController {
     NSNotificationCenter.defaultCenter()
                         .addObserver( self,
                             selector: "updateTimerLabels",
-                                name: Timer.Constants.TimerNotificationKey,
+                                name: TimerViewController.Constants.TimerNotificationKey,
                               object: nil)
   }
   
