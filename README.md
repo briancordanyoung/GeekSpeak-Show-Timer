@@ -7,7 +7,6 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly timed breaks 
 ## Known issues:
 - Autolayout constraints of master view (slide over view) are non-existent.
 - Pause and Next buttons need to be graphic buttons for instant clarity.
-- ""Subtract 1 second button"" is adding seconds!!!  beware
 
 ## Todo:
 
@@ -29,6 +28,8 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly timed breaks 
 - ~~Add keyArchivers to save state between launches~~ (done)
 	- track down archiving state bug when timer is running and state preservation kicks in
 
-## Versions (tagged but, the tag isn't showing up in github for some reason):
+## Versions:
 # v0.1
+_(this version is tagged but, the tag isn't showing up in github for some reason)_
+
 This is the initial version of the timer and used on the 8/3/15 recording of the show (aired 8/8/15).  It is useable, but truely a beta release.  Many views don't have any layout code and you can get the app in an unusable state on iPhones.
