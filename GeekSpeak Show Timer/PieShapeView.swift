@@ -52,7 +52,6 @@ class PieShapeView: FillView {
     }
   }
   
-
   var color: UIColor {
     get {
       return pieLayer.fillColor

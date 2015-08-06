@@ -91,6 +91,15 @@ final class Timer: NSObject, NSCoding {
     return 1.0 - percentageRemaining
   }
   
+  var percentageCompleteUnlimited: CGFloat {
+    // The secondsRemaining computed property is limited so that 
+    // it can not be less than 0.  This property is unlimited allowing
+    // percentageComplete to be greater than 1.0
+    let percentageRemaining = secondsToPercentage(duration - secondsElapsed)
+    let percentageComplete  = 1.0 - percentageRemaining
+    return percentageComplete
+  }
+  
   // MARK: Internal Properties
   var _state: CountingState = .Ready {
     didSet {
