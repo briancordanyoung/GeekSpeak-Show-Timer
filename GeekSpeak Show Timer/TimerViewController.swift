@@ -149,7 +149,11 @@ final class TimerViewController: UIViewController, TimerDelegate {
       updateTimerLabels(timer)
       let timing    = timer.timing
       let totalTime = timing.asShortString(timing.durations.totalShowTime)
-      totalLabel.text = "Total: \(totalTime)"
+      let labelText = padString( "Total: \(totalTime)",
+                    totalLength: 15,
+                            pad: " ",
+                    inDirection: .Left)
+      totalLabel.text = labelText
       
       switch timer.timing.phase {
       case .PreShow,
@@ -176,6 +180,7 @@ final class TimerViewController: UIViewController, TimerDelegate {
       }
       
 
+      var segmentLabelText: String
       
       switch timer.timing.phase {
       case .PreShow:
@@ -183,50 +188,55 @@ final class TimerViewController: UIViewController, TimerDelegate {
         timerViews?.ring1fg.percent = 0.0
         timerViews?.ring2fg.percent = 0.0
         timerViews?.ring3fg.percent = 0.0
-        segmentLabel.text = " Pre Show"
+        segmentLabelText = " Pre Show"
 
       case .Section1:
         timerViews?.fill.percent    = 0.0
         timerViews?.ring1fg.progress = timer.percentageCompleteUnlimited
         timerViews?.ring2fg.percent = 0.0
         timerViews?.ring3fg.percent = 0.0
-        segmentLabel.text = "Segment 1"
+        segmentLabelText = "Segment 1"
 
       case .Break1:
         timerViews?.ring1fg.percent = 1.0
         timerViews?.fill.percent    = timer.percentageComplete
         timerViews?.ring2fg.percent = 0.0
         timerViews?.ring3fg.percent = 0.0
-        segmentLabel.text = "    Break"
+        segmentLabelText = "    Break"
 
       case .Section2:
         timerViews?.fill.percent    = 0.0
         timerViews?.ring1fg.percent = 1.0
         timerViews?.ring2fg.progress = timer.percentageCompleteUnlimited
         timerViews?.ring3fg.percent = 0.0
-        segmentLabel.text = "Segment 2"
+        segmentLabelText = "Segment 2"
 
       case .Break2:
         timerViews?.ring1fg.percent = 1.0
         timerViews?.ring2fg.percent = 1.0
         timerViews?.fill.percent    = timer.percentageComplete
         timerViews?.ring3fg.percent = 0.0
-        segmentLabel.text = "    Break"
+        segmentLabelText = "    Break"
 
       case .Section3:
         timerViews?.fill.percent    = 0.0
         timerViews?.ring1fg.percent = 1.0
         timerViews?.ring2fg.percent = 1.0
         timerViews?.ring3fg.percent = timer.percentageComplete
-        segmentLabel.text = "Segment 3"
+        segmentLabelText = "Segment 3"
 
       case .PostShow:
         timerViews?.ring1fg.percent = 1.0
         timerViews?.ring2fg.percent = 1.0
         timerViews?.ring3fg.percent = 1.0
         timerViews?.fill.percent = 0.0
-        segmentLabel.text = "Post Show"
+        segmentLabelText = "Post Show"
       }
+      
+      segmentLabel.text =  padString( segmentLabelText,
+                         totalLength: 15,
+                                 pad: " ",
+                         inDirection: .Right)
       
       NSNotificationCenter.defaultCenter()
                           .postNotificationName( timerNotificationKey,
@@ -392,17 +402,17 @@ final class TimerViewController: UIViewController, TimerDelegate {
   }
   
   func setupDescriptionLabelContraints(label: UILabel) {
-    
-    let height =  NSLayoutConstraint(item: label,
-                               attribute: .Height,
-                               relatedBy: .Equal,
-                                  toItem: label.superview,
-                               attribute: .Height,
-                              multiplier: 24 / 736,
-                                constant: 0.0)
-    height.priority = 1000
-    label.superview?.addConstraint(height)
-    
+    if let labelSuperView = label.superview {
+          let height =  NSLayoutConstraint(item: label,
+                                      attribute: .Height,
+                                      relatedBy: .Equal,
+                                         toItem: labelSuperView,
+                                      attribute: .Height,
+                                     multiplier: 20 / 736,
+                                       constant: 0.0)
+      height.priority = 1000
+      labelSuperView.addConstraint(height)
+    }
   }
   
   func setupRemainingToggleButtonContraints() {
@@ -419,6 +429,33 @@ final class TimerViewController: UIViewController, TimerDelegate {
     
   }
   
+  enum Direction {
+    case Left
+    case Right
+  }
+  
+  func padString(var string: String, totalLength: Int, pad: Character, inDirection direction: Direction) -> String {
+    var i = 0
+    for character in string {
+      i++
+    }
+    
+    let amountToPad = totalLength - i
+    if amountToPad < 1 {
+      return string
+    }
+    let padString = String(pad)
+    for _ in 1...amountToPad {
+      switch direction {
+        case .Left:
+          string = string + padString
+        case .Right:
+          string = padString + string
+      }
+    }
+    return string
+  }
+
 
   // MARK: -
   // MARK: State Preservation and Restoration
