@@ -36,10 +36,10 @@ class SettingsViewController: UIViewController {
   override func viewDidAppear(animated: Bool) {
     updateTimerLabels()
     NSNotificationCenter.defaultCenter()
-                        .addObserver( self,
-                            selector: "updateTimerLabels",
-                                name: TimerViewController.Constants.TimerNotificationKey,
-                              object: nil)
+              .addObserver( self,
+                  selector: "updateTimerLabels",
+                      name: TimerViewController.Constants.TimerNotificationKey,
+                    object: nil)
   }
   
   override func viewWillDisappear(animated: Bool) {
