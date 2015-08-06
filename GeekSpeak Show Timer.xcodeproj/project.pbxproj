@@ -18,8 +18,6 @@
 		D340CCA31B6D556D00BB17E3 /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCA01B6D556D00BB17E3 /* Angle.swift */; };
 		D340CCA41B6D556D00BB17E3 /* AccumulatedAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCA11B6D556D00BB17E3 /* AccumulatedAngle.swift */; };
 		D340CCA51B6D556D00BB17E3 /* AngularType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCA21B6D556D00BB17E3 /* AngularType.swift */; };
-		D340CCAA1B6D6AD300BB17E3 /* RingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D340CCA91B6D6AD300BB17E3 /* RingLayer.m */; };
-		D340CCAC1B6D711700BB17E3 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCAB1B6D711700BB17E3 /* RingView.swift */; };
 		D340CCB11B6D8B9600BB17E3 /* PartialRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB01B6D8B9600BB17E3 /* PartialRingView.swift */; };
 		D340CCB31B6D91FF00BB17E3 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */; };
 		D340CCB51B6D939F00BB17E3 /* UIColor+DarkenColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB41B6D939F00BB17E3 /* UIColor+DarkenColor.swift */; };
@@ -66,9 +64,6 @@
 		D340CCA01B6D556D00BB17E3 /* Angle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Angle.swift; sourceTree = "<group>"; };
 		D340CCA11B6D556D00BB17E3 /* AccumulatedAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccumulatedAngle.swift; sourceTree = "<group>"; };
 		D340CCA21B6D556D00BB17E3 /* AngularType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AngularType.swift; sourceTree = "<group>"; };
-		D340CCA81B6D6AD300BB17E3 /* RingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RingLayer.h; sourceTree = "<group>"; };
-		D340CCA91B6D6AD300BB17E3 /* RingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RingLayer.m; sourceTree = "<group>"; };
-		D340CCAB1B6D711700BB17E3 /* RingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		D340CCB01B6D8B9600BB17E3 /* PartialRingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartialRingView.swift; sourceTree = "<group>"; };
 		D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		D340CCB41B6D939F00BB17E3 /* UIColor+DarkenColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+DarkenColor.swift"; sourceTree = "<group>"; };
@@ -153,6 +148,7 @@
 		D340CC761B6D3E7600BB17E3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D340CC771B6D3E7600BB17E3 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -195,22 +191,10 @@
 			name = PieShapeView;
 			sourceTree = "<group>";
 		};
-		D340CCAD1B6D712700BB17E3 /* RingView */ = {
-			isa = PBXGroup;
-			children = (
-				D340CC771B6D3E7600BB17E3 /* Info.plist */,
-				D340CCAB1B6D711700BB17E3 /* RingView.swift */,
-				D340CCA81B6D6AD300BB17E3 /* RingLayer.h */,
-				D340CCA91B6D6AD300BB17E3 /* RingLayer.m */,
-			);
-			name = RingView;
-			sourceTree = "<group>";
-		};
 		D340CCB81B6DA8DA00BB17E3 /* Timer Views */ = {
 			isa = PBXGroup;
 			children = (
 				D340CCB61B6D9C6400BB17E3 /* FillView.swift */,
-				D340CCAD1B6D712700BB17E3 /* RingView */,
 				D340CCA71B6D5CE600BB17E3 /* PieShapeView */,
 				D35F34351B73B92C0038CF4C /* PartialRing */,
 			);
@@ -350,11 +334,9 @@
 				D340CCBE1B6DE30100BB17E3 /* SplitViewController.swift in Sources */,
 				D320C3611B6FF5E90046F785 /* UIImage+ImageEffects.m in Sources */,
 				D3C487B31B726F3300B8067E /* Timer+StatePreservation.swift in Sources */,
-				D340CCAC1B6D711700BB17E3 /* RingView.swift in Sources */,
 				D3912C771B6F1476003B42F1 /* Timer+Types.swift in Sources */,
 				D35F34371B73C4D80038CF4C /* PartialRingView+Progress.swift in Sources */,
 				D3912C751B6E9D73003B42F1 /* BCYStandardLibrary.swift in Sources */,
-				D340CCAA1B6D6AD300BB17E3 /* RingLayer.m in Sources */,
 				D340CCA51B6D556D00BB17E3 /* AngularType.swift in Sources */,
 				D340CCBA1B6DDD5400BB17E3 /* TimerViews.swift in Sources */,
 				D340CCA31B6D556D00BB17E3 /* Angle.swift in Sources */,
