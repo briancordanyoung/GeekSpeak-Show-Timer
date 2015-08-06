@@ -25,8 +25,8 @@ class PieShapeView: FillView {
   
   override func encodeWithCoder(aCoder: NSCoder) {
     super.encodeWithCoder(aCoder)
-    aCoder.encodeDouble(startAngle.value,  forKey: Constants.StartAngle)
-    aCoder.encodeDouble(endAngle.value,  forKey: Constants.EndAngle)
+    aCoder.encodeDouble(startAngle.value, forKey: Constants.StartAngle)
+    aCoder.encodeDouble(endAngle.value,   forKey: Constants.EndAngle)
   }
   
   var startAngle: Rotation {

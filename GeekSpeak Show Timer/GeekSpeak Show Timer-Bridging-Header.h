@@ -4,4 +4,4 @@
 
 #import "UIImage+ImageEffects.h"
 #import "PieShapeLayer.h"
-#import "RingLayer.h"
+#import "PartialRingLayer.h"
