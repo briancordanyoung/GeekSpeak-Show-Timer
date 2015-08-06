@@ -187,7 +187,7 @@ final class TimerViewController: UIViewController, TimerDelegate {
 
       case .Section1:
         timerViews?.fill.percent    = 0.0
-        timerViews?.ring1fg.percent = timer.percentageComplete
+        timerViews?.ring1fg.progress = timer.percentageCompleteUnlimited
         timerViews?.ring2fg.percent = 0.0
         timerViews?.ring3fg.percent = 0.0
         segmentLabel.text = "Segment 1"
@@ -202,7 +202,7 @@ final class TimerViewController: UIViewController, TimerDelegate {
       case .Section2:
         timerViews?.fill.percent    = 0.0
         timerViews?.ring1fg.percent = 1.0
-        timerViews?.ring2fg.percent = timer.percentageComplete
+        timerViews?.ring2fg.progress = timer.percentageCompleteUnlimited
         timerViews?.ring3fg.percent = 0.0
         segmentLabel.text = "Segment 2"
 

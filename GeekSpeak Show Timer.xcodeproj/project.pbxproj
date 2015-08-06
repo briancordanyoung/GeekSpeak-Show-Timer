@@ -32,6 +32,7 @@
 		D3912C751B6E9D73003B42F1 /* BCYStandardLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */; };
 		D3912C771B6F1476003B42F1 /* Timer+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C761B6F1476003B42F1 /* Timer+Types.swift */; };
 		D3C487B31B726F3300B8067E /* Timer+StatePreservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */; };
+		D3F699A11B72DE0900BD21FD /* PieShapeView+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F699A01B72DE0900BD21FD /* PieShapeView+Progress.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCYStandardLibrary.swift; sourceTree = "<group>"; };
 		D3912C761B6F1476003B42F1 /* Timer+Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timer+Types.swift"; sourceTree = "<group>"; };
 		D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timer+StatePreservation.swift"; sourceTree = "<group>"; };
+		D3F699A01B72DE0900BD21FD /* PieShapeView+Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PieShapeView+Progress.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				D340CC9B1B6D504500BB17E3 /* PieShapeView.swift */,
+				D3F699A01B72DE0900BD21FD /* PieShapeView+Progress.swift */,
 				D340CC9C1B6D504500BB17E3 /* PieShapeLayer.h */,
 				D340CC9D1B6D504500BB17E3 /* PieShapeLayer.m */,
 			);
@@ -341,6 +344,7 @@
 				D3912C731B6E9CED003B42F1 /* Timer.swift in Sources */,
 				D340CCA41B6D556D00BB17E3 /* AccumulatedAngle.swift in Sources */,
 				D340CC9E1B6D504500BB17E3 /* PieShapeView.swift in Sources */,
+				D3F699A11B72DE0900BD21FD /* PieShapeView+Progress.swift in Sources */,
 				D3912C711B6E93B7003B42F1 /* SettingsViewController.swift in Sources */,
 				D340CC9F1B6D504500BB17E3 /* PieShapeLayer.m in Sources */,
 				D340CCB11B6D8B9600BB17E3 /* PartialRingView.swift in Sources */,
