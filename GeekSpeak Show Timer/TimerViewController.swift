@@ -8,9 +8,6 @@
 
 import UIKit
 
-let timerNotificationKey      = "com.geekspeak.timerNotificationKey"
-let kTimerId                  = "timerId"
-
 
 enum TimerLabelDisplay: String, Printable {
   case Remaining = "Remaining"
@@ -22,6 +19,11 @@ enum TimerLabelDisplay: String, Printable {
 }
 
 final class TimerViewController: UIViewController, TimerDelegate {
+  
+  struct Constants {
+    static let TimerId              = "timerViewControllerTimerId"
+    static let TimerNotificationKey = "com.geekspeak.timerNotificationKey"
+  }
 
   var timerViews: TimerViews?
   let timer = Timer()
@@ -239,7 +241,7 @@ final class TimerViewController: UIViewController, TimerDelegate {
                          inDirection: .Right)
       
       NSNotificationCenter.defaultCenter()
-                          .postNotificationName( timerNotificationKey,
+                          .postNotificationName( Constants.TimerNotificationKey,
                                          object: nil)
 
     }
@@ -461,16 +463,15 @@ final class TimerViewController: UIViewController, TimerDelegate {
   // MARK: State Preservation and Restoration
   override func encodeRestorableStateWithCoder(coder: NSCoder) {
     super.encodeRestorableStateWithCoder(coder)
-    coder.encodeObject(timer, forKey: kTimerId)
+    coder.encodeObject(timer, forKey: Constants.TimerId)
   }
   
   override func decodeRestorableStateWithCoder(coder: NSCoder) {
     super.decodeRestorableStateWithCoder(coder)
-    if let decodedTimer = coder.decodeObjectForKey(kTimerId) as? Timer {
+    if let decodedTimer = coder.decodeObjectForKey(Constants.TimerId) as? Timer {
       timer.timing = decodedTimer.timing
       timerUpdatedTime(Optional(timer))
       timerChangedCountingStatus(timer.state)
-      println("Restored: Timer State")
     }
   }
   
