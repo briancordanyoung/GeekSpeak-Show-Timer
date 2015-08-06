@@ -2,6 +2,11 @@ import UIKit
 
 class PieShapeView: FillView {
   
+  struct Constants {
+    static let StartAngle = "pieShapeViewStartAngleId"
+    static let EndAngle   = "pieShapeViewEndAngleId"
+  }
+
   convenience init() {
     self.init(frame: CGRectMake(0,0,100,100))
   }
@@ -14,9 +19,14 @@ class PieShapeView: FillView {
   
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    // TODO: impliment coder
-//    startAngle = Rotation(degrees: 0)
-//    endAngle   = Rotation(degrees: 360)
+    startAngle = Rotation(aDecoder.decodeDoubleForKey(Constants.StartAngle))
+    endAngle   = Rotation(aDecoder.decodeDoubleForKey(Constants.EndAngle))
+  }
+  
+  override func encodeWithCoder(aCoder: NSCoder) {
+    super.encodeWithCoder(aCoder)
+    aCoder.encodeDouble(startAngle.value,  forKey: Constants.StartAngle)
+    aCoder.encodeDouble(endAngle.value,  forKey: Constants.EndAngle)
   }
   
   var startAngle: Rotation {

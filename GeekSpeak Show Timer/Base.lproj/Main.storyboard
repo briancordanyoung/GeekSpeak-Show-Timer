@@ -325,7 +325,6 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="add10SecondsButtonPressed:" destination="UEF-px-LpL" eventType="touchUpInside" id="sff-7E-koE"/>
                                             <action selector="remove1SecondButtonPressed:" destination="UEF-px-LpL" eventType="touchUpInside" id="5FT-hE-Osm"/>
                                         </connections>
                                     </button>
