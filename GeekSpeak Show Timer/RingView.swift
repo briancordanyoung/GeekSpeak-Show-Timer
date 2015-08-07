@@ -1,6 +1,6 @@
 import UIKit
 
-class PartialRingView: FillView {
+class RingView: FillView {
 
   struct Constants {
     static let StartAngle = "partialRingViewStartAngleId"
@@ -87,10 +87,10 @@ class PartialRingView: FillView {
   
   
   override class func layerClass() -> AnyClass {
-    return PartialRingLayer.self
+    return RingLayer.self
   }
   
-  var ringLayer: PartialRingLayer {
-    return self.layer as! PartialRingLayer
+  var ringLayer: RingLayer {
+    return self.layer as! RingLayer
   }
 }

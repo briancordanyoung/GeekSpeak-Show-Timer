@@ -1,7 +1,7 @@
-#import "PartialRingLayer.h"
+#import "RingLayer.h"
 
 
-@implementation PartialRingLayer
+@implementation RingLayer
 
 @dynamic    startAngle;
 @dynamic    endAngle;
@@ -37,8 +37,8 @@
 
 - (id)initWithLayer:(id)layer {
   if (self = [super initWithLayer:layer]) {
-    if ([layer isKindOfClass:[PartialRingLayer class]]) {
-      PartialRingLayer  *other = (PartialRingLayer *)layer;
+    if ([layer isKindOfClass:[RingLayer class]]) {
+      RingLayer  *other = (RingLayer *)layer;
       self.startAngle   = other.startAngle;
       self.endAngle     = other.endAngle;
       self.ringWidth    = other.ringWidth;

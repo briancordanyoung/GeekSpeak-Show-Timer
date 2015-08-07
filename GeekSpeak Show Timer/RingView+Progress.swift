@@ -1,6 +1,6 @@
 import UIKit
 
-extension PartialRingView {
+extension RingView {
   
   // Unlike the percent property which accounts for the startAngle and adds
   // the "percentage complete" to the startAngle to get the endAngle....
