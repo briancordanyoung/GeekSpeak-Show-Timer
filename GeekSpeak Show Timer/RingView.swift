@@ -3,9 +3,9 @@ import UIKit
 class RingView: FillView {
 
   struct Constants {
-    static let StartAngle = "partialRingViewStartAngleId"
-    static let EndAngle   = "partialRingViewEndAngleId"
-    static let RingWidth  = "partialRingViewRingWidthId"
+    static let StartAngle = "ringViewStartAngleId"
+    static let EndAngle   = "ringViewEndAngleId"
+    static let RingWidth  = "ringViewRingWidthId"
   }
   
   convenience init() {
