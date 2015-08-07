@@ -4,13 +4,28 @@ typedef struct {
   CGFloat    start;
   CGFloat    end;
   CGFloat    width;
-  CGFloat    corneRadiusStart;
-  CGFloat    corneRadiusEnd;
+  CGFloat    cornerRadiusStart;
+  CGFloat    cornerRadiusEnd;
   CGColorRef color;
   
 } GSTRing;
 
+GSTRing MakeGSTRing(CGFloat start,
+                    CGFloat end,
+                    CGFloat width,
+                    CGFloat cornerRadiusStart,
+                    CGFloat cornerRadiusEnd,
+                    CGColorRef color) {
+  GSTRing ring;
+  ring.start             = start;
+  ring.end               = end;
+  ring.width             = width;
+  ring.cornerRadiusStart = cornerRadiusStart;
+  ring.cornerRadiusEnd   = cornerRadiusEnd;
+  ring.color             = color;
 
+  return ring;
+}
 
 
 @interface GSTRingLayer (Private)
@@ -91,13 +106,12 @@ typedef struct {
 
 
 -(void)drawInContext:(CGContextRef)ctx {
-  GSTRing ring;
-  ring.start            = self.start;
-  ring.end              = self.end;
-  ring.width            = self.ringWidth;
-  ring.corneRadiusStart = self.endRadius;
-  ring.corneRadiusEnd   = self.endRadius;
-  ring.color            = self.color.CGColor;
+  GSTRing ring = MakeGSTRing(self.start,
+                             self.end,
+                             self.ringWidth,
+                             self.endRadius,
+                             self.endRadius,
+                             self.color.CGColor);
   
   [self drawRing: ring
        InContext: ctx];
