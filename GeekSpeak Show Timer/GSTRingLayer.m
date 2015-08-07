@@ -1,11 +1,30 @@
-#import "RingLayer.h"
+#import "GSTRingLayer.h"
+
+typedef struct {
+  CGFloat    start;
+  CGFloat    end;
+  CGFloat    width;
+  CGFloat    corneRadiusStart;
+  CGFloat    corneRadiusEnd;
+  CGColorRef color;
+  
+} GSTRing;
 
 
-@implementation RingLayer
+
+
+@interface GSTRingLayer (Private)
+@property (nonatomic,readonly)  CGFloat start;
+@property (nonatomic,readonly)  CGFloat end;
+@end
+
+
+@implementation GSTRingLayer
 
 @dynamic    startAngle;
 @dynamic    endAngle;
 @dynamic    ringWidth;
+@dynamic    endRadius;
 @synthesize color;
 
 
@@ -28,6 +47,7 @@
                           * 0.25;
     self.startAngle = 0.0;
     self.endAngle   = M_PI * 2;
+    self.endRadius  = 0;
     
     [self setNeedsDisplay];
   }
@@ -37,13 +57,13 @@
 
 - (id)initWithLayer:(id)layer {
   if (self = [super initWithLayer:layer]) {
-    if ([layer isKindOfClass:[RingLayer class]]) {
-      RingLayer  *other = (RingLayer *)layer;
+    if ([layer isKindOfClass:[GSTRingLayer class]]) {
+      GSTRingLayer  *other = (GSTRingLayer *)layer;
       self.startAngle   = other.startAngle;
       self.endAngle     = other.endAngle;
       self.ringWidth    = other.ringWidth;
+      self.endRadius    = other.endRadius;
       self.color        = other.color;
-      
     }
   }
   
@@ -53,64 +73,77 @@
 + (BOOL)needsDisplayForKey:(NSString *)key {
   if ([key isEqualToString:@"startAngle"] ||
       [key isEqualToString:@"endAngle"] ||
-      [key isEqualToString:@"ringWidth"]) {
+      [key isEqualToString:@"ringWidth"] ||
+      [key isEqualToString:@"endRadius"]) {
     return YES;
   }
   
   return [super needsDisplayForKey:key];
 }
 
+- (CGFloat) start {
+  return self.startAngle - (M_PI / 2);
+}
 
--(void)drawInContext:(CGContextRef)ctx {
-  [self drawRingInContext: ctx];
+- (CGFloat) end {
+  return self.endAngle - (M_PI / 2);
 }
 
 
--(void)drawRingInContext:(CGContextRef)ctx {
+-(void)drawInContext:(CGContextRef)ctx {
+  GSTRing ring;
+  ring.start            = self.start;
+  ring.end              = self.end;
+  ring.width            = self.ringWidth;
+  ring.corneRadiusStart = self.endRadius;
+  ring.corneRadiusEnd   = self.endRadius;
+  ring.color            = self.color.CGColor;
   
-  CGFloat halfPI = (M_PI / 2);
-  CGFloat start  = self.startAngle - halfPI;
-  CGFloat end    = self.endAngle   - halfPI;
+  [self drawRing: ring
+       InContext: ctx];
+}
+
+
+-(void)drawRing: (GSTRing)ring InContext:(CGContextRef)ctx {
   
   // Create the path
   CGPoint center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
   CGFloat outerRadius = MIN(center.x, center.y);
   CGFloat innerRadius = outerRadius - self.ringWidth;
-  
-  
+
   // Begin Path
   CGContextBeginPath(ctx);
   
   // Inner Radius Start
-  CGPoint i1 = CGPointMake(center.x + innerRadius * cosf(start),
-                           center.y + innerRadius * sinf(start));
+  CGPoint i1 = CGPointMake(center.x + innerRadius * cosf(ring.start),
+                           center.y + innerRadius * sinf(ring.start));
   CGContextMoveToPoint(ctx, i1.x, i1.y);
   
   // Outer Radius Start
-  CGPoint o1 = CGPointMake(center.x + outerRadius * cosf(start),
-                           center.y + outerRadius * sinf(start));
+  CGPoint o1 = CGPointMake(center.x + outerRadius * cosf(ring.start),
+                           center.y + outerRadius * sinf(ring.start));
   CGContextAddLineToPoint(ctx, o1.x, o1.y);
   
   // Outer Radius End
-  int clockwiseDirection = start > end;
+  int clockwiseDirection = ring.start > ring.end;
   CGContextAddArc(ctx, center.x, center.y, outerRadius,
-                  start, end, clockwiseDirection);
+                  ring.start, ring.end, clockwiseDirection);
   
   // Inner Radius End
-  CGPoint i2 = CGPointMake(center.x + innerRadius * cosf(end),
-                           center.y + innerRadius * sinf(end));
+  CGPoint i2 = CGPointMake(center.x + innerRadius * cosf(ring.end),
+                           center.y + innerRadius * sinf(ring.end));
   CGContextAddLineToPoint(ctx, i2.x, i2.y);
   
   // Back to Inner Radius Start
   int reverseDirection = !clockwiseDirection;
   CGContextAddArc(ctx, center.x, center.y, innerRadius,
-                  end, start, reverseDirection);
+                  ring.end, ring.start, reverseDirection);
   
   // End path Path
   CGContextClosePath(ctx);
   
   // Color it
-  CGContextSetFillColorWithColor(ctx, self.color.CGColor);
+  CGContextSetFillColorWithColor(ctx,   ring.color);
   CGContextSetStrokeColorWithColor(ctx, UIColor.clearColor.CGColor);
   CGContextSetLineWidth(ctx, 0.0f);
   

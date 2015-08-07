@@ -3,5 +3,5 @@
 //
 
 #import "UIImage+ImageEffects.h"
-#import "PieShapeLayer.h"
-#import "RingLayer.h"
+#import "GSTPieLayer.h"
+#import "GSTRingLayer.h"

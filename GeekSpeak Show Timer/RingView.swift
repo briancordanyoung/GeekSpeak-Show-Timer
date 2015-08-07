@@ -87,10 +87,10 @@ class RingView: FillView {
   
   
   override class func layerClass() -> AnyClass {
-    return RingLayer.self
+    return GSTRingLayer.self
   }
   
-  var ringLayer: RingLayer {
-    return self.layer as! RingLayer
+  var ringLayer: GSTRingLayer {
+    return self.layer as! GSTRingLayer
   }
 }
