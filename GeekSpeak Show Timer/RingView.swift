@@ -1,11 +1,11 @@
 import UIKit
 
-class PartialRingView: FillView {
+class RingView: FillView {
 
   struct Constants {
-    static let StartAngle = "partialRingViewStartAngleId"
-    static let EndAngle   = "partialRingViewEndAngleId"
-    static let RingWidth  = "partialRingViewRingWidthId"
+    static let StartAngle = "ringViewStartAngleId"
+    static let EndAngle   = "ringViewEndAngleId"
+    static let RingWidth  = "ringViewRingWidthId"
   }
   
   convenience init() {
@@ -28,9 +28,19 @@ class PartialRingView: FillView {
   
   override func encodeWithCoder(aCoder: NSCoder) {
     super.encodeWithCoder(aCoder)
-    aCoder.encodeDouble(startAngle.value, forKey: Constants.StartAngle)
-    aCoder.encodeDouble(endAngle.value,   forKey: Constants.EndAngle)
-    aCoder.encodeDouble(Double(ringWidth),    forKey: Constants.RingWidth)
+    aCoder.encodeDouble(startAngle.value,  forKey: Constants.StartAngle)
+    aCoder.encodeDouble(endAngle.value,    forKey: Constants.EndAngle)
+    aCoder.encodeDouble(Double(ringWidth), forKey: Constants.RingWidth)
+  }
+  
+  class func sectionColor(color: UIColor,
+        atPercentage percentage: Double ) -> [String:AnyObject] {
+
+    var dictionary: [String:AnyObject] = [:]
+    dictionary["color"] = color
+    dictionary["percentage"] = percentage
+
+    return dictionary
   }
   
   var startAngle: Rotation {
@@ -85,12 +95,29 @@ class PartialRingView: FillView {
     }
   }
   
-  
-  override class func layerClass() -> AnyClass {
-    return PartialRingLayer.self
+  var additionalColors: [[String:AnyObject]] {
+    get {
+      var castColors: [[String:AnyObject]] = []
+      if let addCol = ringLayer.additionalColors {
+        for colorDictionary in addCol {
+          if let dictionary = colorDictionary as? [String:AnyObject] {
+            castColors.append(dictionary)
+          }
+        }
+      }
+      return castColors
+    }
+    set(newArray) {
+      ringLayer.additionalColors = newArray
+    }
   }
   
-  var ringLayer: PartialRingLayer {
-    return self.layer as! PartialRingLayer
+  
+  override class func layerClass() -> AnyClass {
+    return GSTRingLayer.self
+  }
+  
+  var ringLayer: GSTRingLayer {
+    return self.layer as! GSTRingLayer
   }
 }

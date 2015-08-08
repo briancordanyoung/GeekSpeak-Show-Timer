@@ -73,11 +73,11 @@ class PieShapeView: FillView {
   
   
   override class func layerClass() -> AnyClass {
-    return PieShapeLayer.self
+    return GSTPieLayer.self
   }
   
-  var pieLayer: PieShapeLayer {
-    return self.layer as! PieShapeLayer
+  var pieLayer: GSTPieLayer {
+    return self.layer as! GSTPieLayer
   }
 
 

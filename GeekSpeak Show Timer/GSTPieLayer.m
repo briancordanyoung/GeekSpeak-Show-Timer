@@ -1,7 +1,7 @@
-#import "PieShapeLayer.h"
+#import "GSTPieLayer.h"
 
 
-@implementation PieShapeLayer
+@implementation GSTPieLayer
 
 @dynamic    startAngle;
 @dynamic    endAngle;
@@ -33,8 +33,8 @@
 
 - (id)initWithLayer:(id)layer {
   if (self = [super initWithLayer:layer]) {
-    if ([layer isKindOfClass:[PieShapeLayer class]]) {
-      PieShapeLayer  *other = (PieShapeLayer *)layer;
+    if ([layer isKindOfClass:[GSTPieLayer class]]) {
+      GSTPieLayer  *other = (GSTPieLayer *)layer;
       self.clipToCircle     = other.clipToCircle;
       self.startAngle       = other.startAngle;
       self.endAngle         = other.endAngle;

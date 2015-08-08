@@ -33,9 +33,19 @@ final class TimerViewController: UIViewController, TimerDelegate {
     }
   }
 
-  let geekSpeakBlueColor = UIColor(red: 14/256,
-                                 green: 115/256,
-                                  blue: 192/256,
+  let geekSpeakBlueColor = UIColor(red: 14/255,
+                                 green: 115/255,
+                                  blue: 192/255,
+                                 alpha: 1.0)
+  
+  let warningColor       = UIColor(red: 14/255,
+                                 green: 207/255,
+                                  blue: 192/255,
+                                 alpha: 1.0)
+  
+  let alarmColor         = UIColor(red: 77/255,
+                                 green: 255/255,
+                                  blue: 237/255,
                                  alpha: 1.0)
   
   @IBOutlet weak var timerCirclesView: UIView!
@@ -79,16 +89,15 @@ final class TimerViewController: UIViewController, TimerDelegate {
     fillView.pieLayer.clipToCircle = true
     timerCirclesView.addSubview(fillView)
     
-    let ring1bg   = configureBGRing(PartialRingView(), withColor: geekSpeakBlueColor)
-    let ring1fg   = configureFGRing(PartialRingView(), withColor: geekSpeakBlueColor)
+    let ring1bg   = configureBGRing(RingView(), withColor: geekSpeakBlueColor)
+    let ring1fg   = configureFGRing(RingView(), withColor: geekSpeakBlueColor)
 
-    let ring2bg   = configureBGRing(PartialRingView(), withColor: geekSpeakBlueColor)
-    let ring2fg   = configureFGRing(PartialRingView(), withColor: geekSpeakBlueColor)
+    let ring2bg   = configureBGRing(RingView(), withColor: geekSpeakBlueColor)
+    let ring2fg   = configureFGRing(RingView(), withColor: geekSpeakBlueColor)
     
-    let ring3bg   = configureBGRing(PartialRingView(), withColor: geekSpeakBlueColor)
-    let ring3fg   = configureFGRing(PartialRingView(), withColor: geekSpeakBlueColor)
-
-
+    let ring3bg   = configureBGRing(RingView(), withColor: geekSpeakBlueColor)
+    let ring3fg   = configureFGRing(RingView(), withColor: geekSpeakBlueColor)
+    
     ring3bg.percentageOfSuperviewSize = 0.95
     ring3fg.percentageOfSuperviewSize = 0.95
     ring2bg.percentageOfSuperviewSize = 0.64
@@ -137,6 +146,27 @@ final class TimerViewController: UIViewController, TimerDelegate {
       buttonText = "Continue"
     }
     startPauseButton.setTitle(buttonText, forState: UIControlState.Normal)
+  }
+  
+  func timerDurationChanged(timer: Timer?) {
+    
+    
+    if let timer = timer {
+      switch timer.timing.phase {
+      case .Section3:
+        let twoMinuteWarning = timer.percentageFromSecondsToEnd(120)
+        let sectionColor2   = RingView.sectionColor( warningColor,
+                                       atPercentage: twoMinuteWarning)
+        timerViews?.ring3fg.additionalColors.append(sectionColor2)
+        
+        let halfMinuteWarning = timer.percentageFromSecondsToEnd(30)
+        let sectionColor3   = RingView.sectionColor( alarmColor,
+                                       atPercentage: halfMinuteWarning)
+        timerViews?.ring3fg.additionalColors.append(sectionColor3)
+      default:
+        break
+      }
+    }
   }
   
   
@@ -307,8 +337,8 @@ final class TimerViewController: UIViewController, TimerDelegate {
   
   // MARK: -
   // MARK: Setup
-  func configureFGRing(ringView: PartialRingView, withColor color: UIColor)
-                                                            -> PartialRingView {
+  func configureFGRing(ringView: RingView, withColor color: UIColor)
+                                                            -> RingView {
       ringView.color      = color
       ringView.startAngle = Rotation(degrees: 0)
       ringView.endAngle   = Rotation(degrees: 10)
@@ -317,8 +347,8 @@ final class TimerViewController: UIViewController, TimerDelegate {
       return ringView
   }
   
-  func configureBGRing(ringView: PartialRingView, withColor color: UIColor)
-                                                            -> PartialRingView {
+  func configureBGRing(ringView: RingView, withColor color: UIColor)
+                                                            -> RingView {
       ringView.color     = color.darkenColorWithMultiplier(0.2)
       ringView.ringWidth = lineWidth
       configureRing(ringView)

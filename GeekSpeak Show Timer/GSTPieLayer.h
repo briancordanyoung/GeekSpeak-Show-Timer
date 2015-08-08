@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface PieShapeLayer : CALayer
+@interface GSTPieLayer : CALayer
 
 
 @property (nonatomic) CGFloat startAngle;

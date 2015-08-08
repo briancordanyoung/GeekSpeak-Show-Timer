@@ -8,6 +8,7 @@ let timerUpdateInterval   = NSTimeInterval(0.01)
 protocol TimerDelegate {
   func timerChangedCountingStatus(state: Timer.CountingState)
   func timerUpdatedTime(timer: Timer?)
+  func timerDurationChanged(timer: Timer?)
 }
 
 // MARK: -
@@ -46,6 +47,7 @@ final class Timer: NSObject, NSCoding {
     set(newDuration) {
       timing.duration = newDuration
       notifyTimerUpdated()
+      notifyTimerDurationUpdated()
     }
   }
   
@@ -98,6 +100,16 @@ final class Timer: NSObject, NSCoding {
     let percentageRemaining = secondsToPercentage(duration - secondsElapsed)
     let percentageComplete  = 1.0 - percentageRemaining
     return percentageComplete
+  }
+  
+  func percentageFromSeconds(seconds: NSTimeInterval) -> Double {
+    let percent = seconds / duration
+    return percent
+  }
+  
+  func percentageFromSecondsToEnd(seconds: NSTimeInterval) -> Double {
+    let percent = 1 - (seconds / duration)
+    return percent
   }
   
   // MARK: Internal Properties
@@ -160,6 +172,7 @@ final class Timer: NSObject, NSCoding {
     storeElapsedTimeAtPause()
     countingStartTime = .None
     timing.incrementPhase()
+    notifyTimerDurationUpdated()
 
     switch _state {
     case .Ready:
@@ -197,6 +210,13 @@ final class Timer: NSObject, NSCoding {
   func notifyCountingStateUpdated() {
     if let delegate = delegate {
       delegate.timerChangedCountingStatus(state)
+    }
+  }
+  
+  func notifyTimerDurationUpdated() {
+    if let delegate = delegate {
+      weak var weakSelf = self
+      delegate.timerDurationChanged(weakSelf)
     }
   }
   

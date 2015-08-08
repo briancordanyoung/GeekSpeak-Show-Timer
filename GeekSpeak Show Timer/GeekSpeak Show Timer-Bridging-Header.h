@@ -3,5 +3,6 @@
 //
 
 #import "UIImage+ImageEffects.h"
-#import "PieShapeLayer.h"
-#import "PartialRingLayer.h"
+#import "GSTPieLayer.h"
+#import "GSTRingLayer.h"
+#import "GSTRing.h"
