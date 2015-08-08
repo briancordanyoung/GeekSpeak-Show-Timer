@@ -10,11 +10,11 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly timed breaks 
 
 ## Todo:
 
-- Add color change to last segment ring at 2 minutes and a third color change at 30 seconds.
 - Create animating buttons for start/pause and Next Segment buttons
 - Create graphics for Add & Remove seconds buttons.
-- ~~When 1st and 2nd segment finish, indicate time is still counting by creating a 5 degree gap that continues rotation at the same pace.~~ (done)
 - images need to be scaled and optimized for: @1x,@2x,@3x
+- ~~Add color change to last segment ring at 2 minutes and a third color change at 30 seconds.~~ (done)
+- ~~When 1st and 2nd segment finish, indicate time is still counting by creating a 5 degree gap that continues rotation at the same pace.~~ (done)
 - ~~Fix labels under show times to scale based on text width~~ (done)
 - ~~Showtime should always count up.~~ (done)
 - ~~Section time should always count down. Except when all three segments are completed~~ (done)
