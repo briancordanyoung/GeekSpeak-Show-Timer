@@ -1,6 +1,6 @@
 # GeekSpeak-Show-Timer
 
-During the recording of GeekSpeak, we need to plan for 2 inexactly timed breaks and an precise show length.  This is the timer we use to make that a easy as possible.
+During the recording of GeekSpeak, we need to plan for 2 inexactly placed breaks and a precise show length.  This is the timer we use to make that as easy as possible.
 
 =======
 
@@ -32,4 +32,4 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly timed breaks 
 # v0.1
 _(this version is tagged but, the tag isn't showing up in github for some reason)_
 
-This is the initial version of the timer and used on the 8/3/15 recording of the show (aired 8/8/15).  It is useable, but truely a beta release.  Many views don't have any layout code and you can get the app in an unusable state on iPhones.
+This is the initial version of the timer and used on the 8/3/15 recording of the show (aired 8/8/15).  It is useable, but truely a beta release.  Many views don't have any layout code and you can get the app in an unusable state on iPhones. [Here is a video demo of this version](https://www.youtube.com/watch?v=kwDyj1H7LJw)
