@@ -28,9 +28,19 @@ class RingView: FillView {
   
   override func encodeWithCoder(aCoder: NSCoder) {
     super.encodeWithCoder(aCoder)
-    aCoder.encodeDouble(startAngle.value, forKey: Constants.StartAngle)
-    aCoder.encodeDouble(endAngle.value,   forKey: Constants.EndAngle)
-    aCoder.encodeDouble(Double(ringWidth),    forKey: Constants.RingWidth)
+    aCoder.encodeDouble(startAngle.value,  forKey: Constants.StartAngle)
+    aCoder.encodeDouble(endAngle.value,    forKey: Constants.EndAngle)
+    aCoder.encodeDouble(Double(ringWidth), forKey: Constants.RingWidth)
+  }
+  
+  class func sectionColor(color: UIColor,
+        atPercentage percentage: Double ) -> [String:AnyObject] {
+
+    var dictionary: [String:AnyObject] = [:]
+    dictionary["color"] = color
+    dictionary["percentage"] = percentage
+
+    return dictionary
   }
   
   var startAngle: Rotation {
@@ -82,6 +92,23 @@ class RingView: FillView {
     }
     set(newColor) {
       ringLayer.color = newColor
+    }
+  }
+  
+  var additionalColors: [[String:AnyObject]] {
+    get {
+      var castColors: [[String:AnyObject]] = []
+      if let addCol = ringLayer.additionalColors {
+        for colorDictionary in addCol {
+          if let dictionary = colorDictionary as? [String:AnyObject] {
+            castColors.append(dictionary)
+          }
+        }
+      }
+      return castColors
+    }
+    set(newArray) {
+      ringLayer.additionalColors = newArray
     }
   }
   

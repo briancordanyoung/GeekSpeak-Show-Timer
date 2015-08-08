@@ -8,5 +8,6 @@
 @property (nonatomic)         CGFloat ringWidth;
 @property (nonatomic)         CGFloat endRadius;
 @property (nonatomic, strong) UIColor *color;
+@property (nonatomic, strong) NSArray *additionalColors;
 
 @end
