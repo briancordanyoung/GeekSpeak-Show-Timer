@@ -10,8 +10,15 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly placed breaks
 
 ## Todo:
 
+- GeekSpeakButton UIButton subclass
+	- use outline art
+	- fill outline art on touch
+	- animate radiating rings after sucessful touch
 - Create animating buttons for start/pause and Next Segment buttons
 - Create graphics for Add & Remove seconds buttons.
+- Add GameKit discovery and networking between timers on multiple devices
+- Animations:
+	On section3 warning & alarm color, animate visibility of each ring radiating out (to catch everyone's eye)
 - images need to be scaled and optimized for: @1x,@2x,@3x
 - ~~Add color change to last segment ring at 2 minutes and a third color change at 30 seconds.~~ (done)
 - ~~When 1st and 2nd segment finish, indicate time is still counting by creating a 5 degree gap that continues rotation at the same pace.~~ (done)
@@ -22,7 +29,6 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly placed breaks
 	- ~~timer labels change to GeekSpeakBlue~~ (done)
 	- Add and remove buttons should be disabled
 	- Next Segment button animates away (reset button animates it back)
-- Add GameKit discovery and networking between timers on multiple devices
 - Abstract out the hard coded definition of 3 segments with one minute breaks, into a definition file. Auto generate views based on this definition, allowing multiple show formats
 - ~~Add test mode in settings app to switch between demo/testing and live show timer~~ (done)
 - ~~Add keyArchivers to save state between launches~~ (done)
