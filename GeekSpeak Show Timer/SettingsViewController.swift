@@ -1,5 +1,6 @@
 class SettingsViewController: UIViewController {
   
+  @IBOutlet weak var contentView: UIView!
   @IBOutlet weak var backgroundImageView: UIImageView!
   @IBOutlet weak var leftNavButton: UIBarButtonItem!
   
@@ -34,6 +35,10 @@ class SettingsViewController: UIViewController {
   }
   
   // MARK: VIewController
+  override func viewDidLoad() {
+    addContraintsForContentView()
+  }
+  
   override func viewWillAppear(animated: Bool) {
     generateBluredBackground()
     setAppearenceOfNavigationBar()
@@ -48,6 +53,26 @@ class SettingsViewController: UIViewController {
     self.navigationController?.navigationBar.backgroundColor = UIColor.blackColor()
     self.navigationController?.navigationBar.translucent = false
   }
+  
+  func addContraintsForContentView() {
+    let leftConstraint = NSLayoutConstraint(item: contentView,
+                                       attribute: .Leading,
+                                       relatedBy: .Equal,
+                                          toItem: view,
+                                       attribute: .Left,
+                                      multiplier: 1.0,
+                                        constant: 0.0)
+    view.addConstraint(leftConstraint)
+    let rightConstraint = NSLayoutConstraint(item: contentView,
+                                       attribute: .Trailing,
+                                       relatedBy: .Equal,
+                                          toItem: view,
+                                       attribute: .Right,
+                                      multiplier: 1.0,
+                                        constant: 0.0)
+    view.addConstraint(rightConstraint)
+  }
+  
   override func viewDidAppear(animated: Bool) {
     updateTimerLabels()
     NSNotificationCenter.defaultCenter()
