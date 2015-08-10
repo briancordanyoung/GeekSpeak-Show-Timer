@@ -23,6 +23,20 @@ final class TimerViewController: UIViewController, TimerDelegate {
   struct Constants {
     static let TimerId              = "timerViewControllerTimerId"
     static let TimerNotificationKey = "com.geekspeak.timerNotificationKey"
+    static let GeekSpeakBlueColor = UIColor(red: 14/255,
+                                          green: 115/255,
+                                           blue: 192/255,
+                                          alpha: 1.0)
+    
+    static let WarningColor       = UIColor(red: 13/255,
+                                          green: 255/255,
+                                           blue: 179/255,
+                                          alpha: 1.0)
+    
+    static let AlarmColor         = UIColor(red: 255/255,
+                                          green: 255/255,
+                                           blue: 150/255,
+                                          alpha: 1.0)
   }
 
   var timerViews: TimerViews?
@@ -33,20 +47,13 @@ final class TimerViewController: UIViewController, TimerDelegate {
     }
   }
 
-  let geekSpeakBlueColor = UIColor(red: 14/255,
-                                 green: 115/255,
-                                  blue: 192/255,
-                                 alpha: 1.0)
+  var useDemoDurations = false
   
-  let warningColor       = UIColor(red: 14/255,
-                                 green: 207/255,
-                                  blue: 192/255,
-                                 alpha: 1.0)
-  
-  let alarmColor         = UIColor(red: 77/255,
-                                 green: 255/255,
-                                  blue: 237/255,
-                                 alpha: 1.0)
+  func updateUseDemoDurations() {
+    useDemoDurations = NSUserDefaults
+      .standardUserDefaults()
+      .boolForKey(Timer.Constants.UseDemoDurations)
+  }
   
   @IBOutlet weak var timerCirclesView: UIView!
   @IBOutlet weak var totalTimeLabel: UILabel!
@@ -71,8 +78,11 @@ final class TimerViewController: UIViewController, TimerDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+  }
+  
+  override func viewWillAppear(animated: Bool) {
     timer.delegate = self
-
+    
     setupContraints()
     setupTimeLabelContraints(totalTimeLabel)
     setupTimeLabelContraints(sectionTimeLabel)
@@ -89,14 +99,20 @@ final class TimerViewController: UIViewController, TimerDelegate {
     fillView.pieLayer.clipToCircle = true
     timerCirclesView.addSubview(fillView)
     
-    let ring1bg   = configureBGRing(RingView(), withColor: geekSpeakBlueColor)
-    let ring1fg   = configureFGRing(RingView(), withColor: geekSpeakBlueColor)
-
-    let ring2bg   = configureBGRing(RingView(), withColor: geekSpeakBlueColor)
-    let ring2fg   = configureFGRing(RingView(), withColor: geekSpeakBlueColor)
+    let ring1bg   = configureBGRing( RingView(),
+      withColor: Constants.GeekSpeakBlueColor)
+    let ring1fg   = configureFGRing( RingView(),
+      withColor: Constants.GeekSpeakBlueColor)
     
-    let ring3bg   = configureBGRing(RingView(), withColor: geekSpeakBlueColor)
-    let ring3fg   = configureFGRing(RingView(), withColor: geekSpeakBlueColor)
+    let ring2bg   = configureBGRing( RingView(),
+      withColor: Constants.GeekSpeakBlueColor)
+    let ring2fg   = configureFGRing( RingView(),
+      withColor: Constants.GeekSpeakBlueColor)
+    
+    let ring3bg   = configureBGRing( RingView(),
+      withColor: Constants.GeekSpeakBlueColor)
+    let ring3fg   = configureFGRing( RingView(),
+      withColor: Constants.GeekSpeakBlueColor)
     
     ring3bg.percentageOfSuperviewSize = 0.95
     ring3fg.percentageOfSuperviewSize = 0.95
@@ -106,18 +122,27 @@ final class TimerViewController: UIViewController, TimerDelegate {
     ring1fg.percentageOfSuperviewSize = 0.33
     
     timerViews = TimerViews(  ring1bg: ring1bg,
-                              ring1fg: ring1fg,
-                              ring2bg: ring2bg,
-                              ring2fg: ring2fg,
-                              ring3bg: ring3bg,
-                              ring3fg: ring3fg,
-                                 fill: fillView)
+      ring1fg: ring1fg,
+      ring2bg: ring2bg,
+      ring2fg: ring2fg,
+      ring3bg: ring3bg,
+      ring3fg: ring3fg,
+      fill: fillView)
     
     timerCirclesView.bringSubviewToFront(remainingToggleButton)
     resetTimer()
     
+    setAppearenceOfNavigationBar()
   }
   
+  func setAppearenceOfNavigationBar() {
+    self.navigationController?.navigationBar.setBackgroundImage( UIImage(),
+      forBarMetrics: UIBarMetrics.Default)
+    self.navigationController?.view.backgroundColor = UIColor.clearColor()
+    self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
+    self.navigationController?.navigationBar.translucent = true
+
+  }
   
   // MARK: -
   // MARK: ViewController
@@ -150,17 +175,27 @@ final class TimerViewController: UIViewController, TimerDelegate {
   
   func timerDurationChanged(timer: Timer?) {
     
+    let section2Seconds: NSTimeInterval
+    let section3Seconds: NSTimeInterval
+    if useDemoDurations {
+      section2Seconds = 2
+      section3Seconds = 1
+    } else {
+      section2Seconds = 120
+      section3Seconds = 30
+    }
+    
     
     if let timer = timer {
       switch timer.timing.phase {
       case .Section3:
-        let twoMinuteWarning = timer.percentageFromSecondsToEnd(120)
-        let sectionColor2   = RingView.sectionColor( warningColor,
+        let twoMinuteWarning = timer.percentageFromSecondsToEnd(section2Seconds)
+        let sectionColor2   = RingView.sectionColor( Constants.WarningColor,
                                        atPercentage: twoMinuteWarning)
         timerViews?.ring3fg.additionalColors.append(sectionColor2)
         
-        let halfMinuteWarning = timer.percentageFromSecondsToEnd(30)
-        let sectionColor3   = RingView.sectionColor( alarmColor,
+        let halfMinuteWarning = timer.percentageFromSecondsToEnd(section3Seconds)
+        let sectionColor3   = RingView.sectionColor( Constants.AlarmColor,
                                        atPercentage: halfMinuteWarning)
         timerViews?.ring3fg.additionalColors.append(sectionColor3)
       default:
@@ -207,8 +242,8 @@ final class TimerViewController: UIViewController, TimerDelegate {
         
       case .PostShow:
         timerLabelDisplay = .Elapsed
-        sectionTimeLabel.textColor = geekSpeakBlueColor
-        totalTimeLabel.textColor   = geekSpeakBlueColor
+        sectionTimeLabel.textColor = Constants.GeekSpeakBlueColor
+        totalTimeLabel.textColor   = Constants.GeekSpeakBlueColor
       }
       
 
@@ -292,6 +327,9 @@ final class TimerViewController: UIViewController, TimerDelegate {
   
   // MARK: -
   // MARK: Actions
+  @IBAction func showSettingsButtonPressed(sender: UIBarButtonItem) {
+    self.splitViewController?.toggleMasterView()
+  }
   
   @IBAction func startPauseButtonPressed(sender: UIButton) {
     switch timer.state {
@@ -320,19 +358,12 @@ final class TimerViewController: UIViewController, TimerDelegate {
   }
   
   func resetTimer() {
-    
-    let useDemoDurations = NSUserDefaults
-                            .standardUserDefaults()
-                            .boolForKey(Timer.Constants.UseDemoDurations)
+    updateUseDemoDurations()
     if useDemoDurations {
       timer.reset(usingDemoTiming: true)
     } else {
       timer.reset()
     }
-  }
-  
-  func setupTimingsToDemoDurations() {
-    
   }
   
   // MARK: -
