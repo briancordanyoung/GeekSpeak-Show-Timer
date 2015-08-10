@@ -78,6 +78,7 @@ final class TimerViewController: UIViewController, TimerDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+
     timer.delegate = self
 
     setupContraints()
@@ -131,6 +132,14 @@ final class TimerViewController: UIViewController, TimerDelegate {
     
   }
   
+  override func viewWillAppear(animated: Bool) {
+    self.navigationController?.navigationBar.setBackgroundImage( UIImage(),
+                                                  forBarMetrics: UIBarMetrics.Default)
+    self.navigationController?.view.backgroundColor = UIColor.clearColor()
+    self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
+    self.navigationController?.navigationBar.translucent = true
+  
+  }
   
   // MARK: -
   // MARK: ViewController
@@ -315,6 +324,9 @@ final class TimerViewController: UIViewController, TimerDelegate {
   
   // MARK: -
   // MARK: Actions
+  @IBAction func showSettingsButtonPressed(sender: UIBarButtonItem) {
+    self.splitViewController?.toggleMasterView()
+  }
   
   @IBAction func startPauseButtonPressed(sender: UIButton) {
     switch timer.state {
@@ -343,17 +355,12 @@ final class TimerViewController: UIViewController, TimerDelegate {
   }
   
   func resetTimer() {
-    
     updateUseDemoDurations()
     if useDemoDurations {
       timer.reset(usingDemoTiming: true)
     } else {
       timer.reset()
     }
-  }
-  
-  func setupTimingsToDemoDurations() {
-    
   }
   
   // MARK: -

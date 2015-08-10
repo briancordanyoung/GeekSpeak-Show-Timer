@@ -15,11 +15,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tY2-lc-OlN" userLabel="TimerCircles">
-                                <rect key="frame" x="16" y="16" width="992" height="992"/>
+                                <rect key="frame" x="16" y="60" width="736" height="736"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="totalTime" text="00:00:00" lineBreakMode="tailTruncation" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="iLg-Ok-lxM" userLabel="totalTime">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="68"/>
@@ -32,7 +32,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="segmentTime" text="00:00:00" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="fhW-lj-LnF" userLabel="segmentTime">
-                                        <rect key="frame" x="692" y="0.0" width="300" height="68"/>
+                                        <rect key="frame" x="436" y="0.0" width="300" height="68"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" placeholder="YES" id="lFr-m0-8yo"/>
                                             <constraint firstAttribute="width" secondItem="fhW-lj-LnF" secondAttribute="height" multiplier="409:93" id="qip-L3-pI6"/>
@@ -53,7 +53,7 @@
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="segment" text="Segment" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="6Xz-Ti-gwy" userLabel="segment">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" restorationIdentifier="segment" text="Segment" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="6Xz-Ti-gwy" userLabel="segment">
                                         <rect key="frame" x="830" y="68" width="162" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="6Xz-Ti-gwy" secondAttribute="height" multiplier="27:4" id="Id1-WE-DuA"/>
@@ -66,7 +66,7 @@
                                         </variation>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6N7-hw-EdK" userLabel="RemainingToggle">
-                                        <rect key="frame" x="0.0" y="0.0" width="992" height="93"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="736" height="93"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="93" placeholder="YES" id="3nA-Cv-Bat"/>
                                         </constraints>
@@ -145,7 +145,7 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="PdP-pn-H8o" secondAttribute="bottom" constant="20" id="JFL-9U-et7"/>
                             <constraint firstItem="PdP-pn-H8o" firstAttribute="width" secondItem="edy-5J-yaK" secondAttribute="width" id="O3c-f6-xju"/>
                             <constraint firstItem="PdP-pn-H8o" firstAttribute="height" secondItem="edy-5J-yaK" secondAttribute="height" id="QoA-ct-xub"/>
-                            <constraint firstItem="tY2-lc-OlN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="16" id="b5I-QT-R6p"/>
+                            <constraint firstItem="tY2-lc-OlN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="60" id="b5I-QT-R6p"/>
                             <constraint firstItem="edy-5J-yaK" firstAttribute="top" secondItem="PdP-pn-H8o" secondAttribute="bottom" constant="8" id="btS-u7-nLT"/>
                             <constraint firstAttribute="trailing" secondItem="tY2-lc-OlN" secondAttribute="trailing" constant="16" placeholder="YES" id="fQ4-E4-lf5"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="edy-5J-yaK" secondAttribute="bottom" constant="20" id="fWi-xK-0mJ"/>
@@ -166,15 +166,15 @@
                                 <exclude reference="QoA-ct-xub"/>
                                 <exclude reference="msl-Iq-GwD"/>
                                 <exclude reference="vTB-3Q-4ny"/>
-                                <exclude reference="JFL-9U-et7"/>
-                                <exclude reference="fWi-xK-0mJ"/>
-                                <exclude reference="zey-f0-8l8"/>
                                 <exclude reference="Cwv-Xd-mk6"/>
                                 <exclude reference="Hed-8j-X5n"/>
                                 <exclude reference="btS-u7-nLT"/>
                                 <exclude reference="mlA-cE-QNr"/>
                                 <exclude reference="v95-P5-teg"/>
                                 <exclude reference="vIC-8F-pSH"/>
+                                <exclude reference="JFL-9U-et7"/>
+                                <exclude reference="fWi-xK-0mJ"/>
+                                <exclude reference="zey-f0-8l8"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -182,11 +182,11 @@
                                 <include reference="3hV-Q5-hFP"/>
                                 <include reference="DtS-4O-nA1"/>
                                 <include reference="O3c-f6-xju"/>
-                                <include reference="JFL-9U-et7"/>
-                                <include reference="fWi-xK-0mJ"/>
                                 <include reference="Cwv-Xd-mk6"/>
                                 <include reference="Hed-8j-X5n"/>
                                 <include reference="v95-P5-teg"/>
+                                <include reference="JFL-9U-et7"/>
+                                <include reference="fWi-xK-0mJ"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -195,15 +195,14 @@
                                 <include reference="QoA-ct-xub"/>
                                 <include reference="msl-Iq-GwD"/>
                                 <include reference="vTB-3Q-4ny"/>
-                                <include reference="zey-f0-8l8"/>
                                 <include reference="btS-u7-nLT"/>
                                 <include reference="mlA-cE-QNr"/>
                                 <include reference="vIC-8F-pSH"/>
+                                <include reference="zey-f0-8l8"/>
                             </mask>
                         </variation>
                     </view>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <navigationItem key="navigationItem" id="wM9-rF-CHT"/>
                     <connections>
                         <outlet property="nextSegmentButton" destination="edy-5J-yaK" id="OHZ-MG-UGu"/>
                         <outlet property="remainingToggleButton" destination="6N7-hw-EdK" id="wa2-xq-e7O"/>
@@ -217,7 +216,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1044.75" y="2439"/>
+            <point key="canvasLocation" x="1844" y="1637"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Kg6-cG-iB5">
+            <objects>
+                <navigationController id="ibD-Av-qm3" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jLh-pU-7bx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="9fm-R7-tyk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hcx-KA-FWk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1015" y="1642"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="wC3-PL-p7M">
@@ -231,7 +246,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="308" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vDu-Wv-iqT" userLabel="blurredBackground">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vDu-Wv-iqT" userLabel="blurredBackground">
                                 <rect key="frame" x="0.0" y="64" width="308" height="960"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eal-fe-nSn">
@@ -354,9 +369,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="eC9-0S-DLt">
-                        <barButtonItem key="rightBarButtonItem" title="Hide" id="4Vd-hZ-s2C">
+                        <barButtonItem key="leftBarButtonItem" title="Timer" id="4Vd-hZ-s2C">
                             <connections>
-                                <action selector="hideSettingButton:" destination="UEF-px-LpL" id="XvZ-Wa-vPS"/>
+                                <action selector="showTimerNavButtonPressed:" destination="UEF-px-LpL" id="F8R-GP-jmG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -365,22 +380,24 @@
                         <outlet property="add1SecondButton" destination="59I-kf-b1M" id="GmH-bj-gwE"/>
                         <outlet property="add5SecondsButton" destination="vSY-I5-brJ" id="Klu-kv-b58"/>
                         <outlet property="backgroundImageView" destination="vDu-Wv-iqT" id="aDt-w2-Pi9"/>
+                        <outlet property="leftNavButton" destination="4Vd-hZ-s2C" id="Crw-ad-su6"/>
                         <outlet property="postShowLabel" destination="iLl-wL-nDt" id="6jf-5Z-qfK"/>
                         <outlet property="remove1SecondButton" destination="hi0-GX-r7Y" id="wyo-MX-d50"/>
                         <outlet property="resetButton" destination="W5L-5D-Beh" id="4y1-Qd-Eop"/>
                         <outlet property="segment1Label" destination="enZ-yY-nPJ" id="Lup-iY-Ml5"/>
                         <outlet property="segment2Label" destination="hSU-AR-jve" id="vr1-Dn-w8D"/>
                         <outlet property="segment3Label" destination="fHF-7j-CuN" id="WxH-99-X1V"/>
+                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="showTimer" id="Y8G-p3-Pc0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tBI-zJ-Era" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1293" y="552"/>
+            <point key="canvasLocation" x="1833" y="552"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HWP-k5-fQJ">
             <objects>
-                <navigationController storyboardIdentifier="masterNavController" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="TOL-hK-koz" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="masterNavController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TOL-hK-koz" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="r20-br-OZI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -391,7 +408,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eWV-ZM-oCz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="793" y="552"/>
+            <point key="canvasLocation" x="997" y="552"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="O7A-gW-31j">
@@ -400,7 +417,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <segue destination="TOL-hK-koz" kind="relationship" relationship="masterViewController" id="qSR-o9-nNq"/>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="detailViewController" id="49W-xH-rXj"/>
+                        <segue destination="ibD-Av-qm3" kind="relationship" relationship="detailViewController" id="S1r-pv-Xnw"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdM-PK-VYN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -411,4 +428,7 @@
     <resources>
         <image name="GeekSpeakWhite" width="600" height="600"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Y8G-p3-Pc0"/>
+    </inferredMetricsTieBreakers>
 </document>

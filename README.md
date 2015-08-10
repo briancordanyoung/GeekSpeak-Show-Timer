@@ -32,7 +32,8 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly placed breaks
 - Abstract out the hard coded definition of 3 segments with one minute breaks, into a definition file. Auto generate views based on this definition, allowing multiple show formats
 - ~~Add test mode in settings app to switch between demo/testing and live show timer~~ (done)
 - ~~Add keyArchivers to save state between launches~~ (done)
-	- track down archiving state bug when timer is running and state preservation kicks in
+- BUG: track down archiving state bug when timer is running and state preservation kicks in
+- BUG: Nav button shows 'Hide' (not 'Show Timer') on start up
 
 ## Versions:
 # v0.1

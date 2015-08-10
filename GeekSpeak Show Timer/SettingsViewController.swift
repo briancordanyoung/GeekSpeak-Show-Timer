@@ -1,6 +1,7 @@
 class SettingsViewController: UIViewController {
   
   @IBOutlet weak var backgroundImageView: UIImageView!
+  @IBOutlet weak var leftNavButton: UIBarButtonItem!
   
   @IBOutlet weak var add1SecondButton: UIButton!
   @IBOutlet weak var add5SecondsButton: UIButton!
@@ -15,25 +16,37 @@ class SettingsViewController: UIViewController {
   
   
   
-  
+  // MARK: Convience Properties
   var timerViewController: TimerViewController? {
     var timerViewController: TimerViewController? = .None
-    if let tmpSVC = splitViewController {
-      if let tmpLast: AnyObject? = tmpSVC.viewControllers.last {
-        if let viewController = tmpLast as? TimerViewController {
-          timerViewController = viewController
+    if let splitViewController = splitViewController {
+      if let navController: AnyObject? =
+                                      splitViewController.viewControllers.last {
+        if let navController = navController as? UINavigationController {
+          if let tmpTimerViewController =
+                       navController.topViewController as? TimerViewController {
+            timerViewController = tmpTimerViewController
+          }
         }
       }
     }
     return timerViewController
   }
-
+  
+  // MARK: VIewController
   override func viewWillAppear(animated: Bool) {
     generateBluredBackground()
-
+    self.navigationController?.navigationBar
+             .setBackgroundImage( UIImage.imageWithColor( UIColor.blackColor()),
+                                           forBarMetrics: UIBarMetrics.Default)
+    self.navigationController?.view.backgroundColor = UIColor.blackColor()
+    self.navigationController?.navigationBar.backgroundColor = UIColor.blackColor()
+    self.navigationController?.navigationBar.translucent = false
   }
   
+  
   override func viewDidAppear(animated: Bool) {
+    manageButtonBarButtons()
     updateTimerLabels()
     NSNotificationCenter.defaultCenter()
               .addObserver( self,
@@ -45,12 +58,6 @@ class SettingsViewController: UIViewController {
   override func viewWillDisappear(animated: Bool) {
     NSNotificationCenter.defaultCenter().removeObserver(self)
   }
-  
-  @IBAction func hideSettingButton(sender: AnyObject) {
-    self.splitViewController?.toggleMasterView()
-  }
-  
-  
   
   @IBAction func add1SecondButtonPressed(sender: UIButton) {
     timerViewController?.timer.duration += 1.0
@@ -116,8 +123,31 @@ class SettingsViewController: UIViewController {
 
     }
   }
-  
 
+  @IBAction func showTimerNavButtonPressed(sender: UIBarButtonItem) {
+    if let splitViewController = splitViewController {
+      // collapsed = true  is iPhone
+      // collapsed = false is iPad & Plus
+      if splitViewController.collapsed == true {
+        self.performSegueWithIdentifier("showTimer", sender: self)
+      } else {
+        self.splitViewController?.toggleMasterView()
+      }
+    }
+  }
+  
+  func manageButtonBarButtons() {
+    if let splitViewController = splitViewController  {
+      // collapsed = true  is iPhone
+      // collapsed = false is iPad & Plus
+      if splitViewController.collapsed == true {
+        leftNavButton.title = "Show Timer"
+      } else {
+        leftNavButton.title = "Hide"
+      }
+    }
+  }
+  
   
   // TODO: Do this on a background thread
   func generateBluredBackground() {
@@ -162,8 +192,13 @@ class SettingsViewController: UIViewController {
                                     saturationDeltaFactor: 1.8,
                                                 maskImage: nil)
       }
+    } else {
+      backgroundImageView.image = UIImage.imageWithColor(UIColor.blackColor())
     }
-  }
+    
+    
+    
+  } // generateBluredBackground
   
   
 }
