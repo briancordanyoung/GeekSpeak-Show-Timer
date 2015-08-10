@@ -36,6 +36,11 @@ class SettingsViewController: UIViewController {
   // MARK: VIewController
   override func viewWillAppear(animated: Bool) {
     generateBluredBackground()
+    setAppearenceOfNavigationBar()
+    manageButtonBarButtons()
+  }
+  
+  func setAppearenceOfNavigationBar() {
     self.navigationController?.navigationBar
              .setBackgroundImage( UIImage.imageWithColor( UIColor.blackColor()),
                                            forBarMetrics: UIBarMetrics.Default)
@@ -43,10 +48,7 @@ class SettingsViewController: UIViewController {
     self.navigationController?.navigationBar.backgroundColor = UIColor.blackColor()
     self.navigationController?.navigationBar.translucent = false
   }
-  
-  
   override func viewDidAppear(animated: Bool) {
-    manageButtonBarButtons()
     updateTimerLabels()
     NSNotificationCenter.defaultCenter()
               .addObserver( self,

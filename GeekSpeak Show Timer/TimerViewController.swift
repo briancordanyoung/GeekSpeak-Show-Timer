@@ -78,9 +78,11 @@ final class TimerViewController: UIViewController, TimerDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
+  }
+  
+  override func viewWillAppear(animated: Bool) {
     timer.delegate = self
-
+    
     setupContraints()
     setupTimeLabelContraints(totalTimeLabel)
     setupTimeLabelContraints(sectionTimeLabel)
@@ -98,19 +100,19 @@ final class TimerViewController: UIViewController, TimerDelegate {
     timerCirclesView.addSubview(fillView)
     
     let ring1bg   = configureBGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueColor)
+      withColor: Constants.GeekSpeakBlueColor)
     let ring1fg   = configureFGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueColor)
-
+      withColor: Constants.GeekSpeakBlueColor)
+    
     let ring2bg   = configureBGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueColor)
+      withColor: Constants.GeekSpeakBlueColor)
     let ring2fg   = configureFGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueColor)
+      withColor: Constants.GeekSpeakBlueColor)
     
     let ring3bg   = configureBGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueColor)
+      withColor: Constants.GeekSpeakBlueColor)
     let ring3fg   = configureFGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueColor)
+      withColor: Constants.GeekSpeakBlueColor)
     
     ring3bg.percentageOfSuperviewSize = 0.95
     ring3fg.percentageOfSuperviewSize = 0.95
@@ -120,25 +122,26 @@ final class TimerViewController: UIViewController, TimerDelegate {
     ring1fg.percentageOfSuperviewSize = 0.33
     
     timerViews = TimerViews(  ring1bg: ring1bg,
-                              ring1fg: ring1fg,
-                              ring2bg: ring2bg,
-                              ring2fg: ring2fg,
-                              ring3bg: ring3bg,
-                              ring3fg: ring3fg,
-                                 fill: fillView)
+      ring1fg: ring1fg,
+      ring2bg: ring2bg,
+      ring2fg: ring2fg,
+      ring3bg: ring3bg,
+      ring3fg: ring3fg,
+      fill: fillView)
     
     timerCirclesView.bringSubviewToFront(remainingToggleButton)
     resetTimer()
     
+    setAppearenceOfNavigationBar()
   }
   
-  override func viewWillAppear(animated: Bool) {
+  func setAppearenceOfNavigationBar() {
     self.navigationController?.navigationBar.setBackgroundImage( UIImage(),
-                                                  forBarMetrics: UIBarMetrics.Default)
+      forBarMetrics: UIBarMetrics.Default)
     self.navigationController?.view.backgroundColor = UIColor.clearColor()
     self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
     self.navigationController?.navigationBar.translucent = true
-  
+
   }
   
   // MARK: -
