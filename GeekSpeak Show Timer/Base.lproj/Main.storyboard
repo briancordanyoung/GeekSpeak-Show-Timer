@@ -76,9 +76,6 @@
                                         <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                             <rect key="frame" x="0.0" y="0.0" width="992" height="93"/>
                                         </variation>
-                                        <connections>
-                                            <action selector="remainingTimeToggled:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zxH-Wf-hTF"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -205,7 +202,6 @@
                     <navigationItem key="navigationItem" id="wM9-rF-CHT"/>
                     <connections>
                         <outlet property="nextSegmentButton" destination="edy-5J-yaK" id="OHZ-MG-UGu"/>
-                        <outlet property="remainingToggleButton" destination="6N7-hw-EdK" id="wa2-xq-e7O"/>
                         <outlet property="sectionTimeLabel" destination="fhW-lj-LnF" id="PUl-lz-n33"/>
                         <outlet property="segmentLabel" destination="6Xz-Ti-gwy" id="Hdh-QZ-ZTt"/>
                         <outlet property="startPauseButton" destination="PdP-pn-H8o" id="wKF-n7-nGL"/>
@@ -221,7 +217,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Kg6-cG-iB5">
             <objects>
-                <navigationController id="ibD-Av-qm3" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="detailNavController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ibD-Av-qm3" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jLh-pU-7bx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -232,7 +228,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hcx-KA-FWk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1015" y="1642"/>
+            <point key="canvasLocation" x="606" y="1636.5"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="wC3-PL-p7M">
@@ -284,6 +280,9 @@
                                                             <constraint firstAttribute="bottom" secondItem="ttH-ST-Owg" secondAttribute="bottom" id="wim-7u-FvR"/>
                                                             <constraint firstItem="ttH-ST-Owg" firstAttribute="top" secondItem="SGr-Xf-42M" secondAttribute="top" id="yQl-dO-sNr"/>
                                                         </constraints>
+                                                        <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                                            <rect key="frame" x="0.0" y="0.0" width="308" height="20.5"/>
+                                                        </variation>
                                                     </view>
                                                     <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tiB-7B-0CH" userLabel="Segment2">
                                                         <rect key="frame" x="0.0" y="29" width="308" height="21"/>
@@ -570,13 +569,13 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdM-PK-VYN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="19" y="1040"/>
+            <point key="canvasLocation" x="-276" y="664.5"/>
         </scene>
     </scenes>
     <resources>
         <image name="GeekSpeakWhite" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Y8G-p3-Pc0"/>
+        <segue reference="9fm-R7-tyk"/>
     </inferredMetricsTieBreakers>
 </document>

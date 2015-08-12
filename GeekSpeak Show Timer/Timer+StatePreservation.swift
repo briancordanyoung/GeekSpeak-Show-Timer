@@ -34,7 +34,6 @@ extension Timer {
   // MARK: -
   // MARK: State Preservation and Restoration
   func decodeWithCoder(coder aDecoder: NSCoder) {
-    
     let countingState = aDecoder.decodeIntForKey(Constants.StateId)
     switch countingState {
     case 1:
@@ -48,7 +47,8 @@ extension Timer {
     }
     
     let countingStartTimeDecoded =
-    aDecoder.decodeDoubleForKey(Constants.CountingStartTimeId)
+                      aDecoder.decodeDoubleForKey(Constants.CountingStartTimeId)
+    
     if countingStartTimeDecoded == DBL_MAX {
       countingStartTime = .None
     } else {
