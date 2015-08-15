@@ -1,12 +1,23 @@
 import UIKit
 
-class SplitViewController: UISplitViewController, UISplitViewControllerDelegate {
+class SplitViewController: UISplitViewController,
+                           UISplitViewControllerDelegate {
+
   
+  struct Constants {
+    static let TimerId              = "timerViewControllerTimerId"
+    static let TimerNotificationKey = "com.geekspeak.timerNotificationKey"
+    static let TimerDataPath        = "TimerData.plist"
+  }
+  
+  
+  var timer = Timer()
   
   override func viewDidLoad() {
     preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryOverlay
     self.delegate = self
   }
+  
   
   // http://stackoverflow.com/questions/26633172/sizing-class-for-ipad-portrait-and-landscape-modes/28268200#28268200
   override func overrideTraitCollectionForChildViewController(childViewController: UIViewController) -> UITraitCollection! {
@@ -17,6 +28,8 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
     }
   }
   
+  
+  
   // Make sure the Settings View is displayed on startup
   // http://stackoverflow.com/questions/25875618/uisplitviewcontroller-in-portrait-on-iphone-shows-detail-vc-instead-of-master
   func splitViewController(splitViewController: UISplitViewController,
@@ -25,7 +38,7 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
                                                                       -> Bool {
     return true
   }
-  
+    
 }
 
 
@@ -38,3 +51,4 @@ extension UISplitViewController {
                                         forEvent: nil)
   }
 }
+

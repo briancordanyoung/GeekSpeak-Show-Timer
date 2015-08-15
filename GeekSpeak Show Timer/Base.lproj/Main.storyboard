@@ -44,7 +44,7 @@
                                             <rect key="frame" x="692" y="0.0" width="300" height="68"/>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="total" text="Total" lineBreakMode="tailTruncation" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="vPK-rh-OhK" userLabel="total">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" restorationIdentifier="total" text="Total" lineBreakMode="tailTruncation" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="vPK-rh-OhK" userLabel="total">
                                         <rect key="frame" x="0.0" y="68" width="162" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="vPK-rh-OhK" secondAttribute="height" multiplier="27:4" id="ooG-hC-mve"/>
@@ -284,6 +284,9 @@
                                                             <constraint firstAttribute="bottom" secondItem="ttH-ST-Owg" secondAttribute="bottom" id="wim-7u-FvR"/>
                                                             <constraint firstItem="ttH-ST-Owg" firstAttribute="top" secondItem="SGr-Xf-42M" secondAttribute="top" id="yQl-dO-sNr"/>
                                                         </constraints>
+                                                        <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                                            <rect key="frame" x="0.0" y="0.0" width="308" height="20.5"/>
+                                                        </variation>
                                                     </view>
                                                     <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tiB-7B-0CH" userLabel="Segment2">
                                                         <rect key="frame" x="0.0" y="29" width="308" height="21"/>

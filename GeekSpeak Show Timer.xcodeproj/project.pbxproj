@@ -29,6 +29,9 @@
 		D35F34341B73B90E0038CF4C /* GSTRingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D35F34331B73B90E0038CF4C /* GSTRingLayer.m */; };
 		D35F34371B73C4D80038CF4C /* RingView+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35F34361B73C4D80038CF4C /* RingView+Progress.swift */; };
 		D37C2AAB1B75B7C8008826D5 /* GSTRing.m in Sources */ = {isa = PBXBuildFile; fileRef = D37C2AAA1B75B7C8008826D5 /* GSTRing.m */; };
+		D384BC541B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384BC531B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift */; };
+		D384BC561B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384BC551B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift */; };
+		D384BC581B7F05B20024BCB0 /* SplitViewController+Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384BC571B7F05B20024BCB0 /* SplitViewController+Coding.swift */; };
 		D3912C711B6E93B7003B42F1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */; };
 		D3912C731B6E9CED003B42F1 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C721B6E9CED003B42F1 /* Timer.swift */; };
 		D3912C751B6E9D73003B42F1 /* BCYStandardLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */; };
@@ -79,6 +82,9 @@
 		D35F34361B73C4D80038CF4C /* RingView+Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RingView+Progress.swift"; sourceTree = "<group>"; };
 		D37C2AA91B75B7C8008826D5 /* GSTRing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSTRing.h; sourceTree = "<group>"; };
 		D37C2AAA1B75B7C8008826D5 /* GSTRing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSTRing.m; sourceTree = "<group>"; };
+		D384BC531B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimerViewController+TimerNotifications.swift"; sourceTree = "<group>"; };
+		D384BC551B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SettingsViewController+TimerNotifications.swift"; sourceTree = "<group>"; };
+		D384BC571B7F05B20024BCB0 /* SplitViewController+Coding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SplitViewController+Coding.swift"; sourceTree = "<group>"; };
 		D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D3912C721B6E9CED003B42F1 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCYStandardLibrary.swift; sourceTree = "<group>"; };
@@ -139,8 +145,11 @@
 				D340CC7C1B6D3E7600BB17E3 /* Main.storyboard */,
 				D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */,
 				D340CCBD1B6DE30100BB17E3 /* SplitViewController.swift */,
+				D384BC571B7F05B20024BCB0 /* SplitViewController+Coding.swift */,
 				D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */,
+				D384BC551B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift */,
 				D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */,
+				D384BC531B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift */,
 				D30230711B77D93D00148E74 /* Timer */,
 				D340CCA61B6D5CC100BB17E3 /* Rotation & Angle Types */,
 				D340CCB81B6DA8DA00BB17E3 /* Timer Views */,
@@ -353,6 +362,7 @@
 				D3C487B31B726F3300B8067E /* Timer+StatePreservation.swift in Sources */,
 				D3912C771B6F1476003B42F1 /* Timer+Types.swift in Sources */,
 				D35F34371B73C4D80038CF4C /* RingView+Progress.swift in Sources */,
+				D384BC541B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift in Sources */,
 				D3912C751B6E9D73003B42F1 /* BCYStandardLibrary.swift in Sources */,
 				D340CCA51B6D556D00BB17E3 /* AngularType.swift in Sources */,
 				D340CCBA1B6DDD5400BB17E3 /* TimerViews.swift in Sources */,
@@ -360,10 +370,12 @@
 				D3912C731B6E9CED003B42F1 /* Timer.swift in Sources */,
 				D32B9DED1B77F6740098DCCF /* UIImage+WithColor.swift in Sources */,
 				D340CCA41B6D556D00BB17E3 /* AccumulatedAngle.swift in Sources */,
+				D384BC581B7F05B20024BCB0 /* SplitViewController+Coding.swift in Sources */,
 				D340CC9E1B6D504500BB17E3 /* PieShapeView.swift in Sources */,
 				D3F699A11B72DE0900BD21FD /* PieShapeView+Progress.swift in Sources */,
 				D3912C711B6E93B7003B42F1 /* SettingsViewController.swift in Sources */,
 				D35F34341B73B90E0038CF4C /* GSTRingLayer.m in Sources */,
+				D384BC561B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift in Sources */,
 				D340CC9F1B6D504500BB17E3 /* GSTPieLayer.m in Sources */,
 				D340CCB11B6D8B9600BB17E3 /* RingView.swift in Sources */,
 				D340CCB71B6D9C6400BB17E3 /* FillView.swift in Sources */,

@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  GeekSpeak Show Timer
-//
-//  Created by Brian Cordan Young on 8/1/15.
-//  Copyright (c) 2015 Brian Young. All rights reserved.
-//
-
 import UIKit
 
 
@@ -18,11 +10,9 @@ enum TimerLabelDisplay: String, Printable {
   }
 }
 
-final class TimerViewController: UIViewController, TimerDelegate {
+final class TimerViewController: UIViewController {
   
   struct Constants {
-    static let TimerId              = "timerViewControllerTimerId"
-    static let TimerNotificationKey = "com.geekspeak.timerNotificationKey"
     static let GeekSpeakBlueColor = UIColor(red: 14/255,
                                           green: 115/255,
                                            blue: 192/255,
@@ -38,23 +28,28 @@ final class TimerViewController: UIViewController, TimerDelegate {
                                            blue: 150/255,
                                           alpha: 1.0)
   }
-
+  
   var timerViews: TimerViews?
-  let timer = Timer()
   var timerLabelDisplay: TimerLabelDisplay = .Remaining {
     didSet {
-      updateTimerLabels(timer)
+      updateTimerLabels()
     }
   }
-
-  var useDemoDurations = false
   
-  func updateUseDemoDurations() {
-    useDemoDurations = NSUserDefaults
-      .standardUserDefaults()
-      .boolForKey(Timer.Constants.UseDemoDurations)
+  // TODO: The Timer Property should be set by the SplitViewController
+  //       during the segue.  But, I'm too tired to make sure that it
+  //       working tonight.  Revisit and stop pulling from other view controller
+  // var timer: Timer!
+  var timer: Timer {
+    if let splitVC = splitViewController as? SplitViewController {
+      return splitVC.timer
+    } else {
+      return Timer()
+    }
   }
   
+
+  // Required on load
   @IBOutlet weak var timerCirclesView: UIView!
   @IBOutlet weak var totalTimeLabel: UILabel!
   @IBOutlet weak var sectionTimeLabel: UILabel!
@@ -81,8 +76,6 @@ final class TimerViewController: UIViewController, TimerDelegate {
   }
   
   override func viewWillAppear(animated: Bool) {
-    timer.delegate = self
-    
     setupContraints()
     setupTimeLabelContraints(totalTimeLabel)
     setupTimeLabelContraints(sectionTimeLabel)
@@ -122,18 +115,23 @@ final class TimerViewController: UIViewController, TimerDelegate {
     ring1fg.percentageOfSuperviewSize = 0.33
     
     timerViews = TimerViews(  ring1bg: ring1bg,
-      ring1fg: ring1fg,
-      ring2bg: ring2bg,
-      ring2fg: ring2fg,
-      ring3bg: ring3bg,
-      ring3fg: ring3fg,
-      fill: fillView)
+                              ring1fg: ring1fg,
+                              ring2bg: ring2bg,
+                              ring2fg: ring2fg,
+                              ring3bg: ring3bg,
+                              ring3fg: ring3fg,
+                                 fill: fillView)
     
     timerCirclesView.bringSubviewToFront(remainingToggleButton)
-    resetTimer()
     
     setAppearenceOfNavigationBar()
+    registerForTimerNotifications()
   }
+  
+  override func viewDidDisappear(animated: Bool) {
+    unregisterForTimerNotifications()
+  }
+  
   
   func setAppearenceOfNavigationBar() {
     self.navigationController?.navigationBar.setBackgroundImage( UIImage(),
@@ -158,172 +156,7 @@ final class TimerViewController: UIViewController, TimerDelegate {
 
 
   
-  // MARK: -
-  // MARK: Timer callback funtions
-  func timerChangedCountingStatus(state: Timer.CountingState) {
-    var buttonText: String
-    switch state {
-    case .Ready:
-      buttonText = "Start"
-    case .Counting:
-      buttonText = "Pause"
-    case .Paused:
-      buttonText = "Continue"
-    }
-    startPauseButton.setTitle(buttonText, forState: UIControlState.Normal)
-  }
-  
-  func timerDurationChanged(timer: Timer?) {
-    
-    let section2Seconds: NSTimeInterval
-    let section3Seconds: NSTimeInterval
-    if useDemoDurations {
-      section2Seconds = 2
-      section3Seconds = 1
-    } else {
-      section2Seconds = 120
-      section3Seconds = 30
-    }
-    
-    
-    if let timer = timer {
-      switch timer.timing.phase {
-      case .Section3:
-        let twoMinuteWarning = timer.percentageFromSecondsToEnd(section2Seconds)
-        let sectionColor2   = RingView.sectionColor( Constants.WarningColor,
-                                       atPercentage: twoMinuteWarning)
-        timerViews?.ring3fg.additionalColors.append(sectionColor2)
-        
-        let halfMinuteWarning = timer.percentageFromSecondsToEnd(section3Seconds)
-        let sectionColor3   = RingView.sectionColor( Constants.AlarmColor,
-                                       atPercentage: halfMinuteWarning)
-        timerViews?.ring3fg.additionalColors.append(sectionColor3)
-      default:
-        break
-      }
-    }
-  }
-  
-  
-  // TODO: This fuction is being called at about 60fps,
-  //       everytime the timer updates.  It is setting values for many views
-  //       that are not changing most of the time.   I'm not sure if I should
-  //       be concerned with doing too much. look in to CPU usage and determine
-  //       if it is worth doing something 'more clever'.
 
-  func timerUpdatedTime(timer: Timer?) {
-    if let timer = timer {
-      updateTimerLabels(timer)
-      let timing    = timer.timing
-      let totalTime = timing.asShortString(timing.durations.totalShowTime)
-      let labelText = padString( "Total: \(totalTime)",
-                    totalLength: 15,
-                            pad: " ",
-                    inDirection: .Left)
-      totalLabel.text = labelText
-      
-      switch timer.timing.phase {
-      case .PreShow,
-           .Break1,    // When a break, or the last segment is complete,
-           .Break2,    // advance to the next segment
-           .Section3:
-        
-        if timer.percentageComplete == 1.0 { timer.next() }
-        timerLabelDisplay = .Remaining
-        sectionTimeLabel.textColor = UIColor.whiteColor()
-        totalTimeLabel.textColor   = UIColor.whiteColor()
-
-      case .Section1,  // When a segment is complete, don't advance.
-           .Section2:  // The user gets to do that
-        
-        timerLabelDisplay = .Remaining
-        sectionTimeLabel.textColor = UIColor.whiteColor()
-        totalTimeLabel.textColor   = UIColor.whiteColor()
-        
-      case .PostShow:
-        timerLabelDisplay = .Elapsed
-        sectionTimeLabel.textColor = Constants.GeekSpeakBlueColor
-        totalTimeLabel.textColor   = Constants.GeekSpeakBlueColor
-      }
-      
-
-      var segmentLabelText: String
-      
-      switch timer.timing.phase {
-      case .PreShow:
-        timerViews?.fill.percent    = timer.percentageComplete
-        timerViews?.ring1fg.percent = 0.0
-        timerViews?.ring2fg.percent = 0.0
-        timerViews?.ring3fg.percent = 0.0
-        segmentLabelText = " Pre Show"
-
-      case .Section1:
-        timerViews?.fill.percent    = 0.0
-        timerViews?.ring1fg.progress = timer.percentageCompleteUnlimited
-        timerViews?.ring2fg.percent = 0.0
-        timerViews?.ring3fg.percent = 0.0
-        segmentLabelText = "Segment 1"
-
-      case .Break1:
-        timerViews?.ring1fg.percent = 1.0
-        timerViews?.fill.percent    = timer.percentageComplete
-        timerViews?.ring2fg.percent = 0.0
-        timerViews?.ring3fg.percent = 0.0
-        segmentLabelText = "    Break"
-
-      case .Section2:
-        timerViews?.fill.percent    = 0.0
-        timerViews?.ring1fg.percent = 1.0
-        timerViews?.ring2fg.progress = timer.percentageCompleteUnlimited
-        timerViews?.ring3fg.percent = 0.0
-        segmentLabelText = "Segment 2"
-
-      case .Break2:
-        timerViews?.ring1fg.percent = 1.0
-        timerViews?.ring2fg.percent = 1.0
-        timerViews?.fill.percent    = timer.percentageComplete
-        timerViews?.ring3fg.percent = 0.0
-        segmentLabelText = "    Break"
-
-      case .Section3:
-        timerViews?.fill.percent    = 0.0
-        timerViews?.ring1fg.percent = 1.0
-        timerViews?.ring2fg.percent = 1.0
-        timerViews?.ring3fg.percent = timer.percentageComplete
-        segmentLabelText = "Segment 3"
-
-      case .PostShow:
-        timerViews?.ring1fg.percent = 1.0
-        timerViews?.ring2fg.percent = 1.0
-        timerViews?.ring3fg.percent = 1.0
-        timerViews?.fill.percent = 0.0
-        segmentLabelText = "Post Show"
-      }
-      
-      segmentLabel.text =  padString( segmentLabelText,
-                         totalLength: 15,
-                                 pad: " ",
-                         inDirection: .Right)
-      
-      NSNotificationCenter.defaultCenter()
-                          .postNotificationName( Constants.TimerNotificationKey,
-                                         object: nil)
-
-    }
-  }
-
-  func updateTimerLabels(timer: Timer) {
-    let timing = timer.timing
-    totalTimeLabel.text     = timing.asString(timer.totalShowTimeElapsed)
-
-    switch timerLabelDisplay {
-    case .Remaining:
-      sectionTimeLabel.text = timing.asString(timer.secondsRemaining)
-    case .Elapsed:
-      sectionTimeLabel.text = timing.asString(timer.secondsElapsed)
-    }
-  }
-  
   
   // MARK: -
   // MARK: Actions
@@ -357,14 +190,6 @@ final class TimerViewController: UIViewController, TimerDelegate {
     }
   }
   
-  func resetTimer() {
-    updateUseDemoDurations()
-    if useDemoDurations {
-      timer.reset(usingDemoTiming: true)
-    } else {
-      timer.reset()
-    }
-  }
   
   // MARK: -
   // MARK: Setup
@@ -519,22 +344,6 @@ final class TimerViewController: UIViewController, TimerDelegate {
     return string
   }
 
-
-  // MARK: -
-  // MARK: State Preservation and Restoration
-  override func encodeRestorableStateWithCoder(coder: NSCoder) {
-    super.encodeRestorableStateWithCoder(coder)
-    coder.encodeObject(timer, forKey: Constants.TimerId)
-  }
-  
-  override func decodeRestorableStateWithCoder(coder: NSCoder) {
-    super.decodeRestorableStateWithCoder(coder)
-    if let decodedTimer = coder.decodeObjectForKey(Constants.TimerId) as? Timer {
-      timer.timing = decodedTimer.timing
-      timerUpdatedTime(Optional(timer))
-      timerChangedCountingStatus(timer.state)
-    }
-  }
   
 
 }

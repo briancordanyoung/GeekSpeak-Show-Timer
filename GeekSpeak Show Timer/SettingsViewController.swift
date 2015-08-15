@@ -1,5 +1,20 @@
+import UIKit
+
 class SettingsViewController: UIViewController {
+
+  // TODO: The Timer Property should be set by the SplitViewController
+  //       during the segue.  But, I'm too tired to make sure that it
+  //       working tonight.  Revisit and stop pulling from other view controller
+  // var timer: Timer!
+  var timer: Timer {
+    if let splitVC = splitViewController as? SplitViewController {
+      return splitVC.timer
+    } else {
+      return Timer()
+    }
+  }
   
+  // Required properties
   @IBOutlet weak var contentView: UIView!
   @IBOutlet weak var backgroundImageView: UIImageView!
   @IBOutlet weak var leftNavButton: UIBarButtonItem!
@@ -34,7 +49,17 @@ class SettingsViewController: UIViewController {
     return timerViewController
   }
   
-  // MARK: VIewController
+  
+  var useDemoDurations = false
+  func updateUseDemoDurations() {
+    useDemoDurations = NSUserDefaults
+                                   .standardUserDefaults()
+                                   .boolForKey(Timer.Constants.UseDemoDurations)
+  }
+  
+
+  
+  // MARK: ViewController
   override func viewDidLoad() {
     addContraintsForContentView()
   }
@@ -45,111 +70,42 @@ class SettingsViewController: UIViewController {
     manageButtonBarButtons()
   }
   
-  func setAppearenceOfNavigationBar() {
-    self.navigationController?.navigationBar
-             .setBackgroundImage( UIImage.imageWithColor( UIColor.blackColor()),
-                                           forBarMetrics: UIBarMetrics.Default)
-    self.navigationController?.view.backgroundColor = UIColor.blackColor()
-    self.navigationController?.navigationBar.backgroundColor = UIColor.blackColor()
-    self.navigationController?.navigationBar.translucent = false
-  }
-  
-  func addContraintsForContentView() {
-    let leftConstraint = NSLayoutConstraint(item: contentView,
-                                       attribute: .Leading,
-                                       relatedBy: .Equal,
-                                          toItem: view,
-                                       attribute: .Left,
-                                      multiplier: 1.0,
-                                        constant: 0.0)
-    view.addConstraint(leftConstraint)
-    let rightConstraint = NSLayoutConstraint(item: contentView,
-                                       attribute: .Trailing,
-                                       relatedBy: .Equal,
-                                          toItem: view,
-                                       attribute: .Right,
-                                      multiplier: 1.0,
-                                        constant: 0.0)
-    view.addConstraint(rightConstraint)
-  }
-  
   override func viewDidAppear(animated: Bool) {
-    updateTimerLabels()
-    NSNotificationCenter.defaultCenter()
-              .addObserver( self,
-                  selector: "updateTimerLabels",
-                      name: TimerViewController.Constants.TimerNotificationKey,
-                    object: nil)
+    updateElapsedTimeLabels()
+    registerForTimerNotifications()
   }
   
   override func viewWillDisappear(animated: Bool) {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    unregisterForTimerNotifications()
   }
   
+  
+  // MARK: Actions
   @IBAction func add1SecondButtonPressed(sender: UIButton) {
-    timerViewController?.timer.duration += 1.0
+    timer.duration += 1.0
     generateBluredBackground()
   }
   
   @IBAction func add5SecondsButtonPressed(sender: UIButton) {
-    timerViewController?.timer.duration += 5.0
+    timer.duration += 5.0
     generateBluredBackground()
   }
   
   @IBAction func add10SecondsButtonPressed(sender: UIButton) {
-    timerViewController?.timer.duration += 10.0
+    timer.duration += 10.0
     generateBluredBackground()
   }
   
   @IBAction func remove1SecondButtonPressed(sender: UIButton) {
-    timerViewController?.timer.duration -= 1.0
+    timer.duration -= 1.0
     generateBluredBackground()
   }
   
   @IBAction func resetButtonPressed(sender: UIButton) {
-    timerViewController?.resetTimer()
+    resetTimer()
     generateBluredBackground()
   }
   
-  func updateTimerLabels() {
-    if let timer = timerViewController?.timer {
-      
-      let timing   = timer.timing
-      
-      var segment1 = timing.asString(timing.timeElapsed.section1)
-      var segment2 = timing.asString(timing.timeElapsed.section2)
-      var segment3 = timing.asString(timing.timeElapsed.section3)
-      var postshow = timing.asString(timing.timeElapsed.postShow)
-      
-      switch timing.phase {
-      case .PreShow,
-           .Break1,
-           .Break2:
-        break
-        
-      case .Section1:
-        segment1 = timing.asString(timer.secondsElapsed)
-        
-      case .Section2:
-        segment2 = timing.asString(timer.secondsElapsed)
-        
-      case .Section3:
-        segment3 = timing.asString(timer.secondsElapsed)
-        
-      case .PostShow:
-        postshow = timing.asString(timer.secondsElapsed)
-      }
-      
-      segment1Label.text = segment1
-      segment2Label.text = segment2
-      segment3Label.text = segment3
-      postShowLabel.text = postshow
-      
-      // TODO: Uncomment once this is on a background thread
-      //       generateBluredBackground()
-
-    }
-  }
 
   @IBAction func showTimerNavButtonPressed(sender: UIBarButtonItem) {
     if let splitViewController = splitViewController {
@@ -162,6 +118,19 @@ class SettingsViewController: UIViewController {
       }
     }
   }
+  
+  // MARK: -
+  // MARK: Timer management
+  func resetTimer() {
+    updateUseDemoDurations()
+    if useDemoDurations {
+      timer.reset(usingDemoTiming: true)
+    } else {
+      timer.reset(usingDemoTiming: false)
+    }
+  }
+  
+  
   
   func manageButtonBarButtons() {
     if let splitViewController = splitViewController  {
@@ -227,6 +196,34 @@ class SettingsViewController: UIViewController {
     
   } // generateBluredBackground
   
+
+  func setAppearenceOfNavigationBar() {
+    self.navigationController?.navigationBar
+      .setBackgroundImage( UIImage.imageWithColor( UIColor.blackColor()),
+        forBarMetrics: UIBarMetrics.Default)
+    self.navigationController?.view.backgroundColor = UIColor.blackColor()
+    self.navigationController?.navigationBar.backgroundColor = UIColor.blackColor()
+    self.navigationController?.navigationBar.translucent = false
+  }
   
+  func addContraintsForContentView() {
+    let leftConstraint = NSLayoutConstraint(item: contentView,
+      attribute: .Leading,
+      relatedBy: .Equal,
+      toItem: view,
+      attribute: .Left,
+      multiplier: 1.0,
+      constant: 0.0)
+    view.addConstraint(leftConstraint)
+    let rightConstraint = NSLayoutConstraint(item: contentView,
+      attribute: .Trailing,
+      relatedBy: .Equal,
+      toItem: view,
+      attribute: .Right,
+      multiplier: 1.0,
+      constant: 0.0)
+    view.addConstraint(rightConstraint)
+  }
+
 }
 

@@ -4,33 +4,6 @@ import UIKit
 
 extension Timer {
   
-  struct Constants {
-    static let UseDemoDurations    = "useDemoDurations"
-
-    static let StateId             = "timerCountingStateId"
-    static let PhaseId             = "timerShowTimingPhaseId"
-    static let CountingStartTimeId = "timerCountingStartTimeId"
-    
-    struct Durations {
-      static let PreShowId  = "timerShowTimingDurationPreShowId"
-      static let Section1Id = "timerShowTimingDurationSection1Id"
-      static let Section2Id = "timerShowTimingDurationSection2Id"
-      static let Section3Id = "timerShowTimingDurationSection3Id"
-      static let Break1Id   = "timerShowTimingDurationBreak1Id"
-      static let Break2Id   = "timerShowTimingDurationBreak2Id"
-    }
-    
-    struct ElapsedTime {
-      static let PreShowId   = "timerShowTimingElapsedPreShowId"
-      static let Section1Id  = "timerShowTimingElapsedSection1Id"
-      static let Section2Id  = "timerShowTimingElapsedSection2Id"
-      static let Section3Id  = "timerShowTimingElapsedSection3Id"
-      static let Break1Id    = "timerShowTimingElapsedBreak1Id"
-      static let Break2Id    = "timerShowTimingElapsedBreak2Id"
-      static let PostShowId  = "timerShowTimingElapsedPostShowId"
-    }
-  }
-
   // MARK: -
   // MARK: State Preservation and Restoration
   func decodeWithCoder(coder aDecoder: NSCoder) {
@@ -46,6 +19,9 @@ extension Timer {
     default:
       _state = .Ready
     }
+    
+    let demoTimings = aDecoder.decodeBoolForKey(Constants.UseDemoDurations)
+
     
     let countingStartTimeDecoded =
     aDecoder.decodeDoubleForKey(Constants.CountingStartTimeId)
@@ -103,6 +79,8 @@ extension Timer {
     timing.timeElapsed.postShow =
                    aDecoder.decodeDoubleForKey(Constants.ElapsedTime.PostShowId)
     
+    notify()
+    incrementTimer()
   }
   
   func encodeWithCoder(aCoder: NSCoder) {
@@ -123,6 +101,8 @@ extension Timer {
       aCoder.encodeDouble( DBL_MAX,
                    forKey: Constants.CountingStartTimeId)
     }
+    
+    aCoder.encodeBool(demoTimings, forKey: Constants.UseDemoDurations)
     
     switch timing.phase {
     case .PreShow:

@@ -5,21 +5,45 @@ import CoreGraphics
 let oneMinute             = NSTimeInterval(60)
 let timerUpdateInterval   = NSTimeInterval(0.01)
 
-protocol TimerDelegate {
-  func timerChangedCountingStatus(state: Timer.CountingState)
-  func timerUpdatedTime(timer: Timer?)
-  func timerDurationChanged(timer: Timer?)
-}
-
 // MARK: -
 // MARK: Timer class
 final class Timer: NSObject, NSCoding {
   
+  struct Constants {
+    static let TimeChange            = "kGPTTimeChange"
+    static let CountingStatusChanged = "kGPTCountingStatusChanged"
+    static let DurationChanged       = "kGPTDurationChanged"
+
+    static let UseDemoDurations    = "useDemoDurations"
+
+    static let StateId             = "timerCountingStateId"
+    static let PhaseId             = "timerShowTimingPhaseId"
+    static let CountingStartTimeId = "timerCountingStartTimeId"
+    
+    struct Durations {
+      static let PreShowId  = "timerShowTimingDurationPreShowId"
+      static let Section1Id = "timerShowTimingDurationSection1Id"
+      static let Section2Id = "timerShowTimingDurationSection2Id"
+      static let Section3Id = "timerShowTimingDurationSection3Id"
+      static let Break1Id   = "timerShowTimingDurationBreak1Id"
+      static let Break2Id   = "timerShowTimingDurationBreak2Id"
+    }
+    
+    struct ElapsedTime {
+      static let PreShowId   = "timerShowTimingElapsedPreShowId"
+      static let Section1Id  = "timerShowTimingElapsedSection1Id"
+      static let Section2Id  = "timerShowTimingElapsedSection2Id"
+      static let Section3Id  = "timerShowTimingElapsedSection3Id"
+      static let Break1Id    = "timerShowTimingElapsedBreak1Id"
+      static let Break2Id    = "timerShowTimingElapsedBreak2Id"
+      static let PostShowId  = "timerShowTimingElapsedPostShowId"
+    }
+  }
   
   // MARK: Properties
   var countingStartTime: NSTimeInterval?
   var timing = ShowTiming()
-  var delegate: TimerDelegate?
+  var demoTimings = false
   
   // MARK: Computed Properties
   var state: CountingState {
@@ -144,7 +168,7 @@ final class Timer: NSObject, NSCoding {
   
   
   func reset() {
-    reset(usingDemoTiming: false)
+    reset(usingDemoTiming: demoTimings)
   }
 
   func reset(usingDemoTiming demoTimings: Bool) {
@@ -153,6 +177,9 @@ final class Timer: NSObject, NSCoding {
     timing            = ShowTiming()
     if demoTimings {
       timing.durations.useDemoDurations()
+      self.demoTimings = true
+    } else {
+      self.demoTimings = false
     }
     notifyTimerUpdated()
   }
@@ -199,26 +226,31 @@ final class Timer: NSObject, NSCoding {
   }
   
   // MARK: -
-  // MARK: Delegate callbacks
+  // MARK: Notify Observers
   private func notifyTimerUpdated() {
-    if let delegate = delegate {
-      weak var weakSelf = self
-      delegate.timerUpdatedTime(weakSelf)
-    }
+    NSNotificationCenter.defaultCenter()
+                        .postNotificationName( Constants.TimeChange,
+                                       object: self)
   }
   
   func notifyCountingStateUpdated() {
-    if let delegate = delegate {
-      delegate.timerChangedCountingStatus(state)
-    }
+    NSNotificationCenter.defaultCenter()
+                        .postNotificationName( Constants.CountingStatusChanged,
+                                       object: self)
   }
   
-  func notifyTimerDurationUpdated() {
-    if let delegate = delegate {
-      weak var weakSelf = self
-      delegate.timerDurationChanged(weakSelf)
-    }
+  private func notifyTimerDurationUpdated() {
+    NSNotificationCenter.defaultCenter()
+                        .postNotificationName( Constants.DurationChanged,
+                                       object: self)
   }
+  
+  func notify() {
+    notifyTimerUpdated()
+    notifyCountingStateUpdated()
+    notifyTimerDurationUpdated()
+  }
+  
   
   // MARK: -
   // MARK: Timer
