@@ -262,7 +262,16 @@ final class Timer: NSObject, NSCoding {
       storeElapsedTimeAtPause()
     case .Counting:
       notifyTimerUpdated()
+      checkTimingForCompletion()
       incrementTimerAgain()
+    }
+  }
+  
+  func checkTimingForCompletion() {
+    if timing.durations.advancePhaseOnCompletion(timing.phase) {
+      if percentageComplete >= 1.0 {
+        next()
+      }
     }
   }
   

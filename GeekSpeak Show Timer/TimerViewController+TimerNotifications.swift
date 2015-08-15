@@ -79,6 +79,25 @@ extension TimerViewController {
     default:
       break
     }
+    
+    
+    switch timer.timing.phase {
+    case .PreShow,
+    .Break1,
+    .Break2,
+    .Section3,
+    .Section1,
+    .Section2:
+      timerLabelDisplay = .Remaining
+      sectionTimeLabel.textColor = UIColor.whiteColor()
+      totalTimeLabel.textColor   = UIColor.whiteColor()
+      
+    case .PostShow:
+      timerLabelDisplay = .Elapsed
+      sectionTimeLabel.textColor = Constants.GeekSpeakBlueColor
+      totalTimeLabel.textColor   = Constants.GeekSpeakBlueColor
+    }
+    
   }
   
   
@@ -97,29 +116,6 @@ extension TimerViewController {
                   inDirection: .Left)
     totalLabel.text = labelText
     
-    switch timer.timing.phase {
-    case .PreShow,
-         .Break1,    // When a break, or the last segment is complete,
-         .Break2,    // advance to the next segment
-         .Section3:
-      
-      if timer.percentageComplete == 1.0 { timer.next() }
-      timerLabelDisplay = .Remaining
-      sectionTimeLabel.textColor = UIColor.whiteColor()
-      totalTimeLabel.textColor   = UIColor.whiteColor()
-      
-    case .Section1,  // When a segment is complete, don't advance.
-         .Section2:  // The user gets to do that
-      
-      timerLabelDisplay = .Remaining
-      sectionTimeLabel.textColor = UIColor.whiteColor()
-      totalTimeLabel.textColor   = UIColor.whiteColor()
-      
-    case .PostShow:
-      timerLabelDisplay = .Elapsed
-      sectionTimeLabel.textColor = Constants.GeekSpeakBlueColor
-      totalTimeLabel.textColor   = Constants.GeekSpeakBlueColor
-    }
     
     
     var segmentLabelText: String
@@ -176,12 +172,13 @@ extension TimerViewController {
     }
     
     segmentLabel.text =  padString( segmentLabelText,
-      totalLength: 15,
-      pad: " ",
-      inDirection: .Right)
+                       totalLength: 15,
+                               pad: " ",
+                       inDirection: .Right)
     
     totalTimeLabel.text     = timing.asString(timer.totalShowTimeElapsed)
     
+      updateTimerLabels()
     }
     
     func updateTimerLabels() {

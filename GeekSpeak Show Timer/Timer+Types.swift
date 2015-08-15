@@ -214,6 +214,21 @@ extension Timer {
       return section1 + section2 + section3
     }
     
+    func advancePhaseOnCompletion(phase: ShowPhase) -> Bool {
+      switch phase {
+      case .PreShow,
+           .Break1,
+           .Break2,
+           .Section3:
+        return true
+      case .Section1,
+           .Section2,
+           .PostShow:
+        return false
+      }
+    }
+
+    
     mutating func useDemoDurations() {
       preShow  =  5.0
       section1 = 10.0

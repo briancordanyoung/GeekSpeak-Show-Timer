@@ -126,6 +126,9 @@ final class TimerViewController: UIViewController {
     
     setAppearenceOfNavigationBar()
     registerForTimerNotifications()
+    timerUpdatedTime()
+    timerChangedCountingStatus()
+    timerDurationChanged()
   }
   
   override func viewDidDisappear(animated: Bool) {
