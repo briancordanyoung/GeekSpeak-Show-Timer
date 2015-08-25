@@ -7,7 +7,6 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly placed breaks
 ## Known issues:
 - Autolayout constraints are failing on an iPhone.
 - Pause and Next buttons need to be graphic buttons for instant clarity.
-- on an iPhone, (SplitViewController is in collapsed Size class) SettingsViewController labels do no update when going to the next phase of the timer.
 
 ## Todo:
 
