@@ -14,20 +14,28 @@ class SplitViewController: UISplitViewController,
   var timer = Timer()
   
   override func viewDidLoad() {
-    preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryOverlay
+    
+    // When on and iPad, we don't want the master view (settings) to force
+    // the detail views over.  We want the master to sit on top of the detail.
+    // This can only happen on iPads.  So, on iPads, set the displayMode to
+    // primaryOverlay.
+    // TODO: Test on iPad air 2 with multi tasking (multi apps in view
+    // TODO: iPhone 6 plus behavious is not worked out.
+    switch Device() {
+      case .iPad2,
+           .iPad3,
+           .iPad4,
+           .iPadAir,
+           .iPadAir2,
+           .iPadMini,
+           .iPadMini2,
+           .iPadMini3:
+          preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryOverlay
+      default:
+      break
+    }
     self.delegate = self
   }
-  
-  
-  // http://stackoverflow.com/questions/26633172/sizing-class-for-ipad-portrait-and-landscape-modes/28268200#28268200
-  override func overrideTraitCollectionForChildViewController(childViewController: UIViewController) -> UITraitCollection! {
-    if view.bounds.width < view.bounds.height {
-      return UITraitCollection(horizontalSizeClass: .Compact)
-    } else {
-      return UITraitCollection(horizontalSizeClass: .Regular)
-    }
-  }
-  
   
   
   // Make sure the Settings View is displayed on startup
@@ -38,6 +46,7 @@ class SplitViewController: UISplitViewController,
                                                                       -> Bool {
     return true
   }
+  
     
 }
 

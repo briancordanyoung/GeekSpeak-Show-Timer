@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="y01-ak-zO4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="IwL-Pm-vjL">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -15,11 +15,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tY2-lc-OlN" userLabel="TimerCircles">
-                                <rect key="frame" x="16" y="60" width="736" height="736"/>
+                                <rect key="frame" x="16" y="-26" width="568" height="568"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="totalTime" text="00:00:00" lineBreakMode="tailTruncation" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="iLg-Ok-lxM" userLabel="totalTime">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="68"/>
@@ -32,7 +32,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="segmentTime" text="00:00:00" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="fhW-lj-LnF" userLabel="segmentTime">
-                                        <rect key="frame" x="436" y="0.0" width="300" height="68"/>
+                                        <rect key="frame" x="268" y="0.0" width="300" height="68"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" placeholder="YES" id="lFr-m0-8yo"/>
                                             <constraint firstAttribute="width" secondItem="fhW-lj-LnF" secondAttribute="height" multiplier="409:93" id="qip-L3-pI6"/>
@@ -45,7 +45,7 @@
                                         </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" restorationIdentifier="total" text="Total" lineBreakMode="tailTruncation" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="vPK-rh-OhK" userLabel="total">
-                                        <rect key="frame" x="0.0" y="68" width="162" height="24"/>
+                                        <rect key="frame" x="0.0" y="68" width="159" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="vPK-rh-OhK" secondAttribute="height" multiplier="27:4" id="ooG-hC-mve"/>
                                         </constraints>
@@ -54,7 +54,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" restorationIdentifier="segment" text="Segment" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="6Xz-Ti-gwy" userLabel="segment">
-                                        <rect key="frame" x="830" y="68" width="162" height="24"/>
+                                        <rect key="frame" x="578" y="68" width="159" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="6Xz-Ti-gwy" secondAttribute="height" multiplier="27:4" id="Id1-WE-DuA"/>
                                         </constraints>
@@ -65,28 +65,10 @@
                                             <rect key="frame" x="911" y="68" width="81" height="24"/>
                                         </variation>
                                     </label>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6N7-hw-EdK" userLabel="RemainingToggle">
-                                        <rect key="frame" x="0.0" y="0.0" width="736" height="93"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="93" placeholder="YES" id="3nA-Cv-Bat"/>
-                                        </constraints>
-                                        <state key="normal">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="0.0" width="992" height="93"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="remainingTimeToggled:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zxH-Wf-hTF"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="vPK-rh-OhK" firstAttribute="top" secondItem="iLg-Ok-lxM" secondAttribute="bottom" id="5RV-jh-Yjo"/>
-                                    <constraint firstItem="6N7-hw-EdK" firstAttribute="top" secondItem="tY2-lc-OlN" secondAttribute="top" id="MJW-rS-lms"/>
                                     <constraint firstAttribute="trailing" secondItem="fhW-lj-LnF" secondAttribute="trailing" id="O8v-RL-dQ4"/>
-                                    <constraint firstAttribute="trailing" secondItem="6N7-hw-EdK" secondAttribute="trailing" id="OVs-pJ-8Vj"/>
-                                    <constraint firstItem="6N7-hw-EdK" firstAttribute="leading" secondItem="tY2-lc-OlN" secondAttribute="leading" id="Z7g-8S-0XA"/>
                                     <constraint firstAttribute="width" secondItem="tY2-lc-OlN" secondAttribute="height" multiplier="1:1" id="az5-AX-nZ5"/>
                                     <constraint firstItem="vPK-rh-OhK" firstAttribute="leading" secondItem="tY2-lc-OlN" secondAttribute="leading" id="c0N-6d-NNr"/>
                                     <constraint firstAttribute="trailing" secondItem="6Xz-Ti-gwy" secondAttribute="trailing" id="gJz-aE-PpC"/>
@@ -103,13 +85,13 @@
                                 </variation>
                             </view>
                             <slider hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="in4-Kr-y3Y" userLabel="mysteryLayoutBugRequiresThis">
-                                <rect key="frame" x="325" y="974" width="118" height="31"/>
+                                <rect key="frame" x="-2" y="0.0" width="4" height="31"/>
                                 <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
                                     <rect key="frame" x="325" y="974" width="118" height="31"/>
                                 </variation>
                             </slider>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="startPause" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PdP-pn-H8o">
-                                <rect key="frame" x="16" y="760" width="353" height="244"/>
+                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="startPause" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PdP-pn-H8o">
+                                <rect key="frame" x="16" y="550" width="280" height="30"/>
                                 <state key="normal" title="Start/Pause">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -121,8 +103,8 @@
                                     <action selector="startPauseButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tgr-GL-D60"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-5J-yaK">
-                                <rect key="frame" x="377" y="760" width="375" height="244"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-5J-yaK">
+                                <rect key="frame" x="304" y="550" width="280" height="30"/>
                                 <state key="normal" title="Next Segment">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -137,102 +119,106 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="PdP-pn-H8o" firstAttribute="top" secondItem="tY2-lc-OlN" secondAttribute="bottom" constant="8" id="3hV-Q5-hFP"/>
-                            <constraint firstItem="edy-5J-yaK" firstAttribute="leading" secondItem="PdP-pn-H8o" secondAttribute="trailing" constant="8" id="Cwv-Xd-mk6"/>
-                            <constraint firstItem="PdP-pn-H8o" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="DtS-4O-nA1"/>
-                            <constraint firstItem="PdP-pn-H8o" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="16" id="E8R-t5-I1A"/>
-                            <constraint firstItem="edy-5J-yaK" firstAttribute="top" secondItem="tY2-lc-OlN" secondAttribute="bottom" constant="8" id="Hed-8j-X5n"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="PdP-pn-H8o" secondAttribute="bottom" constant="20" id="JFL-9U-et7"/>
-                            <constraint firstItem="PdP-pn-H8o" firstAttribute="width" secondItem="edy-5J-yaK" secondAttribute="width" id="O3c-f6-xju"/>
-                            <constraint firstItem="PdP-pn-H8o" firstAttribute="height" secondItem="edy-5J-yaK" secondAttribute="height" id="QoA-ct-xub"/>
-                            <constraint firstItem="tY2-lc-OlN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="60" id="b5I-QT-R6p"/>
-                            <constraint firstItem="edy-5J-yaK" firstAttribute="top" secondItem="PdP-pn-H8o" secondAttribute="bottom" constant="8" id="btS-u7-nLT"/>
-                            <constraint firstAttribute="trailing" secondItem="tY2-lc-OlN" secondAttribute="trailing" constant="16" placeholder="YES" id="fQ4-E4-lf5"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="edy-5J-yaK" secondAttribute="bottom" constant="20" id="fWi-xK-0mJ"/>
-                            <constraint firstItem="edy-5J-yaK" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="mlA-cE-QNr"/>
-                            <constraint firstItem="PdP-pn-H8o" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="msl-Iq-GwD"/>
-                            <constraint firstItem="tY2-lc-OlN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="oUn-Ry-axO"/>
-                            <constraint firstItem="edy-5J-yaK" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="v95-P5-teg"/>
-                            <constraint firstItem="edy-5J-yaK" firstAttribute="leading" secondItem="tY2-lc-OlN" secondAttribute="trailing" constant="8" id="vIC-8F-pSH"/>
-                            <constraint firstItem="PdP-pn-H8o" firstAttribute="leading" secondItem="tY2-lc-OlN" secondAttribute="trailing" constant="8" id="vTB-3Q-4ny"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="edy-5J-yaK" secondAttribute="bottom" constant="20" id="zey-f0-8l8"/>
+                            <constraint firstItem="PdP-pn-H8o" firstAttribute="top" secondItem="tY2-lc-OlN" secondAttribute="bottom" priority="751" constant="8" id="3hV-Q5-hFP" userLabel="startButtonToTimerCircle"/>
+                            <constraint firstItem="edy-5J-yaK" firstAttribute="leading" secondItem="PdP-pn-H8o" secondAttribute="trailing" priority="751" constant="8" id="Cwv-Xd-mk6" userLabel="nextButtonToStartButtonSpace"/>
+                            <constraint firstItem="PdP-pn-H8o" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" priority="751" id="DtS-4O-nA1" userLabel="startButtonToSuperView"/>
+                            <constraint firstItem="PdP-pn-H8o" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" priority="749" constant="16" id="E8R-t5-I1A" userLabel="startButtonToSuperViewTop"/>
+                            <constraint firstItem="edy-5J-yaK" firstAttribute="top" secondItem="tY2-lc-OlN" secondAttribute="bottom" priority="751" constant="8" id="Hed-8j-X5n" userLabel="nextButtonToTimerCircles"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="PdP-pn-H8o" secondAttribute="bottom" priority="751" constant="20" id="JFL-9U-et7" userLabel="startButtonToBottom"/>
+                            <constraint firstItem="PdP-pn-H8o" firstAttribute="width" secondItem="edy-5J-yaK" secondAttribute="width" priority="751" id="O3c-f6-xju" userLabel="buttonsEqualWidth"/>
+                            <constraint firstItem="tY2-lc-OlN" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" priority="749" constant="-32" id="QKI-vN-P0e" userLabel="timerCirclesHeight"/>
+                            <constraint firstItem="PdP-pn-H8o" firstAttribute="height" secondItem="edy-5J-yaK" secondAttribute="height" priority="749" id="QoA-ct-xub" userLabel="buttonsEqualHeight"/>
+                            <constraint firstItem="tY2-lc-OlN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" priority="750" constant="16" id="b5I-QT-R6p" userLabel="timerCircleToTop"/>
+                            <constraint firstItem="edy-5J-yaK" firstAttribute="top" secondItem="PdP-pn-H8o" secondAttribute="bottom" priority="749" constant="8" id="btS-u7-nLT" userLabel="nextButtonToStartButtonHorizontal"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="edy-5J-yaK" secondAttribute="bottom" priority="751" constant="20" id="fWi-xK-0mJ" userLabel="nextButtonToBottom"/>
+                            <constraint firstItem="edy-5J-yaK" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" priority="749" id="mlA-cE-QNr" userLabel="nextButtonToSuperViewSideHorizontal"/>
+                            <constraint firstItem="PdP-pn-H8o" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" priority="749" id="msl-Iq-GwD" userLabel="startButtonToSuperViewHorizontal"/>
+                            <constraint firstItem="tY2-lc-OlN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" priority="750" constant="16" id="oUn-Ry-axO" userLabel="timerCircleToLeading"/>
+                            <constraint firstItem="edy-5J-yaK" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" priority="751" id="v95-P5-teg" userLabel="nextButtonToSuperViewSide"/>
+                            <constraint firstItem="edy-5J-yaK" firstAttribute="leading" secondItem="tY2-lc-OlN" secondAttribute="trailing" priority="749" constant="8" id="vIC-8F-pSH" userLabel="nextButtonToTimerCircle"/>
+                            <constraint firstItem="PdP-pn-H8o" firstAttribute="leading" secondItem="tY2-lc-OlN" secondAttribute="trailing" priority="749" constant="8" id="vTB-3Q-4ny" userLabel="startButtonToTimerCircleHorizontal"/>
+                            <constraint firstItem="tY2-lc-OlN" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" priority="751" constant="-32" id="yRd-tA-hxX" userLabel="timerCirclesWidth"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="edy-5J-yaK" secondAttribute="bottom" priority="749" constant="20" id="zey-f0-8l8" userLabel="nextButtonToBottomHorizontal"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="3hV-Q5-hFP"/>
-                                <exclude reference="DtS-4O-nA1"/>
-                                <exclude reference="E8R-t5-I1A"/>
-                                <exclude reference="O3c-f6-xju"/>
-                                <exclude reference="QoA-ct-xub"/>
-                                <exclude reference="msl-Iq-GwD"/>
-                                <exclude reference="vTB-3Q-4ny"/>
-                                <exclude reference="Cwv-Xd-mk6"/>
-                                <exclude reference="Hed-8j-X5n"/>
-                                <exclude reference="btS-u7-nLT"/>
-                                <exclude reference="mlA-cE-QNr"/>
-                                <exclude reference="v95-P5-teg"/>
-                                <exclude reference="vIC-8F-pSH"/>
-                                <exclude reference="JFL-9U-et7"/>
-                                <exclude reference="fWi-xK-0mJ"/>
-                                <exclude reference="zey-f0-8l8"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="3hV-Q5-hFP"/>
-                                <include reference="DtS-4O-nA1"/>
-                                <include reference="O3c-f6-xju"/>
-                                <include reference="Cwv-Xd-mk6"/>
-                                <include reference="Hed-8j-X5n"/>
-                                <include reference="v95-P5-teg"/>
-                                <include reference="JFL-9U-et7"/>
-                                <include reference="fWi-xK-0mJ"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <mask key="constraints">
-                                <include reference="E8R-t5-I1A"/>
-                                <include reference="QoA-ct-xub"/>
-                                <include reference="msl-Iq-GwD"/>
-                                <include reference="vTB-3Q-4ny"/>
-                                <include reference="btS-u7-nLT"/>
-                                <include reference="mlA-cE-QNr"/>
-                                <include reference="vIC-8F-pSH"/>
-                                <include reference="zey-f0-8l8"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="wM9-rF-CHT"/>
                     <connections>
+                        <outlet property="buttonsEqualHeight" destination="QoA-ct-xub" id="tNN-wT-Eip"/>
+                        <outlet property="buttonsEqualWidth" destination="O3c-f6-xju" id="gBf-Wq-wpy"/>
+                        <outlet property="nextButtonToBottom" destination="fWi-xK-0mJ" id="lvI-OL-dzP"/>
+                        <outlet property="nextButtonToBottomHorizontal" destination="zey-f0-8l8" id="2mr-dh-B8L"/>
+                        <outlet property="nextButtonToStartButtonHorizontal" destination="btS-u7-nLT" id="UPH-BG-BK0"/>
+                        <outlet property="nextButtonToStartButtonSpace" destination="Cwv-Xd-mk6" id="n11-iS-r25"/>
+                        <outlet property="nextButtonToSuperViewSide" destination="v95-P5-teg" id="vIn-EH-bpo"/>
+                        <outlet property="nextButtonToSuperViewSideHorizontal" destination="mlA-cE-QNr" id="N0Z-jz-iaZ"/>
+                        <outlet property="nextButtonToTimerCircle" destination="vIC-8F-pSH" id="KRS-zH-FOO"/>
+                        <outlet property="nextButtonToTimerCircles" destination="Hed-8j-X5n" id="r6R-ah-7GZ"/>
                         <outlet property="nextSegmentButton" destination="edy-5J-yaK" id="OHZ-MG-UGu"/>
-                        <outlet property="remainingToggleButton" destination="6N7-hw-EdK" id="wa2-xq-e7O"/>
                         <outlet property="sectionTimeLabel" destination="fhW-lj-LnF" id="PUl-lz-n33"/>
                         <outlet property="segmentLabel" destination="6Xz-Ti-gwy" id="Hdh-QZ-ZTt"/>
+                        <outlet property="startButtonToBottom" destination="JFL-9U-et7" id="EBU-m0-zQ4"/>
+                        <outlet property="startButtonToSuperView" destination="DtS-4O-nA1" id="dB4-jD-9ZB"/>
+                        <outlet property="startButtonToSuperViewHorizontal" destination="msl-Iq-GwD" id="AcI-ED-awB"/>
+                        <outlet property="startButtonToSuperViewTop" destination="E8R-t5-I1A" id="Vua-hy-3Kw"/>
+                        <outlet property="startButtonToTimerCircle" destination="3hV-Q5-hFP" id="JFD-wH-rBv"/>
+                        <outlet property="startButtonToTimerCircleHorizontal" destination="vTB-3Q-4ny" id="Uqk-Af-Ry1"/>
                         <outlet property="startPauseButton" destination="PdP-pn-H8o" id="wKF-n7-nGL"/>
+                        <outlet property="timerCirclesHeight" destination="QKI-vN-P0e" id="nv0-9C-SXp"/>
                         <outlet property="timerCirclesView" destination="tY2-lc-OlN" id="Tzt-0B-3ti"/>
+                        <outlet property="timerCirclesWidth" destination="yRd-tA-hxX" id="nwf-JM-94o"/>
                         <outlet property="totalLabel" destination="vPK-rh-OhK" id="Bgz-Ou-WQO"/>
                         <outlet property="totalTimeLabel" destination="iLg-Ok-lxM" id="WkL-JZ-5QJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1844" y="1637"/>
+            <point key="canvasLocation" x="1061" y="1342"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="Kg6-cG-iB5">
+        <scene sceneID="9b7-UU-L1h">
             <objects>
-                <navigationController id="ibD-Av-qm3" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jLh-pU-7bx">
+                <navigationController storyboardIdentifier="detailNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VMn-3r-m8Y" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ri6-7l-tDL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="9fm-R7-tyk"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="8Af-hP-dCi"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hcx-KA-FWk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V7p-1Z-Z6F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1015" y="1642"/>
+            <point key="canvasLocation" x="356" y="1342"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7kU-oQ-h2H">
+            <objects>
+                <navigationController storyboardIdentifier="masterNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uFM-no-PJs" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9kd-oR-rfq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="UEF-px-LpL" kind="relationship" relationship="rootViewController" id="C6T-c7-3VC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NtS-M6-vXE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="356" y="598"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="5GO-wN-z0h">
+            <objects>
+                <splitViewController storyboardIdentifier="splitViewNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IwL-Pm-vjL" customClass="SplitViewController" customModule="GeekSpeak_Show_Timer" customModuleProvider="target" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <connections>
+                        <segue destination="uFM-no-PJs" kind="relationship" relationship="masterViewController" id="LMy-Nb-MR9"/>
+                        <segue destination="VMn-3r-m8Y" kind="relationship" relationship="detailViewController" id="kF2-tS-wh9"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cM5-0Z-dUF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-464" y="930"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="wC3-PL-p7M">
@@ -243,14 +229,14 @@
                         <viewControllerLayoutGuide type="bottom" id="hFy-xq-Ehk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="oiW-vz-1PI">
-                        <rect key="frame" x="0.0" y="0.0" width="308" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vDu-Wv-iqT" userLabel="blurredBackground">
-                                <rect key="frame" x="0.0" y="64" width="308" height="960"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vDu-Wv-iqT" userLabel="blurredBackground">
+                                <rect key="frame" x="0.0" y="64" width="600" height="960"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eal-fe-nSn">
-                                <rect key="frame" x="0.0" y="0.0" width="308" height="1024"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cOC-kN-gfy" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="308" height="1024"/>
@@ -285,7 +271,7 @@
                                                             <constraint firstItem="ttH-ST-Owg" firstAttribute="top" secondItem="SGr-Xf-42M" secondAttribute="top" id="yQl-dO-sNr"/>
                                                         </constraints>
                                                         <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
-                                                            <rect key="frame" x="0.0" y="0.0" width="308" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="308" height="21"/>
                                                         </variation>
                                                     </view>
                                                     <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tiB-7B-0CH" userLabel="Segment2">
@@ -543,43 +529,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tBI-zJ-Era" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1833" y="552"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="HWP-k5-fQJ">
-            <objects>
-                <navigationController storyboardIdentifier="masterNavController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TOL-hK-koz" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r20-br-OZI">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="UEF-px-LpL" kind="relationship" relationship="rootViewController" id="XWp-CT-59b"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eWV-ZM-oCz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="997" y="552"/>
-        </scene>
-        <!--Split View Controller-->
-        <scene sceneID="O7A-gW-31j">
-            <objects>
-                <splitViewController storyboardIdentifier="splitViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y01-ak-zO4" customClass="SplitViewController" customModule="GeekSpeak_Show_Timer" customModuleProvider="target" sceneMemberID="viewController">
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
-                    <connections>
-                        <segue destination="TOL-hK-koz" kind="relationship" relationship="masterViewController" id="qSR-o9-nNq"/>
-                        <segue destination="ibD-Av-qm3" kind="relationship" relationship="detailViewController" id="S1r-pv-Xnw"/>
-                    </connections>
-                </splitViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sdM-PK-VYN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="19" y="1040"/>
+            <point key="canvasLocation" x="1061" y="598"/>
         </scene>
     </scenes>
     <resources>
         <image name="GeekSpeakWhite" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Y8G-p3-Pc0"/>
+        <segue reference="8Af-hP-dCi"/>
     </inferredMetricsTieBreakers>
 </document>

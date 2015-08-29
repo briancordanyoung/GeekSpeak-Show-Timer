@@ -66,7 +66,9 @@ class SettingsViewController: UIViewController {
   
   override func viewWillAppear(animated: Bool) {
     generateBluredBackground()
-    setAppearenceOfNavigationBar()
+    if let navigationController = navigationController {
+      Appearance.appearanceForNavigationController(navigationController)
+    }
     manageButtonBarButtons()
   }
   
@@ -192,37 +194,29 @@ class SettingsViewController: UIViewController {
       backgroundImageView.image = UIImage.imageWithColor(UIColor.blackColor())
     }
     
-    
-    
   } // generateBluredBackground
   
-
-  func setAppearenceOfNavigationBar() {
-    self.navigationController?.navigationBar
-      .setBackgroundImage( UIImage.imageWithColor( UIColor.blackColor()),
-        forBarMetrics: UIBarMetrics.Default)
-    self.navigationController?.view.backgroundColor = UIColor.blackColor()
-    self.navigationController?.navigationBar.backgroundColor = UIColor.blackColor()
-    self.navigationController?.navigationBar.translucent = false
-  }
   
   func addContraintsForContentView() {
+    
     let leftConstraint = NSLayoutConstraint(item: contentView,
-      attribute: .Leading,
-      relatedBy: .Equal,
-      toItem: view,
-      attribute: .Left,
-      multiplier: 1.0,
-      constant: 0.0)
+                                       attribute: .Leading,
+                                       relatedBy: .Equal,
+                                          toItem: view,
+                                       attribute: .Left,
+                                      multiplier: 1.0,
+                                        constant: 0.0)
     view.addConstraint(leftConstraint)
+    
     let rightConstraint = NSLayoutConstraint(item: contentView,
-      attribute: .Trailing,
-      relatedBy: .Equal,
-      toItem: view,
-      attribute: .Right,
-      multiplier: 1.0,
-      constant: 0.0)
+                                        attribute: .Trailing,
+                                        relatedBy: .Equal,
+                                           toItem: view,
+                                        attribute: .Right,
+                                       multiplier: 1.0,
+                                         constant: 0.0)
     view.addConstraint(rightConstraint)
+    
   }
 
 }
