@@ -15,28 +15,12 @@ class SplitViewController: UISplitViewController,
   
   override func viewDidLoad() {
     
-    // When on and iPad, we don't want the master view (settings) to force
-    // the detail views over.  We want the master to sit on top of the detail.
-    // This can only happen on iPads.  So, on iPads, set the displayMode to
-    // primaryOverlay.
-    // TODO: Test on iPad air 2 with multi tasking (multi apps in view
-    // TODO: iPhone 6 plus behavious is not worked out.
-    switch Device() {
-      case .iPad2,
-           .iPad3,
-           .iPad4,
-           .iPadAir,
-           .iPadAir2,
-           .iPadMini,
-           .iPadMini2,
-           .iPadMini3:
-          preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryOverlay
-      default:
-      break
-    }
     self.delegate = self
   }
   
+  override func viewDidAppear(animated: Bool) {
+    setDisplayMode()
+  }
   
   // Make sure the Settings View is displayed on startup
   // http://stackoverflow.com/questions/25875618/uisplitviewcontroller-in-portrait-on-iphone-shows-detail-vc-instead-of-master
@@ -46,9 +30,18 @@ class SplitViewController: UISplitViewController,
                                                                       -> Bool {
     return true
   }
+
   
+  func setDisplayMode() {
+    if collapsed {
+      preferredDisplayMode = .Automatic
+    } else {
+      preferredDisplayMode = .PrimaryOverlay
+    }
+  }
     
 }
+
 
 
 extension UISplitViewController {
