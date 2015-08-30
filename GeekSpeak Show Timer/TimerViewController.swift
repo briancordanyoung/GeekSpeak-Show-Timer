@@ -39,15 +39,13 @@ final class TimerViewController: UIViewController {
   // TODO: The Timer Property should be set by the SplitViewController
   //       during the segue.  But, I'm too tired to make sure that it
   //       working tonight.  Revisit and stop pulling from other view controller
-  // var timer: Timer!
   var timer: Timer {
-    if let splitVC = splitViewController as? SplitViewController {
-      return splitVC.timer
+    if let splitViewController = splitViewController as? SplitViewController {
+      return splitViewController.timer
     } else {
       return Timer()
     }
   }
-  
 
   // Required on load
   @IBOutlet weak var timerCirclesView: UIView!

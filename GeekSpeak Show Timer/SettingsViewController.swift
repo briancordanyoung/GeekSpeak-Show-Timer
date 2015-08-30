@@ -7,12 +7,26 @@ class SettingsViewController: UIViewController {
   //       working tonight.  Revisit and stop pulling from other view controller
   // var timer: Timer!
   var timer: Timer {
-    if let splitVC = splitViewController as? SplitViewController {
-      return splitVC.timer
+    if let splitViewController = splitViewController as? SplitViewController {
+      return splitViewController.timer
     } else {
       return Timer()
     }
   }
+//  var timer: Timer {
+//    get {
+//      if let timer = _timer {
+//        return timer
+//      } else {
+//        
+//        return Timer()
+//      }
+//    }
+//    set(timer) {
+//      _timer = timer
+//    }
+//  }
+//  private var _timer: Timer?
   
   // Required properties
   @IBOutlet weak var contentView: UIView!
@@ -32,22 +46,22 @@ class SettingsViewController: UIViewController {
   
   
   
-  // MARK: Convience Properties
-  var timerViewController: TimerViewController? {
-    var timerViewController: TimerViewController? = .None
-    if let splitViewController = splitViewController {
-      if let navController: AnyObject? =
-                                      splitViewController.viewControllers.last {
-        if let navController = navController as? UINavigationController {
-          if let tmpTimerViewController =
-                       navController.topViewController as? TimerViewController {
-            timerViewController = tmpTimerViewController
-          }
-        }
-      }
-    }
-    return timerViewController
-  }
+//  // MARK: Convience Properties
+//  var timerViewController: TimerViewController? {
+//    var timerViewController: TimerViewController? = .None
+//    if let splitViewController = splitViewController {
+//      if let navController: AnyObject? =
+//                                      splitViewController.viewControllers.last {
+//        if let navController = navController as? UINavigationController {
+//          if let tmpTimerViewController =
+//                       navController.topViewController as? TimerViewController {
+//            timerViewController = tmpTimerViewController
+//          }
+//        }
+//      }
+//    }
+//    return timerViewController
+//  }
   
   
   var useDemoDurations = false
@@ -151,21 +165,22 @@ class SettingsViewController: UIViewController {
   func generateBluredBackground() {
     // https://uncorkedstudios.com/blog/ios-7-background-effects-and-split-view-controllers
     
-    if let detailViewController = timerViewController {
+    if let underneathViewController = parentViewController {
       // set up the graphics context to render the screen snapshot.
       // Note the scale value... Values greater than 1 make a context smaller
       // than the detail view controller. Smaller context means faster rendering
       // of the final blurred background image
       let scaleValue = CGFloat(8)
-      let detailViewControllerSize = detailViewController.view.frame.size
-      let contextSize = CGSizeMake(detailViewControllerSize.width  / scaleValue,
-                                   detailViewControllerSize.height / scaleValue)
+      let underneathViewControllerSize = underneathViewController.view.frame.size
+      let contextSize =
+                    CGSizeMake(underneathViewControllerSize.width  / scaleValue,
+                               underneathViewControllerSize.height / scaleValue)
       UIGraphicsBeginImageContextWithOptions(contextSize, true, 1)
       let drawingRect = CGRectMake(0, 0, contextSize.width, contextSize.height)
 
       // Now grab the snapshot of the detail view controllers content
-      detailViewController.view.drawViewHierarchyInRect( drawingRect,
-                                     afterScreenUpdates: false)
+      underneathViewController.view.drawViewHierarchyInRect( drawingRect,
+                                         afterScreenUpdates: false)
       let snapshotImage = UIGraphicsGetImageFromCurrentImageContext()
       UIGraphicsEndImageContext()
 

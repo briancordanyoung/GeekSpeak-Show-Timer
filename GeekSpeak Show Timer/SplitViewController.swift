@@ -14,7 +14,6 @@ class SplitViewController: UISplitViewController,
   var timer = Timer()
   
   override func viewDidLoad() {
-    
     self.delegate = self
   }
   
@@ -31,7 +30,6 @@ class SplitViewController: UISplitViewController,
     return true
   }
 
-  
   func setDisplayMode() {
     if collapsed {
       preferredDisplayMode = .Automatic
@@ -39,6 +37,59 @@ class SplitViewController: UISplitViewController,
       preferredDisplayMode = .PrimaryOverlay
     }
   }
+    
+//  override func viewWillAppear(animated: Bool) {
+//    for viewController in viewControllers {
+//      injectTimerInViewController(viewController as! UIViewController)
+//    }
+//  }
+//  
+//  override func showDetailViewController( viewController: UIViewController!,
+//                                                  sender: AnyObject!) {
+//    println("showDetailViewController")
+//    injectTimerInViewController(viewController)
+//    super.showDetailViewController(viewController, sender: sender)
+//  }
+//  
+//  override func showViewController( viewController: UIViewController,
+//                                            sender: AnyObject!) {
+//    println("showViewController")
+//    injectTimerInViewController(viewController)
+//    super.showViewController(viewController, sender: sender)
+//  }
+//  
+//  func splitViewController(splitViewController: UISplitViewController,
+//                         showViewController vc: UIViewController,
+//                                        sender: AnyObject?) -> Bool {
+//    println("showViewController")
+//    return false
+//  }
+//  
+//  
+//  func splitViewController(splitViewController: UISplitViewController,
+//                   showDetailViewController vc: UIViewController,
+//                                        sender: AnyObject?) -> Bool {
+//    println("showDetailViewController")
+//    return false
+//  }
+//  
+//  
+//  func injectTimerInViewController(viewController: UIViewController) {
+//    if let settingsViewController = viewController as? SettingsViewController {
+//      println("SettingsViewController timer set")
+//                      
+//      settingsViewController.timer = timer
+//    }
+//    if let timerViewController = viewController as? TimerViewController {
+//      println("TimerViewController timer set")
+//
+//                      
+//      timerViewController.timer = timer
+//    }
+//  }
+//  
+  
+  
     
 }
 
