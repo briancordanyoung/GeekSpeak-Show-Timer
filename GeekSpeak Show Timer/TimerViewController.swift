@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  GeekSpeak Show Timer
-//
-//  Created by Brian Cordan Young on 8/1/15.
-//  Copyright (c) 2015 Brian Young. All rights reserved.
-//
-
 import UIKit
 
 
@@ -18,11 +10,9 @@ enum TimerLabelDisplay: String, Printable {
   }
 }
 
-final class TimerViewController: UIViewController, TimerDelegate {
+final class TimerViewController: UIViewController {
   
   struct Constants {
-    static let TimerId              = "timerViewControllerTimerId"
-    static let TimerNotificationKey = "com.geekspeak.timerNotificationKey"
     static let GeekSpeakBlueColor = UIColor(red: 14/255,
                                           green: 115/255,
                                            blue: 192/255,
@@ -38,23 +28,25 @@ final class TimerViewController: UIViewController, TimerDelegate {
                                            blue: 150/255,
                                           alpha: 1.0)
   }
-
+  
   var timerViews: TimerViews?
-  let timer = Timer()
   var timerLabelDisplay: TimerLabelDisplay = .Remaining {
     didSet {
-      updateTimerLabels(timer)
+      updateTimerLabels()
+    }
+  }
+  
+  // TODO: The Timer Property should be set by the SplitViewController
+  //       during the segue. Revisit and stop pulling from other view controller
+  var timer: Timer? {
+    if let splitViewController = splitViewController as? SplitViewController {
+      return splitViewController.timer
+    } else {
+      return .None
     }
   }
 
-  var useDemoDurations = false
-  
-  func updateUseDemoDurations() {
-    useDemoDurations = NSUserDefaults
-      .standardUserDefaults()
-      .boolForKey(Timer.Constants.UseDemoDurations)
-  }
-  
+  // Required on load
   @IBOutlet weak var timerCirclesView: UIView!
   @IBOutlet weak var totalTimeLabel: UILabel!
   @IBOutlet weak var sectionTimeLabel: UILabel!
@@ -62,7 +54,32 @@ final class TimerViewController: UIViewController, TimerDelegate {
   @IBOutlet weak var segmentLabel: UILabel!
   @IBOutlet weak var startPauseButton: UIButton!
   @IBOutlet weak var nextSegmentButton: UIButton!
-  @IBOutlet weak var remainingToggleButton: UIButton!
+  
+  // Vertical Layout
+  @IBOutlet weak var timerCirclesWidth: NSLayoutConstraint!
+  @IBOutlet weak var startButtonToTimerCircle: NSLayoutConstraint!
+  @IBOutlet weak var startButtonToSuperView: NSLayoutConstraint!
+  @IBOutlet weak var buttonsEqualWidth: NSLayoutConstraint!
+  @IBOutlet weak var nextButtonToStartButtonSpace: NSLayoutConstraint!
+  @IBOutlet weak var nextButtonToTimerCircles: NSLayoutConstraint!
+  @IBOutlet weak var nextButtonToSuperViewSide: NSLayoutConstraint!
+  @IBOutlet weak var startButtonToBottom: NSLayoutConstraint!
+  @IBOutlet weak var nextButtonToBottom: NSLayoutConstraint!
+  var verticalContraints: [NSLayoutConstraint] = []
+  
+  // Horizontal Layout
+  @IBOutlet weak var startButtonToTimerCircleHorizontal: NSLayoutConstraint!
+  @IBOutlet weak var startButtonToSuperViewHorizontal: NSLayoutConstraint!
+  @IBOutlet weak var buttonsEqualHeight: NSLayoutConstraint!
+  @IBOutlet weak var nextButtonToStartButtonHorizontal: NSLayoutConstraint!
+  @IBOutlet weak var startButtonToSuperViewTop: NSLayoutConstraint!
+  @IBOutlet weak var nextButtonToSuperViewSideHorizontal: NSLayoutConstraint!
+  @IBOutlet weak var nextButtonToTimerCircle: NSLayoutConstraint!
+  @IBOutlet weak var nextButtonToBottomHorizontal: NSLayoutConstraint!
+  @IBOutlet weak var timerCirclesHeight: NSLayoutConstraint!
+  var horizontalContraints: [NSLayoutConstraint] = []
+  
+  
   
   var lineWidth: CGFloat {
     return self.dynamicType.lineWidthForSize(timerCirclesView.frame.size)
@@ -77,18 +94,33 @@ final class TimerViewController: UIViewController, TimerDelegate {
   }
   
   override func viewDidLoad() {
+    verticalContraints = [startButtonToTimerCircle,
+                          startButtonToSuperView,
+                          buttonsEqualWidth,
+                          nextButtonToStartButtonSpace,
+                          nextButtonToTimerCircles,
+                          nextButtonToSuperViewSide,
+                          startButtonToBottom,
+                          nextButtonToBottom,
+                          timerCirclesWidth]
+    
+    horizontalContraints = [startButtonToTimerCircleHorizontal,
+                            startButtonToSuperViewHorizontal,
+                            buttonsEqualHeight,
+                            nextButtonToStartButtonHorizontal,
+                            startButtonToSuperViewTop,
+                            nextButtonToSuperViewSideHorizontal,
+                            nextButtonToTimerCircle,
+                            nextButtonToBottomHorizontal,
+                            timerCirclesHeight]
     super.viewDidLoad()
   }
   
   override func viewWillAppear(animated: Bool) {
-    timer.delegate = self
-    
-    setupContraints()
     setupTimeLabelContraints(totalTimeLabel)
     setupTimeLabelContraints(sectionTimeLabel)
     setupDescriptionLabelContraints(totalLabel)
     setupDescriptionLabelContraints(segmentLabel)
-    setupRemainingToggleButtonContraints()
     styleButtons()
     
     let fillView  = PieShapeView()
@@ -100,19 +132,19 @@ final class TimerViewController: UIViewController, TimerDelegate {
     timerCirclesView.addSubview(fillView)
     
     let ring1bg   = configureBGRing( RingView(),
-      withColor: Constants.GeekSpeakBlueColor)
+                          withColor: Constants.GeekSpeakBlueColor)
     let ring1fg   = configureFGRing( RingView(),
-      withColor: Constants.GeekSpeakBlueColor)
+                          withColor: Constants.GeekSpeakBlueColor)
     
     let ring2bg   = configureBGRing( RingView(),
-      withColor: Constants.GeekSpeakBlueColor)
+                          withColor: Constants.GeekSpeakBlueColor)
     let ring2fg   = configureFGRing( RingView(),
-      withColor: Constants.GeekSpeakBlueColor)
+                          withColor: Constants.GeekSpeakBlueColor)
     
     let ring3bg   = configureBGRing( RingView(),
-      withColor: Constants.GeekSpeakBlueColor)
+                          withColor: Constants.GeekSpeakBlueColor)
     let ring3fg   = configureFGRing( RingView(),
-      withColor: Constants.GeekSpeakBlueColor)
+                          withColor: Constants.GeekSpeakBlueColor)
     
     ring3bg.percentageOfSuperviewSize = 0.95
     ring3fg.percentageOfSuperviewSize = 0.95
@@ -122,27 +154,39 @@ final class TimerViewController: UIViewController, TimerDelegate {
     ring1fg.percentageOfSuperviewSize = 0.33
     
     timerViews = TimerViews(  ring1bg: ring1bg,
-      ring1fg: ring1fg,
-      ring2bg: ring2bg,
-      ring2fg: ring2fg,
-      ring3bg: ring3bg,
-      ring3fg: ring3fg,
-      fill: fillView)
+                              ring1fg: ring1fg,
+                              ring2bg: ring2bg,
+                              ring2fg: ring2fg,
+                              ring3bg: ring3bg,
+                              ring3fg: ring3fg,
+                                 fill: fillView)
     
-    timerCirclesView.bringSubviewToFront(remainingToggleButton)
-    resetTimer()
-    
-    setAppearenceOfNavigationBar()
+    if let navigationController = navigationController {
+      Appearance.appearanceForNavigationController( navigationController,
+                                       transparent: true)
+      
+    }
+    registerForTimerNotifications()
+    timerUpdatedTime()
+    timerChangedCountingStatus()
+    timerDurationChanged()
+    layoutViewsForSize(view.frame.size)
   }
   
-  func setAppearenceOfNavigationBar() {
-    self.navigationController?.navigationBar.setBackgroundImage( UIImage(),
-      forBarMetrics: UIBarMetrics.Default)
-    self.navigationController?.view.backgroundColor = UIColor.clearColor()
-    self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
-    self.navigationController?.navigationBar.translucent = true
-
+  override func viewDidDisappear(animated: Bool) {
+    unregisterForTimerNotifications()
   }
+  
+  override func viewWillTransitionToSize(size: CGSize,
+        withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    
+    let duration = coordinator.transitionDuration()
+    layoutViewsForSize(size, animateWithDuration: duration)
+  }
+  
+  
+  
+  
   
   // MARK: -
   // MARK: ViewController
@@ -158,172 +202,7 @@ final class TimerViewController: UIViewController, TimerDelegate {
 
 
   
-  // MARK: -
-  // MARK: Timer callback funtions
-  func timerChangedCountingStatus(state: Timer.CountingState) {
-    var buttonText: String
-    switch state {
-    case .Ready:
-      buttonText = "Start"
-    case .Counting:
-      buttonText = "Pause"
-    case .Paused:
-      buttonText = "Continue"
-    }
-    startPauseButton.setTitle(buttonText, forState: UIControlState.Normal)
-  }
-  
-  func timerDurationChanged(timer: Timer?) {
-    
-    let section2Seconds: NSTimeInterval
-    let section3Seconds: NSTimeInterval
-    if useDemoDurations {
-      section2Seconds = 2
-      section3Seconds = 1
-    } else {
-      section2Seconds = 120
-      section3Seconds = 30
-    }
-    
-    
-    if let timer = timer {
-      switch timer.timing.phase {
-      case .Section3:
-        let twoMinuteWarning = timer.percentageFromSecondsToEnd(section2Seconds)
-        let sectionColor2   = RingView.sectionColor( Constants.WarningColor,
-                                       atPercentage: twoMinuteWarning)
-        timerViews?.ring3fg.additionalColors.append(sectionColor2)
-        
-        let halfMinuteWarning = timer.percentageFromSecondsToEnd(section3Seconds)
-        let sectionColor3   = RingView.sectionColor( Constants.AlarmColor,
-                                       atPercentage: halfMinuteWarning)
-        timerViews?.ring3fg.additionalColors.append(sectionColor3)
-      default:
-        break
-      }
-    }
-  }
-  
-  
-  // TODO: This fuction is being called at about 60fps,
-  //       everytime the timer updates.  It is setting values for many views
-  //       that are not changing most of the time.   I'm not sure if I should
-  //       be concerned with doing too much. look in to CPU usage and determine
-  //       if it is worth doing something 'more clever'.
 
-  func timerUpdatedTime(timer: Timer?) {
-    if let timer = timer {
-      updateTimerLabels(timer)
-      let timing    = timer.timing
-      let totalTime = timing.asShortString(timing.durations.totalShowTime)
-      let labelText = padString( "Total: \(totalTime)",
-                    totalLength: 15,
-                            pad: " ",
-                    inDirection: .Left)
-      totalLabel.text = labelText
-      
-      switch timer.timing.phase {
-      case .PreShow,
-           .Break1,    // When a break, or the last segment is complete,
-           .Break2,    // advance to the next segment
-           .Section3:
-        
-        if timer.percentageComplete == 1.0 { timer.next() }
-        timerLabelDisplay = .Remaining
-        sectionTimeLabel.textColor = UIColor.whiteColor()
-        totalTimeLabel.textColor   = UIColor.whiteColor()
-
-      case .Section1,  // When a segment is complete, don't advance.
-           .Section2:  // The user gets to do that
-        
-        timerLabelDisplay = .Remaining
-        sectionTimeLabel.textColor = UIColor.whiteColor()
-        totalTimeLabel.textColor   = UIColor.whiteColor()
-        
-      case .PostShow:
-        timerLabelDisplay = .Elapsed
-        sectionTimeLabel.textColor = Constants.GeekSpeakBlueColor
-        totalTimeLabel.textColor   = Constants.GeekSpeakBlueColor
-      }
-      
-
-      var segmentLabelText: String
-      
-      switch timer.timing.phase {
-      case .PreShow:
-        timerViews?.fill.percent    = timer.percentageComplete
-        timerViews?.ring1fg.percent = 0.0
-        timerViews?.ring2fg.percent = 0.0
-        timerViews?.ring3fg.percent = 0.0
-        segmentLabelText = " Pre Show"
-
-      case .Section1:
-        timerViews?.fill.percent    = 0.0
-        timerViews?.ring1fg.progress = timer.percentageCompleteUnlimited
-        timerViews?.ring2fg.percent = 0.0
-        timerViews?.ring3fg.percent = 0.0
-        segmentLabelText = "Segment 1"
-
-      case .Break1:
-        timerViews?.ring1fg.percent = 1.0
-        timerViews?.fill.percent    = timer.percentageComplete
-        timerViews?.ring2fg.percent = 0.0
-        timerViews?.ring3fg.percent = 0.0
-        segmentLabelText = "    Break"
-
-      case .Section2:
-        timerViews?.fill.percent    = 0.0
-        timerViews?.ring1fg.percent = 1.0
-        timerViews?.ring2fg.progress = timer.percentageCompleteUnlimited
-        timerViews?.ring3fg.percent = 0.0
-        segmentLabelText = "Segment 2"
-
-      case .Break2:
-        timerViews?.ring1fg.percent = 1.0
-        timerViews?.ring2fg.percent = 1.0
-        timerViews?.fill.percent    = timer.percentageComplete
-        timerViews?.ring3fg.percent = 0.0
-        segmentLabelText = "    Break"
-
-      case .Section3:
-        timerViews?.fill.percent    = 0.0
-        timerViews?.ring1fg.percent = 1.0
-        timerViews?.ring2fg.percent = 1.0
-        timerViews?.ring3fg.percent = timer.percentageComplete
-        segmentLabelText = "Segment 3"
-
-      case .PostShow:
-        timerViews?.ring1fg.percent = 1.0
-        timerViews?.ring2fg.percent = 1.0
-        timerViews?.ring3fg.percent = 1.0
-        timerViews?.fill.percent = 0.0
-        segmentLabelText = "Post Show"
-      }
-      
-      segmentLabel.text =  padString( segmentLabelText,
-                         totalLength: 15,
-                                 pad: " ",
-                         inDirection: .Right)
-      
-      NSNotificationCenter.defaultCenter()
-                          .postNotificationName( Constants.TimerNotificationKey,
-                                         object: nil)
-
-    }
-  }
-
-  func updateTimerLabels(timer: Timer) {
-    let timing = timer.timing
-    totalTimeLabel.text     = timing.asString(timer.totalShowTimeElapsed)
-
-    switch timerLabelDisplay {
-    case .Remaining:
-      sectionTimeLabel.text = timing.asString(timer.secondsRemaining)
-    case .Elapsed:
-      sectionTimeLabel.text = timing.asString(timer.secondsElapsed)
-    }
-  }
-  
   
   // MARK: -
   // MARK: Actions
@@ -332,44 +211,60 @@ final class TimerViewController: UIViewController, TimerDelegate {
   }
   
   @IBAction func startPauseButtonPressed(sender: UIButton) {
-    switch timer.state {
-    case .Ready,
-         .Paused:
-      timer.start()
-    case .Counting:
-      timer.pause()
+    if let timer = timer {
+      switch timer.state {
+      case .Ready,
+           .Paused:
+        timer.start()
+      case .Counting:
+        timer.pause()
+      }
     }
   }
 
   @IBAction func nextSegmentButtonPressed(sender: UIButton) {
-    timer.next()
+    timer?.next()
+  }
+
+  
+  // MARK: -
+  // MARK: View Layout
+  
+  
+  func layoutViewsForSize( size: CGSize) {
+    layoutViewsForSize(size, animateWithDuration: 0.0)
+  }
+      
+  
+  func layoutViewsForSize(          size: CGSize,
+            animateWithDuration duration: NSTimeInterval) {
+
+    view.layoutIfNeeded()
+    UIView.animateWithDuration(duration, animations: {
+      if size.width < size.height {
+        self.setContraintPriorityForVerticalLayout()
+      } else {
+        self.setContraintPriorityForHorizontalLayout()
+      }
+      self.view.layoutIfNeeded()
+    })
   }
   
-  @IBAction func remainingTimeToggled(sender: UIButton) {
-    // This button is currently disabled in the storyboard to
-    // remove user control over toggling between remaining and
-    // completed time display.
-    switch timerLabelDisplay {
-    case .Remaining:
-      timerLabelDisplay = .Elapsed
-    case .Elapsed:
-      timerLabelDisplay = .Remaining
-    }
+  func setContraintPriorityForVerticalLayout() {
+    verticalContraints.map(  {$0.priority = 751})
+    horizontalContraints.map({$0.priority = 749})
   }
   
-  func resetTimer() {
-    updateUseDemoDurations()
-    if useDemoDurations {
-      timer.reset(usingDemoTiming: true)
-    } else {
-      timer.reset()
-    }
+  func setContraintPriorityForHorizontalLayout() {
+    verticalContraints.map(  {$0.priority = 749})
+    horizontalContraints.map({$0.priority = 751})
   }
+  
   
   // MARK: -
   // MARK: Setup
   func configureFGRing(ringView: RingView, withColor color: UIColor)
-                                                            -> RingView {
+                                                                   -> RingView {
       ringView.color      = color
       ringView.startAngle = Rotation(degrees: 0)
       ringView.endAngle   = Rotation(degrees: 10)
@@ -379,7 +274,7 @@ final class TimerViewController: UIViewController, TimerDelegate {
   }
   
   func configureBGRing(ringView: RingView, withColor color: UIColor)
-                                                            -> RingView {
+                                                                   -> RingView {
       ringView.color     = color.darkenColorWithMultiplier(0.2)
       ringView.ringWidth = lineWidth
       configureRing(ringView)
@@ -404,51 +299,6 @@ final class TimerViewController: UIViewController, TimerDelegate {
 
   }
   
-  private func setupContraints() {
-    // Contrain the timerCirclesView so that it is
-    // lessThat the smaller of ViewController view height and width AND
-    // at least as wide and high as the smaller of ViewController view 
-    // height and width
-    let height = NSLayoutConstraint(item: timerCirclesView,
-                               attribute: .Height,
-                               relatedBy: .LessThanOrEqual,
-                                  toItem: view,
-                               attribute: .Height,
-                              multiplier: 1.0,
-                                constant: -32)
-    height.priority = 1000
-    view.addConstraint(height)
-
-    let width =  NSLayoutConstraint(item: timerCirclesView,
-                               attribute: .Width,
-                               relatedBy: .LessThanOrEqual,
-                                  toItem: view,
-                               attribute: .Width,
-                              multiplier: 1.0,
-                                constant: -32)
-    width.priority = 1000
-    view.addConstraint(width)
-  
-    let minHeight = NSLayoutConstraint(item: timerCirclesView,
-                               attribute: .Height,
-                               relatedBy: .GreaterThanOrEqual,
-                                  toItem: view,
-                               attribute: .Height,
-                              multiplier: 1.0,
-                                constant: -32)
-    minHeight.priority = 250
-    view.addConstraint(minHeight)
-
-    let minWidth =  NSLayoutConstraint(item: timerCirclesView,
-                               attribute: .Width,
-                               relatedBy: .GreaterThanOrEqual,
-                                  toItem: view,
-                               attribute: .Width,
-                              multiplier: 1.0,
-                                constant: -32)
-    minWidth.priority = 250
-    view.addConstraint(minWidth)
-  }
 
   func setupTimeLabelContraints(label: UILabel) {
     
@@ -478,26 +328,19 @@ final class TimerViewController: UIViewController, TimerDelegate {
     }
   }
   
-  func setupRemainingToggleButtonContraints() {
-    
-    let height =  NSLayoutConstraint(item: remainingToggleButton,
-                               attribute: .Height,
-                               relatedBy: .Equal,
-                                  toItem: remainingToggleButton.superview,
-                               attribute: .Height,
-                              multiplier: 93 / 736,
-                                constant: 0.0)
-    height.priority = 1000
-    remainingToggleButton.superview?.addConstraint(height)
-    
-  }
   
+  
+  // MARK: -
+  // MARK: Utility
   enum Direction {
     case Left
     case Right
   }
   
-  func padString(var string: String, totalLength: Int, pad: Character, inDirection direction: Direction) -> String {
+  func padString(var string: String,
+                totalLength: Int, pad: Character,
+      inDirection direction: Direction) -> String {
+        
     var i = 0
     for character in string {
       i++
@@ -519,22 +362,6 @@ final class TimerViewController: UIViewController, TimerDelegate {
     return string
   }
 
-
-  // MARK: -
-  // MARK: State Preservation and Restoration
-  override func encodeRestorableStateWithCoder(coder: NSCoder) {
-    super.encodeRestorableStateWithCoder(coder)
-    coder.encodeObject(timer, forKey: Constants.TimerId)
-  }
-  
-  override func decodeRestorableStateWithCoder(coder: NSCoder) {
-    super.decodeRestorableStateWithCoder(coder)
-    if let decodedTimer = coder.decodeObjectForKey(Constants.TimerId) as? Timer {
-      timer.timing = decodedTimer.timing
-      timerUpdatedTime(Optional(timer))
-      timerChangedCountingStatus(timer.state)
-    }
-  }
   
 
 }

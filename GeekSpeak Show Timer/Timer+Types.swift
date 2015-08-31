@@ -1,5 +1,12 @@
 import UIKit
 
+// TODO: Refaction and abstract out the following hard coded time.
+//       These structs and enums were a quick and dirty way to get the
+//       Timer up and running.  This should be abstrated out and use
+//       some sort of configuration file that allows the timer to have
+//       user definded Phases, Durations, soft and hard segment times and 
+//       break times.
+
 
 extension Timer {
   
@@ -206,6 +213,21 @@ extension Timer {
     var totalShowTime: NSTimeInterval {
       return section1 + section2 + section3
     }
+    
+    func advancePhaseOnCompletion(phase: ShowPhase) -> Bool {
+      switch phase {
+      case .PreShow,
+           .Break1,
+           .Break2,
+           .Section3:
+        return true
+      case .Section1,
+           .Section2,
+           .PostShow:
+        return false
+      }
+    }
+
     
     mutating func useDemoDurations() {
       preShow  =  5.0
