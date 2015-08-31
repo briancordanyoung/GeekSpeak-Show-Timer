@@ -44,7 +44,7 @@
                                             <rect key="frame" x="692" y="0.0" width="300" height="68"/>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" restorationIdentifier="total" text="Total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="vPK-rh-OhK" userLabel="total">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" restorationIdentifier="total" text="Total" lineBreakMode="tailTruncation" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="vPK-rh-OhK" userLabel="total">
                                         <rect key="frame" x="0.0" y="68" width="159" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="vPK-rh-OhK" secondAttribute="height" multiplier="27:4" id="ooG-hC-mve"/>
@@ -53,7 +53,7 @@
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" restorationIdentifier="segment" text="Segment" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="6Xz-Ti-gwy" userLabel="segment">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" restorationIdentifier="segment" text="Segment" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="6Xz-Ti-gwy" userLabel="segment">
                                         <rect key="frame" x="578" y="68" width="159" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="6Xz-Ti-gwy" secondAttribute="height" multiplier="27:4" id="Id1-WE-DuA"/>

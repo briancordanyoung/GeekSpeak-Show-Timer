@@ -39,16 +39,18 @@ extension TimerViewController {
   
   
   func timerChangedCountingStatus() {
-    var buttonText: String
-    switch timer.state {
-    case .Ready:
-      buttonText = "Start"
-    case .Counting:
-      buttonText = "Pause"
-    case .Paused:
-      buttonText = "Continue"
+    if let timer = timer {
+      var buttonText: String
+      switch timer.state {
+      case .Ready:
+        buttonText = "Start"
+      case .Counting:
+        buttonText = "Pause"
+      case .Paused:
+        buttonText = "Continue"
+      }
+      startPauseButton.setTitle(buttonText, forState: UIControlState.Normal)
     }
-    startPauseButton.setTitle(buttonText, forState: UIControlState.Normal)
   }
   
   func timerDurationChanged() {
@@ -56,48 +58,49 @@ extension TimerViewController {
     //       is abstracted out to some sort of generalized definition
     let section2Seconds: NSTimeInterval
     let section3Seconds: NSTimeInterval
-    if timer.demoTimings {
-      section2Seconds = 2
-      section3Seconds = 1
-    } else {
-      section2Seconds = 120
-      section3Seconds = 30
-    }
     
+    if let timer = timer {
+      if timer.demoTimings {
+        section2Seconds = 2
+        section3Seconds = 1
+      } else {
+        section2Seconds = 120
+        section3Seconds = 30
+      }
     
-    switch timer.timing.phase {
-    case .Section3:
-      let twoMinuteWarning = timer.percentageFromSecondsToEnd(section2Seconds)
-      let sectionColor2   = RingView.sectionColor( Constants.WarningColor,
-        atPercentage: twoMinuteWarning)
-      timerViews?.ring3fg.additionalColors.append(sectionColor2)
+      switch timer.timing.phase {
+      case .Section3:
+        let twoMinuteWarning = timer.percentageFromSecondsToEnd(section2Seconds)
+        let sectionColor2   = RingView.sectionColor( Constants.WarningColor,
+          atPercentage: twoMinuteWarning)
+        timerViews?.ring3fg.additionalColors.append(sectionColor2)
+        
+        let halfMinuteWarning = timer.percentageFromSecondsToEnd(section3Seconds)
+        let sectionColor3   = RingView.sectionColor( Constants.AlarmColor,
+          atPercentage: halfMinuteWarning)
+        timerViews?.ring3fg.additionalColors.append(sectionColor3)
+      default:
+        break
+      }
       
-      let halfMinuteWarning = timer.percentageFromSecondsToEnd(section3Seconds)
-      let sectionColor3   = RingView.sectionColor( Constants.AlarmColor,
-        atPercentage: halfMinuteWarning)
-      timerViews?.ring3fg.additionalColors.append(sectionColor3)
-    default:
-      break
-    }
-    
-    
-    switch timer.timing.phase {
-    case .PreShow,
-    .Break1,
-    .Break2,
-    .Section3,
-    .Section1,
-    .Section2:
-      timerLabelDisplay = .Remaining
-      sectionTimeLabel.textColor = UIColor.whiteColor()
-      totalTimeLabel.textColor   = UIColor.whiteColor()
       
-    case .PostShow:
-      timerLabelDisplay = .Elapsed
-      sectionTimeLabel.textColor = Constants.GeekSpeakBlueColor
-      totalTimeLabel.textColor   = Constants.GeekSpeakBlueColor
+      switch timer.timing.phase {
+      case .PreShow,
+      .Break1,
+      .Break2,
+      .Section3,
+      .Section1,
+      .Section2:
+        timerLabelDisplay = .Remaining
+        sectionTimeLabel.textColor = UIColor.whiteColor()
+        totalTimeLabel.textColor   = UIColor.whiteColor()
+        
+      case .PostShow:
+        timerLabelDisplay = .Elapsed
+        sectionTimeLabel.textColor = Constants.GeekSpeakBlueColor
+        totalTimeLabel.textColor   = Constants.GeekSpeakBlueColor
+      }
     }
-    
   }
   
   
@@ -108,87 +111,90 @@ extension TimerViewController {
   //       if it is worth doing something 'more clever'.
   
   func timerUpdatedTime() {
-    let timing    = timer.timing
-    let totalTime = timing.asShortString(timing.durations.totalShowTime)
-    let labelText = padString( "Total: \(totalTime)",
-                  totalLength: 15,
-                          pad: " ",
-                  inDirection: .Left)
-    totalLabel.text = labelText
-    
-    
-    
-    var segmentLabelText: String
-    
-    switch timer.timing.phase {
-    case .PreShow:
-      timerViews?.fill.percent    = timer.percentageComplete
-      timerViews?.ring1fg.percent = 0.0
-      timerViews?.ring2fg.percent = 0.0
-      timerViews?.ring3fg.percent = 0.0
-      segmentLabelText = " Pre Show"
-      
-    case .Section1:
-      timerViews?.fill.percent    = 0.0
-      timerViews?.ring1fg.progress = timer.percentageCompleteUnlimited
-      timerViews?.ring2fg.percent = 0.0
-      timerViews?.ring3fg.percent = 0.0
-      segmentLabelText = "Segment 1"
-      
-    case .Break1:
-      timerViews?.ring1fg.percent = 1.0
-      timerViews?.fill.percent    = timer.percentageComplete
-      timerViews?.ring2fg.percent = 0.0
-      timerViews?.ring3fg.percent = 0.0
-      segmentLabelText = "    Break"
-      
-    case .Section2:
-      timerViews?.fill.percent    = 0.0
-      timerViews?.ring1fg.percent = 1.0
-      timerViews?.ring2fg.progress = timer.percentageCompleteUnlimited
-      timerViews?.ring3fg.percent = 0.0
-      segmentLabelText = "Segment 2"
-      
-    case .Break2:
-      timerViews?.ring1fg.percent = 1.0
-      timerViews?.ring2fg.percent = 1.0
-      timerViews?.fill.percent    = timer.percentageComplete
-      timerViews?.ring3fg.percent = 0.0
-      segmentLabelText = "    Break"
-      
-    case .Section3:
-      timerViews?.fill.percent    = 0.0
-      timerViews?.ring1fg.percent = 1.0
-      timerViews?.ring2fg.percent = 1.0
-      timerViews?.ring3fg.percent = timer.percentageComplete
-      segmentLabelText = "Segment 3"
-      
-    case .PostShow:
-      timerViews?.ring1fg.percent = 1.0
-      timerViews?.ring2fg.percent = 1.0
-      timerViews?.ring3fg.percent = 1.0
-      timerViews?.fill.percent = 0.0
-      segmentLabelText = "Post Show"
-    }
-    
-    segmentLabel.text =  padString( segmentLabelText,
-                       totalLength: 15,
-                               pad: " ",
-                       inDirection: .Right)
-    
-    totalTimeLabel.text     = timing.asString(timer.totalShowTimeElapsed)
-    
-      updateTimerLabels()
-    }
-    
-    func updateTimerLabels() {
+    if let timer = timer {
       let timing    = timer.timing
-      switch timerLabelDisplay {
-      case .Remaining:
-        sectionTimeLabel.text = timing.asString(timer.secondsRemaining)
-      case .Elapsed:
-        sectionTimeLabel.text = timing.asString(timer.secondsElapsed)
+      let totalTime = timing.asShortString(timing.durations.totalShowTime)
+      let labelText = padString( "Total: \(totalTime)",
+                    totalLength: 15,
+                            pad: " ",
+                    inDirection: .Left)
+      totalLabel.text = labelText
+      
+      
+      
+      var segmentLabelText: String
+      
+      switch timer.timing.phase {
+      case .PreShow:
+        timerViews?.fill.percent    = timer.percentageComplete
+        timerViews?.ring1fg.percent = 0.0
+        timerViews?.ring2fg.percent = 0.0
+        timerViews?.ring3fg.percent = 0.0
+        segmentLabelText = " Pre Show"
+        
+      case .Section1:
+        timerViews?.fill.percent    = 0.0
+        timerViews?.ring1fg.progress = timer.percentageCompleteUnlimited
+        timerViews?.ring2fg.percent = 0.0
+        timerViews?.ring3fg.percent = 0.0
+        segmentLabelText = "Segment 1"
+        
+      case .Break1:
+        timerViews?.ring1fg.percent = 1.0
+        timerViews?.fill.percent    = timer.percentageComplete
+        timerViews?.ring2fg.percent = 0.0
+        timerViews?.ring3fg.percent = 0.0
+        segmentLabelText = "    Break"
+        
+      case .Section2:
+        timerViews?.fill.percent    = 0.0
+        timerViews?.ring1fg.percent = 1.0
+        timerViews?.ring2fg.progress = timer.percentageCompleteUnlimited
+        timerViews?.ring3fg.percent = 0.0
+        segmentLabelText = "Segment 2"
+        
+      case .Break2:
+        timerViews?.ring1fg.percent = 1.0
+        timerViews?.ring2fg.percent = 1.0
+        timerViews?.fill.percent    = timer.percentageComplete
+        timerViews?.ring3fg.percent = 0.0
+        segmentLabelText = "    Break"
+        
+      case .Section3:
+        timerViews?.fill.percent    = 0.0
+        timerViews?.ring1fg.percent = 1.0
+        timerViews?.ring2fg.percent = 1.0
+        timerViews?.ring3fg.percent = timer.percentageComplete
+        segmentLabelText = "Segment 3"
+        
+      case .PostShow:
+        timerViews?.ring1fg.percent = 1.0
+        timerViews?.ring2fg.percent = 1.0
+        timerViews?.ring3fg.percent = 1.0
+        timerViews?.fill.percent = 0.0
+        segmentLabelText = "Post Show"
+      }
+      
+      segmentLabel.text =  padString( segmentLabelText,
+                         totalLength: 15,
+                                 pad: " ",
+                         inDirection: .Right)
+      
+      totalTimeLabel.text     = timing.asString(timer.totalShowTimeElapsed)
+      
+        updateTimerLabels()
+      }
+    }
+  
+    func updateTimerLabels() {
+      if let timer = timer {
+        let timing    = timer.timing
+        switch timerLabelDisplay {
+        case .Remaining:
+          sectionTimeLabel.text = timing.asString(timer.secondsRemaining)
+        case .Elapsed:
+          sectionTimeLabel.text = timing.asString(timer.secondsElapsed)
+      }
     }
   }
-  
 }

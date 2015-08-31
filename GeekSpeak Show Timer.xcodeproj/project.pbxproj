@@ -146,10 +146,10 @@
 			children = (
 				D340CC7C1B6D3E7600BB17E3 /* Main.storyboard */,
 				D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */,
+				D39DAD191B917229007D797C /* Appearance.swift */,
 				D340CCBD1B6DE30100BB17E3 /* SplitViewController.swift */,
 				D384BC571B7F05B20024BCB0 /* SplitViewController+Coding.swift */,
 				D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */,
-				D39DAD191B917229007D797C /* Appearance.swift */,
 				D384BC551B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift */,
 				D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */,
 				D384BC531B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift */,

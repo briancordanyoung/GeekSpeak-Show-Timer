@@ -28,7 +28,8 @@ extension SettingsViewController {
   
   // MARK: Actions
   func updateElapsedTimeLabels() {
-    
+    if let timer = timer {
+      
       let timing   = timer.timing
       
       var segment1 = timing.asString(timing.timeElapsed.section1)
@@ -62,7 +63,7 @@ extension SettingsViewController {
       
       // TODO: Uncomment once this is on a background thread
       //       generateBluredBackground()
-
+    }
   }
 
 }

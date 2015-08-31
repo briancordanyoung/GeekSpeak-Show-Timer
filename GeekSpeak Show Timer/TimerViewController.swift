@@ -37,13 +37,12 @@ final class TimerViewController: UIViewController {
   }
   
   // TODO: The Timer Property should be set by the SplitViewController
-  //       during the segue.  But, I'm too tired to make sure that it
-  //       working tonight.  Revisit and stop pulling from other view controller
-  var timer: Timer {
+  //       during the segue. Revisit and stop pulling from other view controller
+  var timer: Timer? {
     if let splitViewController = splitViewController as? SplitViewController {
       return splitViewController.timer
     } else {
-      return Timer()
+      return .None
     }
   }
 
@@ -212,17 +211,19 @@ final class TimerViewController: UIViewController {
   }
   
   @IBAction func startPauseButtonPressed(sender: UIButton) {
-    switch timer.state {
-    case .Ready,
-         .Paused:
-      timer.start()
-    case .Counting:
-      timer.pause()
+    if let timer = timer {
+      switch timer.state {
+      case .Ready,
+           .Paused:
+        timer.start()
+      case .Counting:
+        timer.pause()
+      }
     }
   }
 
   @IBAction func nextSegmentButtonPressed(sender: UIButton) {
-    timer.next()
+    timer?.next()
   }
 
   

@@ -3,30 +3,15 @@ import UIKit
 class SettingsViewController: UIViewController {
 
   // TODO: The Timer Property should be set by the SplitViewController
-  //       during the segue.  But, I'm too tired to make sure that it
-  //       working tonight.  Revisit and stop pulling from other view controller
-  // var timer: Timer!
-  var timer: Timer {
+  //       during the segue. Revisit and stop pulling from other view controller
+  var timer: Timer? {
     if let splitViewController = splitViewController as? SplitViewController {
       return splitViewController.timer
     } else {
-      return Timer()
+      return .None
     }
   }
-//  var timer: Timer {
-//    get {
-//      if let timer = _timer {
-//        return timer
-//      } else {
-//        
-//        return Timer()
-//      }
-//    }
-//    set(timer) {
-//      _timer = timer
-//    }
-//  }
-//  private var _timer: Timer?
+  
   
   // Required properties
   @IBOutlet weak var contentView: UIView!
@@ -46,22 +31,22 @@ class SettingsViewController: UIViewController {
   
   
   
-//  // MARK: Convience Properties
-//  var timerViewController: TimerViewController? {
-//    var timerViewController: TimerViewController? = .None
-//    if let splitViewController = splitViewController {
-//      if let navController: AnyObject? =
-//                                      splitViewController.viewControllers.last {
-//        if let navController = navController as? UINavigationController {
-//          if let tmpTimerViewController =
-//                       navController.topViewController as? TimerViewController {
-//            timerViewController = tmpTimerViewController
-//          }
-//        }
-//      }
-//    }
-//    return timerViewController
-//  }
+  // MARK: Convience Properties
+  var timerViewController: TimerViewController? {
+    var timerViewController: TimerViewController? = .None
+    if let splitViewController = splitViewController {
+      if let navController: AnyObject? =
+                                      splitViewController.viewControllers.last {
+        if let navController = navController as? UINavigationController {
+          if let tmpTimerViewController =
+                       navController.topViewController as? TimerViewController {
+            timerViewController = tmpTimerViewController
+          }
+        }
+      }
+    }
+    return timerViewController
+  }
   
   
   var useDemoDurations = false
@@ -84,11 +69,11 @@ class SettingsViewController: UIViewController {
       Appearance.appearanceForNavigationController(navigationController)
     }
     manageButtonBarButtons()
+    updateElapsedTimeLabels()
+    registerForTimerNotifications()
   }
   
   override func viewDidAppear(animated: Bool) {
-    updateElapsedTimeLabels()
-    registerForTimerNotifications()
   }
   
   override func viewWillDisappear(animated: Bool) {
@@ -98,22 +83,22 @@ class SettingsViewController: UIViewController {
   
   // MARK: Actions
   @IBAction func add1SecondButtonPressed(sender: UIButton) {
-    timer.duration += 1.0
+    timer?.duration += 1.0
     generateBluredBackground()
   }
   
   @IBAction func add5SecondsButtonPressed(sender: UIButton) {
-    timer.duration += 5.0
+    timer?.duration += 5.0
     generateBluredBackground()
   }
   
   @IBAction func add10SecondsButtonPressed(sender: UIButton) {
-    timer.duration += 10.0
+    timer?.duration += 10.0
     generateBluredBackground()
   }
   
   @IBAction func remove1SecondButtonPressed(sender: UIButton) {
-    timer.duration -= 1.0
+    timer?.duration -= 1.0
     generateBluredBackground()
   }
   
@@ -140,9 +125,9 @@ class SettingsViewController: UIViewController {
   func resetTimer() {
     updateUseDemoDurations()
     if useDemoDurations {
-      timer.reset(usingDemoTiming: true)
+      timer?.reset(usingDemoTiming: true)
     } else {
-      timer.reset(usingDemoTiming: false)
+      timer?.reset(usingDemoTiming: false)
     }
   }
   
@@ -165,7 +150,7 @@ class SettingsViewController: UIViewController {
   func generateBluredBackground() {
     // https://uncorkedstudios.com/blog/ios-7-background-effects-and-split-view-controllers
     
-    if let underneathViewController = parentViewController {
+    if let underneathViewController = timerViewController {
       // set up the graphics context to render the screen snapshot.
       // Note the scale value... Values greater than 1 make a context smaller
       // than the detail view controller. Smaller context means faster rendering
