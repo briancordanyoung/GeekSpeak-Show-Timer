@@ -10,7 +10,7 @@ extension SplitViewController: UIStateRestoring {
   override func encodeRestorableStateWithCoder(coder: NSCoder) {
     super.encodeRestorableStateWithCoder(coder)
     coder.encodeObject(timer, forKey: Constants.TimerId)
-    removeTemporaryTimerData()
+    removeTemporaryTimerArchive()
   }
   
   override func decodeRestorableStateWithCoder(coder: NSCoder) {
@@ -31,34 +31,34 @@ extension SplitViewController: UIStateRestoring {
   
   // Explicit Coding
   func encodeTimerToDisk() {
-    removeTemporaryTimerData()
-    NSKeyedArchiver.archiveRootObject( timer, toFile: temporaryTimerDataPath)
+    removeTemporaryTimerArchive()
+    NSKeyedArchiver.archiveRootObject( timer, toFile: temporaryTimerArchivePath)
   }
   
   func decodeTimerFromDisk() {
     if let decodedTimer = NSKeyedUnarchiver
-                    .unarchiveObjectWithFile(temporaryTimerDataPath) as? Timer {
+                 .unarchiveObjectWithFile(temporaryTimerArchivePath) as? Timer {
       timer = decodedTimer
-      removeTemporaryTimerData()
+      removeTemporaryTimerArchive()
     }
     
   }
   
   
   // Helpers
-  private var temporaryTimerDataPath: String {
+  private var temporaryTimerArchivePath: String {
     return NSTemporaryDirectory() + Constants.TimerDataPath
   }
   
-  private var temporaryTimerDateExists: Bool {
+  private var temporaryTimerArchiveExists: Bool {
     return NSFileManager.defaultManager()
-                                       .fileExistsAtPath(temporaryTimerDataPath)
+                                    .fileExistsAtPath(temporaryTimerArchivePath)
   }
   
-  private func removeTemporaryTimerData() {
-    if temporaryTimerDateExists {
+  private func removeTemporaryTimerArchive() {
+    if temporaryTimerArchiveExists {
       var error: NSError?
-      NSFileManager.defaultManager().removeItemAtPath( temporaryTimerDataPath,
+      NSFileManager.defaultManager().removeItemAtPath( temporaryTimerArchivePath,
                                                 error: &error)
       if let error = error {
         NSLog("Error removing tmp Timer Data: " + error.description)
