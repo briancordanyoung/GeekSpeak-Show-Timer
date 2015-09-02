@@ -1,7 +1,7 @@
 import UIKit
 
-class SplitViewController: UISplitViewController,
-                           UISplitViewControllerDelegate {
+class TimerSplitViewController: UISplitViewController,
+                                UISplitViewControllerDelegate {
 
   
   struct Constants {

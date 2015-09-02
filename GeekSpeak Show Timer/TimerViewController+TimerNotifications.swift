@@ -42,14 +42,12 @@ extension TimerViewController {
     if let timer = timer {
       var buttonText: String
       switch timer.state {
-      case .Ready:
-        buttonText = "Start"
+      case .Ready,
+           .Paused:
+        showPlayImageUsingTransition(.instant)
       case .Counting:
-        buttonText = "Pause"
-      case .Paused:
-        buttonText = "Continue"
+        showPauseImageUsingTransition(.instant)
       }
-      startPauseButton.setTitle(buttonText, forState: UIControlState.Normal)
     }
   }
   
@@ -72,12 +70,12 @@ extension TimerViewController {
       case .Section3:
         let twoMinuteWarning = timer.percentageFromSecondsToEnd(section2Seconds)
         let sectionColor2   = RingView.sectionColor( Constants.WarningColor,
-          atPercentage: twoMinuteWarning)
+                                       atPercentage: twoMinuteWarning)
         timerViews?.ring3fg.additionalColors.append(sectionColor2)
         
         let halfMinuteWarning = timer.percentageFromSecondsToEnd(section3Seconds)
         let sectionColor3   = RingView.sectionColor( Constants.AlarmColor,
-          atPercentage: halfMinuteWarning)
+                                       atPercentage: halfMinuteWarning)
         timerViews?.ring3fg.additionalColors.append(sectionColor3)
       default:
         break
@@ -86,11 +84,11 @@ extension TimerViewController {
       
       switch timer.timing.phase {
       case .PreShow,
-      .Break1,
-      .Break2,
-      .Section3,
-      .Section1,
-      .Section2:
+           .Break1,
+           .Break2,
+           .Section3,
+           .Section1,
+           .Section2:
         timerLabelDisplay = .Remaining
         sectionTimeLabel.textColor = UIColor.whiteColor()
         totalTimeLabel.textColor   = UIColor.whiteColor()

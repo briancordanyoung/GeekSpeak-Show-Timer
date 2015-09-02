@@ -39,7 +39,7 @@ final class TimerViewController: UIViewController {
   // TODO: The Timer Property should be set by the SplitViewController
   //       during the segue. Revisit and stop pulling from other view controller
   var timer: Timer? {
-    if let splitViewController = splitViewController as? SplitViewController {
+    if let splitViewController = splitViewController as? TimerSplitViewController {
       return splitViewController.timer
     } else {
       return .None
@@ -80,6 +80,9 @@ final class TimerViewController: UIViewController {
   var horizontalContraints: [NSLayoutConstraint] = []
   
   
+  @IBOutlet weak var playImage: UIImageView!
+  @IBOutlet weak var pauseImage: UIImageView!
+  @IBOutlet weak var skipImage: UIImageView!
   
   var lineWidth: CGFloat {
     return self.dynamicType.lineWidthForSize(timerCirclesView.frame.size)
@@ -114,6 +117,18 @@ final class TimerViewController: UIViewController {
                             nextButtonToBottomHorizontal,
                             timerCirclesHeight]
     super.viewDidLoad()
+    
+    
+    if let timer = timer {
+      switch timer.state {
+      case .Ready,
+           .Paused:
+        showPlayImageUsingTransition(.instant)
+      case .Counting:
+        showPauseImageUsingTransition(.instant)
+      }
+    }
+    
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -121,7 +136,7 @@ final class TimerViewController: UIViewController {
     setupTimeLabelContraints(sectionTimeLabel)
     setupDescriptionLabelContraints(totalLabel)
     setupDescriptionLabelContraints(segmentLabel)
-    styleButtons()
+    //styleButtons()
     
     let fillView  = PieShapeView()
     fillView.opaque     = false
@@ -210,22 +225,64 @@ final class TimerViewController: UIViewController {
     self.splitViewController?.toggleMasterView()
   }
   
+  @IBAction func startPauseButtonTouched(sender: UIButton) {
+    pauseImage.highlighted = true
+    playImage.highlighted = true
+  }
+
+  @IBAction func startPauseButtonCanceled(sender: UIButton) {
+    pauseImage.highlighted = false
+    playImage.highlighted = false
+  }
+
   @IBAction func startPauseButtonPressed(sender: UIButton) {
     if let timer = timer {
       switch timer.state {
       case .Ready,
            .Paused:
         timer.start()
+        showPauseImageUsingTransition(.instant)
       case .Counting:
         timer.pause()
+        showPlayImageUsingTransition(.instant)
       }
     }
+  }
+  
+  enum TransitionType {
+    case animated
+    case instant
+  }
+  
+  func showPlayImageUsingTransition(transition: TransitionType) {
+    playImage.hidden = false
+    playImage.highlighted = false
+    pauseImage.hidden = true
+    pauseImage.highlighted = false
+  }
+
+  func showPauseImageUsingTransition(transition: TransitionType) {
+    playImage.hidden = true
+    playImage.highlighted = false
+    pauseImage.hidden = false
+    pauseImage.highlighted = false
+  }
+  
+  
+  @IBAction func nextSegmentButtonTouched(sender: UIButton) {
+    skipImage.highlighted = true
+  }
+
+  @IBAction func nextSegmentButtonCanceled(sender: UIButton) {
+    skipImage.highlighted = false
   }
 
   @IBAction func nextSegmentButtonPressed(sender: UIButton) {
     timer?.next()
+    skipImage.highlighted = false
   }
 
+  
   
   // MARK: -
   // MARK: View Layout
@@ -286,18 +343,18 @@ final class TimerViewController: UIViewController {
     ringView.opaque              = false
   }
 
-  private func styleButtons() {
-    styleButton(startPauseButton)
-    styleButton(nextSegmentButton)
-  }
-  
-  private func styleButton(button: UIButton)  {
-    button.layer.borderWidth = 1
-    button.layer.cornerRadius = 15
-    button.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).CGColor
-    button.titleLabel?.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-
-  }
+//  private func styleButtons() {
+//    styleButton(startPauseButton)
+//    styleButton(nextSegmentButton)
+//  }
+//  
+//  private func styleButton(button: UIButton)  {
+//    button.layer.borderWidth = 1
+//    button.layer.cornerRadius = 15
+//    button.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).CGColor
+//    button.titleLabel?.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+//
+//  }
   
 
   func setupTimeLabelContraints(label: UILabel) {

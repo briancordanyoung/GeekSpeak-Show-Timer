@@ -1,6 +1,6 @@
 import UIKit
 
-extension SplitViewController: UIStateRestoring {
+extension TimerSplitViewController: UIStateRestoring {
   
   // MARK: -
   // MARK: State Preservation and Restoration

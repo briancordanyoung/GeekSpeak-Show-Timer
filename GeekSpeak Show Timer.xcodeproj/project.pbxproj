@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D305FDD91B950A45006CE9E3 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = D305FDD31B950A45006CE9E3 /* pause.png */; };
+		D305FDDA1B950A45006CE9E3 /* pauseFill.png in Resources */ = {isa = PBXBuildFile; fileRef = D305FDD41B950A45006CE9E3 /* pauseFill.png */; };
+		D305FDDB1B950A45006CE9E3 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = D305FDD51B950A45006CE9E3 /* play.png */; };
+		D305FDDC1B950A45006CE9E3 /* playFill.png in Resources */ = {isa = PBXBuildFile; fileRef = D305FDD61B950A45006CE9E3 /* playFill.png */; };
+		D305FDDD1B950A45006CE9E3 /* skip.png in Resources */ = {isa = PBXBuildFile; fileRef = D305FDD71B950A45006CE9E3 /* skip.png */; };
+		D305FDDE1B950A45006CE9E3 /* skipfill.png in Resources */ = {isa = PBXBuildFile; fileRef = D305FDD81B950A45006CE9E3 /* skipfill.png */; };
 		D320C3611B6FF5E90046F785 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = D320C3601B6FF5E90046F785 /* UIImage+ImageEffects.m */; };
 		D32B9DED1B77F6740098DCCF /* UIImage+WithColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32B9DEC1B77F6740098DCCF /* UIImage+WithColor.swift */; };
 		D340CC791B6D3E7600BB17E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */; };
@@ -24,14 +30,14 @@
 		D340CCB51B6D939F00BB17E3 /* UIColor+DarkenColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB41B6D939F00BB17E3 /* UIColor+DarkenColor.swift */; };
 		D340CCB71B6D9C6400BB17E3 /* FillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB61B6D9C6400BB17E3 /* FillView.swift */; };
 		D340CCBA1B6DDD5400BB17E3 /* TimerViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB91B6DDD5400BB17E3 /* TimerViews.swift */; };
-		D340CCBE1B6DE30100BB17E3 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCBD1B6DE30100BB17E3 /* SplitViewController.swift */; };
+		D340CCBE1B6DE30100BB17E3 /* TimerSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCBD1B6DE30100BB17E3 /* TimerSplitViewController.swift */; };
 		D3463F681B713E0D002C68A8 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3463F671B713E0D002C68A8 /* Settings.bundle */; };
 		D35F34341B73B90E0038CF4C /* GSTRingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D35F34331B73B90E0038CF4C /* GSTRingLayer.m */; };
 		D35F34371B73C4D80038CF4C /* RingView+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35F34361B73C4D80038CF4C /* RingView+Progress.swift */; };
 		D37C2AAB1B75B7C8008826D5 /* GSTRing.m in Sources */ = {isa = PBXBuildFile; fileRef = D37C2AAA1B75B7C8008826D5 /* GSTRing.m */; };
 		D384BC541B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384BC531B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift */; };
 		D384BC561B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384BC551B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift */; };
-		D384BC581B7F05B20024BCB0 /* SplitViewController+Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384BC571B7F05B20024BCB0 /* SplitViewController+Coding.swift */; };
+		D384BC581B7F05B20024BCB0 /* TimerSplitViewController+Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384BC571B7F05B20024BCB0 /* TimerSplitViewController+Coding.swift */; };
 		D3912C711B6E93B7003B42F1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */; };
 		D3912C731B6E9CED003B42F1 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C721B6E9CED003B42F1 /* Timer.swift */; };
 		D3912C751B6E9D73003B42F1 /* BCYStandardLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */; };
@@ -52,6 +58,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D305FDD31B950A45006CE9E3 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
+		D305FDD41B950A45006CE9E3 /* pauseFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseFill.png; sourceTree = "<group>"; };
+		D305FDD51B950A45006CE9E3 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		D305FDD61B950A45006CE9E3 /* playFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playFill.png; sourceTree = "<group>"; };
+		D305FDD71B950A45006CE9E3 /* skip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skip.png; sourceTree = "<group>"; };
+		D305FDD81B950A45006CE9E3 /* skipfill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skipfill.png; sourceTree = "<group>"; };
 		D320C35F1B6FF5E90046F785 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		D320C3601B6FF5E90046F785 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		D32B9DEC1B77F6740098DCCF /* UIImage+WithColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+WithColor.swift"; sourceTree = "<group>"; };
@@ -76,7 +88,7 @@
 		D340CCB41B6D939F00BB17E3 /* UIColor+DarkenColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+DarkenColor.swift"; sourceTree = "<group>"; };
 		D340CCB61B6D9C6400BB17E3 /* FillView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillView.swift; sourceTree = "<group>"; };
 		D340CCB91B6DDD5400BB17E3 /* TimerViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViews.swift; sourceTree = "<group>"; };
-		D340CCBD1B6DE30100BB17E3 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		D340CCBD1B6DE30100BB17E3 /* TimerSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerSplitViewController.swift; sourceTree = "<group>"; };
 		D3463F671B713E0D002C68A8 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D35F34321B73B90E0038CF4C /* GSTRingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSTRingLayer.h; sourceTree = "<group>"; };
 		D35F34331B73B90E0038CF4C /* GSTRingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSTRingLayer.m; sourceTree = "<group>"; };
@@ -85,13 +97,14 @@
 		D37C2AAA1B75B7C8008826D5 /* GSTRing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSTRing.m; sourceTree = "<group>"; };
 		D384BC531B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimerViewController+TimerNotifications.swift"; sourceTree = "<group>"; };
 		D384BC551B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SettingsViewController+TimerNotifications.swift"; sourceTree = "<group>"; };
-		D384BC571B7F05B20024BCB0 /* SplitViewController+Coding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SplitViewController+Coding.swift"; sourceTree = "<group>"; };
+		D384BC571B7F05B20024BCB0 /* TimerSplitViewController+Coding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimerSplitViewController+Coding.swift"; sourceTree = "<group>"; };
 		D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D3912C721B6E9CED003B42F1 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCYStandardLibrary.swift; sourceTree = "<group>"; };
 		D3912C761B6F1476003B42F1 /* Timer+Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timer+Types.swift"; sourceTree = "<group>"; };
 		D39DAD191B917229007D797C /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timer+StatePreservation.swift"; sourceTree = "<group>"; };
+		D3EC191B1B94EB5000A8E426 /* playPauseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = playPauseButton.swift; sourceTree = "<group>"; };
 		D3F699A01B72DE0900BD21FD /* PieShapeView+Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PieShapeView+Progress.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +136,19 @@
 			name = Timer;
 			sourceTree = "<group>";
 		};
+		D305FDD21B9509DE006CE9E3 /* ButtonImages */ = {
+			isa = PBXGroup;
+			children = (
+				D305FDD31B950A45006CE9E3 /* pause.png */,
+				D305FDD41B950A45006CE9E3 /* pauseFill.png */,
+				D305FDD51B950A45006CE9E3 /* play.png */,
+				D305FDD61B950A45006CE9E3 /* playFill.png */,
+				D305FDD71B950A45006CE9E3 /* skip.png */,
+				D305FDD81B950A45006CE9E3 /* skipfill.png */,
+			);
+			name = ButtonImages;
+			sourceTree = "<group>";
+		};
 		D340CC6A1B6D3E7600BB17E3 = {
 			isa = PBXGroup;
 			children = (
@@ -147,12 +173,13 @@
 				D340CC7C1B6D3E7600BB17E3 /* Main.storyboard */,
 				D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */,
 				D39DAD191B917229007D797C /* Appearance.swift */,
-				D340CCBD1B6DE30100BB17E3 /* SplitViewController.swift */,
-				D384BC571B7F05B20024BCB0 /* SplitViewController+Coding.swift */,
+				D340CCBD1B6DE30100BB17E3 /* TimerSplitViewController.swift */,
+				D384BC571B7F05B20024BCB0 /* TimerSplitViewController+Coding.swift */,
 				D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */,
 				D384BC551B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift */,
 				D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */,
 				D384BC531B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift */,
+				D3EC191B1B94EB5000A8E426 /* playPauseButton.swift */,
 				D30230711B77D93D00148E74 /* Timer */,
 				D340CCA61B6D5CC100BB17E3 /* Rotation & Angle Types */,
 				D340CCB81B6DA8DA00BB17E3 /* Timer Views */,
@@ -164,6 +191,7 @@
 				D3463F671B713E0D002C68A8 /* Settings.bundle */,
 				D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */,
 				D340CC811B6D3E7600BB17E3 /* LaunchScreen.xib */,
+				D305FDD21B9509DE006CE9E3 /* ButtonImages */,
 				D340CC761B6D3E7600BB17E3 /* Supporting Files */,
 				D340CC9A1B6D504400BB17E3 /* GeekSpeak Show Timer-Bridging-Header.h */,
 			);
@@ -285,6 +313,7 @@
 		D340CC6B1B6D3E7600BB17E3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Brian Young";
 				TargetAttributes = {
@@ -321,8 +350,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D305FDDB1B950A45006CE9E3 /* play.png in Resources */,
 				D3463F681B713E0D002C68A8 /* Settings.bundle in Resources */,
+				D305FDDD1B950A45006CE9E3 /* skip.png in Resources */,
+				D305FDDA1B950A45006CE9E3 /* pauseFill.png in Resources */,
 				D340CC7E1B6D3E7600BB17E3 /* Main.storyboard in Resources */,
+				D305FDDE1B950A45006CE9E3 /* skipfill.png in Resources */,
+				D305FDDC1B950A45006CE9E3 /* playFill.png in Resources */,
+				D305FDD91B950A45006CE9E3 /* pause.png in Resources */,
 				D340CC831B6D3E7600BB17E3 /* LaunchScreen.xib in Resources */,
 				D340CC801B6D3E7600BB17E3 /* Images.xcassets in Resources */,
 			);
@@ -361,7 +396,7 @@
 				D37C2AAB1B75B7C8008826D5 /* GSTRing.m in Sources */,
 				D39DAD1A1B917229007D797C /* Appearance.swift in Sources */,
 				D340CCB51B6D939F00BB17E3 /* UIColor+DarkenColor.swift in Sources */,
-				D340CCBE1B6DE30100BB17E3 /* SplitViewController.swift in Sources */,
+				D340CCBE1B6DE30100BB17E3 /* TimerSplitViewController.swift in Sources */,
 				D320C3611B6FF5E90046F785 /* UIImage+ImageEffects.m in Sources */,
 				D3C487B31B726F3300B8067E /* Timer+StatePreservation.swift in Sources */,
 				D3912C771B6F1476003B42F1 /* Timer+Types.swift in Sources */,
@@ -374,7 +409,7 @@
 				D3912C731B6E9CED003B42F1 /* Timer.swift in Sources */,
 				D32B9DED1B77F6740098DCCF /* UIImage+WithColor.swift in Sources */,
 				D340CCA41B6D556D00BB17E3 /* AccumulatedAngle.swift in Sources */,
-				D384BC581B7F05B20024BCB0 /* SplitViewController+Coding.swift in Sources */,
+				D384BC581B7F05B20024BCB0 /* TimerSplitViewController+Coding.swift in Sources */,
 				D340CC9E1B6D504500BB17E3 /* PieShapeView.swift in Sources */,
 				D3F699A11B72DE0900BD21FD /* PieShapeView+Progress.swift in Sources */,
 				D3912C711B6E93B7003B42F1 /* SettingsViewController.swift in Sources */,
