@@ -36,7 +36,7 @@ final class TimerViewController: UIViewController {
     }
   }
   
-  // TODO: The Timer Property should be set by the SplitViewController
+  // TODO: The Timer Property should be injected by the SplitViewController
   //       during the segue. Revisit and stop pulling from other view controller
   var timer: Timer? {
     if let splitViewController = splitViewController as? TimerSplitViewController {

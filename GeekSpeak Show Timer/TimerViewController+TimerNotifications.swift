@@ -23,6 +23,7 @@ extension TimerViewController {
 
   func unregisterForTimerNotifications() {
     let notifyCenter = NSNotificationCenter.defaultCenter()
+    // TODO: When I explicitly remove each observer it throws an execption. why?
 //    notifyCenter.removeObserver( self,
 //                     forKeyPath: Timer.Constants.TimeChange)
 //    notifyCenter.removeObserver( self,
@@ -186,7 +187,7 @@ extension TimerViewController {
   
     func updateTimerLabels() {
       if let timer = timer {
-        let timing    = timer.timing
+        let timing = timer.timing
         switch timerLabelDisplay {
         case .Remaining:
           sectionTimeLabel.text = timing.asString(timer.secondsRemaining)
