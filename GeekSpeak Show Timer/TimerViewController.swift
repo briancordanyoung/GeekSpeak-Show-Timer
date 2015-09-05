@@ -136,7 +136,6 @@ final class TimerViewController: UIViewController {
     setupTimeLabelContraints(sectionTimeLabel)
     setupDescriptionLabelContraints(totalLabel)
     setupDescriptionLabelContraints(segmentLabel)
-    //styleButtons()
     
     let fillView  = PieShapeView()
     fillView.opaque     = false
@@ -185,8 +184,15 @@ final class TimerViewController: UIViewController {
     timerUpdatedTime()
     timerChangedCountingStatus()
     timerDurationChanged()
-    layoutViewsForSize(view.frame.size)
+    if let splitViewController = splitViewController {
+      layoutViewsForSize(splitViewController.view.frame.size)
+    } else {
+      layoutViewsForSize(view.frame.size)
+    }
   }
+  
+  
+  
   
   override func viewDidDisappear(animated: Bool) {
     unregisterForTimerNotifications()
@@ -342,20 +348,6 @@ final class TimerViewController: UIViewController {
     timerCirclesView.addSubview(ringView)
     ringView.opaque              = false
   }
-
-//  private func styleButtons() {
-//    styleButton(startPauseButton)
-//    styleButton(nextSegmentButton)
-//  }
-//  
-//  private func styleButton(button: UIButton)  {
-//    button.layer.borderWidth = 1
-//    button.layer.cornerRadius = 15
-//    button.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).CGColor
-//    button.titleLabel?.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-//
-//  }
-  
 
   func setupTimeLabelContraints(label: UILabel) {
     
