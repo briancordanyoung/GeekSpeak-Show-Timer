@@ -1,7 +1,6 @@
 import UIKit
 
-class TimerSplitViewController: UISplitViewController,
-                                UISplitViewControllerDelegate {
+class TimerSplitViewController: UISplitViewController {
 
   
   struct Constants {
@@ -21,15 +20,6 @@ class TimerSplitViewController: UISplitViewController,
     setDisplayMode()
   }
   
-  // Make sure the Settings View is displayed on startup
-  // http://stackoverflow.com/questions/25875618/uisplitviewcontroller-in-portrait-on-iphone-shows-detail-vc-instead-of-master
-  func splitViewController(splitViewController: UISplitViewController,
-    collapseSecondaryViewController secondaryViewController: UIViewController!,
-            ontoPrimaryViewController primaryViewController: UIViewController!)
-                                                                      -> Bool {
-    return true
-  }
-
   func setDisplayMode() {
     if collapsed {
       preferredDisplayMode = .Automatic
