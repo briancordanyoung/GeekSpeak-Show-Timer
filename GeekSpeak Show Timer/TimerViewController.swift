@@ -183,10 +183,12 @@ final class TimerViewController: UIViewController {
     } else {
       layoutViewsForSize(view.frame.size)
     }
-    
   }
   
-  
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+
+  }
   
   
   override func viewDidDisappear(animated: Bool) {
@@ -209,7 +211,6 @@ final class TimerViewController: UIViewController {
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     timerViews?.layoutSubviewsWithLineWidth(lineWidth)
-    startPauseButton.applyMask() 
   }
   
   

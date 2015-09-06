@@ -3,14 +3,19 @@ import UIKit
 
 class TimeWipeButton: UIButton {
   
+  struct Constants {
+    static let startAngleAnimKey = "startAngle"
+    static let endAngleAnimKey   = "endAngle"
+  }
+  
   var highlightOpacity = CGFloat(1.0)
+  var wipeDuration     = CFTimeInterval(3)
   
   var viewA: ShapesView? {
     willSet(newView) {
       newView?.userInteractionEnabled = false
       if let viewA   = viewA   { viewA.removeFromSuperview() }
       if let newView = newView {
-        maskAContainer.opaque = false
         newView.addSubview(maskAContainer)
         addSubview(newView)
       }
@@ -30,7 +35,10 @@ class TimeWipeButton: UIButton {
     willSet(newView) {
       newView?.userInteractionEnabled = false
       if let viewB   = viewB   { viewB.removeFromSuperview() }
-      if let newView = newView { addSubview(newView) }
+      if let newView = newView {
+        newView.addSubview(maskBContainer)
+        addSubview(newView)
+      }
 
       switch viewVisible {
       case .ViewA:
@@ -48,17 +56,13 @@ class TimeWipeButton: UIButton {
   }
   
   var viewVisible = ViewVisible.ViewA {
-    willSet(newView) {
-      switch newView {
+    willSet(nextView) {
+      switch nextView {
       case .ViewA:
-        transitionFromAToB()
+        if viewVisible != nextView { transitionFromBToA() }
       case .ViewB:
-        transitionFromBToA()
+        if viewVisible != nextView { transitionFromAToB() }
       }
-    }
-    // TODO: Remove once animation of views is in place
-    didSet {
-      updateViewVisibility()
     }
   }
   
@@ -71,59 +75,95 @@ class TimeWipeButton: UIButton {
     }
   }
 
+  var otherShapeView: ShapesView? {
+    switch viewVisible {
+    case .ViewA:
+      return viewB
+    case .ViewB:
+      return viewA
+    }
+  }
+
   
-  
+  private var viewIsReady = false
   private let maskAContainer = SizeToSuperView()
+  private let maskBContainer = SizeToSuperView()
   private let maskA = PieShapeView()
   private let maskB = PieShapeView()
+  private var applyMaskLater: () -> () = {}
 
-
+  // MARK: Setup
   override init(frame: CGRect) {
     super.init(frame: frame)
-    setup()
+    setupPieShapeViews()
   }
   
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    setup()
-  }
-  
-  
-  func setup() {
     setupPieShapeViews()
   }
   
   func setupPieShapeViews() {
     maskA.opaque = false
-    maskAContainer.addSubview(maskA)
     maskA.pieLayer.clipToCircle = false
     maskA.startAngle = Rotation(degrees: 0)
-    maskA.endAngle   = Rotation(degrees: 200)
+    maskA.endAngle   = Rotation(degrees: 360)
+    maskAContainer.opaque = false
+    maskAContainer.addSubview(maskA)
+
+    maskB.opaque = false
+    maskB.pieLayer.clipToCircle = false
+    maskB.startAngle = Rotation(degrees: 0)
+    maskB.endAngle   = Rotation(degrees: 360)
+    maskBContainer.opaque = false
+    maskBContainer.addSubview(maskB)
+    
+    applyMaskLater = {
+      self.viewA?.maskView = self.maskAContainer
+      self.viewB?.maskView = self.maskBContainer
+    }
   }
   
+  override func needsUpdateConstraints() -> Bool {
+    applyMaskLater()
+    return super.needsUpdateConstraints()
+  }
   
+  // MARK:
+  // MARK: UIControl Methods
   override func beginTrackingWithTouch(touch: UITouch,
                              withEvent event: UIEvent) -> Bool {
     let superResult =  super.beginTrackingWithTouch(touch, withEvent: event)
-    currentShapeView?.fillOpacity = highlightOpacity
+                                                            
+    if removeAnimationsFromLayers() {
+      otherShapeView?.fillOpacity   = highlightOpacity
+      currentShapeView?.fillOpacity = 0.0
+    } else {
+      currentShapeView?.fillOpacity = highlightOpacity
+      otherShapeView?.fillOpacity   = 0.0
+    }
     return superResult
   }
   
   override func cancelTrackingWithEvent(event: UIEvent?) {
     super.cancelTrackingWithEvent(event)
-    currentShapeView?.fillOpacity = 0.0
+    viewA?.fillOpacity = 0.0
+    viewB?.fillOpacity = 0.0
   }
   
   override func endTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) {
     super.endTrackingWithTouch(touch, withEvent: event)
-    currentShapeView?.fillOpacity = 0.0
+    if !touchInside {
+      viewA?.fillOpacity = 0.0
+      viewB?.fillOpacity = 0.0
+    }
     
   }
+
+
   
-  func applyMask() {
-    viewA?.maskView = maskAContainer
-  }
-  
+  // MARK:
+  // MARK: Actions
   func updateViewVisibility() {
     switch viewVisible {
     case .ViewA:
@@ -133,16 +173,116 @@ class TimeWipeButton: UIButton {
       viewA?.alpha = 0.0
       viewB?.alpha = 1.0
     }
-
   }
   
   func transitionFromAToB() {
+    
+    if removeAnimationsFromLayers() {
+      viewA?.fillOpacity = highlightOpacity
+      viewB?.fillOpacity = 0.0
+    }
 
+    wipeAnimationForLayer(maskA.pieLayer, forKey: Constants.startAngleAnimKey)
+    wipeAnimationForLayer(maskB.pieLayer, forKey: Constants.endAngleAnimKey)
+    
+    if let viewA = viewA {
+      self.bringSubviewToFront(viewA)
+    }
+    viewA?.alpha = 1.0
+    viewB?.alpha = 1.0
   }
 
+  
+  
   func transitionFromBToA() {
+    if removeAnimationsFromLayers() {
+      viewB?.fillOpacity = highlightOpacity
+      viewA?.fillOpacity = 0.0
+    }
 
+    wipeAnimationForLayer(maskB.pieLayer, forKey: Constants.startAngleAnimKey)
+    wipeAnimationForLayer(maskA.pieLayer, forKey: Constants.endAngleAnimKey)
+    
+    if let viewB = viewB {
+      self.bringSubviewToFront(viewB)
+    }
+    viewA?.alpha = 1.0
+    viewB?.alpha = 1.0
   }
+  
+  func removeAnimationsFromLayers() -> Bool {
+    return removeAnimationsFromLayers([maskA.pieLayer,
+                                       maskB.pieLayer])
+  }
+  
+  func removeAnimationsFromLayers(layers: [GSTPieLayer]) -> Bool {
+    var didRemove = false
+
+    for layer in layers {
+      if removeAnimationsFromLayer(layer) {
+        didRemove = true
+      }
+    }
+    
+    return didRemove
+  }
+  
+  
+  func removeAnimationsFromLayer(layer: GSTPieLayer) -> Bool {
+    var didRemove = false
+    
+    for key in [Constants.startAngleAnimKey,
+                Constants.endAngleAnimKey] {
+      if removeAnimationFromLayer(layer, forKey: key) {
+        didRemove = true
+      }
+    }
+
+    return didRemove
+  }
+
+  
+  func removeAnimationFromLayer(layer: GSTPieLayer, forKey key: String) -> Bool {
+    var didRemove = false
+    if (layer.animationForKey(key) != nil) {
+
+      didRemove = true
+      layer.removeAnimationForKey(key)
+    }
+    
+    return didRemove
+  }
+
+  func wipeAnimationForLayer(layer: GSTPieLayer, forKey key: String) {
+    let animation = CABasicAnimation(keyPath:key)
+    
+    animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+    animation.fromValue      = CGFloat(Rotation(degrees: 0))
+    animation.toValue        = CGFloat(Rotation(degrees: 360))
+    animation.duration       = wipeDuration
+    animation.delegate       = self
+    layer.setValue(CGFloat(Rotation(degrees: 360)), forKey: key)
+    layer.addAnimation(animation, forKey: key)
+  }
+  
+  
+  // CAAnimation delegate callbacks
+  override func animationDidStart(anim: CAAnimation!) {
+  
+  }
+
+  override func animationDidStop(animation: CAAnimation! ,finished: Bool) {
+    if finished {
+      viewA?.fillOpacity = 0.0
+      viewB?.fillOpacity = 0.0
+    }
+    updateViewVisibility()
+    maskA.startAngle = Rotation(degrees: 0)
+    maskA.endAngle   = Rotation(degrees: 360)
+    maskB.startAngle = Rotation(degrees: 0)
+    maskB.endAngle   = Rotation(degrees: 360)
+  }
+  
 
   
 }

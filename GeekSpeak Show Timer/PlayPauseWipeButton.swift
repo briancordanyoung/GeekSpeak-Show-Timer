@@ -35,11 +35,11 @@ class PlayPauseButton: TimeWipeButton {
     }
     
     set(newButtonView) {
-      switch visibleButtonView {
+      switch newButtonView {
       case .Play:
-        viewVisible = .ViewB
-      case .Pause:
         viewVisible = .ViewA
+      case .Pause:
+        viewVisible = .ViewB
       }
     }
   }

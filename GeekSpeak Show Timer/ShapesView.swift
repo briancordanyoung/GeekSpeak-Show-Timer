@@ -8,7 +8,8 @@ class ShapesView: SizeToSuperView {
   }
   
   var fillOpacity = CGFloat(0.0) {
-    didSet { setNeedsDisplay() }
+    didSet {
+      setNeedsDisplay() }
   }
   
   var lineWidth = CGFloat(1.0) {
