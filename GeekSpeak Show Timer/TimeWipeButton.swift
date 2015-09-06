@@ -210,49 +210,64 @@ class TimeWipeButton: UIButton {
     viewB?.alpha = 1.0
   }
   
+  
+  
+  
+  
+  
+  
+  
+  // MARK:
+  // MARK: Mask Animation Methods
+  
+  // MARK: check for existence of animation
+  func animationExistsOnLayer(layer: GSTPieLayer, forKey key: String) -> Bool {
+    return layer.animationForKey(key) != nil
+  }
+  
+  func animationExistsOnLayers(layers: [GSTPieLayer], forKey key: String) -> Bool {
+    func animationExistsOnLayerForKey(layer: GSTPieLayer) -> Bool {
+      return animationExistsOnLayer(layer, forKey: key)
+    }
+    
+    return layers.anyAreTrue(animationExistsOnLayerForKey)
+  }
+  
+  
+  // MARK: remove animation
   func removeAnimationsFromLayers() -> Bool {
     return removeAnimationsFromLayers([maskA.pieLayer,
                                        maskB.pieLayer])
   }
   
+  
+  
   func removeAnimationsFromLayers(layers: [GSTPieLayer]) -> Bool {
-    var didRemove = false
-
-    for layer in layers {
-      if removeAnimationsFromLayer(layer) {
-        didRemove = true
-      }
-    }
-    
-    return didRemove
+    return layers.anyAreTrue( removeAnimationsFromLayer )
   }
   
   
   func removeAnimationsFromLayer(layer: GSTPieLayer) -> Bool {
-    var didRemove = false
-    
-    for key in [Constants.startAngleAnimKey,
-                Constants.endAngleAnimKey] {
-      if removeAnimationFromLayer(layer, forKey: key) {
-        didRemove = true
-      }
+    let keys = [Constants.startAngleAnimKey,
+                Constants.endAngleAnimKey]
+
+    func removeAnimationForKey(key: String) -> Bool {
+      return removeAnimationFromLayer(layer, forKey: key)
     }
 
-    return didRemove
+    return keys.anyAreTrue(removeAnimationForKey)
   }
 
-  
   func removeAnimationFromLayer(layer: GSTPieLayer, forKey key: String) -> Bool {
-    var didRemove = false
-    if (layer.animationForKey(key) != nil) {
-
-      didRemove = true
+    if animationExistsOnLayer(layer, forKey: key) {
       layer.removeAnimationForKey(key)
+      return true
+    } else {
+      return false
     }
-    
-    return didRemove
   }
 
+  // MARK: create animation
   func wipeAnimationForLayer(layer: GSTPieLayer, forKey key: String) {
     let animation = CABasicAnimation(keyPath:key)
     
@@ -266,7 +281,7 @@ class TimeWipeButton: UIButton {
   }
   
   
-  // CAAnimation delegate callbacks
+  // MARK: CAAnimation delegate callbacks
   override func animationDidStart(anim: CAAnimation!) {
   
   }
