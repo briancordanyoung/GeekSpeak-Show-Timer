@@ -93,6 +93,13 @@ class TimeWipeButton: UIButton {
     setupPieShapeViews()
   }
   
+  func setupPieShapeViews() {
+    maskA.opaque = false
+    maskAContainer.addSubview(maskA)
+    maskA.pieLayer.clipToCircle = false
+    maskA.startAngle = Rotation(degrees: 0)
+    maskA.endAngle   = Rotation(degrees: 200)
+  }
   
   
   override func beginTrackingWithTouch(touch: UITouch,
@@ -111,19 +118,6 @@ class TimeWipeButton: UIButton {
     super.endTrackingWithTouch(touch, withEvent: event)
     currentShapeView?.fillOpacity = 0.0
     
-  }
-  
-  
-  func setupPieShapeViews() {
-    maskA.opaque = false
-    maskAContainer.addSubview(maskA)
-    maskA.pieLayer.clipToCircle = false
-    maskA.startAngle = Rotation(degrees: 0)
-    maskA.endAngle   = Rotation(degrees: 200)
-  }
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
   }
   
   func applyMask() {
