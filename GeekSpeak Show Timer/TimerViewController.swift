@@ -52,7 +52,7 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var sectionTimeLabel: UILabel!
   @IBOutlet weak var totalLabel: UILabel!
   @IBOutlet weak var segmentLabel: UILabel!
-  @IBOutlet weak var startPauseButton: UIButton!
+  @IBOutlet weak var startPauseButton: PlayPauseButton!
   @IBOutlet weak var nextSegmentButton: UIButton!
   
   // Vertical Layout
@@ -120,13 +120,7 @@ final class TimerViewController: UIViewController {
     
     
     if let timer = timer {
-      switch timer.state {
-      case .Ready,
-           .Paused:
-        showPlayImageUsingTransition(.instant)
-      case .Counting:
-        showPauseImageUsingTransition(.instant)
-      }
+      displayPlayPauseButton(timer)
     }
     
   }
@@ -189,6 +183,7 @@ final class TimerViewController: UIViewController {
     } else {
       layoutViewsForSize(view.frame.size)
     }
+    
   }
   
   
@@ -214,6 +209,7 @@ final class TimerViewController: UIViewController {
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     timerViews?.layoutSubviewsWithLineWidth(lineWidth)
+    startPauseButton.applyMask() 
   }
   
   
@@ -231,48 +227,29 @@ final class TimerViewController: UIViewController {
     self.splitViewController?.toggleMasterView()
   }
   
-  @IBAction func startPauseButtonTouched(sender: UIButton) {
-    pauseImage.highlighted = true
-    playImage.highlighted = true
-  }
 
-  @IBAction func startPauseButtonCanceled(sender: UIButton) {
-    pauseImage.highlighted = false
-    playImage.highlighted = false
-  }
-
-  @IBAction func startPauseButtonPressed(sender: UIButton) {
+  @IBAction func startPauseButtonPressed(sender: PlayPauseButton) {
     if let timer = timer {
       switch timer.state {
       case .Ready,
            .Paused:
         timer.start()
-        showPauseImageUsingTransition(.instant)
       case .Counting:
         timer.pause()
-        showPlayImageUsingTransition(.instant)
       }
     }
   }
   
-  enum TransitionType {
-    case animated
-    case instant
+  func displayPlayPauseButton(timer: Timer) {
+    switch timer.state {
+    case .Ready,
+         .Paused:
+      startPauseButton.visibleButtonView = .Play
+    case .Counting:
+      startPauseButton.visibleButtonView = .Pause
+    }
   }
   
-  func showPlayImageUsingTransition(transition: TransitionType) {
-    playImage.hidden = false
-    playImage.highlighted = false
-    pauseImage.hidden = true
-    pauseImage.highlighted = false
-  }
-
-  func showPauseImageUsingTransition(transition: TransitionType) {
-    playImage.hidden = true
-    playImage.highlighted = false
-    pauseImage.hidden = false
-    pauseImage.highlighted = false
-  }
   
   
   @IBAction func nextSegmentButtonTouched(sender: UIButton) {

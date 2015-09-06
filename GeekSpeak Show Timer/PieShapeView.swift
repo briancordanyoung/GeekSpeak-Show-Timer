@@ -13,12 +13,14 @@ class PieShapeView: FillView {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
+    contentMode = .Redraw
     startAngle = Rotation(degrees: 0)
     endAngle   = Rotation(degrees: 360)
   }
   
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
+    contentMode = .Redraw
     startAngle = Rotation(aDecoder.decodeDoubleForKey(Constants.StartAngle))
     endAngle   = Rotation(aDecoder.decodeDoubleForKey(Constants.EndAngle))
   }

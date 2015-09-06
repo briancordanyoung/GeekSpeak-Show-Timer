@@ -41,14 +41,7 @@ extension TimerViewController {
   
   func timerChangedCountingStatus() {
     if let timer = timer {
-      var buttonText: String
-      switch timer.state {
-      case .Ready,
-           .Paused:
-        showPlayImageUsingTransition(.instant)
-      case .Counting:
-        showPauseImageUsingTransition(.instant)
-      }
+      displayPlayPauseButton(timer)
     }
   }
   
