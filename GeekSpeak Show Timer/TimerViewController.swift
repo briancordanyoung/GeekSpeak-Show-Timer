@@ -34,6 +34,8 @@ final class TimerViewController: UIViewController {
                                           green: 255/255,
                                            blue: 150/255,
                                           alpha: 1.0)
+    
+    static let LineWidth          = CGFloat(90) / CGFloat(736)
   }
   
   var timerViews: TimerViews?
@@ -91,19 +93,7 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var pauseImage: UIImageView!
   @IBOutlet weak var skipImage: UIImageView!
   
-  var lineWidth: CGFloat {
-    return self.dynamicType.lineWidthForSize(timerCirclesView.frame.size)
-  }
-  
-  
-  class func lineWidthForSize(size: CGSize) -> CGFloat {
-    let developmentLineWidth    = CGFloat(90)
-    let developmentViewWidth    = CGFloat(736)
-    let currentViewWidth = (size.width + size.height) / 2
-    return (currentViewWidth / developmentViewWidth) * developmentLineWidth
-  }
-  
-  override func viewDidLoad() {
+  override func viewDidLoad() {    
     verticalContraints = [startButtonToTimerCircle,
                           startButtonToSuperView,
                           buttonsEqualWidth,
@@ -214,12 +204,6 @@ final class TimerViewController: UIViewController {
   
   // MARK: -
   // MARK: ViewController
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    timerViews?.layoutSubviewsWithLineWidth(lineWidth)
-  }
-  
-  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
   }
@@ -328,23 +312,32 @@ final class TimerViewController: UIViewController {
   // MARK: Setup
   func configureFGRing(ringView: RingView, withColor color: UIColor)
                                                                    -> RingView {
-      ringView.color      = color
-      ringView.startAngle = Rotation(degrees: 0)
-      ringView.endAngle   = Rotation(degrees: 10)
-      ringView.ringWidth  = lineWidth
-      configureRing(ringView)
-      return ringView
+                                                                    
+    ringView.color      = color
+    ringView.startAngle = Rotation(degrees: 0)
+    ringView.endAngle   = Rotation(degrees: 0)
+    configureRing(ringView)
+    return ringView
   }
   
   func configureBGRing(ringView: RingView, withColor color: UIColor)
                                                                    -> RingView {
-      ringView.color     = color.darkenColorWithMultiplier(0.2)
-      ringView.ringWidth = lineWidth
-      configureRing(ringView)
-      return ringView
+    ringView.color     = color.darkenColorWithMultiplier(0.2)
+    configureRing(ringView)
+    return ringView
   }
   
-  func configureRing(ringView: UIView) {
+  func configureRing(ringView: RingView) {
+    ringView.ringWidth = Constants.LineWidth
+    ringView.viewSize  = {[weak timerCirclesView] in
+                            if let timerCirclesView = timerCirclesView {
+                              return min(timerCirclesView.bounds.height,
+                                         timerCirclesView.bounds.width)
+                            } else {
+                              println("Warning: reference to timerCirclesView was lost.")
+                              return CGFloat(1000)
+                            }
+                          }
     timerCirclesView.addSubview(ringView)
     ringView.opaque              = false
   }

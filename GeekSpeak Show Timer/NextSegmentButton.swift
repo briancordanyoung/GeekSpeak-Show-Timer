@@ -86,6 +86,10 @@ class NextSegmentButton: ShapesButton {
     setupShapeView()
   }
   
+  func setupRingViews() {
+//    let ring1 = RingView()
+  }
+  
   func setupShapeView() {
     shapesView = ShapesView()
     

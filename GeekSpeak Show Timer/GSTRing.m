@@ -16,6 +16,7 @@
 @synthesize cornerRadiusStart;
 @synthesize cornerRadiusEnd;
 @synthesize color;
+@synthesize viewSize;
 
 - (id)init {
   self = [super init];
@@ -25,6 +26,7 @@
 - (id)initWithStart: (CGFloat) newStart
                 end: (CGFloat) newEnd
               width: (CGFloat) newWidth
+           viewSize: (relativeViewSize) newViewSize
   cornerRadiusStart: (CGFloat) newCornerRadiusStart
     cornerRadiusEnd: (CGFloat) newCornerRadiusEnd
               color: (CGColorRef) newColor {
@@ -33,6 +35,7 @@
   self.start             = newStart;
   self.end               = newEnd;
   self.width             = newWidth;
+  self.viewSize          = newViewSize;
   self.cornerRadiusStart = newCornerRadiusStart;
   self.cornerRadiusEnd   = newCornerRadiusEnd;
   self.color             = newColor;
