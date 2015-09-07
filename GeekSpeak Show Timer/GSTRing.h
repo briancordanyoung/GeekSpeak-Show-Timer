@@ -12,11 +12,11 @@ typedef  NSNumber * __nullable   (^relativeViewSize)(void);
 
 @interface GSTRing : NSObject
 
-  @property (nonatomic) CGFloat     start;
-  @property (nonatomic) CGFloat     end;
-  @property (nonatomic) CGFloat     width;
-  @property (nonatomic) CGFloat     cornerRadiusStart;
-  @property (nonatomic) CGFloat     cornerRadiusEnd;
+  @property (nonatomic) CGFloat     start;  /* angle in radians */
+  @property (nonatomic) CGFloat     end;    /* angle in radians */
+  @property (nonatomic) CGFloat     width;  /* percentage from 0 to 1 */
+  @property (nonatomic) CGFloat     cornerRadiusStart; /* unused */
+  @property (nonatomic) CGFloat     cornerRadiusEnd;   /* unused */
   @property (nonnull, nonatomic) CGColorRef  color;
   @property (nullable, copy) relativeViewSize viewSize;
 
