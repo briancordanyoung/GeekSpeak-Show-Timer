@@ -7,7 +7,7 @@ class SizeToSuperView: UIView {
   var sizeConstraintsActive:   [NSLayoutConstraint] = []
   var sizeConstraintsInactive: [NSLayoutConstraint] = []
 
-  var percentageOfSuperViewAnimationDuration = NSTimeInterval(0.5)
+  var percentageOfSuperViewAnimationDuration = NSTimeInterval(0.25)
   private var _percentageOfSuperviewSize: CGFloat = 1.0
   
   var percentageOfSuperviewSize: CGFloat {
