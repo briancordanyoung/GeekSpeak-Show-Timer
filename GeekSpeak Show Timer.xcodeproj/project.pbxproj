@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D305FDD91B950A45006CE9E3 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = D305FDD31B950A45006CE9E3 /* pause.png */; };
-		D305FDDA1B950A45006CE9E3 /* pauseFill.png in Resources */ = {isa = PBXBuildFile; fileRef = D305FDD41B950A45006CE9E3 /* pauseFill.png */; };
-		D305FDDB1B950A45006CE9E3 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = D305FDD51B950A45006CE9E3 /* play.png */; };
-		D305FDDC1B950A45006CE9E3 /* playFill.png in Resources */ = {isa = PBXBuildFile; fileRef = D305FDD61B950A45006CE9E3 /* playFill.png */; };
-		D305FDDD1B950A45006CE9E3 /* skip.png in Resources */ = {isa = PBXBuildFile; fileRef = D305FDD71B950A45006CE9E3 /* skip.png */; };
-		D305FDDE1B950A45006CE9E3 /* skipfill.png in Resources */ = {isa = PBXBuildFile; fileRef = D305FDD81B950A45006CE9E3 /* skipfill.png */; };
 		D320C3611B6FF5E90046F785 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = D320C3601B6FF5E90046F785 /* UIImage+ImageEffects.m */; };
 		D32B9DED1B77F6740098DCCF /* UIImage+WithColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32B9DEC1B77F6740098DCCF /* UIImage+WithColor.swift */; };
 		D340CC791B6D3E7600BB17E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */; };
@@ -68,12 +62,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D305FDD31B950A45006CE9E3 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
-		D305FDD41B950A45006CE9E3 /* pauseFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseFill.png; sourceTree = "<group>"; };
-		D305FDD51B950A45006CE9E3 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
-		D305FDD61B950A45006CE9E3 /* playFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playFill.png; sourceTree = "<group>"; };
-		D305FDD71B950A45006CE9E3 /* skip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skip.png; sourceTree = "<group>"; };
-		D305FDD81B950A45006CE9E3 /* skipfill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skipfill.png; sourceTree = "<group>"; };
 		D320C35F1B6FF5E90046F785 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		D320C3601B6FF5E90046F785 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		D32B9DEC1B77F6740098DCCF /* UIImage+WithColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+WithColor.swift"; sourceTree = "<group>"; };
@@ -155,19 +143,6 @@
 			name = Timer;
 			sourceTree = "<group>";
 		};
-		D305FDD21B9509DE006CE9E3 /* ButtonImages */ = {
-			isa = PBXGroup;
-			children = (
-				D305FDD31B950A45006CE9E3 /* pause.png */,
-				D305FDD41B950A45006CE9E3 /* pauseFill.png */,
-				D305FDD51B950A45006CE9E3 /* play.png */,
-				D305FDD61B950A45006CE9E3 /* playFill.png */,
-				D305FDD71B950A45006CE9E3 /* skip.png */,
-				D305FDD81B950A45006CE9E3 /* skipfill.png */,
-			);
-			name = ButtonImages;
-			sourceTree = "<group>";
-		};
 		D340CC6A1B6D3E7600BB17E3 = {
 			isa = PBXGroup;
 			children = (
@@ -211,7 +186,6 @@
 				D3463F671B713E0D002C68A8 /* Settings.bundle */,
 				D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */,
 				D340CC811B6D3E7600BB17E3 /* LaunchScreen.xib */,
-				D305FDD21B9509DE006CE9E3 /* ButtonImages */,
 				D340CC761B6D3E7600BB17E3 /* Supporting Files */,
 				D340CC9A1B6D504400BB17E3 /* GeekSpeak Show Timer-Bridging-Header.h */,
 			);
@@ -386,14 +360,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D305FDDB1B950A45006CE9E3 /* play.png in Resources */,
 				D3463F681B713E0D002C68A8 /* Settings.bundle in Resources */,
-				D305FDDD1B950A45006CE9E3 /* skip.png in Resources */,
-				D305FDDA1B950A45006CE9E3 /* pauseFill.png in Resources */,
 				D340CC7E1B6D3E7600BB17E3 /* Main.storyboard in Resources */,
-				D305FDDE1B950A45006CE9E3 /* skipfill.png in Resources */,
-				D305FDDC1B950A45006CE9E3 /* playFill.png in Resources */,
-				D305FDD91B950A45006CE9E3 /* pause.png in Resources */,
 				D340CC831B6D3E7600BB17E3 /* LaunchScreen.xib in Resources */,
 				D340CC801B6D3E7600BB17E3 /* Images.xcassets in Resources */,
 			);
