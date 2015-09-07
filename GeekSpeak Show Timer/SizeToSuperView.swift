@@ -28,11 +28,11 @@ class SizeToSuperView: UIView {
 
   func animatePercentageOfSuperviewSizeWithDuration(duration: NSTimeInterval) {
     
-    // repmace the current inactive contraints with one that will use the 
+    // replace the current inactive contraints with one that will use the
     // newly set percentage
     if let superview = self.superview {
     let sizeInactive = createHeightAndWidthContraintsForView( self,
-                                      toSuperview: superview,
+                                          toSuperview: superview,
                                       usingMultiplier: percentageOfSuperviewSize)
       sizeInactive.map({$0.priority = $0.priority * 0.1})
       sizeConstraintsInactive.map({superview.removeConstraint($0)})
@@ -43,22 +43,27 @@ class SizeToSuperView: UIView {
     if let superview = superview  {
       layoutIfNeeded()
       
-      let options = UIViewAnimationOptions.CurveEaseInOut
-
-      UIView.animateWithDuration( duration,
-                           delay: 0.0,
-                         options: options,
-      animations: {
+      func changePercentage() {
         self.sizeConstraintsInactive.map({$0.priority = $0.priority * 10 })
         self.sizeConstraintsActive.map(  {$0.priority = $0.priority * 0.1})
         let newInactive = self.sizeConstraintsActive
-        let newActive = self.sizeConstraintsInactive
+        let newActive   = self.sizeConstraintsInactive
         self.sizeConstraintsInactive = newInactive
         self.sizeConstraintsActive   = newActive
         self.layoutIfNeeded()
-      }, completion: { completed in
-        self.setNeedsDisplay()
-      })
+      }
+      
+      if duration == 0 {
+        changePercentage()
+      }
+      
+      let options = UIViewAnimationOptions.CurveEaseInOut
+      UIView.animateWithDuration( duration,
+                           delay: 0.0,
+                         options: options,
+                      animations: changePercentage,
+                      completion: { completed in self.setNeedsDisplay() }
+      )
     }
   }
   

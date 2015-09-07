@@ -90,7 +90,7 @@
                                     <rect key="frame" x="325" y="974" width="118" height="31"/>
                                 </variation>
                             </slider>
-                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="startPause" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PdP-pn-H8o" userLabel="PlayPause" customClass="PlayPauseButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PdP-pn-H8o" userLabel="PlayPause" customClass="PlayPauseButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
                                 <rect key="frame" x="16" y="760" width="364" height="244"/>
                                 <state key="normal">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -103,47 +103,7 @@
                                     <action selector="startPauseButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="675-vk-O2X"/>
                                 </connections>
                             </button>
-                            <view opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CfQ-6G-hJJ" userLabel="PlayPauseImages">
-                                <rect key="frame" x="76" y="760" width="244" height="244"/>
-                                <subviews>
-                                    <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" image="play.png" highlightedImage="playFill.png" translatesAutoresizingMaskIntoConstraints="NO" id="yIc-zX-kNL" userLabel="play">
-                                        <rect key="frame" x="0.0" y="0.0" width="244" height="244"/>
-                                    </imageView>
-                                    <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" image="pause.png" highlightedImage="pauseFill.png" translatesAutoresizingMaskIntoConstraints="NO" id="Bgs-Iy-hve" userLabel="pause">
-                                        <rect key="frame" x="0.0" y="0.0" width="244" height="244"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="yIc-zX-kNL" firstAttribute="top" secondItem="CfQ-6G-hJJ" secondAttribute="top" id="D60-NZ-Fqe"/>
-                                    <constraint firstAttribute="trailing" secondItem="yIc-zX-kNL" secondAttribute="trailing" id="Dki-Rq-sJQ"/>
-                                    <constraint firstItem="Bgs-Iy-hve" firstAttribute="top" secondItem="CfQ-6G-hJJ" secondAttribute="top" id="KVt-wz-paS"/>
-                                    <constraint firstItem="Bgs-Iy-hve" firstAttribute="leading" secondItem="CfQ-6G-hJJ" secondAttribute="leading" id="M1J-qp-Lc4"/>
-                                    <constraint firstAttribute="bottom" secondItem="yIc-zX-kNL" secondAttribute="bottom" id="Q8e-eO-5RQ"/>
-                                    <constraint firstAttribute="trailing" secondItem="Bgs-Iy-hve" secondAttribute="trailing" id="WVw-3L-Tjw"/>
-                                    <constraint firstAttribute="bottom" secondItem="Bgs-Iy-hve" secondAttribute="bottom" id="iSA-5L-Z0v"/>
-                                    <constraint firstItem="yIc-zX-kNL" firstAttribute="leading" secondItem="CfQ-6G-hJJ" secondAttribute="leading" id="v5z-8G-cE8"/>
-                                    <constraint firstAttribute="width" secondItem="CfQ-6G-hJJ" secondAttribute="height" multiplier="1:1" id="wRj-fP-Y6I"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="subviews">
-                                        <exclude reference="yIc-zX-kNL"/>
-                                        <exclude reference="Bgs-Iy-hve"/>
-                                    </mask>
-                                    <mask key="constraints">
-                                        <exclude reference="wRj-fP-Y6I"/>
-                                        <exclude reference="KVt-wz-paS"/>
-                                        <exclude reference="M1J-qp-Lc4"/>
-                                        <exclude reference="WVw-3L-Tjw"/>
-                                        <exclude reference="iSA-5L-Z0v"/>
-                                        <exclude reference="D60-NZ-Fqe"/>
-                                        <exclude reference="Dki-Rq-sJQ"/>
-                                        <exclude reference="Q8e-eO-5RQ"/>
-                                        <exclude reference="v5z-8G-cE8"/>
-                                    </mask>
-                                </variation>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-5J-yaK" userLabel="Skip">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-5J-yaK" userLabel="Skip" customClass="NextSegmentButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
                                 <rect key="frame" x="388" y="760" width="364" height="244"/>
                                 <state key="normal">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -153,31 +113,9 @@
                                     <rect key="frame" x="724" y="373" width="284" height="375"/>
                                 </variation>
                                 <connections>
-                                    <action selector="nextSegmentButtonCanceled:" destination="BYZ-38-t0r" eventType="touchDragExit" id="2Hq-T3-1o9"/>
-                                    <action selector="nextSegmentButtonCanceled:" destination="BYZ-38-t0r" eventType="touchCancel" id="50F-DB-r1w"/>
-                                    <action selector="nextSegmentButtonCanceled:" destination="BYZ-38-t0r" eventType="touchDragOutside" id="kxo-eK-Rjs"/>
-                                    <action selector="nextSegmentButtonCanceled:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="mUn-bb-iL7"/>
-                                    <action selector="nextSegmentButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l5Z-AD-lkN"/>
-                                    <action selector="nextSegmentButtonTouched:" destination="BYZ-38-t0r" eventType="touchDragEnter" id="bTz-el-9iQ"/>
-                                    <action selector="nextSegmentButtonTouched:" destination="BYZ-38-t0r" eventType="touchDown" id="dQR-zU-INt"/>
+                                    <action selector="nextSegmentButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4vC-nM-WnJ"/>
                                 </connections>
                             </button>
-                            <view opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xHT-Dn-aoJ" userLabel="SkipImages">
-                                <rect key="frame" x="448" y="760" width="244" height="244"/>
-                                <subviews>
-                                    <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" image="skip.png" highlightedImage="skipfill.png" translatesAutoresizingMaskIntoConstraints="NO" id="3FX-As-bNC" userLabel="skip">
-                                        <rect key="frame" x="0.0" y="0.0" width="244" height="244"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="3FX-As-bNC" firstAttribute="leading" secondItem="xHT-Dn-aoJ" secondAttribute="leading" id="4Q4-0G-jib"/>
-                                    <constraint firstAttribute="trailing" secondItem="3FX-As-bNC" secondAttribute="trailing" id="7Vo-Dc-wrf"/>
-                                    <constraint firstItem="3FX-As-bNC" firstAttribute="top" secondItem="xHT-Dn-aoJ" secondAttribute="top" id="B1Z-4E-jkq"/>
-                                    <constraint firstAttribute="bottom" secondItem="3FX-As-bNC" secondAttribute="bottom" id="OVl-Ud-F8Q"/>
-                                    <constraint firstAttribute="width" secondItem="xHT-Dn-aoJ" secondAttribute="height" multiplier="1:1" id="kta-i2-n87"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -186,42 +124,22 @@
                             <constraint firstItem="PdP-pn-H8o" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" priority="751" id="DtS-4O-nA1" userLabel="startButtonToSuperView"/>
                             <constraint firstItem="PdP-pn-H8o" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" priority="749" constant="16" id="E8R-t5-I1A" userLabel="startButtonToSuperViewTop"/>
                             <constraint firstItem="edy-5J-yaK" firstAttribute="top" secondItem="tY2-lc-OlN" secondAttribute="bottom" priority="751" constant="8" id="Hed-8j-X5n" userLabel="nextButtonToTimerCircles"/>
-                            <constraint firstItem="xHT-Dn-aoJ" firstAttribute="height" relation="lessThanOrEqual" secondItem="edy-5J-yaK" secondAttribute="height" priority="500" id="Hyo-Yk-avA"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="PdP-pn-H8o" secondAttribute="bottom" priority="751" constant="20" id="JFL-9U-et7" userLabel="startButtonToBottom"/>
-                            <constraint firstItem="xHT-Dn-aoJ" firstAttribute="centerY" secondItem="edy-5J-yaK" secondAttribute="centerY" id="JUK-K9-SrX"/>
-                            <constraint firstItem="xHT-Dn-aoJ" firstAttribute="width" secondItem="xHT-Dn-aoJ" secondAttribute="height" multiplier="1:1" id="LbD-AJ-4nj"/>
                             <constraint firstItem="PdP-pn-H8o" firstAttribute="width" secondItem="edy-5J-yaK" secondAttribute="width" priority="751" id="O3c-f6-xju" userLabel="buttonsEqualWidth"/>
                             <constraint firstItem="tY2-lc-OlN" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" priority="749" constant="-32" id="QKI-vN-P0e" userLabel="timerCirclesHeight"/>
                             <constraint firstItem="PdP-pn-H8o" firstAttribute="height" secondItem="edy-5J-yaK" secondAttribute="height" priority="749" id="QoA-ct-xub" userLabel="buttonsEqualHeight"/>
-                            <constraint firstItem="CfQ-6G-hJJ" firstAttribute="width" relation="lessThanOrEqual" secondItem="PdP-pn-H8o" secondAttribute="width" priority="500" id="Qqy-cC-MJ5"/>
-                            <constraint firstItem="CfQ-6G-hJJ" firstAttribute="centerY" secondItem="PdP-pn-H8o" secondAttribute="centerY" id="awL-ri-Bkj"/>
                             <constraint firstItem="tY2-lc-OlN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" priority="750" constant="16" id="b5I-QT-R6p" userLabel="timerCircleToTop"/>
-                            <constraint firstItem="xHT-Dn-aoJ" firstAttribute="centerX" secondItem="edy-5J-yaK" secondAttribute="centerX" id="bH4-Ah-xxA"/>
                             <constraint firstItem="edy-5J-yaK" firstAttribute="top" secondItem="PdP-pn-H8o" secondAttribute="bottom" priority="749" constant="8" id="btS-u7-nLT" userLabel="nextButtonToStartButtonHorizontal"/>
-                            <constraint firstItem="xHT-Dn-aoJ" firstAttribute="width" relation="lessThanOrEqual" secondItem="edy-5J-yaK" secondAttribute="width" priority="500" id="dZa-QV-ceU"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="edy-5J-yaK" secondAttribute="bottom" priority="751" constant="20" id="fWi-xK-0mJ" userLabel="nextButtonToBottom"/>
-                            <constraint firstItem="CfQ-6G-hJJ" firstAttribute="height" relation="lessThanOrEqual" secondItem="PdP-pn-H8o" secondAttribute="height" priority="500" id="mC7-4T-bJC"/>
                             <constraint firstItem="edy-5J-yaK" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" priority="749" id="mlA-cE-QNr" userLabel="nextButtonToSuperViewSideHorizontal"/>
                             <constraint firstItem="PdP-pn-H8o" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" priority="749" id="msl-Iq-GwD" userLabel="startButtonToSuperViewHorizontal"/>
                             <constraint firstItem="tY2-lc-OlN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" priority="750" constant="16" id="oUn-Ry-axO" userLabel="timerCircleToLeading"/>
                             <constraint firstItem="edy-5J-yaK" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" priority="751" id="v95-P5-teg" userLabel="nextButtonToSuperViewSide"/>
                             <constraint firstItem="edy-5J-yaK" firstAttribute="leading" secondItem="tY2-lc-OlN" secondAttribute="trailing" priority="749" constant="8" id="vIC-8F-pSH" userLabel="nextButtonToTimerCircle"/>
                             <constraint firstItem="PdP-pn-H8o" firstAttribute="leading" secondItem="tY2-lc-OlN" secondAttribute="trailing" priority="749" constant="8" id="vTB-3Q-4ny" userLabel="startButtonToTimerCircleHorizontal"/>
-                            <constraint firstItem="CfQ-6G-hJJ" firstAttribute="centerX" secondItem="PdP-pn-H8o" secondAttribute="centerX" id="wJP-Tk-Pxh"/>
                             <constraint firstItem="tY2-lc-OlN" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" priority="751" constant="-32" id="yRd-tA-hxX" userLabel="timerCirclesWidth"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="edy-5J-yaK" secondAttribute="bottom" priority="749" constant="20" id="zey-f0-8l8" userLabel="nextButtonToBottomHorizontal"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="CfQ-6G-hJJ"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="Qqy-cC-MJ5"/>
-                                <exclude reference="awL-ri-Bkj"/>
-                                <exclude reference="mC7-4T-bJC"/>
-                                <exclude reference="wJP-Tk-Pxh"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="wM9-rF-CHT"/>
                     <connections>
@@ -235,12 +153,9 @@
                         <outlet property="nextButtonToSuperViewSideHorizontal" destination="mlA-cE-QNr" id="N0Z-jz-iaZ"/>
                         <outlet property="nextButtonToTimerCircle" destination="vIC-8F-pSH" id="KRS-zH-FOO"/>
                         <outlet property="nextButtonToTimerCircles" destination="Hed-8j-X5n" id="r6R-ah-7GZ"/>
-                        <outlet property="nextSegmentButton" destination="edy-5J-yaK" id="OHZ-MG-UGu"/>
-                        <outlet property="pauseImage" destination="Bgs-Iy-hve" id="mJT-Mh-B1k"/>
-                        <outlet property="playImage" destination="yIc-zX-kNL" id="dpW-Vv-N0c"/>
+                        <outlet property="nextSegmentButton" destination="edy-5J-yaK" id="aip-vC-v9i"/>
                         <outlet property="sectionTimeLabel" destination="fhW-lj-LnF" id="PUl-lz-n33"/>
                         <outlet property="segmentLabel" destination="6Xz-Ti-gwy" id="Hdh-QZ-ZTt"/>
-                        <outlet property="skipImage" destination="3FX-As-bNC" id="Mva-e3-Aeg"/>
                         <outlet property="startButtonToBottom" destination="JFL-9U-et7" id="EBU-m0-zQ4"/>
                         <outlet property="startButtonToSuperView" destination="DtS-4O-nA1" id="dB4-jD-9ZB"/>
                         <outlet property="startButtonToSuperViewHorizontal" destination="msl-Iq-GwD" id="AcI-ED-awB"/>
@@ -757,12 +672,6 @@
     </scenes>
     <resources>
         <image name="GeekSpeakWhite" width="600" height="600"/>
-        <image name="pause.png" width="1000" height="1000"/>
-        <image name="pauseFill.png" width="1000" height="1000"/>
-        <image name="play.png" width="1000" height="1000"/>
-        <image name="playFill.png" width="1000" height="1000"/>
-        <image name="skip.png" width="1000" height="1000"/>
-        <image name="skipfill.png" width="1000" height="1000"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Y8G-p3-Pc0"/>

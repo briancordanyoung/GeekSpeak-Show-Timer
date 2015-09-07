@@ -3,6 +3,15 @@ import UIKit
 
 class TimeWipeButton: UIButton {
   
+  struct Constants {
+    static let startAngleAnimKey = "startAngle"
+    static let endAngleAnimKey   = "endAngle"
+  }
+  
+  var highlightOpacity = CGFloat(1.0)
+  var wipeDuration     = CFTimeInterval(0.33333333)
+  
+  
   var percentageOfSuperviewSize: CGFloat {
     get {
       var percentage = CGFloat(1)
@@ -17,14 +26,6 @@ class TimeWipeButton: UIButton {
       viewB?.animatePercentageOfSuperviewSize(newPercentage)
     }
   }
-  
-  struct Constants {
-    static let startAngleAnimKey = "startAngle"
-    static let endAngleAnimKey   = "endAngle"
-  }
-  
-  var highlightOpacity = CGFloat(1.0)
-  var wipeDuration     = CFTimeInterval(0.33333333)
   
   var viewA: ShapesView? {
     willSet(newView) {
@@ -97,7 +98,6 @@ class TimeWipeButton: UIButton {
   }
   
   
-  private var viewIsReady = false
   private let maskAContainer = SizeToSuperView()
   private let maskBContainer = SizeToSuperView()
   private let maskA = PieShapeView()
