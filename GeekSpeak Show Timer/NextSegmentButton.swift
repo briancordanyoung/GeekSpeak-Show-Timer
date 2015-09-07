@@ -199,6 +199,9 @@ class NextSegmentButton: ShapesButton {
     }
   }
   
+  
+  
+  
   // MARK:
   // MARK:  Animation Methods
   private let phaseCount    =  NSTimeInterval(2)
