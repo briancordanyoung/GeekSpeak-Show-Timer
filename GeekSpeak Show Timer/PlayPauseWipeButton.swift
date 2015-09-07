@@ -31,12 +31,7 @@ class PlayPauseButton: TimeWipeButton {
     let minHeightWidth = min(size.height,size.width)
     
     func m(p: CGFloat) -> CGFloat {
-      if p > 1000 {
-        println("p \(p)")
-      }
-      
       let percent = p / CGFloat(1000)
-      
       return percent * minHeightWidth
     }
     
