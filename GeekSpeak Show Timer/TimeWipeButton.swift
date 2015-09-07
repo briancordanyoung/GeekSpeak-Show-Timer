@@ -3,6 +3,21 @@ import UIKit
 
 class TimeWipeButton: UIButton {
   
+  var percentageOfSuperviewSize: CGFloat {
+    get {
+      var percentage = CGFloat(1)
+      if let a = viewA?.percentageOfSuperviewSize ,
+             b = viewB?.percentageOfSuperviewSize {
+        percentage = ((a + b) / 2)
+      }
+      return percentage
+    }
+    set(newPercentage) {
+      viewA?.animatePercentageOfSuperviewSize(newPercentage)
+      viewB?.animatePercentageOfSuperviewSize(newPercentage)
+    }
+  }
+  
   struct Constants {
     static let startAngleAnimKey = "startAngle"
     static let endAngleAnimKey   = "endAngle"

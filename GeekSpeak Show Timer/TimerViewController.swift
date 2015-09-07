@@ -13,6 +13,8 @@ enum TimerLabelDisplay: String, Printable {
 final class TimerViewController: UIViewController {
   
   struct Constants {
+    static let DeemphisisedButtonScale = CGFloat(0.5)
+    static let EmphisisedButtonScale   = CGFloat(1.0)
     static let GeekSpeakBlueColor = UIColor(red: 14/255,
                                           green: 115/255,
                                            blue: 192/255,
@@ -245,14 +247,22 @@ final class TimerViewController: UIViewController {
   
   func displayPlayPauseButton(timer: Timer) {
     switch timer.state {
-    case .Ready,
-         .Paused:
+    case .Ready:
+      startPauseButton.percentageOfSuperviewSize = Constants.EmphisisedButtonScale
+      if startPauseButtonCount > 0 {
+        startPauseButton.animateToPlayView()
+      } else {
+        startPauseButton.showPlayView()
+      }
+    case .Paused:
+      startPauseButton.percentageOfSuperviewSize = Constants.DeemphisisedButtonScale
       if startPauseButtonCount > 0 {
         startPauseButton.animateToPlayView()
       } else {
         startPauseButton.showPlayView()
       }
     case .Counting:
+      startPauseButton.percentageOfSuperviewSize = Constants.DeemphisisedButtonScale
       if startPauseButtonCount > 0 {
         startPauseButton.animateToPauseView()
       } else {
