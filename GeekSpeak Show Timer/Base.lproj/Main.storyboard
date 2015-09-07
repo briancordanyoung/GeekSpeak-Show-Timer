@@ -103,8 +103,12 @@
                                     <action selector="startPauseButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="675-vk-O2X"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-5J-yaK" userLabel="Skip" customClass="NextSegmentButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-5J-yaK" userLabel="Skip" customClass="NextSegmentButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
                                 <rect key="frame" x="388" y="760" width="364" height="244"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="1" id="tPY-Qx-9to" userLabel="nextButtonHeight"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="1" id="xcx-qj-ia9" userLabel="nextButtonWidth"/>
+                                </constraints>
                                 <state key="normal">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -145,6 +149,7 @@
                     <connections>
                         <outlet property="buttonsEqualHeight" destination="QoA-ct-xub" id="tNN-wT-Eip"/>
                         <outlet property="buttonsEqualWidth" destination="O3c-f6-xju" id="gBf-Wq-wpy"/>
+                        <outlet property="nextButtonHeight" destination="tPY-Qx-9to" id="HpB-gi-1vJ"/>
                         <outlet property="nextButtonToBottom" destination="fWi-xK-0mJ" id="lvI-OL-dzP"/>
                         <outlet property="nextButtonToBottomHorizontal" destination="zey-f0-8l8" id="2mr-dh-B8L"/>
                         <outlet property="nextButtonToStartButtonHorizontal" destination="btS-u7-nLT" id="UPH-BG-BK0"/>
@@ -153,6 +158,7 @@
                         <outlet property="nextButtonToSuperViewSideHorizontal" destination="mlA-cE-QNr" id="N0Z-jz-iaZ"/>
                         <outlet property="nextButtonToTimerCircle" destination="vIC-8F-pSH" id="KRS-zH-FOO"/>
                         <outlet property="nextButtonToTimerCircles" destination="Hed-8j-X5n" id="r6R-ah-7GZ"/>
+                        <outlet property="nextButtonWidth" destination="xcx-qj-ia9" id="jaH-vG-brV"/>
                         <outlet property="nextSegmentButton" destination="edy-5J-yaK" id="aip-vC-v9i"/>
                         <outlet property="sectionTimeLabel" destination="fhW-lj-LnF" id="PUl-lz-n33"/>
                         <outlet property="segmentLabel" destination="6Xz-Ti-gwy" id="Hdh-QZ-ZTt"/>

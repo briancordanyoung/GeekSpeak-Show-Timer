@@ -13,8 +13,8 @@ enum TimerLabelDisplay: String, Printable {
 final class TimerViewController: UIViewController {
   
   struct Constants {
-    static let DeemphisisedButtonScale = CGFloat(0.5)
-    static let EmphisisedButtonScale   = CGFloat(1.0)
+    static let DeemphisisedButtonScale = CGFloat(0.25)
+    static let EmphisisedButtonScale   = CGFloat(1.0 )
     static let GeekSpeakBlueColor = UIColor(red: 14/255,
                                           green: 115/255,
                                            blue: 192/255,
@@ -35,8 +35,12 @@ final class TimerViewController: UIViewController {
                                            blue: 150/255,
                                           alpha: 1.0)
     
-    static let LineWidth          = CGFloat(90) / CGFloat(736)
-    static let RingDarkeningFactor = CGFloat(0.2)
+    static let LineWidth              = CGFloat(90) / CGFloat(736)
+    static let RingDarkeningFactor    = CGFloat(0.2)
+    
+    static let ActiveLayoutPriority   = UILayoutPriority(751)
+    static let InactiveLayoutPriority = UILayoutPriority(749)
+    static let IgnoreLayoutPriority   = UILayoutPriority(1)
   }
   
   var timerViews: TimerViews?
@@ -46,7 +50,23 @@ final class TimerViewController: UIViewController {
     }
   }
   
-  // TODO: The Timer Property should be injected by the SplitViewController
+  private var layoutSize: CGSize {
+    if let splitViewController = splitViewController {
+      return splitViewController.view.frame.size
+    } else {
+      return view.frame.size
+    }
+  }
+  
+  private var layoutIsVertical: Bool {
+    return self.layoutSize.width < self.layoutSize.height
+  }
+  
+  private var layoutIsHorizontal: Bool {
+    return self.layoutSize.width < self.layoutSize.height
+  }
+  
+ // TODO: The Timer Property should be injected by the SplitViewController
   //       during the segue. Revisit and stop pulling from other view controller
   var timer: Timer? {
     if let splitViewController = splitViewController as? TimerSplitViewController {
@@ -75,6 +95,7 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var nextButtonToSuperViewSide: NSLayoutConstraint!
   @IBOutlet weak var startButtonToBottom: NSLayoutConstraint!
   @IBOutlet weak var nextButtonToBottom: NSLayoutConstraint!
+  @IBOutlet weak var nextButtonWidth: NSLayoutConstraint!
   var verticalContraints: [NSLayoutConstraint] = []
   
   // Horizontal Layout
@@ -87,33 +108,32 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var nextButtonToTimerCircle: NSLayoutConstraint!
   @IBOutlet weak var nextButtonToBottomHorizontal: NSLayoutConstraint!
   @IBOutlet weak var timerCirclesHeight: NSLayoutConstraint!
+  @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
   var horizontalContraints: [NSLayoutConstraint] = []
   
   
-  @IBOutlet weak var playImage: UIImageView!
-  @IBOutlet weak var pauseImage: UIImageView!
-  @IBOutlet weak var skipImage: UIImageView!
-  
-  override func viewDidLoad() {    
+  override func viewDidLoad() {
     verticalContraints = [startButtonToTimerCircle,
                           startButtonToSuperView,
-                          buttonsEqualWidth,
                           nextButtonToStartButtonSpace,
                           nextButtonToTimerCircles,
                           nextButtonToSuperViewSide,
                           startButtonToBottom,
                           nextButtonToBottom,
-                          timerCirclesWidth]
+                          timerCirclesWidth,
+                          buttonsEqualWidth,
+                          nextButtonWidth]
     
     horizontalContraints = [startButtonToTimerCircleHorizontal,
                             startButtonToSuperViewHorizontal,
-                            buttonsEqualHeight,
                             nextButtonToStartButtonHorizontal,
                             startButtonToSuperViewTop,
                             nextButtonToSuperViewSideHorizontal,
                             nextButtonToTimerCircle,
                             nextButtonToBottomHorizontal,
-                            timerCirclesHeight]
+                            timerCirclesHeight,
+                            buttonsEqualHeight,
+                            nextButtonHeight]
     super.viewDidLoad()
     
     
@@ -175,11 +195,7 @@ final class TimerViewController: UIViewController {
     timerUpdatedTime()
     timerChangedCountingStatus()
     timerDurationChanged()
-    if let splitViewController = splitViewController {
-      layoutViewsForSize(splitViewController.view.frame.size)
-    } else {
-      layoutViewsForSize(view.frame.size)
-    }
+    layoutViewsForSize(layoutSize)
   }
   
   override func viewDidAppear(animated: Bool) {
@@ -240,6 +256,7 @@ final class TimerViewController: UIViewController {
   func displayPlayPauseButton(timer: Timer) {
     switch timer.state {
     case .Ready:
+      hideNextButtonWithDuration(0.5)
       startPauseButton.percentageOfSuperviewSize = Constants.EmphisisedButtonScale
       nextSegmentButton.percentageOfSuperviewSize = Constants.DeemphisisedButtonScale
       if startPauseButtonCount > 0 {
@@ -258,6 +275,7 @@ final class TimerViewController: UIViewController {
       }
       
     case .Counting:
+      showNextButtonWithDuration(0.5)
       startPauseButton.percentageOfSuperviewSize = Constants.DeemphisisedButtonScale
       nextSegmentButton.percentageOfSuperviewSize = Constants.EmphisisedButtonScale
       if startPauseButtonCount > 0 {
@@ -298,15 +316,140 @@ final class TimerViewController: UIViewController {
     })
   }
   
+  func hideNextButtonWithDuration(duration: NSTimeInterval) {
+
+    view.layoutIfNeeded()
+
+    func animated() {
+      self.nextSegmentButton.alpha = 0.0
+      self.ignoreContraint(self.buttonsEqualWidth)
+      self.ignoreContraint(self.buttonsEqualHeight)
+
+      if layoutIsVertical {
+        self.activateIgnoredContraint(  self.nextButtonWidth)
+        self.deactivateIgnoredContraint(self.nextButtonHeight)
+      } else {
+        self.deactivateIgnoredContraint(self.nextButtonWidth)
+        self.activateIgnoredContraint(  self.nextButtonHeight)
+      }
+      self.view.layoutIfNeeded()
+    }
+    
+    
+    func notAnimated(completed: Bool) {
+      self.nextSegmentButton.alpha = 0.0
+      self.ignoreContraint(self.buttonsEqualWidth)
+      self.ignoreContraint(self.buttonsEqualHeight)
+
+      if layoutIsVertical {
+        self.activateIgnoredContraint(  self.nextButtonWidth)
+        self.deactivateIgnoredContraint(self.nextButtonHeight)
+      } else {
+        self.deactivateIgnoredContraint(self.nextButtonWidth)
+        self.activateIgnoredContraint(  self.nextButtonHeight)
+      }
+      self.view.layoutIfNeeded()
+      self.nextSegmentButton.hidden  = true
+      self.nextSegmentButton.enabled = false
+    }
+
+    if duration == 0 {
+      notAnimated(true)
+    } else {
+      UIView.animateWithDuration( duration,
+        animations: animated,
+        completion: notAnimated)
+    }
+  }
+
+  
+  
+  
+  
+  func showNextButtonWithDuration(duration: NSTimeInterval) {
+
+    view.layoutIfNeeded()
+    self.nextSegmentButton.hidden  = false
+    self.nextSegmentButton.enabled = true
+    
+    func animated() {
+      self.nextSegmentButton.alpha = 1.0
+      self.ignoreContraint(self.nextButtonWidth)
+      self.ignoreContraint(self.nextButtonHeight)
+      
+      if self.layoutIsVertical {
+        self.activateIgnoredContraint(  self.buttonsEqualWidth)
+        self.deactivateIgnoredContraint(self.buttonsEqualHeight)
+      } else {
+        self.deactivateIgnoredContraint(self.buttonsEqualWidth)
+        self.activateIgnoredContraint(  self.buttonsEqualHeight)
+      }
+      self.view.layoutIfNeeded()
+    }
+    
+    
+    func notAnimated(completed: Bool) {
+      self.nextSegmentButton.alpha = 1.0
+      self.ignoreContraint(self.nextButtonWidth)
+      self.ignoreContraint(self.nextButtonHeight)
+      
+      if self.layoutIsVertical {
+        self.activateIgnoredContraint(  self.buttonsEqualWidth)
+        self.deactivateIgnoredContraint(self.buttonsEqualHeight)
+      } else {
+        self.deactivateIgnoredContraint(self.buttonsEqualWidth)
+        self.activateIgnoredContraint(  self.buttonsEqualHeight)
+      }
+      self.view.layoutIfNeeded()
+    }
+    
+    if duration == 0 {
+      notAnimated(true)
+    } else {
+      UIView.animateWithDuration( duration,
+        animations: animated,
+        completion: notAnimated)
+    }
+  }
+  
+  
+  
+  
+  
   func setContraintPriorityForVerticalLayout() {
-    verticalContraints.map(  {$0.priority = 751})
-    horizontalContraints.map({$0.priority = 749})
+    verticalContraints.map(    activateContraint )
+    horizontalContraints.map(deactivateContraint )
   }
   
   func setContraintPriorityForHorizontalLayout() {
-    verticalContraints.map(  {$0.priority = 749})
-    horizontalContraints.map({$0.priority = 751})
+    verticalContraints.map(  deactivateContraint )
+    horizontalContraints.map(  activateContraint )
   }
+  
+  func activateContraint(constraint: NSLayoutConstraint) {
+    if constraint.priority == Constants.InactiveLayoutPriority {
+      activateIgnoredContraint(constraint)
+    }
+  }
+  
+  func deactivateContraint(constraint: NSLayoutConstraint) {
+    if constraint.priority == Constants.ActiveLayoutPriority {
+      deactivateIgnoredContraint(constraint)
+    }
+  }
+  
+  func activateIgnoredContraint(constraint: NSLayoutConstraint) {
+    constraint.priority = Constants.ActiveLayoutPriority
+  }
+  
+  func deactivateIgnoredContraint(constraint: NSLayoutConstraint) {
+    constraint.priority = Constants.InactiveLayoutPriority
+  }
+  
+  func ignoreContraint(constraint: NSLayoutConstraint) {
+    constraint.priority = Constants.IgnoreLayoutPriority
+  }
+  
   
   
   // MARK: -
