@@ -101,6 +101,7 @@ class RingView: RingFillView {
     }
     set(newColor) {
       ringLayer.color = newColor
+      ringLayer.setNeedsDisplay()
     }
   }
   

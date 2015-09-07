@@ -36,6 +36,7 @@ final class TimerViewController: UIViewController {
                                           alpha: 1.0)
     
     static let LineWidth          = CGFloat(90) / CGFloat(736)
+    static let RingDarkeningFactor = CGFloat(0.2)
   }
   
   var timerViews: TimerViews?
@@ -322,7 +323,8 @@ final class TimerViewController: UIViewController {
   
   func configureBGRing(ringView: RingView, withColor color: UIColor)
                                                                    -> RingView {
-    ringView.color     = color.darkenColorWithMultiplier(0.2)
+    let darkenBy = Constants.RingDarkeningFactor
+    ringView.color     = color.darkenColorWithMultiplier(darkenBy)
     configureRing(ringView)
     return ringView
   }

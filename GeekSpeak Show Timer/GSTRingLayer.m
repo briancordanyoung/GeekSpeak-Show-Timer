@@ -273,7 +273,7 @@
   if ([key isEqualToString:@"startAngle"] ||
       [key isEqualToString:@"endAngle"] ||
       [key isEqualToString:@"ringWidth"] ||
-      [key isEqualToString:@"endRadius"]) {
+      [key isEqualToString:@"endRadius"]  ) {
     return YES;
   }
   
