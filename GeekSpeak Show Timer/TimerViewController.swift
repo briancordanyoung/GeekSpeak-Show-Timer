@@ -168,13 +168,6 @@ final class TimerViewController: UIViewController {
     ring1bg.percentageOfSuperviewSize = 0.33
     ring1fg.percentageOfSuperviewSize = 0.33
 
-//    ring3bg.animatePercentageOfSuperviewSize(0.95)
-//    ring3fg.animatePercentageOfSuperviewSize(0.95)
-//    ring2bg.animatePercentageOfSuperviewSize(0.64)
-//    ring2fg.animatePercentageOfSuperviewSize(0.64)
-//    ring1bg.animatePercentageOfSuperviewSize(0.33)
-//    ring1fg.animatePercentageOfSuperviewSize(0.33)
-    
     timerViews = TimerViews(  ring1bg: ring1bg,
                               ring1fg: ring1fg,
                               ring2bg: ring2bg,
