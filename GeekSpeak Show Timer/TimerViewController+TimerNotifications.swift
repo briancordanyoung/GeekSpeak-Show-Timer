@@ -129,7 +129,7 @@ extension TimerViewController {
         timerViews?.ring1fg.progress = timer.percentageCompleteUnlimited
         timerViews?.ring2fg.percent = 0.0
         timerViews?.ring3fg.percent = 0.0
-        segmentLabelText = "Segment 1"
+        segmentLabelText = "Section 1"
         
       case .Break1:
         timerViews?.ring1fg.percent = 1.0
@@ -143,7 +143,7 @@ extension TimerViewController {
         timerViews?.ring1fg.percent = 1.0
         timerViews?.ring2fg.progress = timer.percentageCompleteUnlimited
         timerViews?.ring3fg.percent = 0.0
-        segmentLabelText = "Segment 2"
+        segmentLabelText = "Section 2"
         
       case .Break2:
         timerViews?.ring1fg.percent = 1.0
@@ -157,7 +157,7 @@ extension TimerViewController {
         timerViews?.ring1fg.percent = 1.0
         timerViews?.ring2fg.percent = 1.0
         timerViews?.ring3fg.percent = timer.percentageComplete
-        segmentLabelText = "Segment 3"
+        segmentLabelText = "Section 3"
         
       case .PostShow:
         timerViews?.ring1fg.percent = 1.0
