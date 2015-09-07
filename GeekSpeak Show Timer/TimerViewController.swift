@@ -334,8 +334,7 @@ final class TimerViewController: UIViewController {
                               return min(timerCirclesView.bounds.height,
                                          timerCirclesView.bounds.width)
                             } else {
-                              println("Warning: reference to timerCirclesView was lost.")
-                              return CGFloat(1000)
+                              return .None
                             }
                           }
     timerCirclesView.addSubview(ringView)
