@@ -1,6 +1,6 @@
 import UIKit
 
-class RingView: FillView {
+class RingView: RingFillView {
 
   struct Constants {
     static let StartAngle = "ringViewStartAngleId"

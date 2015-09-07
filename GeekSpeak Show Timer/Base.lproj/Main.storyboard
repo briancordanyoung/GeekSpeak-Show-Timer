@@ -44,8 +44,8 @@
                                             <rect key="frame" x="692" y="0.0" width="300" height="68"/>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" restorationIdentifier="total" text="Total" lineBreakMode="tailTruncation" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="vPK-rh-OhK" userLabel="total">
-                                        <rect key="frame" x="0.0" y="68" width="159" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="total" text="Total" lineBreakMode="tailTruncation" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="vPK-rh-OhK" userLabel="total">
+                                        <rect key="frame" x="0.0" y="68" width="162" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="vPK-rh-OhK" secondAttribute="height" multiplier="27:4" id="ooG-hC-mve"/>
                                         </constraints>
@@ -53,8 +53,8 @@
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" restorationIdentifier="segment" text="Segment" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="6Xz-Ti-gwy" userLabel="segment">
-                                        <rect key="frame" x="578" y="68" width="159" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="segment" text="Segment" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="6Xz-Ti-gwy" userLabel="segment">
+                                        <rect key="frame" x="574" y="68" width="162" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="6Xz-Ti-gwy" secondAttribute="height" multiplier="27:4" id="Id1-WE-DuA"/>
                                         </constraints>
@@ -90,9 +90,9 @@
                                     <rect key="frame" x="325" y="974" width="118" height="31"/>
                                 </variation>
                             </slider>
-                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="startPause" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PdP-pn-H8o">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PdP-pn-H8o" userLabel="PlayPause" customClass="PlayPauseButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
                                 <rect key="frame" x="16" y="760" width="364" height="244"/>
-                                <state key="normal" title="Start/Pause">
+                                <state key="normal">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -100,12 +100,12 @@
                                     <rect key="frame" x="724" y="16" width="284" height="349"/>
                                 </variation>
                                 <connections>
-                                    <action selector="startPauseButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tgr-GL-D60"/>
+                                    <action selector="startPauseButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="675-vk-O2X"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-5J-yaK">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-5J-yaK" userLabel="Skip" customClass="NextSegmentButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
                                 <rect key="frame" x="388" y="760" width="364" height="244"/>
-                                <state key="normal" title="Next Segment">
+                                <state key="normal">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -113,7 +113,7 @@
                                     <rect key="frame" x="724" y="373" width="284" height="375"/>
                                 </variation>
                                 <connections>
-                                    <action selector="nextSegmentButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l5Z-AD-lkN"/>
+                                    <action selector="nextSegmentButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4vC-nM-WnJ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -153,7 +153,7 @@
                         <outlet property="nextButtonToSuperViewSideHorizontal" destination="mlA-cE-QNr" id="N0Z-jz-iaZ"/>
                         <outlet property="nextButtonToTimerCircle" destination="vIC-8F-pSH" id="KRS-zH-FOO"/>
                         <outlet property="nextButtonToTimerCircles" destination="Hed-8j-X5n" id="r6R-ah-7GZ"/>
-                        <outlet property="nextSegmentButton" destination="edy-5J-yaK" id="OHZ-MG-UGu"/>
+                        <outlet property="nextSegmentButton" destination="edy-5J-yaK" id="aip-vC-v9i"/>
                         <outlet property="sectionTimeLabel" destination="fhW-lj-LnF" id="PUl-lz-n33"/>
                         <outlet property="segmentLabel" destination="6Xz-Ti-gwy" id="Hdh-QZ-ZTt"/>
                         <outlet property="startButtonToBottom" destination="JFL-9U-et7" id="EBU-m0-zQ4"/>
@@ -191,6 +191,119 @@
             <point key="canvasLocation" x="356" y="2174"/>
         </scene>
         <!--Navigation Controller-->
+        <scene sceneID="YQ4-1z-a1j">
+            <objects>
+                <navigationController id="LIY-r9-ade" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="d7L-Eh-KGi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="rJb-IH-xEf" kind="relationship" relationship="rootViewController" id="DGD-Zh-Dko"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rvi-RR-nnf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="452" y="-484"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="iHC-zk-XTD">
+            <objects>
+                <navigationController id="nHx-oN-Lse" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vat-jl-X6h">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="zGx-k9-MHE" kind="relationship" relationship="rootViewController" id="xvE-CB-fOU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D71-Jo-mtM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="440" y="-1218"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="A0K-Pg-S0j">
+            <objects>
+                <viewController id="zGx-k9-MHE" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KB7-PX-5zY"/>
+                        <viewControllerLayoutGuide type="bottom" id="8vE-OP-NIU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7sj-Jj-Sba">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="jux-Rs-jJ7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="auQ-MZ-BCX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1169" y="-1215"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ap4-dB-hcp">
+            <objects>
+                <viewController id="rJb-IH-xEf" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rh6-tn-quy"/>
+                        <viewControllerLayoutGuide type="bottom" id="AwK-VH-x5i"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Izo-fL-mdQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.92724893279999998" green="0.60038859619999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="7mT-CU-EdP"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B35-g5-PkF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1179" y="-484"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="7Ze-rq-6oF">
+            <objects>
+                <viewController id="ttc-Ub-OGp" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zBe-I0-IKd"/>
+                        <viewControllerLayoutGuide type="bottom" id="3gn-Zg-3YI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="teN-da-mET">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jPc-4g-Eva" customClass="SizeToSuperView" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
+                                <rect key="frame" x="150" y="150" width="300" height="300"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.11684455389999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="jPc-4g-Eva" secondAttribute="trailing" constant="134" placeholder="YES" id="7Re-8W-iWT"/>
+                            <constraint firstItem="jPc-4g-Eva" firstAttribute="top" secondItem="zBe-I0-IKd" secondAttribute="bottom" constant="130" placeholder="YES" id="Gfl-mT-X5D"/>
+                            <constraint firstItem="3gn-Zg-3YI" firstAttribute="top" secondItem="jPc-4g-Eva" secondAttribute="bottom" constant="150" placeholder="YES" id="Ljk-0S-eyN"/>
+                            <constraint firstItem="jPc-4g-Eva" firstAttribute="leading" secondItem="teN-da-mET" secondAttribute="leadingMargin" constant="134" placeholder="YES" id="dPX-lz-Pne"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JWT-3R-zmz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3397" y="-511"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="2ap-24-ZuD">
+            <objects>
+                <splitViewController id="zUu-sC-l07" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="nHx-oN-Lse" kind="relationship" relationship="masterViewController" id="s5P-Ri-u2g"/>
+                        <segue destination="LIY-r9-ade" kind="relationship" relationship="detailViewController" id="8Yb-8C-bhY"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LGa-oE-wX5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-380" y="-886"/>
+        </scene>
+        <!--Navigation Controller-->
         <scene sceneID="7kU-oQ-h2H">
             <objects>
                 <navigationController storyboardIdentifier="masterNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uFM-no-PJs" sceneMemberID="viewController">
@@ -206,10 +319,10 @@
             </objects>
             <point key="canvasLocation" x="356" y="598"/>
         </scene>
-        <!--Split View Controller-->
+        <!--Timer Split View Controller-->
         <scene sceneID="5GO-wN-z0h">
             <objects>
-                <splitViewController storyboardIdentifier="splitViewNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IwL-Pm-vjL" customClass="SplitViewController" customModule="GeekSpeak_Show_Timer" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController storyboardIdentifier="splitViewNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IwL-Pm-vjL" customClass="TimerSplitViewController" customModule="GeekSpeak_Show_Timer" customModuleProvider="target" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
@@ -555,23 +668,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tBI-zJ-Era" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1189" y="598"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="dd3-oR-AmI">
-            <objects>
-                <viewController id="cIA-xz-Ac2" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="qf1-bi-xHy"/>
-                        <viewControllerLayoutGuide type="bottom" id="WDu-jO-uKD"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Fla-Vu-F2m">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Bwp-yw-tXJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
     <resources>

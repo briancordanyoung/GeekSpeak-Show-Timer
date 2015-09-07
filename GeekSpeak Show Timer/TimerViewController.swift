@@ -13,9 +13,16 @@ enum TimerLabelDisplay: String, Printable {
 final class TimerViewController: UIViewController {
   
   struct Constants {
+    static let DeemphisisedButtonScale = CGFloat(0.5)
+    static let EmphisisedButtonScale   = CGFloat(1.0)
     static let GeekSpeakBlueColor = UIColor(red: 14/255,
                                           green: 115/255,
                                            blue: 192/255,
+                                          alpha: 1.0)
+    
+    static let BreakColor         = UIColor(red: 0.75,
+                                          green: 0.0,
+                                           blue: 0.0,
                                           alpha: 1.0)
     
     static let WarningColor       = UIColor(red: 13/255,
@@ -36,10 +43,10 @@ final class TimerViewController: UIViewController {
     }
   }
   
-  // TODO: The Timer Property should be set by the SplitViewController
+  // TODO: The Timer Property should be injected by the SplitViewController
   //       during the segue. Revisit and stop pulling from other view controller
   var timer: Timer? {
-    if let splitViewController = splitViewController as? SplitViewController {
+    if let splitViewController = splitViewController as? TimerSplitViewController {
       return splitViewController.timer
     } else {
       return .None
@@ -52,8 +59,8 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var sectionTimeLabel: UILabel!
   @IBOutlet weak var totalLabel: UILabel!
   @IBOutlet weak var segmentLabel: UILabel!
-  @IBOutlet weak var startPauseButton: UIButton!
-  @IBOutlet weak var nextSegmentButton: UIButton!
+  @IBOutlet weak var startPauseButton: PlayPauseButton!
+  @IBOutlet weak var nextSegmentButton: NextSegmentButton!
   
   // Vertical Layout
   @IBOutlet weak var timerCirclesWidth: NSLayoutConstraint!
@@ -80,6 +87,9 @@ final class TimerViewController: UIViewController {
   var horizontalContraints: [NSLayoutConstraint] = []
   
   
+  @IBOutlet weak var playImage: UIImageView!
+  @IBOutlet weak var pauseImage: UIImageView!
+  @IBOutlet weak var skipImage: UIImageView!
   
   var lineWidth: CGFloat {
     return self.dynamicType.lineWidthForSize(timerCirclesView.frame.size)
@@ -114,6 +124,12 @@ final class TimerViewController: UIViewController {
                             nextButtonToBottomHorizontal,
                             timerCirclesHeight]
     super.viewDidLoad()
+    
+    
+    if let timer = timer {
+      displayPlayPauseButton(timer)
+    }
+    
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -121,15 +137,14 @@ final class TimerViewController: UIViewController {
     setupTimeLabelContraints(sectionTimeLabel)
     setupDescriptionLabelContraints(totalLabel)
     setupDescriptionLabelContraints(segmentLabel)
-    styleButtons()
     
-    let fillView  = PieShapeView()
-    fillView.opaque     = false
-    fillView.startAngle = Rotation(degrees: 0)
-    fillView.endAngle   = Rotation(degrees: 0)
-    fillView.color      = UIColor(red: 0.75, green: 0.0, blue: 0.0, alpha: 1.0)
-    fillView.pieLayer.clipToCircle = true
-    timerCirclesView.addSubview(fillView)
+    let breakView  = PieShapeView()
+    breakView.opaque     = false
+    breakView.startAngle = Rotation(degrees: 0)
+    breakView.endAngle   = Rotation(degrees: 0)
+    breakView.color      = Constants.BreakColor
+    breakView.pieLayer.clipToCircle = true
+    timerCirclesView.addSubview(breakView)
     
     let ring1bg   = configureBGRing( RingView(),
                           withColor: Constants.GeekSpeakBlueColor)
@@ -152,26 +167,35 @@ final class TimerViewController: UIViewController {
     ring2fg.percentageOfSuperviewSize = 0.64
     ring1bg.percentageOfSuperviewSize = 0.33
     ring1fg.percentageOfSuperviewSize = 0.33
-    
+
     timerViews = TimerViews(  ring1bg: ring1bg,
                               ring1fg: ring1fg,
                               ring2bg: ring2bg,
                               ring2fg: ring2fg,
                               ring3bg: ring3bg,
                               ring3fg: ring3fg,
-                                 fill: fillView)
+                                 fill: breakView)
     
     if let navigationController = navigationController {
       Appearance.appearanceForNavigationController( navigationController,
                                        transparent: true)
-      
     }
     registerForTimerNotifications()
     timerUpdatedTime()
     timerChangedCountingStatus()
     timerDurationChanged()
-    layoutViewsForSize(view.frame.size)
+    if let splitViewController = splitViewController {
+      layoutViewsForSize(splitViewController.view.frame.size)
+    } else {
+      layoutViewsForSize(view.frame.size)
+    }
   }
+  
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+
+  }
+  
   
   override func viewDidDisappear(animated: Bool) {
     unregisterForTimerNotifications()
@@ -210,7 +234,13 @@ final class TimerViewController: UIViewController {
     self.splitViewController?.toggleMasterView()
   }
   
-  @IBAction func startPauseButtonPressed(sender: UIButton) {
+  @IBAction func nextSegmentButtonPressed(sender: NextSegmentButton) {
+    timer?.next()
+  }
+  
+  var startPauseButtonCount: Int = 0
+  @IBAction func startPauseButtonPressed(sender: PlayPauseButton) {
+    startPauseButtonCount++
     if let timer = timer {
       switch timer.state {
       case .Ready,
@@ -221,11 +251,44 @@ final class TimerViewController: UIViewController {
       }
     }
   }
-
-  @IBAction func nextSegmentButtonPressed(sender: UIButton) {
-    timer?.next()
+  
+  func displayPlayPauseButton(timer: Timer) {
+    switch timer.state {
+    case .Ready:
+      startPauseButton.percentageOfSuperviewSize = Constants.EmphisisedButtonScale
+      nextSegmentButton.percentageOfSuperviewSize = Constants.DeemphisisedButtonScale
+      if startPauseButtonCount > 0 {
+        startPauseButton.animateToPlayView()
+      } else {
+        startPauseButton.showPlayView()
+      }
+      
+    case .Paused:
+      startPauseButton.percentageOfSuperviewSize = Constants.DeemphisisedButtonScale
+      nextSegmentButton.percentageOfSuperviewSize = Constants.EmphisisedButtonScale
+      if startPauseButtonCount > 0 {
+        startPauseButton.animateToPlayView()
+      } else {
+        startPauseButton.showPlayView()
+      }
+      
+    case .Counting:
+      startPauseButton.percentageOfSuperviewSize = Constants.DeemphisisedButtonScale
+      nextSegmentButton.percentageOfSuperviewSize = Constants.EmphisisedButtonScale
+      if startPauseButtonCount > 0 {
+        startPauseButton.animateToPauseView()
+      } else {
+        startPauseButton.showPauseView()
+      }
+      
+    }
+    startPauseButtonCount--
+    startPauseButtonCount = max(0,startPauseButtonCount)
   }
-
+  
+  
+  
+  
   
   // MARK: -
   // MARK: View Layout
@@ -285,20 +348,6 @@ final class TimerViewController: UIViewController {
     timerCirclesView.addSubview(ringView)
     ringView.opaque              = false
   }
-
-  private func styleButtons() {
-    styleButton(startPauseButton)
-    styleButton(nextSegmentButton)
-  }
-  
-  private func styleButton(button: UIButton)  {
-    button.layer.borderWidth = 1
-    button.layer.cornerRadius = 15
-    button.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).CGColor
-    button.titleLabel?.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-
-  }
-  
 
   func setupTimeLabelContraints(label: UILabel) {
     
