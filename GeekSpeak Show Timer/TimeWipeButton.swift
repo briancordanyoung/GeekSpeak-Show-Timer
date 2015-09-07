@@ -9,7 +9,7 @@ class TimeWipeButton: UIButton {
   }
   
   var highlightOpacity = CGFloat(1.0)
-  var wipeDuration     = CFTimeInterval(0.33333333)
+  var wipeDuration     = CFTimeInterval(0.2)
   
   
   var percentageOfSuperviewSize: CGFloat {
