@@ -24,26 +24,6 @@ class PlayPauseButton: TimeWipeButton {
     }
   }
   
-  var visibleButtonView: VisibleButtonView {
-    get {
-      switch viewVisible {
-      case .ViewA:
-        return .Play
-      case .ViewB:
-        return .Pause
-      }
-    }
-    
-    set(newButtonView) {
-      switch newButtonView {
-      case .Play:
-        viewVisible = .ViewA
-      case .Pause:
-        viewVisible = .ViewB
-      }
-    }
-  }
-  
   
   // Button Shapes
   let playShape: SizableBezierPathFunc = { size in
@@ -56,9 +36,22 @@ class PlayPauseButton: TimeWipeButton {
     return UIBezierPath(roundedRect: rect, cornerRadius: size.height / 3)
   }
 
+  func showPlayView() {
+    showViewA()
+  }
   
+  func showPauseView() {
+    showViewB()
+  }
   
+  func animateToPlayView() {
+    animateToViewA()
+  }
 
+  func animateToPauseView() {
+    animateToViewB()
+  }
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupPlayPauseView()
@@ -70,16 +63,17 @@ class PlayPauseButton: TimeWipeButton {
   }
 
   func setupPlayPauseView() {
+    pauseButtonView = ShapesView()
+    let pauseButtonShape = SizableBezierPath()
+    pauseButtonShape.pathForSize = pauseShape
+    pauseButtonView?.shapes.append(pauseButtonShape)
+    
     playButtonView = ShapesView()
     let playButtonShape = SizableBezierPath()
     playButtonShape.pathForSize = playShape
     playButtonView?.shapes.append(playButtonShape)
     
-    
-    pauseButtonView = ShapesView()
-    let pauseButtonShape = SizableBezierPath()
-    pauseButtonShape.pathForSize = pauseShape
-    pauseButtonView?.shapes.append(pauseButtonShape)
+    showViewA()
   }
 
 }

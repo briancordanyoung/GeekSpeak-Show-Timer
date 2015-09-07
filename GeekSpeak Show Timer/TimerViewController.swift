@@ -228,8 +228,10 @@ final class TimerViewController: UIViewController {
     self.splitViewController?.toggleMasterView()
   }
   
-
+  
+  var startPauseButtonCount: Int = 0
   @IBAction func startPauseButtonPressed(sender: PlayPauseButton) {
+    startPauseButtonCount++
     if let timer = timer {
       switch timer.state {
       case .Ready,
@@ -245,10 +247,20 @@ final class TimerViewController: UIViewController {
     switch timer.state {
     case .Ready,
          .Paused:
-      startPauseButton.visibleButtonView = .Play
+      if startPauseButtonCount > 0 {
+        startPauseButton.animateToPlayView()
+      } else {
+        startPauseButton.showPlayView()
+      }
     case .Counting:
-      startPauseButton.visibleButtonView = .Pause
+      if startPauseButtonCount > 0 {
+        startPauseButton.animateToPauseView()
+      } else {
+        startPauseButton.showPauseView()
+      }
     }
+    startPauseButtonCount--
+    startPauseButtonCount = max(0,startPauseButtonCount)
   }
   
   
