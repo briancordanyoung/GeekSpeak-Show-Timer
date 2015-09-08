@@ -217,7 +217,7 @@ class NextSegmentButton: ShapesButton {
 
   
   func animateRings() {
-    darkRings.map( {$0.alpha = 1.0} )
+//    darkRings.map( {$0.alpha = 1.0} )
     animationStep1()
    }
   
@@ -227,7 +227,7 @@ class NextSegmentButton: ShapesButton {
                            delay: stepDuration,
                          options: nil,
                       animations: {
-                                    self.lightRing3.alpha = 1.0
+                                    self.darkRing3.alpha = 1.0
                                   },
                       completion: { completed in
                                     self.animationStep2()
@@ -239,7 +239,7 @@ class NextSegmentButton: ShapesButton {
                            delay: stepDuration,
                          options: nil,
                       animations: {
-                                    self.lightRing3.alpha = 0.0
+                                    self.darkRing3.alpha = 0.0
                                   },
                       completion: { completed in
                                     self.animationStep3()
@@ -251,7 +251,7 @@ class NextSegmentButton: ShapesButton {
                            delay: stepDuration,
                          options: nil,
                       animations: {
-                                    self.lightRing2.alpha = 1.0
+                                    self.darkRing2.alpha = 1.0
                                   },
                       completion: { completed in
                                     self.animationStep4()
@@ -263,7 +263,7 @@ class NextSegmentButton: ShapesButton {
                            delay: stepDuration,
                          options: nil,
                       animations: {
-                                    self.lightRing2.alpha = 0.0
+                                    self.darkRing2.alpha = 0.0
                                   },
                       completion: { completed in
                                     self.animationStep5()
@@ -275,7 +275,7 @@ class NextSegmentButton: ShapesButton {
                            delay: stepDuration,
                          options: nil,
                       animations: {
-                                    self.lightRing1.alpha = 1.0
+                                    self.darkRing1.alpha = 1.0
                                   },
                       completion: { completed in
                                     self.animationStep6()
@@ -287,7 +287,7 @@ class NextSegmentButton: ShapesButton {
                            delay: stepDuration,
                          options: nil,
                       animations: {
-                                    self.lightRing1.alpha = 0.0
+                                    self.darkRing1.alpha = 0.0
                                   },
                       completion: { completed in
                                     self.animationFadeOut()
