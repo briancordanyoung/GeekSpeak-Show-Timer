@@ -287,7 +287,7 @@ final class TimerViewController: UIViewController {
   }
 
   
-  func displayPlayPauseButton(timer: Timer) {
+  func updateButtonLayout(timer: Timer) {
     switch timer.state {
     case .Ready:
       hideNextButtonWithDuration(0.5)

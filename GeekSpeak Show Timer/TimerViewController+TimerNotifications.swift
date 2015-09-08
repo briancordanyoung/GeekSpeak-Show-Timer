@@ -41,7 +41,7 @@ extension TimerViewController {
   
   func timerChangedCountingStatus() {
     if let timer = timer {
-      displayPlayPauseButton(timer)
+      updateButtonLayout(timer)
     }
   }
   
