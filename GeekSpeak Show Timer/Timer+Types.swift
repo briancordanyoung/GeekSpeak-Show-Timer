@@ -13,9 +13,11 @@ extension Timer {
   
   // MARK: - Enums
   enum CountingState: String, Printable {
-    case Ready          = "Ready"
-    case Counting       = "Counting"
-    case Paused         = "Paused"
+    case Ready                 = "Ready"
+    case Counting              = "Counting"
+    case Paused                = "Paused"
+    case PausedAfterComplete   = "PausedAfterComplete"
+    case CountingAfterComplete = "CountingAfterComplete"
     
     var description: String {
       return self.rawValue

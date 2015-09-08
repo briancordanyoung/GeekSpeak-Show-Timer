@@ -246,9 +246,11 @@ final class TimerViewController: UIViewController {
     if let timer = timer {
       switch timer.state {
       case .Ready,
-           .Paused:
+           .Paused,
+           .PausedAfterComplete:
         timer.start()
-      case .Counting:
+      case .Counting,
+           .CountingAfterComplete:
         timer.pause()
       }
     }
@@ -271,15 +273,15 @@ final class TimerViewController: UIViewController {
       startPauseButton.percentageOfSuperviewSize = Constants.DeemphisisedButtonScale
       startPauseButton.showPauseView()
       
-//    case .PausedAfterComplete:
-//      hideNextButtonWithDuration(0)
-//      percentageOfSuperviewSize = Constants.DeemphisisedButtonScale
-//      startPauseButton.showPlayView()
+    case .PausedAfterComplete:
+      hideNextButtonWithDuration(0)
+      startPauseButton.percentageOfSuperviewSize = Constants.EmphisisedButtonScale
+      startPauseButton.showPlayView()
 
-//    case .CountingAfterComplete:
-//      hideNextButtonWithDuration(0)
-//      startPauseButton.percentageOfSuperviewSize = Constants.DeemphisisedButtonScale
-//      startPauseButton.showPauseView()
+    case .CountingAfterComplete:
+      hideNextButtonWithDuration(0)
+      startPauseButton.percentageOfSuperviewSize = Constants.EmphisisedButtonScale
+      startPauseButton.showPauseView()
       
     }
   }
@@ -288,8 +290,6 @@ final class TimerViewController: UIViewController {
   func displayPlayPauseButton(timer: Timer) {
     switch timer.state {
     case .Ready:
-      
-      
       hideNextButtonWithDuration(0.5)
       startPauseButton.animatePercentageOfSuperviewSize( Constants.EmphisisedButtonScale)
       if startPauseButtonCount > 0 {
@@ -315,22 +315,22 @@ final class TimerViewController: UIViewController {
         startPauseButton.showPauseView()
       }
       
-//    case .PausedAfterComplete:
-//      startPauseButton.animatePercentageOfSuperviewSize( Constants.DeemphisisedButtonScale)
-//      if startPauseButtonCount > 0 {
-//        startPauseButton.animateToPlayView()
-//      } else {
-//        startPauseButton.showPlayView()
-//      }
+    case .PausedAfterComplete:
+      startPauseButton.animatePercentageOfSuperviewSize( Constants.EmphisisedButtonScale)
+      if startPauseButtonCount > 0 {
+        startPauseButton.animateToPlayView()
+      } else {
+        startPauseButton.showPlayView()
+      }
       
-//    case .CountingAfterComplete:
-//      hideNextButtonWithDuration(0.5)
-//      startPauseButton.animatePercentageOfSuperviewSize( Constants.DeemphisisedButtonScale)
-//      if startPauseButtonCount > 0 {
-//        startPauseButton.animateToPauseView()
-//      } else {
-//        startPauseButton.showPauseView()
-//      }
+    case .CountingAfterComplete:
+      hideNextButtonWithDuration(0.5)
+      startPauseButton.animatePercentageOfSuperviewSize( Constants.EmphisisedButtonScale)
+      if startPauseButtonCount > 0 {
+        startPauseButton.animateToPauseView()
+      } else {
+        startPauseButton.showPauseView()
+      }
 
     }
     startPauseButtonCount--
@@ -385,29 +385,14 @@ final class TimerViewController: UIViewController {
     
     
     func notAnimated(completed: Bool) {
-//      self.nextSegmentButton.alpha = 0.0
-//      self.ignoreContraint(self.buttonsEqualWidth)
-//      self.ignoreContraint(self.buttonsEqualHeight)
-//
-//      if layoutIsVertical {
-//        self.activateIgnoredContraint(  self.nextButtonWidth)
-//        self.deactivateIgnoredContraint(self.nextButtonHeight)
-//      } else {
-//        self.deactivateIgnoredContraint(self.nextButtonWidth)
-//        self.activateIgnoredContraint(  self.nextButtonHeight)
-//      }
       self.view.layoutIfNeeded()
       self.nextSegmentButton.hidden  = true
       self.nextSegmentButton.enabled = false
     }
 
-//    if duration == 0 {
-//      notAnimated(true)
-//    } else {
       UIView.animateWithDuration( duration,
         animations: animated,
         completion: notAnimated)
-//    }
   }
 
   
@@ -437,27 +422,12 @@ final class TimerViewController: UIViewController {
     
     
     func notAnimated(completed: Bool) {
-//      self.nextSegmentButton.alpha = 1.0
-//      self.ignoreContraint(self.nextButtonWidth)
-//      self.ignoreContraint(self.nextButtonHeight)
-//      
-//      if self.layoutIsVertical {
-//        self.activateIgnoredContraint(  self.buttonsEqualWidth)
-//        self.deactivateIgnoredContraint(self.buttonsEqualHeight)
-//      } else {
-//        self.deactivateIgnoredContraint(self.buttonsEqualWidth)
-//        self.activateIgnoredContraint(  self.buttonsEqualHeight)
-//      }
       self.view.layoutIfNeeded()
     }
     
-//    if duration == 0 {
-//      notAnimated(true)
-//    } else {
       UIView.animateWithDuration( duration,
         animations: animated,
         completion: notAnimated)
-//    }
   }
   
   

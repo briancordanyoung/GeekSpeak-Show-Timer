@@ -159,9 +159,11 @@ final class Timer: NSObject, NSCoding {
     switch state {
     case .Ready:
       reset()
-    case .Counting:
+    case .Counting,
+         .CountingAfterComplete:
       start()
-    case .Paused:
+    case .Paused,
+         .PausedAfterComplete:
       pause()
     }
   }
@@ -185,17 +187,36 @@ final class Timer: NSObject, NSCoding {
   }
   
   func start() {
-    _state = .Counting
+    if percentageComplete < 1.0 {
+      _state = .Counting
+    } else {
+      _state = .CountingAfterComplete
+    }
     countingStartTime = NSDate.timeIntervalSinceReferenceDate()
     incrementTimer()
   }
   
   func pause() {
-    _state = .Paused
+    if percentageComplete < 1.0 {
+      _state = .Paused
+    } else {
+      _state = .PausedAfterComplete
+    }
     storeElapsedTimeAtPause()
   }
 
   func next() {
+    if percentageComplete < 1.0 {
+      if _state == .Counting {
+        _state == .CountingAfterComplete
+      }
+      if _state == .Paused {
+        _state == .PausedAfterComplete
+      }
+    }
+    
+    
+    
     storeElapsedTimeAtPause()
     countingStartTime = .None
     timing.incrementPhase()
@@ -204,9 +225,11 @@ final class Timer: NSObject, NSCoding {
     switch _state {
     case .Ready:
       reset()
-    case .Counting:
+    case .Counting,
+         .CountingAfterComplete:
       start()
-    case .Paused:
+    case .Paused,
+         .PausedAfterComplete:
       notifyTimerUpdated()
       break
     }
@@ -220,7 +243,9 @@ final class Timer: NSObject, NSCoding {
     case .Ready,
          .Paused:
       notifyTimerUpdated()
-    case .Counting:
+    case .Counting,
+         .PausedAfterComplete,
+         .CountingAfterComplete:
       break
     }
   }
@@ -258,9 +283,11 @@ final class Timer: NSObject, NSCoding {
     switch state {
     case .Ready:
       break
-    case .Paused:
+    case .Paused,
+         .PausedAfterComplete:
       storeElapsedTimeAtPause()
-    case .Counting:
+    case .Counting,
+         .CountingAfterComplete:
       notifyTimerUpdated()
       checkTimingForCompletion()
       incrementTimerAgain()
