@@ -50,6 +50,7 @@ final class TimerViewController: UIViewController {
     }
   }
   
+  
   private var layoutSize: CGSize {
     if let splitViewController = splitViewController {
       return splitViewController.view.frame.size
@@ -467,6 +468,57 @@ final class TimerViewController: UIViewController {
   
   func ignoreContraint(constraint: NSLayoutConstraint) {
     constraint.priority = Constants.IgnoreLayoutPriority
+  }
+  
+  
+  
+  // MARK: -
+  // MARK: Warning Animation
+  
+  var warningDuration = NSTimeInterval(1.0)
+  private var warningStartTime = NSDate().timeIntervalSince1970
+  private var warningAnimationInProgress = false
+
+  func animateWarning() {
+    if !warningAnimationInProgress {
+      warningStartTime = NSDate().timeIntervalSince1970
+      warningAnimationInProgress = true
+      animateBlackToWhite()
+    }
+  }
+  
+  func animateBlackToWhite() {
+    UIView.animateWithDuration( 0.05,
+      delay: 0.0,
+      options: nil,
+      animations: {
+        self.view.backgroundColor = Constants.BreakColor
+      },
+      completion: { completed in
+        if (self.warningStartTime + self.warningDuration) > NSDate().timeIntervalSince1970 {
+          self.animateWhiteToBlack()
+        } else {
+          self.warningAnimationInProgress = false
+          self.view.backgroundColor = UIColor.blackColor()
+        }
+    })
+  }
+  
+  func animateWhiteToBlack() {
+    UIView.animateWithDuration( 0.05,
+      delay: 0.0,
+      options: nil,
+      animations: {
+        self.view.backgroundColor = UIColor.blackColor()
+      },
+      completion: { completed in
+        if (self.warningStartTime + self.warningDuration) > NSDate().timeIntervalSince1970 {
+          self.animateBlackToWhite()
+        } else {
+          self.warningAnimationInProgress = false
+          self.view.backgroundColor = UIColor.blackColor()
+        }
+    })
   }
   
   
