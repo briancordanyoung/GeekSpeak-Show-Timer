@@ -8,20 +8,24 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+typedef  NSNumber * __nullable   (^relativeViewSize)(void);
+
 @interface GSTRing : NSObject
 
-  @property (nonatomic) CGFloat    start;
-  @property (nonatomic) CGFloat    end;
-  @property (nonatomic) CGFloat    width;
-  @property (nonatomic) CGFloat    cornerRadiusStart;
-  @property (nonatomic) CGFloat    cornerRadiusEnd;
-  @property (nonatomic) CGColorRef color;
+  @property (nonatomic) CGFloat     start;  /* angle in radians */
+  @property (nonatomic) CGFloat     end;    /* angle in radians */
+  @property (nonatomic) CGFloat     width;  /* percentage from 0 to 1 */
+  @property (nonatomic) CGFloat     cornerRadiusStart; /* unused */
+  @property (nonatomic) CGFloat     cornerRadiusEnd;   /* unused */
+  @property (nonnull, nonatomic) CGColorRef  color;
+  @property (nullable, copy) relativeViewSize viewSize;
 
-- (id)initWithStart: (CGFloat) newStart
+- (nullable id)initWithStart: (CGFloat) newStart
                 end: (CGFloat) newEnd
               width: (CGFloat) newWidth
+           viewSize: (nullable relativeViewSize) newViewSize
   cornerRadiusStart: (CGFloat) newCornerRadiusStart
     cornerRadiusEnd: (CGFloat) newCornerRadiusEnd
-              color: (CGColorRef) newColor;
+              color: (nonnull CGColorRef) newColor;
 
 @end

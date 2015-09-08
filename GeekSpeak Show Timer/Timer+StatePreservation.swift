@@ -92,6 +92,10 @@ extension Timer {
       aCoder.encodeInt(2, forKey: Constants.StateId)
     case .Paused:
       aCoder.encodeInt(3, forKey: Constants.StateId)
+    case .PausedAfterComplete:
+      aCoder.encodeInt(4, forKey: Constants.StateId)
+    case .CountingAfterComplete:
+      aCoder.encodeInt(5, forKey: Constants.StateId)
     }
     
     if let countingStartTime = countingStartTime {

@@ -26,7 +26,20 @@
     self.endAngle   = M_PI * 2;
     self.endRadius  = 0;
     self.aditionalColors = @[];
-    
+
+    __weak GSTRingLayer *weakSelf = self;
+    self.viewSize         = ^NSNumber*(void) {
+                        if (weakSelf == nil) {
+                          return nil;
+                        } else {
+                          CGFloat size = MIN(weakSelf.bounds.size.width,
+                                             weakSelf.bounds.size.height);
+                          NSNumber * viewSize = [NSNumber numberWithFloat:size];
+                          return viewSize;
+                        }
+                      };
+
+    self.additionalColors = @[];
     [self setNeedsDisplay];
   }
   
@@ -40,6 +53,7 @@
       self.startAngle       = other.startAngle;
       self.endAngle         = other.endAngle;
       self.ringWidth        = other.ringWidth;
+      self.viewSize         = other.viewSize;
       self.endRadius        = other.endRadius;
       self.color            = other.color;
       self.additionalColors = other.additionalColors;
@@ -77,6 +91,7 @@
   GSTRing *ring = [[GSTRing alloc] initWithStart: self.start
                                              end: self.end
                                            width: self.ringWidth
+                                        viewSize: self.viewSize
                                cornerRadiusStart: self.endRadius
                                  cornerRadiusEnd: self.endRadius
                                            color: self.color.CGColor ];
@@ -90,6 +105,7 @@
   GSTRing *ring = [[GSTRing alloc] initWithStart: startAngle
                                              end: precedingRing.end
                                            width: self.ringWidth
+                                        viewSize: self.viewSize
                                cornerRadiusStart: 0.0
                                  cornerRadiusEnd: precedingRing.cornerRadiusEnd
                                            color: sectionColor ];
@@ -197,8 +213,20 @@
   // Create the path
   CGPoint center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
   CGFloat outerRadius = MIN(center.x, center.y);
-  CGFloat innerRadius = outerRadius - self.ringWidth;
-
+  
+  // Setup view size with bounds, just incase the viewSize block resolves to nil
+  CGFloat viewSize = MIN(self.bounds.size.width,
+                         self.bounds.size.height);
+  if (ring.viewSize != nil) {
+    NSNumber * viewSizeNumber = ring.viewSize();
+    if (viewSizeNumber != nil) {
+      // This is the view size we really want!
+      viewSize = viewSizeNumber.floatValue;
+    }
+  }
+  
+  CGFloat innerRadius = outerRadius - (viewSize * ring.width);
+  
   // Begin Path
   CGContextBeginPath(ctx);
   
@@ -245,7 +273,7 @@
   if ([key isEqualToString:@"startAngle"] ||
       [key isEqualToString:@"endAngle"] ||
       [key isEqualToString:@"ringWidth"] ||
-      [key isEqualToString:@"endRadius"]) {
+      [key isEqualToString:@"endRadius"]  ) {
     return YES;
   }
   

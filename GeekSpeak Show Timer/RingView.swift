@@ -1,7 +1,7 @@
 import UIKit
 
 class RingView: RingFillView {
-
+  
   struct Constants {
     static let StartAngle = "ringViewStartAngleId"
     static let EndAngle   = "ringViewEndAngleId"
@@ -16,7 +16,7 @@ class RingView: RingFillView {
     super.init(frame: frame)
     startAngle = Rotation(degrees: 0)
     endAngle   = Rotation(degrees: 360)
-    ringWidth  = CGFloat(10)
+    ringWidth  = CGFloat(0.12228)
   }
   
   required init(coder aDecoder: NSCoder) {
@@ -70,6 +70,15 @@ class RingView: RingFillView {
     }
   }
   
+  var viewSize: relativeViewSize? {
+    get {
+      return ringLayer.viewSize
+    }
+    set(newViewSize) {
+      ringLayer.viewSize = newViewSize
+    }
+  }
+  
 
   var percent: CGFloat {
     get {
@@ -92,17 +101,16 @@ class RingView: RingFillView {
     }
     set(newColor) {
       ringLayer.color = newColor
+      ringLayer.setNeedsDisplay()
     }
   }
   
   var additionalColors: [[String:AnyObject]] {
     get {
       var castColors: [[String:AnyObject]] = []
-      if let addCol = ringLayer.additionalColors {
-        for colorDictionary in addCol {
-          if let dictionary = colorDictionary as? [String:AnyObject] {
-            castColors.append(dictionary)
-          }
+      for colorDictionary in ringLayer.additionalColors {
+        if let dictionary = colorDictionary as? [String:AnyObject] {
+          castColors.append(dictionary)
         }
       }
       return castColors

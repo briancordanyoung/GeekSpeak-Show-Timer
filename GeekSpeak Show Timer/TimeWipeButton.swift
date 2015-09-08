@@ -22,10 +22,16 @@ class TimeWipeButton: UIButton {
       return percentage
     }
     set(newPercentage) {
-      viewA?.animatePercentageOfSuperviewSize(newPercentage)
-      viewB?.animatePercentageOfSuperviewSize(newPercentage)
+      viewA?.percentageOfSuperviewSize = newPercentage
+      viewB?.percentageOfSuperviewSize = newPercentage
     }
   }
+  
+  func animatePercentageOfSuperviewSize( newPercentage: CGFloat) {
+    viewA?.animatePercentageOfSuperviewSize(newPercentage)
+    viewB?.animatePercentageOfSuperviewSize(newPercentage)
+  }
+  
   
   var viewA: ShapesView? {
     willSet(newView) {
