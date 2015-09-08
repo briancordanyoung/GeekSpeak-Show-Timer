@@ -14,9 +14,14 @@ class ShapesButton: UIButton {
       return percentage
     }
     set(newPercentage) {
-      shapesView?.animatePercentageOfSuperviewSize(newPercentage)
+      shapesView?.percentageOfSuperviewSize = newPercentage
     }
   }
+  
+  func animatePercentageOfSuperviewSize( newPercentage: CGFloat) {
+    shapesView?.animatePercentageOfSuperviewSize(newPercentage)
+  }
+
   
   var shapesView: ShapesView? {
     willSet(newView) {
