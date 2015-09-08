@@ -75,6 +75,8 @@ extension TimerViewController {
         break
       }
       
+      // end todo move
+      
       
       switch timer.timing.phase {
       case .PreShow,
@@ -159,6 +161,27 @@ extension TimerViewController {
         timerViews?.ring3fg.percent = timer.percentageComplete
         segmentLabelText = "Section 3"
         
+        // TODO:  Move this in to the ShowTiming struct
+        if timer.demoTimings {
+          if timeInterval(timer.secondsRemaining, isBetweenA: 2, andB: 1.5) {
+            animateWarning()
+          }
+          if timeInterval(timer.secondsRemaining, isBetweenA: 1, andB: 0.5) {
+            animateWarning()
+          }
+          
+        } else {
+          if timeInterval(timer.secondsRemaining, isBetweenA: 120, andB: 117) {
+            animateWarning()
+          }
+          
+          if timeInterval(timer.secondsRemaining, isBetweenA: 30, andB: 27) {
+            animateWarning()
+          }
+        }
+        // end todo move
+        
+        
       case .PostShow:
         timerViews?.ring1fg.percent = 1.0
         timerViews?.ring2fg.percent = 1.0
@@ -189,4 +212,17 @@ extension TimerViewController {
       }
     }
   }
+  
+  func timeInterval(time: NSTimeInterval, isBetweenA a: NSTimeInterval,
+                                                andB b:NSTimeInterval) -> Bool {
+    
+    let small = min(a,b)
+    let large = max(a,b)
+    let smaller = time >= small
+    let larger  = time <= large
+    
+    return smaller && larger
+  }
+  
+  
 }

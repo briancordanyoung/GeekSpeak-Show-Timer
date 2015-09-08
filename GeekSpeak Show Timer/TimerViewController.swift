@@ -25,14 +25,23 @@ final class TimerViewController: UIViewController {
                                            blue: 0.0,
                                           alpha: 1.0)
     
-    static let WarningColor       = UIColor(red: 13/255,
-                                          green: 255/255,
-                                           blue: 179/255,
+//    static let WarningColor       = UIColor(red: 13/255,
+//                                          green: 255/255,
+//                                           blue: 179/255,
+//                                          alpha: 1.0)
+//    
+//    static let AlarmColor         = UIColor(red: 255/255,
+//                                          green: 255/255,
+//                                           blue: 150/255,
+//                                          alpha: 1.0)
+    static let WarningColor       = UIColor(red: 23/255,
+                                          green: 157/255,
+                                           blue: 172/255,
                                           alpha: 1.0)
     
-    static let AlarmColor         = UIColor(red: 255/255,
-                                          green: 255/255,
-                                           blue: 150/255,
+    static let AlarmColor         = UIColor(red: 30/255,
+                                          green: 226/255,
+                                           blue: 166/255,
                                           alpha: 1.0)
     
     static let LineWidth              = CGFloat(90) / CGFloat(736)
@@ -49,6 +58,7 @@ final class TimerViewController: UIViewController {
       updateTimerLabels()
     }
   }
+  
   
   private var layoutSize: CGSize {
     if let splitViewController = splitViewController {
@@ -467,6 +477,57 @@ final class TimerViewController: UIViewController {
   
   func ignoreContraint(constraint: NSLayoutConstraint) {
     constraint.priority = Constants.IgnoreLayoutPriority
+  }
+  
+  
+  
+  // MARK: -
+  // MARK: Warning Animation
+  
+  var warningDuration = NSTimeInterval(1.0)
+  private var warningStartTime = NSDate().timeIntervalSince1970
+  private var warningAnimationInProgress = false
+
+  func animateWarning() {
+    if !warningAnimationInProgress {
+      warningStartTime = NSDate().timeIntervalSince1970
+      warningAnimationInProgress = true
+      animateBlackToWhite()
+    }
+  }
+  
+  func animateBlackToWhite() {
+    UIView.animateWithDuration( 0.05,
+      delay: 0.0,
+      options: nil,
+      animations: {
+        self.view.backgroundColor = Constants.BreakColor
+      },
+      completion: { completed in
+        if (self.warningStartTime + self.warningDuration) > NSDate().timeIntervalSince1970 {
+          self.animateWhiteToBlack()
+        } else {
+          self.warningAnimationInProgress = false
+          self.view.backgroundColor = UIColor.blackColor()
+        }
+    })
+  }
+  
+  func animateWhiteToBlack() {
+    UIView.animateWithDuration( 0.05,
+      delay: 0.0,
+      options: nil,
+      animations: {
+        self.view.backgroundColor = UIColor.blackColor()
+      },
+      completion: { completed in
+        if (self.warningStartTime + self.warningDuration) > NSDate().timeIntervalSince1970 {
+          self.animateBlackToWhite()
+        } else {
+          self.warningAnimationInProgress = false
+          self.view.backgroundColor = UIColor.blackColor()
+        }
+    })
   }
   
   
