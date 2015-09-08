@@ -5,7 +5,7 @@ extension TimerSplitViewController: UISplitViewControllerDelegate {
   func splitViewController(svc: UISplitViewController,
         willChangeToDisplayMode displayMode: UISplitViewControllerDisplayMode) {
     // Maybe a good place to inject the timer class?
-          println("splitViewController(_:willChangeToDisplayMode:")
+    println("splitViewController(_:willChangeToDisplayMode: \(displayMode)0")
   }
   
 //  func targetDisplayModeForActionInSplitViewController(svc: UISplitViewController) -> UISplitViewControllerDisplayMode {

@@ -27,6 +27,24 @@ class TimerSplitViewController: UISplitViewController {
       preferredDisplayMode = .PrimaryOverlay
     }
   }
+  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    println("Segue: \(segue.identifier)")
+    if segue.identifier == "showDetail" {
+      if let navController = segue.destinationViewController as? UINavigationController {
+        if let timerViewController = navController.topViewController as? TimerViewController {
+          println("Segue: \(segue.identifier)  found: TimerViewController")
+        }
+      }
+    }
+    if segue.identifier == "showMaster" {
+      if let navController = segue.destinationViewController as? UINavigationController {
+        if let timerViewController = navController.topViewController as? SettingsViewController {
+          println("Segue \(segue.identifier)  found: SettingsViewController")
+        }
+      }
+    }
+  }
     
 //  override func viewWillAppear(animated: Bool) {
 //    for viewController in viewControllers {
