@@ -316,6 +316,7 @@ final class TimerViewController: UIViewController {
       }
       
     case .PausedAfterComplete:
+      hideNextButtonWithDuration(0.5)
       startPauseButton.animatePercentageOfSuperviewSize( Constants.EmphisisedButtonScale)
       if startPauseButtonCount > 0 {
         startPauseButton.animateToPlayView()

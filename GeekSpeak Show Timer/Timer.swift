@@ -206,21 +206,20 @@ final class Timer: NSObject, NSCoding {
   }
 
   func next() {
-    if percentageComplete < 1.0 {
-      if _state == .Counting {
-        _state == .CountingAfterComplete
-      }
-      if _state == .Paused {
-        _state == .PausedAfterComplete
-      }
-    }
-    
-    
-    
     storeElapsedTimeAtPause()
     countingStartTime = .None
     timing.incrementPhase()
     notifyTimerDurationUpdated()
+
+    if percentageComplete > 1.0 ||
+      timing.phase == .PostShow {
+        if _state == .Counting {
+          _state = .CountingAfterComplete
+        }
+        if _state == .Paused {
+          _state = .PausedAfterComplete
+        }
+    }
 
     switch _state {
     case .Ready:
