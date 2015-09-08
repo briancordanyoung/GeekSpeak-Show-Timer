@@ -25,14 +25,23 @@ final class TimerViewController: UIViewController {
                                            blue: 0.0,
                                           alpha: 1.0)
     
-    static let WarningColor       = UIColor(red: 13/255,
-                                          green: 255/255,
-                                           blue: 179/255,
+//    static let WarningColor       = UIColor(red: 13/255,
+//                                          green: 255/255,
+//                                           blue: 179/255,
+//                                          alpha: 1.0)
+//    
+//    static let AlarmColor         = UIColor(red: 255/255,
+//                                          green: 255/255,
+//                                           blue: 150/255,
+//                                          alpha: 1.0)
+    static let WarningColor       = UIColor(red: 23/255,
+                                          green: 157/255,
+                                           blue: 172/255,
                                           alpha: 1.0)
     
-    static let AlarmColor         = UIColor(red: 255/255,
-                                          green: 255/255,
-                                           blue: 150/255,
+    static let AlarmColor         = UIColor(red: 30/255,
+                                          green: 226/255,
+                                           blue: 166/255,
                                           alpha: 1.0)
     
     static let LineWidth              = CGFloat(90) / CGFloat(736)
