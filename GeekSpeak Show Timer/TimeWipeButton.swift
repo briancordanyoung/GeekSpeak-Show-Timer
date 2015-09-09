@@ -10,6 +10,29 @@ class TimeWipeButton: UIButton {
   
   var highlightOpacity = CGFloat(1.0)
   var wipeDuration     = CFTimeInterval(0.2)
+
+  var lineColor: UIColor {
+    get {
+      if let viewA = viewA {
+        self._lineColor = viewA.lineColor
+      }
+      if let viewB = viewB {
+        self._lineColor = viewB.lineColor
+      }
+      return _lineColor
+    }
+    set(newLineColor) {
+      if let viewA = viewA {
+        viewA.lineColor = newLineColor
+      }
+      if let viewB = viewB {
+        viewB.lineColor = newLineColor
+      }
+      _lineColor = newLineColor
+    }
+  }
+  
+  private var _lineColor = UIColor.whiteColor()
   
   
   var percentageOfSuperviewSize: CGFloat {

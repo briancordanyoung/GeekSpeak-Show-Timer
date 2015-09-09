@@ -151,6 +151,11 @@ final class TimerViewController: UIViewController {
   }
   
   override func viewWillAppear(animated: Bool) {
+//    nextSegmentButton.lineColor = Constants.GeekSpeakBlueColor
+//    nextSegmentButton.tintColor = Constants.GeekSpeakBlueColor
+//    startPauseButton.lineColor  = Constants.GeekSpeakBlueColor
+//    startPauseButton.tintColor  = Constants.GeekSpeakBlueColor
+    
     if let timer = timer {
       setupButtonLayout(timer)
     }
