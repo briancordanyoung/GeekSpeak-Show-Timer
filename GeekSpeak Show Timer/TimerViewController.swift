@@ -77,10 +77,10 @@ final class TimerViewController: UIViewController {
   }
   
  // TODO: The Timer Property should be injected by the SplitViewController
-  //       during the segue. Revisit and stop pulling from other view controller
+  //       during the segue. Revisit and stop pulling from the app delegate
   var timer: Timer? {
-    if let splitViewController = splitViewController as? TimerSplitViewController {
-      return splitViewController.timer
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate  {
+      return appDelegate.timer
     } else {
       return .None
     }
@@ -229,6 +229,16 @@ final class TimerViewController: UIViewController {
     
     let duration = coordinator.transitionDuration()
     layoutViewsForSize(size, animateWithDuration: duration)
+          
+          
+   // MARK: Manage SPlitViewContoller preferedDisplayMode
+//    if let svc = splitViewController {
+//      if svc.collapsed {
+//        println("collapsed: \(svc.preferredDisplayMode == .Automatic)")
+//      } else {
+//        println("not collapsed: \(svc.preferredDisplayMode == .Automatic)")
+//      }
+//    }
   }
   
   
@@ -248,7 +258,8 @@ final class TimerViewController: UIViewController {
   // MARK: -
   // MARK: Actions
   @IBAction func showSettingsButtonPressed(sender: UIBarButtonItem) {
-    self.splitViewController?.toggleMasterView()
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    appDelegate.pressButtonBarItem()
   }
   
   @IBAction func nextSegmentButtonPressed(sender: NextSegmentButton) {
@@ -634,6 +645,21 @@ final class TimerViewController: UIViewController {
   }
 
   
+  
+  // MARK: Manage SPlitViewContoller preferedDisplayMode
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    super.prepareForSegue(segue, sender: sender)
+    if let svc = splitViewController  {
+      if svc.collapsed {
+        println("    collapsed (timer view controller)")
+        //        return .Automatic
+      } else {
+        println("not collapsed (timer view controller)")
+        //        return .PrimaryOverlay
+      }
+    }
+  }
+
 
 }
 

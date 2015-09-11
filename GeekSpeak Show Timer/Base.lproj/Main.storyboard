@@ -18,8 +18,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <slider hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="in4-Kr-y3Y" userLabel="mysteryLayoutBugRequiresThis">
+                                <rect key="frame" x="-2" y="0.0" width="4" height="31"/>
+                                <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="325" y="974" width="118" height="31"/>
+                                </variation>
+                            </slider>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PdP-pn-H8o" userLabel="PlayPause" customClass="PlayPauseButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
+                                <rect key="frame" x="16" y="808" width="364" height="196"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="724" y="16" width="284" height="349"/>
+                                </variation>
+                                <connections>
+                                    <action selector="startPauseButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="675-vk-O2X"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-5J-yaK" userLabel="Skip" customClass="NextSegmentButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
+                                <rect key="frame" x="388" y="808" width="364" height="196"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="1" id="tPY-Qx-9to" userLabel="nextButtonHeight"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="1" id="xcx-qj-ia9" userLabel="nextButtonWidth"/>
+                                </constraints>
+                                <state key="normal">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="724" y="373" width="284" height="375"/>
+                                </variation>
+                                <connections>
+                                    <action selector="nextSegmentButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4vC-nM-WnJ"/>
+                                </connections>
+                            </button>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tY2-lc-OlN" userLabel="TimerCircles">
-                                <rect key="frame" x="16" y="16" width="736" height="736"/>
+                                <rect key="frame" x="16" y="64" width="736" height="736"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="totalTime" text="00:00:00" lineBreakMode="tailTruncation" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="iLg-Ok-lxM" userLabel="totalTime">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="68"/>
@@ -84,42 +120,6 @@
                                     <rect key="frame" x="16" y="16" width="700" height="700"/>
                                 </variation>
                             </view>
-                            <slider hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="in4-Kr-y3Y" userLabel="mysteryLayoutBugRequiresThis">
-                                <rect key="frame" x="-2" y="0.0" width="4" height="31"/>
-                                <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                    <rect key="frame" x="325" y="974" width="118" height="31"/>
-                                </variation>
-                            </slider>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PdP-pn-H8o" userLabel="PlayPause" customClass="PlayPauseButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
-                                <rect key="frame" x="16" y="760" width="364" height="244"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="724" y="16" width="284" height="349"/>
-                                </variation>
-                                <connections>
-                                    <action selector="startPauseButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="675-vk-O2X"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-5J-yaK" userLabel="Skip" customClass="NextSegmentButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
-                                <rect key="frame" x="388" y="760" width="364" height="244"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="1" id="tPY-Qx-9to" userLabel="nextButtonHeight"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="1" id="xcx-qj-ia9" userLabel="nextButtonWidth"/>
-                                </constraints>
-                                <state key="normal">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="724" y="373" width="284" height="375"/>
-                                </variation>
-                                <connections>
-                                    <action selector="nextSegmentButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4vC-nM-WnJ"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -132,7 +132,7 @@
                             <constraint firstItem="PdP-pn-H8o" firstAttribute="width" secondItem="edy-5J-yaK" secondAttribute="width" priority="751" id="O3c-f6-xju" userLabel="buttonsEqualWidth"/>
                             <constraint firstItem="tY2-lc-OlN" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" priority="749" constant="-32" id="QKI-vN-P0e" userLabel="timerCirclesHeight"/>
                             <constraint firstItem="PdP-pn-H8o" firstAttribute="height" secondItem="edy-5J-yaK" secondAttribute="height" priority="749" id="QoA-ct-xub" userLabel="buttonsEqualHeight"/>
-                            <constraint firstItem="tY2-lc-OlN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" priority="750" constant="16" id="b5I-QT-R6p" userLabel="timerCircleToTop"/>
+                            <constraint firstItem="tY2-lc-OlN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" priority="750" constant="64" id="b5I-QT-R6p" userLabel="timerCircleToTop"/>
                             <constraint firstItem="edy-5J-yaK" firstAttribute="top" secondItem="PdP-pn-H8o" secondAttribute="bottom" priority="749" constant="8" id="btS-u7-nLT" userLabel="nextButtonToStartButtonHorizontal"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="edy-5J-yaK" secondAttribute="bottom" priority="751" constant="20" id="fWi-xK-0mJ" userLabel="nextButtonToBottom"/>
                             <constraint firstItem="edy-5J-yaK" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" priority="749" id="mlA-cE-QNr" userLabel="nextButtonToSuperViewSideHorizontal"/>
@@ -325,10 +325,10 @@
             </objects>
             <point key="canvasLocation" x="356" y="598"/>
         </scene>
-        <!--Timer Split View Controller-->
+        <!--Split View Controller-->
         <scene sceneID="5GO-wN-z0h">
             <objects>
-                <splitViewController storyboardIdentifier="splitViewNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IwL-Pm-vjL" customClass="TimerSplitViewController" customModule="GeekSpeak_Show_Timer" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController storyboardIdentifier="splitViewNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IwL-Pm-vjL" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
@@ -680,6 +680,6 @@
         <image name="GeekSpeakWhite" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Y8G-p3-Pc0"/>
+        <segue reference="8Af-hP-dCi"/>
     </inferredMetricsTieBreakers>
 </document>

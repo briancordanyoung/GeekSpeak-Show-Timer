@@ -3,15 +3,15 @@ import UIKit
 class SettingsViewController: UIViewController {
 
   // TODO: The Timer Property should be injected by the SplitViewController
-  //       during the segue. Revisit and stop pulling from other view controller
+  //       during the segue. Revisit and stop pulling from the app delegate
   var timer: Timer? {
-    if let splitViewController = splitViewController as? TimerSplitViewController {
-      return splitViewController.timer
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate  {
+      return appDelegate.timer
     } else {
       return .None
     }
   }
-  
+
   
   // Required properties
   @IBOutlet weak var contentView: UIView!
@@ -112,13 +112,15 @@ class SettingsViewController: UIViewController {
     if let splitViewController = splitViewController {
       // collapsed = true  is iPhone
       // collapsed = false is iPad & Plus
-      if splitViewController.collapsed == true {
+      if splitViewController.collapsed {
         self.performSegueWithIdentifier("showTimer", sender: self)
       } else {
-        self.splitViewController?.toggleMasterView()
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.pressButtonBarItem()
       }
     }
   }
+  
   
   // MARK: -
   // MARK: Timer management
@@ -217,6 +219,20 @@ class SettingsViewController: UIViewController {
                                          constant: 0.0)
     view.addConstraint(rightConstraint)
     
+  }
+  
+  // MARK: Manage SplitViewContoller preferedDisplayMode
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    super.prepareForSegue(segue, sender: sender)
+    if let svc = splitViewController  {
+      if svc.collapsed {
+        println("    collapsed (settings view controller)")
+//        return .Automatic
+      } else {
+        println("not collapsed (settings view controller)")
+//        return .PrimaryOverlay
+      }
+    }
   }
 
 }

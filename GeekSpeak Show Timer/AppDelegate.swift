@@ -1,25 +1,39 @@
-//
-//  AppDelegate.swift
-//  GeekSpeak Show Timer
-//
-//  Created by Brian Cordan Young on 8/1/15.
-//  Copyright (c) 2015 Brian Young. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+  struct Constants {
+    static let TimerId              = "timerViewControllerTimerId"
+    static let TimerNotificationKey = "com.geekspeak.timerNotificationKey"
+    static let TimerDataPath        = "TimerData.plist"
+  }
+  
+  
+
+  var timer = Timer()
+  var splitViewControllerDelegate = TimerSplitViewControllerDelegate()
   var window: UIWindow?
+  
+  var splitViewController: UISplitViewController? {
+    if let splitViewController = self.window?.rootViewController
+      as? UISplitViewController {
+      return splitViewController
+    } else {
+      return .None
+    }
+  }
 
 
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+  func application(application: UIApplication,
+       didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?)
+                                                                       -> Bool {
     registerUserDefaults()
     Appearance.apply()
-    
+    setupSplitViewController()
     return true
   }
+  
 
   func application(application: UIApplication,
           willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?)
@@ -32,25 +46,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func applicationWillResignActive(application: UIApplication) {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
   }
 
   func applicationDidEnterBackground(application: UIApplication) {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
   }
 
   func applicationWillEnterForeground(application: UIApplication) {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    // reset the timer if it hasn't started, so that it uses the UserDefaults
+    // to set which timing to use (demo or show)
+    if timer.totalShowTimeElapsed == 0 {
+      timer.reset()
+    }
   }
 
   func applicationDidBecomeActive(application: UIApplication) {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
   }
 
   func applicationWillTerminate(application: UIApplication) {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
   }
   
   func application(application: UIApplication, shouldSaveApplicationState
@@ -66,9 +78,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 
-// Setup the default defaults in app memory
 extension AppDelegate {
+
+  func setupSplitViewController() {
+    if let splitViewController = splitViewController {
+      // setup nav bar buttons
+//        let index = splitViewController.viewControllers.count - 1
+//        let navigationController = splitViewController
+//                              .viewControllers[index] as! UINavigationController
+//        let navItem = navigationController.topViewController.navigationItem
+//        navItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
+//        navItem.leftItemsSupplementBackButton = true
+      println("Assigning splitViewControllerDelegate")
+      splitViewController.delegate = splitViewControllerDelegate
+    }
+  }
+
+  func pressButtonBarItem() {
+    func setupSplitViewController() {
+      if let splitViewController = splitViewController {
+          let barButtonItem = splitViewController.displayModeButtonItem()
+            UIApplication.sharedApplication().sendAction( barButtonItem.action,
+                                                      to: barButtonItem.target,
+                                                    from: nil,
+                                                forEvent: nil)
+          }
+      }
+  }
   
+  // Setup the default defaults in app memory
   func registerUserDefaults() {
     let defaults: [String:AnyObject] = [
       Timer.Constants.UseDemoDurations: false
