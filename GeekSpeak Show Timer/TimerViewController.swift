@@ -92,6 +92,7 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var sectionTimeLabel: UILabel!
   @IBOutlet weak var totalLabel: UILabel!
   @IBOutlet weak var segmentLabel: UILabel!
+  @IBOutlet weak var flashImageView: UIImageView!
   @IBOutlet weak var startPauseButton: PlayPauseButton!
   @IBOutlet weak var nextSegmentButton: NextSegmentButton!
   
@@ -508,6 +509,8 @@ final class TimerViewController: UIViewController {
     if !warningAnimationInProgress {
       warningStartTime = NSDate().timeIntervalSince1970
       warningAnimationInProgress = true
+      flashImageView.alpha = 0.0
+      flashImageView.hidden = false
       animateBlackToWhite()
     }
   }
@@ -517,6 +520,7 @@ final class TimerViewController: UIViewController {
       delay: 0.0,
       options: nil,
       animations: {
+        self.flashImageView.alpha = 1.0
         self.view.backgroundColor = Constants.BreakColor
       },
       completion: { completed in
@@ -525,6 +529,8 @@ final class TimerViewController: UIViewController {
         } else {
           self.warningAnimationInProgress = false
           self.view.backgroundColor = UIColor.blackColor()
+          self.flashImageView.alpha = 0.0
+          self.flashImageView.hidden = true
         }
     })
   }
@@ -534,6 +540,7 @@ final class TimerViewController: UIViewController {
       delay: 0.0,
       options: nil,
       animations: {
+        self.flashImageView.alpha = 0.0
         self.view.backgroundColor = UIColor.blackColor()
       },
       completion: { completed in
@@ -542,7 +549,8 @@ final class TimerViewController: UIViewController {
         } else {
           self.warningAnimationInProgress = false
           self.view.backgroundColor = UIColor.blackColor()
-        }
+          self.flashImageView.alpha = 0.0
+          self.flashImageView.hidden = true        }
     })
   }
   

@@ -45,6 +45,7 @@
 		D3991DC71B9FBF1B00C63286 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3991DC51B9FBF1B00C63286 /* LaunchScreen.xib */; };
 		D3991DD31B9FBF1B00C63286 /* RingLayerPlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3991DD21B9FBF1B00C63286 /* RingLayerPlayTests.swift */; };
 		D39DAD1A1B917229007D797C /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39DAD191B917229007D797C /* Appearance.swift */; };
+		D3A845A51BA39E8B00062B02 /* flash.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A845A41BA39E8B00062B02 /* flash.png */; };
 		D3A9B7E01B980E8F00745F56 /* TimerSplitViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A9B7DF1B980E8F00745F56 /* TimerSplitViewControllerDelegate.swift */; };
 		D3C0807B1B9BB6290020A4A0 /* PlayPauseWipeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EC191B1B94EB5000A8E426 /* PlayPauseWipeButton.swift */; };
 		D3C487B31B726F3300B8067E /* Timer+StatePreservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */; };
@@ -133,6 +134,7 @@
 		D3991DD11B9FBF1B00C63286 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3991DD21B9FBF1B00C63286 /* RingLayerPlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingLayerPlayTests.swift; sourceTree = "<group>"; };
 		D39DAD191B917229007D797C /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		D3A845A41BA39E8B00062B02 /* flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash.png; sourceTree = "<group>"; };
 		D3A9B7DF1B980E8F00745F56 /* TimerSplitViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerSplitViewControllerDelegate.swift; sourceTree = "<group>"; };
 		D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timer+StatePreservation.swift"; sourceTree = "<group>"; };
 		D3EC191B1B94EB5000A8E426 /* PlayPauseWipeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayPauseWipeButton.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				D320C3601B6FF5E90046F785 /* UIImage+ImageEffects.m */,
 				D3463F671B713E0D002C68A8 /* Settings.bundle */,
 				D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */,
+				D3A845A41BA39E8B00062B02 /* flash.png */,
 				D340CC811B6D3E7600BB17E3 /* LaunchScreen.xib */,
 				D340CC761B6D3E7600BB17E3 /* Supporting Files */,
 				D340CC9A1B6D504400BB17E3 /* GeekSpeak Show Timer-Bridging-Header.h */,
@@ -491,6 +494,7 @@
 				D3463F681B713E0D002C68A8 /* Settings.bundle in Resources */,
 				D340CC7E1B6D3E7600BB17E3 /* Main.storyboard in Resources */,
 				D340CC831B6D3E7600BB17E3 /* LaunchScreen.xib in Resources */,
+				D3A845A51BA39E8B00062B02 /* flash.png in Resources */,
 				D340CC801B6D3E7600BB17E3 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

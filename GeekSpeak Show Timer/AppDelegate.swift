@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     registerUserDefaults()
     Appearance.apply()
     setupSplitViewController()
+    resetTimerIfShowTimeElapsed()
     return true
   }
   
@@ -52,14 +53,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func applicationWillEnterForeground(application: UIApplication) {
-    // reset the timer if it hasn't started, so that it uses the UserDefaults
-    // to set which timing to use (demo or show)
-    if timer.totalShowTimeElapsed == 0 {
-      timer.reset()
-    }
+
+    resetTimerIfShowTimeElapsed()
   }
 
   func applicationDidBecomeActive(application: UIApplication) {
+    
+    resetTimerIfShowTimeElapsed()
   }
 
   func applicationWillTerminate(application: UIApplication) {
@@ -80,6 +80,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
 
+  func resetTimerIfShowTimeElapsed() {
+    // reset the timer if it hasn't started, so that it uses the UserDefaults
+    // to set which timing to use (demo or show)
+    let useDemoDurations = NSUserDefaults
+                                  .standardUserDefaults()
+                                  .boolForKey(Timer.Constants.UseDemoDurations)
+    if timer.totalShowTimeElapsed == 0 {
+      if useDemoDurations {
+        timer.reset(usingDemoTiming: true)
+      } else {
+        timer.reset(usingDemoTiming: false)
+      }
+    }
+  }
+  
   func setupSplitViewController() {
     if let splitViewController = splitViewController {
       // setup nav bar buttons
