@@ -106,6 +106,25 @@ extension AppDelegate {
 //        navItem.leftItemsSupplementBackButton = true
       println("Assigning splitViewControllerDelegate")
       splitViewController.delegate = splitViewControllerDelegate
+      
+      // This is a hack.  Once I find the correct place to tell the splitViewController
+      // to use .PrimaryOverlay when in horizontal regular, I can remove this.
+      switch Device() {
+      case  .iPhone4,
+            .iPhone4s,
+            .iPhone5,
+            .iPhone5c,
+            .iPhone5s,
+            .iPodTouch5,
+            .iPhone6:
+        break
+      case .iPhone6Plus:
+        break
+      case .Simulator:
+        break
+      default:
+        splitViewController.preferredDisplayMode = .PrimaryOverlay
+      }
     }
   }
 
