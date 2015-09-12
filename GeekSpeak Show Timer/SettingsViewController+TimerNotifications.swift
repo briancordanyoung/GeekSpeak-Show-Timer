@@ -62,8 +62,7 @@ extension SettingsViewController {
       segment3Label.text = segment3
       postShowLabel.text = postshow
       
-      // TODO: Uncomment once this is on a background thread
-      //       generateBluredBackground()
+      generateBluredBackground()
     }
   }
 

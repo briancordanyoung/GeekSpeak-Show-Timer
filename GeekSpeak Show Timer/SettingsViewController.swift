@@ -12,6 +12,7 @@ class SettingsViewController: UIViewController {
     }
   }
 
+  var blurringBackground = false
   
   // Required properties
   @IBOutlet weak var contentView: UIView!
@@ -149,8 +150,11 @@ class SettingsViewController: UIViewController {
   
   
   // TODO: Do this on a background thread
+  
   func generateBluredBackground() {
-    // https://uncorkedstudios.com/blog/ios-7-background-effects-and-split-view-controllers
+
+    if blurringBackground { return }
+    blurringBackground = true
     
     if let underneathViewController = timerViewController {
       // set up the graphics context to render the screen snapshot.
@@ -187,10 +191,17 @@ class SettingsViewController: UIViewController {
         
         // Now actually apply the blur to the snapshot and set the background
         // behind our master view controller
-        backgroundImageView.image = backgroundImage.applyBlurWithRadius( 20,
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+
+        let blurredBackgroundImage = backgroundImage.applyBlurWithRadius( 20,
                                                 tintColor: UIColor.clearColor(),
                                     saturationDeltaFactor: 1.8,
                                                 maskImage: nil)
+            dispatch_sync(dispatch_get_main_queue(), {
+                self.backgroundImageView.image = blurredBackgroundImage
+                self.blurringBackground = false
+            })
+          })
       }
     } else {
       backgroundImageView.image = UIImage.imageWithColor(UIColor.blackColor())
@@ -221,19 +232,6 @@ class SettingsViewController: UIViewController {
     
   }
   
-  // MARK: Manage SplitViewContoller preferedDisplayMode
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    super.prepareForSegue(segue, sender: sender)
-    if let svc = splitViewController  {
-      if svc.collapsed {
-        println("    collapsed (settings view controller)")
-//        return .Automatic
-      } else {
-        println("not collapsed (settings view controller)")
-//        return .PrimaryOverlay
-      }
-    }
-  }
 
 }
 
