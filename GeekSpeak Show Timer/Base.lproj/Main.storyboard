@@ -18,19 +18,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="flash.png" translatesAutoresizingMaskIntoConstraints="NO" id="5o7-Gc-suh" userLabel="FlashImageView">
-                                <rect key="frame" x="0.0" y="64" width="300" height="300"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" none="YES" image="YES"/>
-                                    <bool key="isElement" value="YES"/>
-                                </accessibility>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="5o7-Gc-suh" secondAttribute="height" multiplier="1:1" id="Duc-Ea-NmZ" userLabel="Aspect-1:1"/>
-                                </constraints>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gWc-zk-mRv" userLabel="Container">
-                                <rect key="frame" x="16" y="64" width="736" height="960"/>
+                                <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flash.png" translatesAutoresizingMaskIntoConstraints="NO" id="5o7-Gc-suh" userLabel="FlashImageView">
+                                        <rect key="frame" x="-192" y="-192" width="1152" height="1152"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" none="YES" image="YES"/>
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="5o7-Gc-suh" secondAttribute="height" multiplier="1:1" id="Duc-Ea-NmZ" userLabel="Aspect-1:1"/>
+                                        </constraints>
+                                    </imageView>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N48-Wj-ZUq" userLabel="Controls">
                                         <rect key="frame" x="353" y="736" width="30" height="224"/>
                                         <subviews>
@@ -58,8 +58,8 @@
                                             <constraint firstAttribute="trailing" secondItem="PdP-pn-H8o" secondAttribute="trailing" id="v7x-2E-xam"/>
                                         </constraints>
                                     </view>
-                                    <view opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tY2-lc-OlN" userLabel="TimerCircles">
-                                        <rect key="frame" x="0.0" y="0.0" width="736" height="736"/>
+                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tY2-lc-OlN" userLabel="TimerCircles">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="768"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="totalTime" text="00:00:00" lineBreakMode="tailTruncation" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="iLg-Ok-lxM" userLabel="totalTime">
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="68"/>
@@ -71,8 +71,8 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" restorationIdentifier="segmentTime" text="00:00:00" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="fhW-lj-LnF" userLabel="segmentTime">
-                                                <rect key="frame" x="436" y="0.0" width="300" height="68"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="segmentTime" text="00:00:00" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="fhW-lj-LnF" userLabel="segmentTime">
+                                                <rect key="frame" x="468" y="0.0" width="300" height="68"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="300" placeholder="YES" id="lFr-m0-8yo"/>
                                                     <constraint firstAttribute="width" secondItem="fhW-lj-LnF" secondAttribute="height" multiplier="409:93" id="qip-L3-pI6"/>
@@ -93,8 +93,8 @@
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" restorationIdentifier="segment" text="Section" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="6Xz-Ti-gwy" userLabel="segment">
-                                                <rect key="frame" x="577" y="68" width="158.5" height="23.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="segment" text="Section" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="6Xz-Ti-gwy" userLabel="segment">
+                                                <rect key="frame" x="609" y="68" width="158.5" height="23.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="6Xz-Ti-gwy" secondAttribute="height" multiplier="27:4" id="Id1-WE-DuA"/>
                                                 </constraints>
@@ -141,8 +141,9 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="N48-Wj-ZUq" firstAttribute="bottom" secondItem="gWc-zk-mRv" secondAttribute="bottom" priority="751" id="2dZ-j3-aAh" userLabel="vControlsToContainerBottom"/>
+                                    <constraint firstItem="5o7-Gc-suh" firstAttribute="bottom" secondItem="gWc-zk-mRv" secondAttribute="bottom" priority="751" id="4Va-GK-Ujy" userLabel="vFlashImageViewBottomEdge"/>
                                     <constraint firstItem="tY2-lc-OlN" firstAttribute="centerY" secondItem="gWc-zk-mRv" secondAttribute="centerY" priority="749" id="5lf-ye-AdK" userLabel="hCirclesCenteredY"/>
-                                    <constraint firstItem="N48-Wj-ZUq" firstAttribute="height" relation="greaterThanOrEqual" secondItem="gWc-zk-mRv" secondAttribute="height" priority="749" id="7T6-Ol-kOV" userLabel="hControlsHeight"/>
+                                    <constraint firstItem="N48-Wj-ZUq" firstAttribute="height" relation="lessThanOrEqual" secondItem="gWc-zk-mRv" secondAttribute="height" priority="749" id="7T6-Ol-kOV" userLabel="hControlsHeight"/>
                                     <constraint firstItem="edy-5J-yaK" firstAttribute="height" secondItem="tY2-lc-OlN" secondAttribute="height" id="9gv-wh-1O8" userLabel="skipButtonHeight"/>
                                     <constraint firstItem="N48-Wj-ZUq" firstAttribute="width" relation="greaterThanOrEqual" secondItem="gWc-zk-mRv" secondAttribute="width" priority="751" id="AHu-SS-Fd4" userLabel="vControlsWidth"/>
                                     <constraint firstItem="tY2-lc-OlN" firstAttribute="width" relation="lessThanOrEqual" secondItem="gWc-zk-mRv" secondAttribute="width" priority="751" id="AfI-f3-uUe" userLabel="vCirclesWidth"/>
@@ -157,24 +158,25 @@
                                     <constraint firstAttribute="height" secondItem="N48-Wj-ZUq" secondAttribute="height" priority="1" id="Yz7-tV-hac" userLabel="controlsHeight"/>
                                     <constraint firstItem="tY2-lc-OlN" firstAttribute="centerX" secondItem="gWc-zk-mRv" secondAttribute="centerX" priority="751" id="amj-Tl-7DM" userLabel="vCirclesCenteredX"/>
                                     <constraint firstItem="tY2-lc-OlN" firstAttribute="leading" secondItem="gWc-zk-mRv" secondAttribute="leading" priority="749" id="cRT-Og-qdL" userLabel="hCirclesToContainerLeading"/>
+                                    <constraint firstItem="5o7-Gc-suh" firstAttribute="centerY" secondItem="tY2-lc-OlN" secondAttribute="centerY" id="htc-mL-1dH" userLabel="flashImageViewCenteredY"/>
                                     <constraint firstItem="tY2-lc-OlN" firstAttribute="top" secondItem="gWc-zk-mRv" secondAttribute="top" priority="751" id="iyz-WB-h6a" userLabel="vCirclesToContainerTop"/>
                                     <constraint firstItem="tY2-lc-OlN" firstAttribute="trailing" secondItem="N48-Wj-ZUq" secondAttribute="leading" priority="749" id="jef-g1-gbn" userLabel="hCirclesToControls"/>
                                     <constraint firstItem="N48-Wj-ZUq" firstAttribute="centerY" secondItem="gWc-zk-mRv" secondAttribute="centerY" priority="749" id="kbj-I9-w0U" userLabel="hControlsCenteredY"/>
+                                    <constraint firstAttribute="right" secondItem="5o7-Gc-suh" secondAttribute="right" priority="749" id="ldD-8i-zgb" userLabel="hFlashImageViewTrailingEdge"/>
                                     <constraint firstItem="N48-Wj-ZUq" firstAttribute="width" secondItem="gWc-zk-mRv" secondAttribute="width" priority="1" id="q9W-6m-oRN" userLabel="controlsWidth"/>
                                     <constraint firstItem="tY2-lc-OlN" firstAttribute="height" relation="lessThanOrEqual" secondItem="gWc-zk-mRv" secondAttribute="height" priority="749" id="qHi-5a-v30" userLabel="hCirclesHeight"/>
+                                    <constraint firstItem="5o7-Gc-suh" firstAttribute="centerX" secondItem="tY2-lc-OlN" secondAttribute="centerX" id="xFy-RG-QQa" userLabel="flashImageViewCenteredX"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="5o7-Gc-suh" secondAttribute="bottom" priority="751" id="7qr-D2-4gA" userLabel="vFlashImageViewBottomEdge"/>
-                            <constraint firstItem="5o7-Gc-suh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="y3c-jy-aDJ" secondAttribute="bottom" priority="751" id="9aa-2b-CjF" userLabel="vFlashImageViewTopLayout"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="gWc-zk-mRv" secondAttribute="trailing" id="T1X-EF-ZHc" userLabel="containerToSuperTrailing"/>
-                            <constraint firstItem="gWc-zk-mRv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="U2G-rl-XeB" userLabel="containerToSuperLeading"/>
-                            <constraint firstItem="gWc-zk-mRv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Xxo-f3-x05" userLabel="containerToSuperTop"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5o7-Gc-suh" secondAttribute="trailing" priority="749" id="hh3-SD-OOc" userLabel="hFlashImageViewTrailingEdge"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gWc-zk-mRv" secondAttribute="bottom" id="wGn-um-rOe" userLabel="containerToSuperBottom"/>
-                            <constraint firstItem="5o7-Gc-suh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" priority="749" id="xW4-cq-DeE" userLabel="hFlashImageViewLeadingEdge"/>
+                            <constraint firstItem="tY2-lc-OlN" firstAttribute="height" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="height" id="GLM-kE-o8n"/>
+                            <constraint firstItem="gWc-zk-mRv" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="T1X-EF-ZHc" userLabel="containerToSuperTrailing"/>
+                            <constraint firstItem="gWc-zk-mRv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="U2G-rl-XeB" userLabel="containerToSuperLeading"/>
+                            <constraint firstItem="gWc-zk-mRv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="top" id="Xxo-f3-x05" userLabel="containerToSuperTop"/>
+                            <constraint firstItem="tY2-lc-OlN" firstAttribute="width" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="width" id="lMM-dq-h6S"/>
+                            <constraint firstItem="gWc-zk-mRv" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="bottom" id="wGn-um-rOe" userLabel="containerToSuperBottom"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wM9-rF-CHT"/>
@@ -187,6 +189,7 @@
                         <outlet property="hControlsCenteredY" destination="kbj-I9-w0U" id="4JU-Gb-dKh"/>
                         <outlet property="hControlsHeight" destination="7T6-Ol-kOV" id="fys-5R-Gfg"/>
                         <outlet property="hControlsToContainerTrailing" destination="NoN-NY-Dqm" id="Ask-5h-VA7"/>
+                        <outlet property="hFlashImageViewTrailingEdge" destination="ldD-8i-zgb" id="k8b-x4-u4r"/>
                         <outlet property="nextSegmentButton" destination="edy-5J-yaK" id="aip-vC-v9i"/>
                         <outlet property="sectionTimeLabel" destination="fhW-lj-LnF" id="PUl-lz-n33"/>
                         <outlet property="segmentLabel" destination="6Xz-Ti-gwy" id="Hdh-QZ-ZTt"/>
@@ -201,6 +204,7 @@
                         <outlet property="vControlsCenteredX" destination="LuQ-Li-hQE" id="LKW-1z-zmp"/>
                         <outlet property="vControlsToContainerBottom" destination="2dZ-j3-aAh" id="IRS-PL-rnj"/>
                         <outlet property="vControlsWidth" destination="AHu-SS-Fd4" id="wQL-bZ-Sbk"/>
+                        <outlet property="vFlashImageViewBottomEdge" destination="4Va-GK-Ujy" id="pYH-2t-dQE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

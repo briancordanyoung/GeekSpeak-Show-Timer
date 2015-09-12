@@ -104,6 +104,7 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var vControlsToContainerBottom: NSLayoutConstraint!
   @IBOutlet weak var vCirclesWidth: NSLayoutConstraint!
   @IBOutlet weak var vControlsWidth: NSLayoutConstraint!
+  @IBOutlet weak var vFlashImageViewBottomEdge: NSLayoutConstraint!
   var verticalContraints: [NSLayoutConstraint] = []
   
   // Horizontal Layout
@@ -114,6 +115,7 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var hControlsToContainerTrailing: NSLayoutConstraint!
   @IBOutlet weak var hCirclesHeight: NSLayoutConstraint!
   @IBOutlet weak var hControlsHeight: NSLayoutConstraint!
+  @IBOutlet weak var hFlashImageViewTrailingEdge: NSLayoutConstraint!
   var horizontalContraints: [NSLayoutConstraint] = []
   
   
@@ -124,17 +126,17 @@ final class TimerViewController: UIViewController {
                           vCirclesToControls,
                           vControlsToContainerBottom,
                           vCirclesWidth,
-                          vControlsWidth]
-    
+                          vControlsWidth,
+                          vFlashImageViewBottomEdge]
     
     horizontalContraints = [hCirclesCenteredY,
                             hControlsCenteredY,
                             hCirclesToContainerLeading,
                             hCirclesToControls,
                             hControlsToContainerTrailing,
-                            hCirclesHeight,
-                            hControlsHeight]
-                            
+    hFlashImageViewTrailingEdge]
+    
+    
     super.viewDidLoad()
   }
   
@@ -337,53 +339,6 @@ final class TimerViewController: UIViewController {
     })
   }
   
-  func hideNextButtonWithDuration(duration: NSTimeInterval) {
-
-    view.layoutIfNeeded()
-
-    func animated() {
-      self.nextSegmentButton.alpha = 0.0
-      self.view.layoutIfNeeded()
-    }
-    
-    
-    func notAnimated(completed: Bool) {
-      self.view.layoutIfNeeded()
-      self.nextSegmentButton.hidden  = true
-      self.nextSegmentButton.enabled = false
-    }
-
-      UIView.animateWithDuration( duration,
-        animations: animated,
-        completion: notAnimated)
-  }
-
-  
-  
-  
-  
-  func showNextButtonWithDuration(duration: NSTimeInterval) {
-
-    view.layoutIfNeeded()
-    self.nextSegmentButton.hidden  = false
-    self.nextSegmentButton.enabled = true
-    
-    func animated() {
-      self.nextSegmentButton.alpha = 1.0
-      self.view.layoutIfNeeded()
-    }
-    
-    
-    func notAnimated(completed: Bool) {
-      self.view.layoutIfNeeded()
-    }
-    
-      UIView.animateWithDuration( duration,
-        animations: animated,
-        completion: notAnimated)
-  }
-  
-  
   
   
   
@@ -399,26 +354,14 @@ final class TimerViewController: UIViewController {
   
   func activateContraint(constraint: NSLayoutConstraint) {
     if constraint.priority == Constants.InactiveLayoutPriority {
-      activateIgnoredContraint(constraint)
+      constraint.priority = Constants.ActiveLayoutPriority
     }
   }
   
   func deactivateContraint(constraint: NSLayoutConstraint) {
     if constraint.priority == Constants.ActiveLayoutPriority {
-      deactivateIgnoredContraint(constraint)
+      constraint.priority = Constants.InactiveLayoutPriority
     }
-  }
-  
-  func activateIgnoredContraint(constraint: NSLayoutConstraint) {
-    constraint.priority = Constants.ActiveLayoutPriority
-  }
-  
-  func deactivateIgnoredContraint(constraint: NSLayoutConstraint) {
-    constraint.priority = Constants.InactiveLayoutPriority
-  }
-  
-  func ignoreContraint(constraint: NSLayoutConstraint) {
-    constraint.priority = Constants.IgnoreLayoutPriority
   }
   
   
