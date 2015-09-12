@@ -501,7 +501,7 @@ final class TimerViewController: UIViewController {
   // MARK: -
   // MARK: Warning Animation
   
-  var warningDuration = NSTimeInterval(1.0)
+  var warningDuration = NSTimeInterval(0.75)
   private var warningStartTime = NSDate().timeIntervalSince1970
   private var warningAnimationInProgress = false
 
