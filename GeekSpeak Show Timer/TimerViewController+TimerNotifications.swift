@@ -62,6 +62,7 @@ extension TimerViewController {
     
       switch timer.timing.phase {
       case .Section3:
+        timerViews?.ring3fg.additionalColors.removeAll(keepCapacity: true)
         let twoMinuteWarning = timer.percentageFromSecondsToEnd(section2Seconds)
         let sectionColor2   = RingView.sectionColor( Constants.WarningColor,
                                        atPercentage: twoMinuteWarning)
