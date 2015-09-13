@@ -1,6 +1,7 @@
 import UIKit
 
-class TimerSplitViewControllerDelegate: UISplitViewControllerDelegate {
+class TimerSplitViewControllerDelegate: NSObject, UISplitViewControllerDelegate {
+  
   
 //  func splitViewController(svc: UISplitViewController,
 //        willChangeToDisplayMode displayMode: UISplitViewControllerDisplayMode) {
@@ -20,16 +21,26 @@ class TimerSplitViewControllerDelegate: UISplitViewControllerDelegate {
   
   
   // MARK: Manage SplitViewContoller preferedDisplayMode
-  func targetDisplayModeForActionInSplitViewController(svc: UISplitViewController) -> UISplitViewControllerDisplayMode {
-    println("targetDisplayModeForActionInSplitViewController:")
-    if svc.collapsed {
-      println("    collapsed (targetDisplayModeForActionInSplitViewController)")
-      return .Automatic
-    } else {
-      println("not collapsed (targetDisplayModeForActionInSplitViewController)")
-      return .PrimaryOverlay
-    }
-  }
+//  func targetDisplayModeForActionInSplitViewController(svc: UISplitViewController) -> UISplitViewControllerDisplayMode {
+////    if svc.collapsed {
+////      println("    collapsed (targetDisplayModeForActionInSplitViewController)")
+////      return .Automatic
+////    } else {
+////      println("not collapsed (targetDisplayModeForActionInSplitViewController)")
+////      return .PrimaryOverlay
+////    }
+//    switch svc.displayMode  {
+//    case .Automatic:
+//      println("DisplayMode: Automatic")
+//    case .PrimaryOverlay:
+//      println("DisplayMode: PrimaryOverlay")
+//    case .PrimaryHidden:
+//      println("DisplayMode: PrimaryHidden")
+//    case .AllVisible:
+//      println("DisplayMode: AllVisible")
+//    }
+//    return svc.displayMode
+//  }
   
 //  func splitViewControllerPreferredInterfaceOrientationForPresentation(
 //                                    splitViewController: UISplitViewController)

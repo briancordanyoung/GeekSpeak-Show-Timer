@@ -102,7 +102,7 @@ extension AppDelegate {
 //        let navItem = navigationController.topViewController.navigationItem
 //        navItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
 //        navItem.leftItemsSupplementBackButton = true
-      println("Assigning splitViewControllerDelegate")
+
       splitViewController.delegate = splitViewControllerDelegate
       
       // This is a hack.  Once I find the correct place to tell the splitViewController

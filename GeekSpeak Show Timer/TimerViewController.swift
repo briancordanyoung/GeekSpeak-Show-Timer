@@ -501,12 +501,6 @@ final class TimerViewController: UIViewController {
   }
 
   
-  
-  // MARK: Manage SPlitViewContoller preferedDisplayMode
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    super.prepareForSegue(segue, sender: sender)
-  }
-
 
 }
 
