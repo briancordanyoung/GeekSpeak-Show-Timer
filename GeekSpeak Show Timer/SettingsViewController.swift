@@ -149,8 +149,7 @@ class SettingsViewController: UIViewController {
   }
   
   
-  // TODO: Do this on a background thread
-  
+
   func generateBluredBackground() {
 
     if blurringBackground { return }

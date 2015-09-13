@@ -53,12 +53,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func applicationWillEnterForeground(application: UIApplication) {
-
     resetTimerIfShowTimeElapsed()
   }
 
   func applicationDidBecomeActive(application: UIApplication) {
-    
     resetTimerIfShowTimeElapsed()
   }
 

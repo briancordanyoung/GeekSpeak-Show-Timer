@@ -25,15 +25,6 @@ final class TimerViewController: UIViewController {
                                            blue: 0.0,
                                           alpha: 1.0)
     
-//    static let WarningColor       = UIColor(red: 13/255,
-//                                          green: 255/255,
-//                                           blue: 179/255,
-//                                          alpha: 1.0)
-//    
-//    static let AlarmColor         = UIColor(red: 255/255,
-//                                          green: 255/255,
-//                                           blue: 150/255,
-//                                          alpha: 1.0)
     static let WarningColor       = UIColor(red: 23/255,
                                           green: 157/255,
                                            blue: 172/255,
@@ -221,15 +212,6 @@ final class TimerViewController: UIViewController {
     let duration = coordinator.transitionDuration()
     layoutViewsForSize(size, animateWithDuration: duration)
           
-          
-   // MARK: Manage SPlitViewContoller preferedDisplayMode
-//    if let svc = splitViewController {
-//      if svc.collapsed {
-//        println("collapsed: \(svc.preferredDisplayMode == .Automatic)")
-//      } else {
-//        println("not collapsed: \(svc.preferredDisplayMode == .Automatic)")
-//      }
-//    }
   }
   
   
@@ -523,15 +505,6 @@ final class TimerViewController: UIViewController {
   // MARK: Manage SPlitViewContoller preferedDisplayMode
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     super.prepareForSegue(segue, sender: sender)
-    if let svc = splitViewController  {
-      if svc.collapsed {
-        println("    collapsed (timer view controller)")
-        //        return .Automatic
-      } else {
-        println("not collapsed (timer view controller)")
-        //        return .PrimaryOverlay
-      }
-    }
   }
 
 
