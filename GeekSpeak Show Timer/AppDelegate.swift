@@ -32,10 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Appearance.apply()
     setupSplitViewController()
     resetTimerIfShowTimeElapsed()
-    UIApplication.sharedApplication().idleTimerDisabled = true
+    registerForTimerNotifications()
     return true
   }
-  
+
+
 
   func application(application: UIApplication,
           willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?)
@@ -44,38 +45,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UIApplication.sharedApplication()
                  .setStatusBarStyle( UIStatusBarStyle.Default,
                            animated: false)
+                                                                        
+
     return true
   }
   
+  func applicationWillEnterForeground(application: UIApplication) {
+    resetTimerIfShowTimeElapsed()
+  }
+
+  func applicationDidBecomeActive(application: UIApplication) {
+    timerChangedCountingStatus()
+  }
+  
   func applicationWillResignActive(application: UIApplication) {
-    UIApplication.sharedApplication().idleTimerDisabled = false
   }
 
   func applicationDidEnterBackground(application: UIApplication) {
     UIApplication.sharedApplication().idleTimerDisabled = false
   }
 
-  func applicationWillEnterForeground(application: UIApplication) {
-    resetTimerIfShowTimeElapsed()
-    UIApplication.sharedApplication().idleTimerDisabled = true
-  }
-
-  func applicationDidBecomeActive(application: UIApplication) {
-    resetTimerIfShowTimeElapsed()
-    UIApplication.sharedApplication().idleTimerDisabled = true
-  }
-
+  
   func applicationWillTerminate(application: UIApplication) {
-    UIApplication.sharedApplication().idleTimerDisabled = false
   }
   
   func application(application: UIApplication, shouldSaveApplicationState
                          coder: NSCoder) -> Bool {
+    unregisterForTimerNotifications()
     return true
   }
 
   func application(application: UIApplication, shouldRestoreApplicationState
                          coder: NSCoder) -> Bool {
+    registerForTimerNotifications()
     return true
   }
 
@@ -83,6 +85,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 extension AppDelegate {
+  
+  func registerForTimerNotifications() {
+    let notifyCenter = NSNotificationCenter.defaultCenter()
+    notifyCenter.addObserver( self,
+                    selector: "timerChangedCountingStatus",
+                        name: Timer.Constants.CountingStatusChanged,
+                      object: timer)
+
+  }
+  
+  func unregisterForTimerNotifications() {
+    let notifyCenter = NSNotificationCenter.defaultCenter()
+    // TODO: When I explicitly remove each observer it throws an execption. why?
+    //    notifyCenter.removeObserver( self,
+    //                     forKeyPath: Timer.Constants.CountingStatusChanged)
+    notifyCenter.removeObserver(self)
+    
+  }
+
+  func timerChangedCountingStatus() {
+    switch timer.state {
+    case .Ready,
+         .Paused,
+         .PausedAfterComplete:
+      UIApplication.sharedApplication().idleTimerDisabled = false
+      
+    case .Counting,
+         .CountingAfterComplete:
+      UIApplication.sharedApplication().idleTimerDisabled = true
+    }
+
+  }
 
   func resetTimerIfShowTimeElapsed() {
     // reset the timer if it hasn't started, so that it uses the UserDefaults
