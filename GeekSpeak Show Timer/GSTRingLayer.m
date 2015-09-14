@@ -208,11 +208,9 @@
 -(void)drawRing: (GSTRing*) ring
       inContext: (CGContextRef) ctx {
   
-  // Create the path
   CGPoint center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
-  CGFloat outerRadius = MIN(center.x, center.y);
   
-  // Setup view size with bounds, just incase the viewSize block resolves to nil
+  CGFloat outerRadius = MIN(center.x, center.y);
   CGFloat viewSize = MIN(self.bounds.size.width,
                          self.bounds.size.height);
   if (ring.viewSize != nil) {
@@ -225,44 +223,21 @@
   
   CGFloat innerRadius = outerRadius - (viewSize * ring.width);
   
-  // Begin Path
-  CGContextBeginPath(ctx);
+  RingPoint *centerP = [[RingPoint alloc] initWithX: center.x y: center.y];
   
-  // Inner Radius Start
-  CGPoint i1 = CGPointMake(center.x + innerRadius * cosf(ring.start),
-                           center.y + innerRadius * sinf(ring.start));
-  CGContextMoveToPoint(ctx, i1.x, i1.y);
+  RingDrawing *ringDrawing = [[RingDrawing alloc] initWithCenter: centerP
+                                                     outerRadius: outerRadius
+                                                     innerRadius: innerRadius
+                                                      startAngle: ring.start
+                                                        endAngle: ring.end
+                                        cornerRoundingPercentage:
+                                                 ring.cornerRoundingPercentage];
   
-  // Outer Radius Start
-  CGPoint o1 = CGPointMake(center.x + outerRadius * cosf(ring.start),
-                           center.y + outerRadius * sinf(ring.start));
-  CGContextAddLineToPoint(ctx, o1.x, o1.y);
+  UIColor *fillColor = [[UIColor alloc] initWithCGColor:ring.color];
+  ringDrawing.fillColor = fillColor;
+  ringDrawing.lineWidth = ring.width;
   
-  // Outer Radius End
-  int direction = ring.start > ring.end ? 1 : 0;
-  CGContextAddArc(ctx, center.x, center.y, outerRadius,
-                  ring.start, ring.end, direction);
-  
-  // Inner Radius End
-  CGPoint i2 = CGPointMake(center.x + innerRadius * cosf(ring.end),
-                           center.y + innerRadius * sinf(ring.end));
-  CGContextAddLineToPoint(ctx, i2.x, i2.y);
-  
-  // Back to Inner Radius Start
-  int reverseDirection = ring.start > ring.end ? 0 : 1;
-  CGContextAddArc(ctx, center.x, center.y, innerRadius,
-                  ring.end, ring.start, reverseDirection);
-  
-  // End path Path
-  CGContextClosePath(ctx);
-  
-  // Color it
-  CGContextSetFillColorWithColor(ctx,   ring.color);
-  CGContextSetStrokeColorWithColor(ctx, UIColor.clearColor.CGColor);
-  CGContextSetLineWidth(ctx, 0.0f);
-  
-  // Draw in context
-  CGContextDrawPath(ctx, kCGPathFillStroke);
+  [ringDrawing drawInContext: ctx];
 }
 
 // MARK: Animation

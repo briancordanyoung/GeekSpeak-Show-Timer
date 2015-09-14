@@ -4,7 +4,7 @@ import UIKit
 class RingDrawing: NSObject {
   let center: RingPoint
   let outerRadius: CGFloat
-  let ringWidth: CGFloat
+  let innerRadius: CGFloat
   let startAngle: Rotation
   let endAngle: Rotation
   let cornerRoundingPercentage: CGFloat
@@ -14,26 +14,26 @@ class RingDrawing: NSObject {
 
   init(             center: RingPoint,
                outerRadius: CGFloat,
-                 ringWidth: CGFloat,
-                startAngle: Rotation,
-                  endAngle: Rotation,
+               innerRadius: CGFloat,
+                startAngle: CGFloat,
+                  endAngle: CGFloat,
   cornerRoundingPercentage: CGFloat) {
                  self.center      = center
                  self.outerRadius = outerRadius
-                 self.ringWidth   = ringWidth
-                 self.startAngle  = startAngle - Rotation(degrees: 90)
-                 self.endAngle    = endAngle - Rotation(degrees: 90)
+                 self.innerRadius = innerRadius
+                 self.startAngle  = Rotation(startAngle)
+                 self.endAngle    = Rotation(endAngle)
     self.cornerRoundingPercentage = cornerRoundingPercentage
   }
 
   convenience init(     center: RingPoint,
-       outerRadius: CGFloat,
-         ringWidth: CGFloat ) {
+                   outerRadius: CGFloat,
+                   innerRadius: CGFloat ) {
     self.init(             center: center,
                        outerRadius: outerRadius,
-                         ringWidth: ringWidth,
-                        startAngle: Rotation(degrees: 0),
-                          endAngle: Rotation(degrees: 360),
+                       innerRadius: innerRadius,
+                        startAngle: CGFloat(Rotation(degrees: 0)),
+                          endAngle: CGFloat(Rotation(degrees: 360)),
           cornerRoundingPercentage: CGFloat(0))
   }
   
@@ -49,9 +49,8 @@ class RingDrawing: NSObject {
   
   
   
-  var innerRadius: CGFloat {
-    let radius = outerRadius - ringWidth
-    return max(radius,0)
+  var ringWidth: CGFloat {
+    return outerRadius - innerRadius
   }
   
   var midOffset: CGFloat {
