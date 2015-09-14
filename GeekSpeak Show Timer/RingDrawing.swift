@@ -7,30 +7,34 @@ class RingDrawing: NSObject {
   let ringWidth: CGFloat
   let startAngle: Rotation
   let endAngle: Rotation
+  let cornerRoundingPercentage: CGFloat
   var fillColor = UIColor.whiteColor()
   var lineColor = UIColor.clearColor()
   var lineWidth = CGFloat(0)
 
-  init(     center: RingPoint,
-       outerRadius: CGFloat,
-         ringWidth: CGFloat,
-        startAngle: Rotation,
-          endAngle: Rotation) {
-            self.center      = center
-            self.outerRadius = outerRadius
-            self.ringWidth   = ringWidth
-            self.startAngle  = startAngle - Rotation(degrees: 90)
-            self.endAngle    = endAngle - Rotation(degrees: 90)
+  init(             center: RingPoint,
+               outerRadius: CGFloat,
+                 ringWidth: CGFloat,
+                startAngle: Rotation,
+                  endAngle: Rotation,
+  cornerRoundingPercentage: CGFloat) {
+                 self.center      = center
+                 self.outerRadius = outerRadius
+                 self.ringWidth   = ringWidth
+                 self.startAngle  = startAngle - Rotation(degrees: 90)
+                 self.endAngle    = endAngle - Rotation(degrees: 90)
+    self.cornerRoundingPercentage = cornerRoundingPercentage
   }
 
   convenience init(     center: RingPoint,
        outerRadius: CGFloat,
          ringWidth: CGFloat ) {
-    self.init(center: center,
-         outerRadius: outerRadius,
-           ringWidth: ringWidth,
-          startAngle: Rotation(degrees: 0),
-            endAngle: Rotation(degrees: 360))
+    self.init(             center: center,
+                       outerRadius: outerRadius,
+                         ringWidth: ringWidth,
+                        startAngle: Rotation(degrees: 0),
+                          endAngle: Rotation(degrees: 360),
+          cornerRoundingPercentage: CGFloat(0))
   }
   
   // CGFloat calculated of Angle properties
@@ -51,7 +55,7 @@ class RingDrawing: NSObject {
   }
   
   var midOffset: CGFloat {
-    return ringWidth / 3
+    return ringWidth * cornerRoundingPercentage
   }
   
   var controlPointOffset: CGFloat {
@@ -285,7 +289,7 @@ class RingDrawing: NSObject {
   
   
   
-  func drawRounded(context: CGContextRef) {
+  func drawRoundedRing(context: CGContextRef) {
     
     CGContextMoveToPoint(context, innerBezStart.x, innerBezStart.y)
 //    CGContextAddLineToPoint(context, innerCapStart.x, innerCapStart.y)
@@ -337,7 +341,7 @@ class RingDrawing: NSObject {
   }
   
 
-  func drawOriginal(context: CGContextRef) {
+  func drawRing(context: CGContextRef) {
     CGContextMoveToPoint(context, innerStart.x, innerStart.y)
     CGContextAddLineToPoint(context, outerStart.x, outerStart.y)
     CGContextAddArc(context, center.x, center.y,
@@ -368,8 +372,11 @@ class RingDrawing: NSObject {
 //    drawOriginal(context)
 //    lineColor = tmpColor
 //    lineWidth = tmpWidth
-
-    drawRounded(context)
+    if cornerRoundingPercentage == 0 {
+      drawRing(context)
+    } else {
+      drawRoundedRing(context)
+    }
   }
 
 }
