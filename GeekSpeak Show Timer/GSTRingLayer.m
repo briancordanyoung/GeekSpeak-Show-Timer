@@ -1,7 +1,6 @@
 #import "GSTRingLayer.h"
 #import "GSTRing.h"
-//#import <GeekSpeak-Show-Timer-Swift.h>
-//#import <RingLayerPlay-Swift.h>
+#import <GeekSpeak_Show_Timer-Swift.h>
 
 @implementation GSTRingLayer
 
