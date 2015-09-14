@@ -94,13 +94,13 @@
 		D320C35F1B6FF5E90046F785 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		D320C3601B6FF5E90046F785 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		D32B9DEC1B77F6740098DCCF /* UIImage+WithColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+WithColor.swift"; sourceTree = "<group>"; };
-		D340CC731B6D3E7600BB17E3 /* GeekSpeak-Show-Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GeekSpeak-Show-Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D340CC731B6D3E7600BB17E3 /* GeekSpeak Show Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GeekSpeak Show Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D340CC771B6D3E7600BB17E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D340CC7D1B6D3E7600BB17E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D340CC821B6D3E7600BB17E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		D340CC881B6D3E7600BB17E3 /* GeekSpeak-Show-TimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GeekSpeak-Show-TimerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D340CC881B6D3E7600BB17E3 /* GeekSpeak Show TimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GeekSpeak Show TimerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D340CC8D1B6D3E7600BB17E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D340CC8E1B6D3E7600BB17E3 /* GeekSpeak_Show_TimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeekSpeak_Show_TimerTests.swift; sourceTree = "<group>"; };
 		D340CC9A1B6D504400BB17E3 /* GeekSpeak Show Timer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GeekSpeak Show Timer-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -213,8 +213,8 @@
 		D340CC741B6D3E7600BB17E3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D340CC731B6D3E7600BB17E3 /* GeekSpeak-Show-Timer.app */,
-				D340CC881B6D3E7600BB17E3 /* GeekSpeak-Show-TimerTests.xctest */,
+				D340CC731B6D3E7600BB17E3 /* GeekSpeak Show Timer.app */,
+				D340CC881B6D3E7600BB17E3 /* GeekSpeak Show TimerTests.xctest */,
 				D3991DB81B9FBF1B00C63286 /* RingLayerPlay.app */,
 				D3991DCC1B9FBF1B00C63286 /* RingLayerPlayTests.xctest */,
 			);
@@ -383,9 +383,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D340CC721B6D3E7600BB17E3 /* GeekSpeak-Show-Timer */ = {
+		D340CC721B6D3E7600BB17E3 /* GeekSpeak Show Timer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D340CC921B6D3E7600BB17E3 /* Build configuration list for PBXNativeTarget "GeekSpeak-Show-Timer" */;
+			buildConfigurationList = D340CC921B6D3E7600BB17E3 /* Build configuration list for PBXNativeTarget "GeekSpeak Show Timer" */;
 			buildPhases = (
 				D340CC6F1B6D3E7600BB17E3 /* Sources */,
 				D340CC701B6D3E7600BB17E3 /* Frameworks */,
@@ -396,14 +396,14 @@
 			);
 			dependencies = (
 			);
-			name = "GeekSpeak-Show-Timer";
+			name = "GeekSpeak Show Timer";
 			productName = "GeekSpeak Show Timer";
-			productReference = D340CC731B6D3E7600BB17E3 /* GeekSpeak-Show-Timer.app */;
+			productReference = D340CC731B6D3E7600BB17E3 /* GeekSpeak Show Timer.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D340CC871B6D3E7600BB17E3 /* GeekSpeak-Show-TimerTests */ = {
+		D340CC871B6D3E7600BB17E3 /* GeekSpeak Show TimerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D340CC951B6D3E7600BB17E3 /* Build configuration list for PBXNativeTarget "GeekSpeak-Show-TimerTests" */;
+			buildConfigurationList = D340CC951B6D3E7600BB17E3 /* Build configuration list for PBXNativeTarget "GeekSpeak Show TimerTests" */;
 			buildPhases = (
 				D340CC841B6D3E7600BB17E3 /* Sources */,
 				D340CC851B6D3E7600BB17E3 /* Frameworks */,
@@ -414,9 +414,9 @@
 			dependencies = (
 				D340CC8A1B6D3E7600BB17E3 /* PBXTargetDependency */,
 			);
-			name = "GeekSpeak-Show-TimerTests";
+			name = "GeekSpeak Show TimerTests";
 			productName = "GeekSpeak Show TimerTests";
-			productReference = D340CC881B6D3E7600BB17E3 /* GeekSpeak-Show-TimerTests.xctest */;
+			productReference = D340CC881B6D3E7600BB17E3 /* GeekSpeak Show TimerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		D3991DB71B9FBF1B00C63286 /* RingLayerPlay */ = {
@@ -493,8 +493,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D340CC721B6D3E7600BB17E3 /* GeekSpeak-Show-Timer */,
-				D340CC871B6D3E7600BB17E3 /* GeekSpeak-Show-TimerTests */,
+				D340CC721B6D3E7600BB17E3 /* GeekSpeak Show Timer */,
+				D340CC871B6D3E7600BB17E3 /* GeekSpeak Show TimerTests */,
 				D3991DB71B9FBF1B00C63286 /* RingLayerPlay */,
 				D3991DCB1B9FBF1B00C63286 /* RingLayerPlayTests */,
 			);
@@ -645,7 +645,7 @@
 /* Begin PBXTargetDependency section */
 		D340CC8A1B6D3E7600BB17E3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D340CC721B6D3E7600BB17E3 /* GeekSpeak-Show-Timer */;
+			target = D340CC721B6D3E7600BB17E3 /* GeekSpeak Show Timer */;
 			targetProxy = D340CC891B6D3E7600BB17E3 /* PBXContainerItemProxy */;
 		};
 		D3991DCE1B9FBF1B00C63286 /* PBXTargetDependency */ = {
@@ -911,7 +911,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D340CC921B6D3E7600BB17E3 /* Build configuration list for PBXNativeTarget "GeekSpeak-Show-Timer" */ = {
+		D340CC921B6D3E7600BB17E3 /* Build configuration list for PBXNativeTarget "GeekSpeak Show Timer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D340CC931B6D3E7600BB17E3 /* Debug */,
@@ -920,7 +920,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D340CC951B6D3E7600BB17E3 /* Build configuration list for PBXNativeTarget "GeekSpeak-Show-TimerTests" */ = {
+		D340CC951B6D3E7600BB17E3 /* Build configuration list for PBXNativeTarget "GeekSpeak Show TimerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D340CC961B6D3E7600BB17E3 /* Debug */,

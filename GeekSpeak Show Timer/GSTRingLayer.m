@@ -1,6 +1,15 @@
+@import UIKit;
 #import "GSTRingLayer.h"
 #import "GSTRing.h"
 #import <GeekSpeak_Show_Timer-Swift.h>
+
+@interface GSTRingLayer ()
+
+@property (nonatomic) CGImageRef roundedMask;
+-(void)createMaskInContext:(CGContextRef) ctx;
+
+@end
+
 
 @implementation GSTRingLayer
 
@@ -10,7 +19,7 @@
 @dynamic    cornerRounding;
 @synthesize color;
 @synthesize additionalColors = _additionalColors;
-
+@synthesize roundedMask;
 
 
 // MARK: -
@@ -172,6 +181,8 @@
 // MARK: Drawing
 -(void)drawInContext: (CGContextRef) ctx {
 
+  [self createMaskInContext: ctx];
+  
   GSTRing* ring = self.primaryRing;
   
   NSMutableArray*  ringList = [[NSMutableArray alloc] init];
@@ -200,10 +211,64 @@
   }
   
   for (GSTRing* eachRing in ringList) {
+    eachRing.cornerRoundingPercentage = 0.0;
     [self drawRing: eachRing inContext: ctx];
   }
 }
 
+-(void)createMaskInContext:(CGContextRef) ctx {
+  if (self.roundedMask != nil) {
+    CGFloat maskHeight =  CGImageGetHeight(self.roundedMask);
+    CGFloat ctxHeight  =  CGBitmapContextGetHeight(ctx);
+    CGFloat maskWidth =  CGImageGetWidth(self.roundedMask);
+    CGFloat ctxWidth  =  CGBitmapContextGetWidth(ctx);
+    
+    if ((maskHeight != ctxHeight) || (maskWidth != ctxWidth)) {
+      CGImageRelease(self.roundedMask);
+      self.roundedMask = nil;
+    }
+  }
+  
+  
+  if (self.cornerRounding > 0) {
+    CGRect rect = CGRectMake(0 , 0,  CGBitmapContextGetWidth(ctx),
+                             CGBitmapContextGetHeight(ctx));
+    
+    if (self.roundedMask == nil)  {
+      
+      CGColorSpaceRef greySpace = CGColorSpaceCreateDeviceGray();
+      
+      CGContextRef maskCTX =  CGBitmapContextCreate( NULL,
+                                        CGBitmapContextGetWidth(ctx),
+                                        CGBitmapContextGetHeight(ctx),
+                                        CGBitmapContextGetBitsPerComponent(ctx),
+                                        CGBitmapContextGetBytesPerRow(ctx),
+                                        greySpace,
+                                        (CGBitmapInfo)kCGImageAlphaNone);
+      
+      CGColorSpaceRelease(greySpace);
+      
+      CGColorRef maskOutColor = [[UIColor blackColor] CGColor];
+      CGColorRef maskInColor  = [[UIColor whiteColor] CGColor];
+      
+      CGContextSetFillColorWithColor(maskCTX, maskOutColor);
+      CGContextFillRect(maskCTX, rect);
+      
+      GSTRing* maskRing = self.primaryRing;
+      maskRing.start = 0 - (M_PI / 2);
+      maskRing.end   = (M_PI * 2) - (M_PI / 2);
+      maskRing.color = maskInColor;
+      maskRing.cornerRoundingPercentage = self.cornerRounding;
+      [self drawRing: maskRing inContext: maskCTX];
+      
+      self.roundedMask = CGBitmapContextCreateImage(maskCTX);
+      CGContextRelease(maskCTX);
+      
+    }
+    CGContextClipToMask(ctx, rect, self.roundedMask);
+  }
+
+}
 
 -(void)drawRing: (GSTRing*) ring
       inContext: (CGContextRef) ctx {
@@ -230,8 +295,7 @@
                                                      innerRadius: innerRadius
                                                       startAngle: ring.start
                                                         endAngle: ring.end
-                                        cornerRoundingPercentage:
-                                                 ring.cornerRoundingPercentage];
+                                        cornerRoundingPercentage: ring.cornerRoundingPercentage];
   
   UIColor *fillColor = [[UIColor alloc] initWithCGColor:ring.color];
   ringDrawing.fillColor = fillColor;

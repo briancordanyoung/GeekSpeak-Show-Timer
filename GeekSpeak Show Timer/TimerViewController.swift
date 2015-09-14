@@ -409,9 +409,10 @@ final class TimerViewController: UIViewController {
   func configureFGRing(ringView: RingView, withColor color: UIColor)
                                                                    -> RingView {
                                                                     
-    ringView.color      = color
-    ringView.startAngle = Rotation(degrees: 0)
-    ringView.endAngle   = Rotation(degrees: 0)
+    ringView.color          = color
+    ringView.startAngle     = Rotation(degrees: 0)
+    ringView.endAngle       = Rotation(degrees: 0)
+    ringView.cornerRounding = CGFloat(0.333)
     configureRing(ringView)
     return ringView
   }

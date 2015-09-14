@@ -79,6 +79,15 @@ class RingView: RingFillView {
     }
   }
   
+  var cornerRounding: CGFloat {
+    get {
+      return ringLayer.cornerRounding
+    }
+    set(newCornerRounding) {
+      ringLayer.cornerRounding = newCornerRounding
+    }
+  }
+  
 
   var percent: CGFloat {
     get {
