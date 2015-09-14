@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Appearance.apply()
     setupSplitViewController()
     resetTimerIfShowTimeElapsed()
+    UIApplication.sharedApplication().idleTimerDisabled = true
     return true
   }
   
@@ -47,20 +48,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func applicationWillResignActive(application: UIApplication) {
+    UIApplication.sharedApplication().idleTimerDisabled = false
   }
 
   func applicationDidEnterBackground(application: UIApplication) {
+    UIApplication.sharedApplication().idleTimerDisabled = false
   }
 
   func applicationWillEnterForeground(application: UIApplication) {
     resetTimerIfShowTimeElapsed()
+    UIApplication.sharedApplication().idleTimerDisabled = true
   }
 
   func applicationDidBecomeActive(application: UIApplication) {
     resetTimerIfShowTimeElapsed()
+    UIApplication.sharedApplication().idleTimerDisabled = true
   }
 
   func applicationWillTerminate(application: UIApplication) {
+    UIApplication.sharedApplication().idleTimerDisabled = false
   }
   
   func application(application: UIApplication, shouldSaveApplicationState
