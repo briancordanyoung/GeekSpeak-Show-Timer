@@ -15,17 +15,15 @@ typedef  NSNumber * __nullable   (^relativeViewSize)(void);
   @property (nonatomic) CGFloat     start;  /* angle in radians */
   @property (nonatomic) CGFloat     end;    /* angle in radians */
   @property (nonatomic) CGFloat     width;  /* percentage from 0 to 1 */
-  @property (nonatomic) CGFloat     cornerRadiusStart; /* unused */
-  @property (nonatomic) CGFloat     cornerRadiusEnd;   /* unused */
+  @property (nonatomic) CGFloat     cornerRoundingPercentage; /* percentage from 0 to 1 */
   @property (nonnull, nonatomic) CGColorRef  color;
   @property (nullable, copy) relativeViewSize viewSize;
 
 - (nullable id)initWithStart: (CGFloat) newStart
-                end: (CGFloat) newEnd
-              width: (CGFloat) newWidth
-           viewSize: (nullable relativeViewSize) newViewSize
-  cornerRadiusStart: (CGFloat) newCornerRadiusStart
-    cornerRadiusEnd: (CGFloat) newCornerRadiusEnd
-              color: (nonnull CGColorRef) newColor;
+                         end: (CGFloat) newEnd
+                       width: (CGFloat) newWidth
+                    viewSize: (nullable relativeViewSize) newViewSize
+    cornerRoundingPercentage: (CGFloat) cornerRounding
+                       color: (nonnull CGColorRef) newColor;
 
 @end

@@ -8,7 +8,7 @@
 @dynamic    startAngle;
 @dynamic    endAngle;
 @dynamic    ringWidth;
-@dynamic    endRadius;
+@dynamic    cornerRounding;
 @synthesize color;
 @synthesize additionalColors = _additionalColors;
 
@@ -23,9 +23,9 @@
     self.ringWidth  = MIN(self.bounds.size.width/2,
                           self.bounds.size.height/2)
                           * 0.25;
-    self.startAngle = 0.0;
-    self.endAngle   = M_PI * 2;
-    self.endRadius  = 0;
+    self.startAngle      = 0.0;
+    self.endAngle        = M_PI * 2;
+    self.cornerRounding  = 0;
     self.aditionalColors = @[];
 
     __weak GSTRingLayer *weakSelf = self;
@@ -55,7 +55,7 @@
       self.endAngle         = other.endAngle;
       self.ringWidth        = other.ringWidth;
       self.viewSize         = other.viewSize;
-      self.endRadius        = other.endRadius;
+      self.cornerRounding   = other.cornerRounding;
       self.color            = other.color;
       self.additionalColors = other.additionalColors;
     }
@@ -93,8 +93,7 @@
                                              end: self.end
                                            width: self.ringWidth
                                         viewSize: self.viewSize
-                               cornerRadiusStart: self.endRadius
-                                 cornerRadiusEnd: self.endRadius
+                        cornerRoundingPercentage: self.cornerRounding
                                            color: self.color.CGColor ];
   return ring;
 }
@@ -107,8 +106,7 @@
                                              end: precedingRing.end
                                            width: self.ringWidth
                                         viewSize: self.viewSize
-                               cornerRadiusStart: 0.0
-                                 cornerRadiusEnd: precedingRing.cornerRadiusEnd
+                        cornerRoundingPercentage: 0.0
                                            color: sectionColor ];
   return ring;
 }
@@ -196,9 +194,9 @@
       [ringList addObject:sectionRing];
 
 
-      precedingRing.end             = startAngle;
-      precedingRing.cornerRadiusEnd = 0.0;
-      precedingRing = sectionRing;
+      precedingRing.end                      = startAngle;
+      precedingRing.cornerRoundingPercentage = 0.0;
+      precedingRing                          = sectionRing;
     }
   }
   

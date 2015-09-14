@@ -8,7 +8,7 @@
 @property (nonatomic)         CGFloat endAngle;   /* angle in radians */
 @property (nonatomic)         CGFloat ringWidth;  /* percentage from 0 to 1 */
 @property (nullable, copy)     relativeViewSize viewSize;
-@property (nonatomic)         CGFloat endRadius;  /* unused */
+@property (nonatomic)         CGFloat cornerRounding; 
 @property (nonnull, nonatomic, strong) UIColor *color;
 @property (nonnull, nonatomic, strong) NSArray *additionalColors;
 
