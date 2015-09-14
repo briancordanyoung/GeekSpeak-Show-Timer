@@ -1,4 +1,5 @@
 import Swift
+import Foundation
 
 public protocol AngularType : Comparable, FloatLiteralConvertible, IntegerLiteralConvertible, SignedNumberType {
   var value: Double { set get }
@@ -43,6 +44,14 @@ public func / <T:AngularType> (lhs: T, rhs: T) -> T {
 
 public func * <T:AngularType> (lhs: T, rhs: T) -> T {
   return T(lhs.value * rhs.value)
+}
+
+public func cos<T:AngularType>(x: T) -> T {
+  return T(cos(x.value))
+}
+
+public func sin<T:AngularType>(x: T) -> T {
+  return T(sin(x.value))
 }
 
 public func floor<T:AngularType>(x: T) -> T {
