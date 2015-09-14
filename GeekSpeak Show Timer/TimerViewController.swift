@@ -25,15 +25,6 @@ final class TimerViewController: UIViewController {
                                            blue: 0.0,
                                           alpha: 1.0)
     
-//    static let WarningColor       = UIColor(red: 13/255,
-//                                          green: 255/255,
-//                                           blue: 179/255,
-//                                          alpha: 1.0)
-//    
-//    static let AlarmColor         = UIColor(red: 255/255,
-//                                          green: 255/255,
-//                                           blue: 150/255,
-//                                          alpha: 1.0)
     static let WarningColor       = UIColor(red: 23/255,
                                           green: 157/255,
                                            blue: 172/255,
@@ -77,10 +68,10 @@ final class TimerViewController: UIViewController {
   }
   
  // TODO: The Timer Property should be injected by the SplitViewController
-  //       during the segue. Revisit and stop pulling from other view controller
+  //       during the segue. Revisit and stop pulling from the app delegate
   var timer: Timer? {
-    if let splitViewController = splitViewController as? TimerSplitViewController {
-      return splitViewController.timer
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate  {
+      return appDelegate.timer
     } else {
       return .None
     }
@@ -92,65 +83,60 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var sectionTimeLabel: UILabel!
   @IBOutlet weak var totalLabel: UILabel!
   @IBOutlet weak var segmentLabel: UILabel!
+  @IBOutlet weak var flashImageView: UIImageView!
   @IBOutlet weak var startPauseButton: PlayPauseButton!
   @IBOutlet weak var nextSegmentButton: NextSegmentButton!
   
   // Vertical Layout
-  @IBOutlet weak var timerCirclesWidth: NSLayoutConstraint!
-  @IBOutlet weak var startButtonToTimerCircle: NSLayoutConstraint!
-  @IBOutlet weak var startButtonToSuperView: NSLayoutConstraint!
-  @IBOutlet weak var buttonsEqualWidth: NSLayoutConstraint!
-  @IBOutlet weak var nextButtonToStartButtonSpace: NSLayoutConstraint!
-  @IBOutlet weak var nextButtonToTimerCircles: NSLayoutConstraint!
-  @IBOutlet weak var nextButtonToSuperViewSide: NSLayoutConstraint!
-  @IBOutlet weak var startButtonToBottom: NSLayoutConstraint!
-  @IBOutlet weak var nextButtonToBottom: NSLayoutConstraint!
-  @IBOutlet weak var nextButtonWidth: NSLayoutConstraint!
+  @IBOutlet weak var vCirclesCenteredX: NSLayoutConstraint!
+  @IBOutlet weak var vControlsCenteredX: NSLayoutConstraint!
+  @IBOutlet weak var vCirclesToContainerTop: NSLayoutConstraint!
+  @IBOutlet weak var vCirclesToControls: NSLayoutConstraint!
+  @IBOutlet weak var vControlsToContainerBottom: NSLayoutConstraint!
+  @IBOutlet weak var vCirclesWidth: NSLayoutConstraint!
+  @IBOutlet weak var vControlsWidth: NSLayoutConstraint!
+  @IBOutlet weak var vFlashImageViewBottomEdge: NSLayoutConstraint!
   var verticalContraints: [NSLayoutConstraint] = []
   
   // Horizontal Layout
-  @IBOutlet weak var startButtonToTimerCircleHorizontal: NSLayoutConstraint!
-  @IBOutlet weak var startButtonToSuperViewHorizontal: NSLayoutConstraint!
-  @IBOutlet weak var buttonsEqualHeight: NSLayoutConstraint!
-  @IBOutlet weak var nextButtonToStartButtonHorizontal: NSLayoutConstraint!
-  @IBOutlet weak var startButtonToSuperViewTop: NSLayoutConstraint!
-  @IBOutlet weak var nextButtonToSuperViewSideHorizontal: NSLayoutConstraint!
-  @IBOutlet weak var nextButtonToTimerCircle: NSLayoutConstraint!
-  @IBOutlet weak var nextButtonToBottomHorizontal: NSLayoutConstraint!
-  @IBOutlet weak var timerCirclesHeight: NSLayoutConstraint!
-  @IBOutlet weak var nextButtonHeight: NSLayoutConstraint!
+  @IBOutlet weak var hCirclesCenteredY: NSLayoutConstraint!
+  @IBOutlet weak var hControlsCenteredY: NSLayoutConstraint!
+  @IBOutlet weak var hCirclesToContainerLeading: NSLayoutConstraint!
+  @IBOutlet weak var hCirclesToControls: NSLayoutConstraint!
+  @IBOutlet weak var hControlsToContainerTrailing: NSLayoutConstraint!
+  @IBOutlet weak var hCirclesHeight: NSLayoutConstraint!
+  @IBOutlet weak var hControlsHeight: NSLayoutConstraint!
+  @IBOutlet weak var hFlashImageViewTrailingEdge: NSLayoutConstraint!
   var horizontalContraints: [NSLayoutConstraint] = []
   
   
   override func viewDidLoad() {
-    verticalContraints = [startButtonToTimerCircle,
-                          startButtonToSuperView,
-                          nextButtonToStartButtonSpace,
-                          nextButtonToTimerCircles,
-                          nextButtonToSuperViewSide,
-                          startButtonToBottom,
-                          nextButtonToBottom,
-                          timerCirclesWidth,
-                          buttonsEqualWidth,
-                          nextButtonWidth]
+    verticalContraints = [vCirclesCenteredX,
+                          vControlsCenteredX,
+                          vCirclesToContainerTop,
+                          vCirclesToControls,
+                          vControlsToContainerBottom,
+                          vCirclesWidth,
+                          vControlsWidth,
+                          vFlashImageViewBottomEdge]
     
-    horizontalContraints = [startButtonToTimerCircleHorizontal,
-                            startButtonToSuperViewHorizontal,
-                            nextButtonToStartButtonHorizontal,
-                            startButtonToSuperViewTop,
-                            nextButtonToSuperViewSideHorizontal,
-                            nextButtonToTimerCircle,
-                            nextButtonToBottomHorizontal,
-                            timerCirclesHeight,
-                            buttonsEqualHeight,
-                            nextButtonHeight]
+    horizontalContraints = [hCirclesCenteredY,
+                            hControlsCenteredY,
+                            hCirclesToContainerLeading,
+                            hCirclesToControls,
+                            hControlsToContainerTrailing,
+    hFlashImageViewTrailingEdge]
+    
+    
     super.viewDidLoad()
-    
-    
-    
   }
   
   override func viewWillAppear(animated: Bool) {
+//    nextSegmentButton.lineColor = Constants.GeekSpeakBlueColor
+    nextSegmentButton.tintColor = Constants.GeekSpeakBlueColor
+//    startPauseButton.lineColor  = Constants.GeekSpeakBlueColor
+    startPauseButton.tintColor  = Constants.GeekSpeakBlueColor
+    
     if let timer = timer {
       setupButtonLayout(timer)
     }
@@ -207,6 +193,7 @@ final class TimerViewController: UIViewController {
     timerChangedCountingStatus()
     timerDurationChanged()
     layoutViewsForSize(layoutSize)
+    startPauseButton.percentageOfSuperviewSize = CGFloat(0.1)
   }
   
   override func viewDidAppear(animated: Bool) {
@@ -224,6 +211,7 @@ final class TimerViewController: UIViewController {
     
     let duration = coordinator.transitionDuration()
     layoutViewsForSize(size, animateWithDuration: duration)
+          
   }
   
   
@@ -243,7 +231,8 @@ final class TimerViewController: UIViewController {
   // MARK: -
   // MARK: Actions
   @IBAction func showSettingsButtonPressed(sender: UIBarButtonItem) {
-    self.splitViewController?.toggleMasterView()
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    appDelegate.pressButtonBarItem()
   }
   
   @IBAction func nextSegmentButtonPressed(sender: NextSegmentButton) {
@@ -268,29 +257,13 @@ final class TimerViewController: UIViewController {
   
   func setupButtonLayout(timer: Timer) {
     switch timer.state {
-    case .Ready:
-      hideNextButtonWithDuration(0)
-      startPauseButton.percentageOfSuperviewSize = Constants.EmphisisedButtonScale
+    case .Ready,
+         .Paused,
+         .PausedAfterComplete:
       startPauseButton.showPlayView()
     
-    case .Paused:
-      showNextButtonWithDuration(0)
-      startPauseButton.percentageOfSuperviewSize = Constants.DeemphisisedButtonScale
-      startPauseButton.showPlayView()
-      
-    case .Counting:
-      showNextButtonWithDuration(0)
-      startPauseButton.percentageOfSuperviewSize = Constants.DeemphisisedButtonScale
-      startPauseButton.showPauseView()
-      
-    case .PausedAfterComplete:
-      hideNextButtonWithDuration(0)
-      startPauseButton.percentageOfSuperviewSize = Constants.EmphisisedButtonScale
-      startPauseButton.showPlayView()
-
-    case .CountingAfterComplete:
-      hideNextButtonWithDuration(0)
-      startPauseButton.percentageOfSuperviewSize = Constants.EmphisisedButtonScale
+    case .Counting,
+      .CountingAfterComplete:
       startPauseButton.showPauseView()
       
     }
@@ -299,50 +272,23 @@ final class TimerViewController: UIViewController {
   
   func updateButtonLayout(timer: Timer) {
     switch timer.state {
-    case .Ready:
-      hideNextButtonWithDuration(0.5)
-      startPauseButton.animatePercentageOfSuperviewSize( Constants.EmphisisedButtonScale)
+    case .Ready,
+         .Paused,
+         .PausedAfterComplete:
       if startPauseButtonCount > 0 {
         startPauseButton.animateToPlayView()
       } else {
         startPauseButton.showPlayView()
       }
       
-    case .Paused:
-      startPauseButton.animatePercentageOfSuperviewSize( Constants.DeemphisisedButtonScale)
-      if startPauseButtonCount > 0 {
-        startPauseButton.animateToPlayView()
-      } else {
-        startPauseButton.showPlayView()
-      }
-      
-    case .Counting:
-      showNextButtonWithDuration(0.5)
-      startPauseButton.animatePercentageOfSuperviewSize( Constants.DeemphisisedButtonScale)
+    case .Counting,
+         .CountingAfterComplete:
       if startPauseButtonCount > 0 {
         startPauseButton.animateToPauseView()
       } else {
         startPauseButton.showPauseView()
       }
       
-    case .PausedAfterComplete:
-      hideNextButtonWithDuration(0.5)
-      startPauseButton.animatePercentageOfSuperviewSize( Constants.EmphisisedButtonScale)
-      if startPauseButtonCount > 0 {
-        startPauseButton.animateToPlayView()
-      } else {
-        startPauseButton.showPlayView()
-      }
-      
-    case .CountingAfterComplete:
-      hideNextButtonWithDuration(0.5)
-      startPauseButton.animatePercentageOfSuperviewSize( Constants.EmphisisedButtonScale)
-      if startPauseButtonCount > 0 {
-        startPauseButton.animateToPauseView()
-      } else {
-        startPauseButton.showPauseView()
-      }
-
     }
     startPauseButtonCount--
     startPauseButtonCount = max(0,startPauseButtonCount)
@@ -375,73 +321,6 @@ final class TimerViewController: UIViewController {
     })
   }
   
-  func hideNextButtonWithDuration(duration: NSTimeInterval) {
-
-    view.layoutIfNeeded()
-
-    func animated() {
-      self.nextSegmentButton.alpha = 0.0
-      self.ignoreContraint(self.buttonsEqualWidth)
-      self.ignoreContraint(self.buttonsEqualHeight)
-
-      if layoutIsVertical {
-        self.activateIgnoredContraint(  self.nextButtonWidth)
-        self.deactivateIgnoredContraint(self.nextButtonHeight)
-      } else {
-        self.deactivateIgnoredContraint(self.nextButtonWidth)
-        self.activateIgnoredContraint(  self.nextButtonHeight)
-      }
-      self.view.layoutIfNeeded()
-    }
-    
-    
-    func notAnimated(completed: Bool) {
-      self.view.layoutIfNeeded()
-      self.nextSegmentButton.hidden  = true
-      self.nextSegmentButton.enabled = false
-    }
-
-      UIView.animateWithDuration( duration,
-        animations: animated,
-        completion: notAnimated)
-  }
-
-  
-  
-  
-  
-  func showNextButtonWithDuration(duration: NSTimeInterval) {
-
-    view.layoutIfNeeded()
-    self.nextSegmentButton.hidden  = false
-    self.nextSegmentButton.enabled = true
-    
-    func animated() {
-      self.nextSegmentButton.alpha = 1.0
-      self.ignoreContraint(self.nextButtonWidth)
-      self.ignoreContraint(self.nextButtonHeight)
-      
-      if self.layoutIsVertical {
-        self.activateIgnoredContraint(  self.buttonsEqualWidth)
-        self.deactivateIgnoredContraint(self.buttonsEqualHeight)
-      } else {
-        self.deactivateIgnoredContraint(self.buttonsEqualWidth)
-        self.activateIgnoredContraint(  self.buttonsEqualHeight)
-      }
-      self.view.layoutIfNeeded()
-    }
-    
-    
-    func notAnimated(completed: Bool) {
-      self.view.layoutIfNeeded()
-    }
-    
-      UIView.animateWithDuration( duration,
-        animations: animated,
-        completion: notAnimated)
-  }
-  
-  
   
   
   
@@ -457,26 +336,14 @@ final class TimerViewController: UIViewController {
   
   func activateContraint(constraint: NSLayoutConstraint) {
     if constraint.priority == Constants.InactiveLayoutPriority {
-      activateIgnoredContraint(constraint)
+      constraint.priority = Constants.ActiveLayoutPriority
     }
   }
   
   func deactivateContraint(constraint: NSLayoutConstraint) {
     if constraint.priority == Constants.ActiveLayoutPriority {
-      deactivateIgnoredContraint(constraint)
+      constraint.priority = Constants.InactiveLayoutPriority
     }
-  }
-  
-  func activateIgnoredContraint(constraint: NSLayoutConstraint) {
-    constraint.priority = Constants.ActiveLayoutPriority
-  }
-  
-  func deactivateIgnoredContraint(constraint: NSLayoutConstraint) {
-    constraint.priority = Constants.InactiveLayoutPriority
-  }
-  
-  func ignoreContraint(constraint: NSLayoutConstraint) {
-    constraint.priority = Constants.IgnoreLayoutPriority
   }
   
   
@@ -484,7 +351,7 @@ final class TimerViewController: UIViewController {
   // MARK: -
   // MARK: Warning Animation
   
-  var warningDuration = NSTimeInterval(1.0)
+  var warningDuration = NSTimeInterval(0.75)
   private var warningStartTime = NSDate().timeIntervalSince1970
   private var warningAnimationInProgress = false
 
@@ -492,6 +359,7 @@ final class TimerViewController: UIViewController {
     if !warningAnimationInProgress {
       warningStartTime = NSDate().timeIntervalSince1970
       warningAnimationInProgress = true
+      flashImageView.alpha = 0.0
       animateBlackToWhite()
     }
   }
@@ -501,6 +369,7 @@ final class TimerViewController: UIViewController {
       delay: 0.0,
       options: nil,
       animations: {
+        self.flashImageView.alpha = 1.0
         self.view.backgroundColor = Constants.BreakColor
       },
       completion: { completed in
@@ -509,6 +378,7 @@ final class TimerViewController: UIViewController {
         } else {
           self.warningAnimationInProgress = false
           self.view.backgroundColor = UIColor.blackColor()
+          self.flashImageView.alpha = 0.0
         }
     })
   }
@@ -518,6 +388,7 @@ final class TimerViewController: UIViewController {
       delay: 0.0,
       options: nil,
       animations: {
+        self.flashImageView.alpha = 0.0
         self.view.backgroundColor = UIColor.blackColor()
       },
       completion: { completed in
@@ -526,6 +397,7 @@ final class TimerViewController: UIViewController {
         } else {
           self.warningAnimationInProgress = false
           self.view.backgroundColor = UIColor.blackColor()
+          self.flashImageView.alpha = 0.0
         }
     })
   }
@@ -537,9 +409,10 @@ final class TimerViewController: UIViewController {
   func configureFGRing(ringView: RingView, withColor color: UIColor)
                                                                    -> RingView {
                                                                     
-    ringView.color      = color
-    ringView.startAngle = Rotation(degrees: 0)
-    ringView.endAngle   = Rotation(degrees: 0)
+    ringView.color          = color
+    ringView.startAngle     = Rotation(degrees: 0)
+    ringView.endAngle       = Rotation(degrees: 0)
+    ringView.cornerRounding = CGFloat(0.333)
     configureRing(ringView)
     return ringView
   }

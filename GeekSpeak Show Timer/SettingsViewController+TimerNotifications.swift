@@ -18,7 +18,7 @@ extension SettingsViewController {
 
   func unregisterForTimerNotifications() {
     let notifyCenter = NSNotificationCenter.defaultCenter()
-    // TODO: When I explicitly remove each observer it throws an execption. why?
+// TODO: When I explicitly remove each observer it throws an execption. why?
 //    notifyCenter.removeObserver( self,
 //                     forKeyPath: Timer.Constants.TimeChange)
 //    notifyCenter.removeObserver( self,
@@ -62,8 +62,7 @@ extension SettingsViewController {
       segment3Label.text = segment3
       postShowLabel.text = postshow
       
-      // TODO: Uncomment once this is on a background thread
-      //       generateBluredBackground()
+      generateBluredBackground()
     }
   }
 

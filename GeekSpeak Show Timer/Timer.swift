@@ -183,7 +183,7 @@ final class Timer: NSObject, NSCoding {
     } else {
       self.demoTimings = false
     }
-    notifyTimerUpdated()
+    notify()
   }
   
   func start() {

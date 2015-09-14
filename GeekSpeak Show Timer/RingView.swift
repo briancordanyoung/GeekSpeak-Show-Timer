@@ -1,3 +1,19 @@
+// Ring Classes:  Refactor!!!
+//                The classes for drawing and layingout the ring are completely
+//                messing confussing, uses similar but different propery  names
+//                mix obj-c and swift cause type conversions that are confusing
+//                and general a mess.  Clean this mess up!!!
+//                Draw cleanly and be nice.  ;)
+//
+//                  GSTRing.h
+//                  GSTRing.m
+//                  GSTRingLayer.h
+//                  RingCircle.swift
+//                  RingFillView.swift
+//                  RingPoint.swift
+//                  RingView+Progress.swift
+//                  RingView.swift
+
 import UIKit
 
 class RingView: RingFillView {
@@ -76,6 +92,15 @@ class RingView: RingFillView {
     }
     set(newViewSize) {
       ringLayer.viewSize = newViewSize
+    }
+  }
+  
+  var cornerRounding: CGFloat {
+    get {
+      return ringLayer.cornerRounding
+    }
+    set(newCornerRounding) {
+      ringLayer.cornerRounding = newCornerRounding
     }
   }
   

@@ -23,7 +23,7 @@ extension TimerViewController {
 
   func unregisterForTimerNotifications() {
     let notifyCenter = NSNotificationCenter.defaultCenter()
-    // TODO: When I explicitly remove each observer it throws an execption. why?
+// TODO: When I explicitly remove each observer it throws an execption. why?
 //    notifyCenter.removeObserver( self,
 //                     forKeyPath: Timer.Constants.TimeChange)
 //    notifyCenter.removeObserver( self,
@@ -62,6 +62,9 @@ extension TimerViewController {
     
       switch timer.timing.phase {
       case .Section3:
+        
+        timerViews?.ring3fg.additionalColors.removeAll(keepCapacity: true)
+        
         let twoMinuteWarning = timer.percentageFromSecondsToEnd(section2Seconds)
         let sectionColor2   = RingView.sectionColor( Constants.WarningColor,
                                        atPercentage: twoMinuteWarning)

@@ -3,15 +3,16 @@ import UIKit
 class SettingsViewController: UIViewController {
 
   // TODO: The Timer Property should be injected by the SplitViewController
-  //       during the segue. Revisit and stop pulling from other view controller
+  //       during the segue. Revisit and stop pulling from the app delegate
   var timer: Timer? {
-    if let splitViewController = splitViewController as? TimerSplitViewController {
-      return splitViewController.timer
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate  {
+      return appDelegate.timer
     } else {
       return .None
     }
   }
-  
+
+  var blurringBackground = false
   
   // Required properties
   @IBOutlet weak var contentView: UIView!
@@ -112,13 +113,15 @@ class SettingsViewController: UIViewController {
     if let splitViewController = splitViewController {
       // collapsed = true  is iPhone
       // collapsed = false is iPad & Plus
-      if splitViewController.collapsed == true {
+      if splitViewController.collapsed {
         self.performSegueWithIdentifier("showTimer", sender: self)
       } else {
-        self.splitViewController?.toggleMasterView()
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.pressButtonBarItem()
       }
     }
   }
+  
   
   // MARK: -
   // MARK: Timer management
@@ -146,9 +149,11 @@ class SettingsViewController: UIViewController {
   }
   
   
-  // TODO: Do this on a background thread
+
   func generateBluredBackground() {
-    // https://uncorkedstudios.com/blog/ios-7-background-effects-and-split-view-controllers
+
+    if blurringBackground { return }
+    blurringBackground = true
     
     if let underneathViewController = timerViewController {
       // set up the graphics context to render the screen snapshot.
@@ -185,10 +190,17 @@ class SettingsViewController: UIViewController {
         
         // Now actually apply the blur to the snapshot and set the background
         // behind our master view controller
-        backgroundImageView.image = backgroundImage.applyBlurWithRadius( 20,
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+
+        let blurredBackgroundImage = backgroundImage.applyBlurWithRadius( 20,
                                                 tintColor: UIColor.clearColor(),
                                     saturationDeltaFactor: 1.8,
                                                 maskImage: nil)
+            dispatch_sync(dispatch_get_main_queue(), {
+                self.backgroundImageView.image = blurredBackgroundImage
+                self.blurringBackground = false
+            })
+          })
       }
     } else {
       backgroundImageView.image = UIImage.imageWithColor(UIColor.blackColor())
@@ -218,6 +230,7 @@ class SettingsViewController: UIViewController {
     view.addConstraint(rightConstraint)
     
   }
+  
 
 }
 

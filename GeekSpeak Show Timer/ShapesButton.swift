@@ -4,6 +4,22 @@ import UIKit
 class ShapesButton: UIButton {
   
   var highlightOpacity = CGFloat(1.0)
+  var lineColor: UIColor {
+    get {
+      if let shapesView = shapesView {
+        self._lineColor = shapesView.lineColor
+      }
+      return _lineColor
+    }
+    set(newLineColor) {
+      if let shapesView = shapesView {
+        shapesView.lineColor = newLineColor
+      }
+      _lineColor = newLineColor
+    }
+  }
+  
+  private var _lineColor = UIColor.whiteColor()
   
   var percentageOfSuperviewSize: CGFloat {
     get {

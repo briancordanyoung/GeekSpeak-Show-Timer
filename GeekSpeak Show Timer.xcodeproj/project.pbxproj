@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D31864EC1BA6605A0083B46E /* RingDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31864EB1BA6605A0083B46E /* RingDrawing.swift */; };
+		D31864ED1BA6605A0083B46E /* RingDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31864EB1BA6605A0083B46E /* RingDrawing.swift */; };
 		D320C3611B6FF5E90046F785 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = D320C3601B6FF5E90046F785 /* UIImage+ImageEffects.m */; };
 		D32B9DED1B77F6740098DCCF /* UIImage+WithColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32B9DEC1B77F6740098DCCF /* UIImage+WithColor.swift */; };
 		D340CC791B6D3E7600BB17E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */; };
@@ -24,7 +26,6 @@
 		D340CCB51B6D939F00BB17E3 /* UIColor+DarkenColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB41B6D939F00BB17E3 /* UIColor+DarkenColor.swift */; };
 		D340CCB71B6D9C6400BB17E3 /* FillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB61B6D9C6400BB17E3 /* FillView.swift */; };
 		D340CCBA1B6DDD5400BB17E3 /* TimerViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB91B6DDD5400BB17E3 /* TimerViews.swift */; };
-		D340CCBE1B6DE30100BB17E3 /* TimerSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCBD1B6DE30100BB17E3 /* TimerSplitViewController.swift */; };
 		D3463F681B713E0D002C68A8 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3463F671B713E0D002C68A8 /* Settings.bundle */; };
 		D35F34341B73B90E0038CF4C /* GSTRingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D35F34331B73B90E0038CF4C /* GSTRingLayer.m */; };
 		D35F34371B73C4D80038CF4C /* RingView+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35F34361B73C4D80038CF4C /* RingView+Progress.swift */; };
@@ -35,16 +36,36 @@
 		D37C2AAB1B75B7C8008826D5 /* GSTRing.m in Sources */ = {isa = PBXBuildFile; fileRef = D37C2AAA1B75B7C8008826D5 /* GSTRing.m */; };
 		D384BC541B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384BC531B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift */; };
 		D384BC561B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384BC551B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift */; };
-		D384BC581B7F05B20024BCB0 /* TimerSplitViewController+Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384BC571B7F05B20024BCB0 /* TimerSplitViewController+Coding.swift */; };
 		D3912C711B6E93B7003B42F1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */; };
 		D3912C731B6E9CED003B42F1 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C721B6E9CED003B42F1 /* Timer.swift */; };
 		D3912C751B6E9D73003B42F1 /* BCYStandardLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */; };
 		D3912C771B6F1476003B42F1 /* Timer+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C761B6F1476003B42F1 /* Timer+Types.swift */; };
+		D3991DBD1B9FBF1B00C63286 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3991DBC1B9FBF1B00C63286 /* AppDelegate.swift */; };
+		D3991DBF1B9FBF1B00C63286 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3991DBE1B9FBF1B00C63286 /* ViewController.swift */; };
+		D3991DC21B9FBF1B00C63286 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3991DC01B9FBF1B00C63286 /* Main.storyboard */; };
+		D3991DC41B9FBF1B00C63286 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3991DC31B9FBF1B00C63286 /* Images.xcassets */; };
+		D3991DC71B9FBF1B00C63286 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3991DC51B9FBF1B00C63286 /* LaunchScreen.xib */; };
+		D3991DD31B9FBF1B00C63286 /* RingLayerPlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3991DD21B9FBF1B00C63286 /* RingLayerPlayTests.swift */; };
 		D39DAD1A1B917229007D797C /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39DAD191B917229007D797C /* Appearance.swift */; };
-		D3A9B7E01B980E8F00745F56 /* TimerSplitViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A9B7DF1B980E8F00745F56 /* TimerSplitViewController+Delegate.swift */; };
+		D3A845A51BA39E8B00062B02 /* flash.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A845A41BA39E8B00062B02 /* flash.png */; };
+		D3A9B7E01B980E8F00745F56 /* TimerSplitViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A9B7DF1B980E8F00745F56 /* TimerSplitViewControllerDelegate.swift */; };
 		D3C0807B1B9BB6290020A4A0 /* PlayPauseWipeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EC191B1B94EB5000A8E426 /* PlayPauseWipeButton.swift */; };
 		D3C487B31B726F3300B8067E /* Timer+StatePreservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */; };
+		D3DFF55C1BA5EF8000A4700D /* RingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DFF55B1BA5EF8000A4700D /* RingPoint.swift */; };
+		D3DFF55E1BA5EF8700A4700D /* RingCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DFF55D1BA5EF8700A4700D /* RingCircle.swift */; };
+		D3DFF55F1BA5F27300A4700D /* RingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DFF55B1BA5EF8000A4700D /* RingPoint.swift */; };
+		D3DFF5601BA5F27300A4700D /* RingCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DFF55D1BA5EF8700A4700D /* RingCircle.swift */; };
 		D3F699A11B72DE0900BD21FD /* PieShapeView+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F699A01B72DE0900BD21FD /* PieShapeView+Progress.swift */; };
+		D3F7BA6A1B9FBF6600BA2936 /* RingView+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35F34361B73C4D80038CF4C /* RingView+Progress.swift */; };
+		D3F7BA6B1B9FBF6600BA2936 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB01B6D8B9600BB17E3 /* RingView.swift */; };
+		D3F7BA6C1B9FBF6600BA2936 /* RingFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36742851B9D465700EE13F7 /* RingFillView.swift */; };
+		D3F7BA6D1B9FBF6600BA2936 /* GSTRingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D35F34331B73B90E0038CF4C /* GSTRingLayer.m */; };
+		D3F7BA6E1B9FBF6600BA2936 /* GSTRing.m in Sources */ = {isa = PBXBuildFile; fileRef = D37C2AAA1B75B7C8008826D5 /* GSTRing.m */; };
+		D3F7BA6F1B9FBF7500BA2936 /* SizeToSuperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FD350B1B9B939200CE15F6 /* SizeToSuperView.swift */; };
+		D3F7BA711B9FC1C600BA2936 /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCA01B6D556D00BB17E3 /* Angle.swift */; };
+		D3F7BA721B9FC1C600BA2936 /* AccumulatedAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCA11B6D556D00BB17E3 /* AccumulatedAngle.swift */; };
+		D3F7BA731B9FC1C600BA2936 /* AngularType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCA21B6D556D00BB17E3 /* AngularType.swift */; };
+		D3FB37FE1BA3F2A4003C6BB2 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FB37FD1BA3F2A4003C6BB2 /* Device.swift */; };
 		D3FD35061B9B650A00CE15F6 /* TimeWipeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FD35051B9B650A00CE15F6 /* TimeWipeButton.swift */; };
 		D3FD35081B9B6B8B00CE15F6 /* ShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FD35071B9B6B8B00CE15F6 /* ShapesView.swift */; };
 		D3FD350A1B9B727C00CE15F6 /* SizableBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FD35091B9B727C00CE15F6 /* SizableBezierPath.swift */; };
@@ -59,9 +80,17 @@
 			remoteGlobalIDString = D340CC721B6D3E7600BB17E3;
 			remoteInfo = "GeekSpeak Show Timer";
 		};
+		D3991DCD1B9FBF1B00C63286 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D340CC6B1B6D3E7600BB17E3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D3991DB71B9FBF1B00C63286;
+			remoteInfo = RingLayerPlay;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D31864EB1BA6605A0083B46E /* RingDrawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingDrawing.swift; sourceTree = "<group>"; };
 		D320C35F1B6FF5E90046F785 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		D320C3601B6FF5E90046F785 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		D32B9DEC1B77F6740098DCCF /* UIImage+WithColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+WithColor.swift"; sourceTree = "<group>"; };
@@ -86,7 +115,6 @@
 		D340CCB41B6D939F00BB17E3 /* UIColor+DarkenColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+DarkenColor.swift"; sourceTree = "<group>"; };
 		D340CCB61B6D9C6400BB17E3 /* FillView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillView.swift; sourceTree = "<group>"; };
 		D340CCB91B6DDD5400BB17E3 /* TimerViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViews.swift; sourceTree = "<group>"; };
-		D340CCBD1B6DE30100BB17E3 /* TimerSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerSplitViewController.swift; sourceTree = "<group>"; };
 		D3463F671B713E0D002C68A8 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D35F34321B73B90E0038CF4C /* GSTRingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSTRingLayer.h; sourceTree = "<group>"; };
 		D35F34331B73B90E0038CF4C /* GSTRingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSTRingLayer.m; sourceTree = "<group>"; };
@@ -99,16 +127,30 @@
 		D37C2AAA1B75B7C8008826D5 /* GSTRing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSTRing.m; sourceTree = "<group>"; };
 		D384BC531B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimerViewController+TimerNotifications.swift"; sourceTree = "<group>"; };
 		D384BC551B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SettingsViewController+TimerNotifications.swift"; sourceTree = "<group>"; };
-		D384BC571B7F05B20024BCB0 /* TimerSplitViewController+Coding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimerSplitViewController+Coding.swift"; sourceTree = "<group>"; };
 		D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D3912C721B6E9CED003B42F1 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCYStandardLibrary.swift; sourceTree = "<group>"; };
 		D3912C761B6F1476003B42F1 /* Timer+Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timer+Types.swift"; sourceTree = "<group>"; };
+		D3991DB81B9FBF1B00C63286 /* RingLayerPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RingLayerPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3991DBB1B9FBF1B00C63286 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3991DBC1B9FBF1B00C63286 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D3991DBE1B9FBF1B00C63286 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D3991DC11B9FBF1B00C63286 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D3991DC31B9FBF1B00C63286 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D3991DC61B9FBF1B00C63286 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		D3991DCC1B9FBF1B00C63286 /* RingLayerPlayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RingLayerPlayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3991DD11B9FBF1B00C63286 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3991DD21B9FBF1B00C63286 /* RingLayerPlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingLayerPlayTests.swift; sourceTree = "<group>"; };
 		D39DAD191B917229007D797C /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
-		D3A9B7DF1B980E8F00745F56 /* TimerSplitViewController+Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimerSplitViewController+Delegate.swift"; sourceTree = "<group>"; };
+		D3A845A41BA39E8B00062B02 /* flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash.png; sourceTree = "<group>"; };
+		D3A9B7DF1B980E8F00745F56 /* TimerSplitViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerSplitViewControllerDelegate.swift; sourceTree = "<group>"; };
 		D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timer+StatePreservation.swift"; sourceTree = "<group>"; };
+		D3DFF55B1BA5EF8000A4700D /* RingPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingPoint.swift; sourceTree = "<group>"; };
+		D3DFF55D1BA5EF8700A4700D /* RingCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingCircle.swift; sourceTree = "<group>"; };
 		D3EC191B1B94EB5000A8E426 /* PlayPauseWipeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayPauseWipeButton.swift; sourceTree = "<group>"; };
 		D3F699A01B72DE0900BD21FD /* PieShapeView+Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PieShapeView+Progress.swift"; sourceTree = "<group>"; };
+		D3F7BA701B9FC15600BA2936 /* RingLayerPlay-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RingLayerPlay-Bridging-Header.h"; sourceTree = "<group>"; };
+		D3FB37FD1BA3F2A4003C6BB2 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		D3FD35051B9B650A00CE15F6 /* TimeWipeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeWipeButton.swift; sourceTree = "<group>"; };
 		D3FD35071B9B6B8B00CE15F6 /* ShapesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapesView.swift; sourceTree = "<group>"; };
 		D3FD35091B9B727C00CE15F6 /* SizableBezierPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizableBezierPath.swift; sourceTree = "<group>"; };
@@ -124,6 +166,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D340CC851B6D3E7600BB17E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D3991DB51B9FBF1B00C63286 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D3991DC91B9FBF1B00C63286 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -148,6 +204,8 @@
 			children = (
 				D340CC751B6D3E7600BB17E3 /* GeekSpeak Show Timer */,
 				D340CC8B1B6D3E7600BB17E3 /* GeekSpeak Show TimerTests */,
+				D3991DB91B9FBF1B00C63286 /* RingLayerPlay */,
+				D3991DCF1B9FBF1B00C63286 /* RingLayerPlayTests */,
 				D340CC741B6D3E7600BB17E3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -157,6 +215,8 @@
 			children = (
 				D340CC731B6D3E7600BB17E3 /* GeekSpeak Show Timer.app */,
 				D340CC881B6D3E7600BB17E3 /* GeekSpeak Show TimerTests.xctest */,
+				D3991DB81B9FBF1B00C63286 /* RingLayerPlay.app */,
+				D3991DCC1B9FBF1B00C63286 /* RingLayerPlayTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -167,9 +227,7 @@
 				D340CC7C1B6D3E7600BB17E3 /* Main.storyboard */,
 				D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */,
 				D39DAD191B917229007D797C /* Appearance.swift */,
-				D340CCBD1B6DE30100BB17E3 /* TimerSplitViewController.swift */,
-				D3A9B7DF1B980E8F00745F56 /* TimerSplitViewController+Delegate.swift */,
-				D384BC571B7F05B20024BCB0 /* TimerSplitViewController+Coding.swift */,
+				D3A9B7DF1B980E8F00745F56 /* TimerSplitViewControllerDelegate.swift */,
 				D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */,
 				D384BC551B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift */,
 				D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */,
@@ -178,6 +236,7 @@
 				D340CCA61B6D5CC100BB17E3 /* Rotation & Angle Types */,
 				D340CCB81B6DA8DA00BB17E3 /* Timer Views */,
 				D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */,
+				D3FB37FD1BA3F2A4003C6BB2 /* Device.swift */,
 				D367427E1B9CDDED00EE13F7 /* Array+Bool.swift */,
 				D32B9DEC1B77F6740098DCCF /* UIImage+WithColor.swift */,
 				D340CCB41B6D939F00BB17E3 /* UIColor+DarkenColor.swift */,
@@ -185,6 +244,7 @@
 				D320C3601B6FF5E90046F785 /* UIImage+ImageEffects.m */,
 				D3463F671B713E0D002C68A8 /* Settings.bundle */,
 				D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */,
+				D3A845A41BA39E8B00062B02 /* flash.png */,
 				D340CC811B6D3E7600BB17E3 /* LaunchScreen.xib */,
 				D340CC761B6D3E7600BB17E3 /* Supporting Files */,
 				D340CC9A1B6D504400BB17E3 /* GeekSpeak Show Timer-Bridging-Header.h */,
@@ -261,6 +321,9 @@
 				D35F34331B73B90E0038CF4C /* GSTRingLayer.m */,
 				D37C2AA91B75B7C8008826D5 /* GSTRing.h */,
 				D37C2AAA1B75B7C8008826D5 /* GSTRing.m */,
+				D3DFF55B1BA5EF8000A4700D /* RingPoint.swift */,
+				D3DFF55D1BA5EF8700A4700D /* RingCircle.swift */,
+				D31864EB1BA6605A0083B46E /* RingDrawing.swift */,
 			);
 			name = Ring;
 			sourceTree = "<group>";
@@ -276,6 +339,45 @@
 				D3FD35091B9B727C00CE15F6 /* SizableBezierPath.swift */,
 			);
 			name = Buttons;
+			sourceTree = "<group>";
+		};
+		D3991DB91B9FBF1B00C63286 /* RingLayerPlay */ = {
+			isa = PBXGroup;
+			children = (
+				D3991DBC1B9FBF1B00C63286 /* AppDelegate.swift */,
+				D3991DBE1B9FBF1B00C63286 /* ViewController.swift */,
+				D3991DC01B9FBF1B00C63286 /* Main.storyboard */,
+				D3991DC31B9FBF1B00C63286 /* Images.xcassets */,
+				D3991DC51B9FBF1B00C63286 /* LaunchScreen.xib */,
+				D3F7BA701B9FC15600BA2936 /* RingLayerPlay-Bridging-Header.h */,
+				D3991DBA1B9FBF1B00C63286 /* Supporting Files */,
+			);
+			path = RingLayerPlay;
+			sourceTree = "<group>";
+		};
+		D3991DBA1B9FBF1B00C63286 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D3991DBB1B9FBF1B00C63286 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D3991DCF1B9FBF1B00C63286 /* RingLayerPlayTests */ = {
+			isa = PBXGroup;
+			children = (
+				D3991DD21B9FBF1B00C63286 /* RingLayerPlayTests.swift */,
+				D3991DD01B9FBF1B00C63286 /* Supporting Files */,
+			);
+			path = RingLayerPlayTests;
+			sourceTree = "<group>";
+		};
+		D3991DD01B9FBF1B00C63286 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D3991DD11B9FBF1B00C63286 /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,6 +419,41 @@
 			productReference = D340CC881B6D3E7600BB17E3 /* GeekSpeak Show TimerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		D3991DB71B9FBF1B00C63286 /* RingLayerPlay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D3991DD81B9FBF1B00C63286 /* Build configuration list for PBXNativeTarget "RingLayerPlay" */;
+			buildPhases = (
+				D3991DB41B9FBF1B00C63286 /* Sources */,
+				D3991DB51B9FBF1B00C63286 /* Frameworks */,
+				D3991DB61B9FBF1B00C63286 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RingLayerPlay;
+			productName = RingLayerPlay;
+			productReference = D3991DB81B9FBF1B00C63286 /* RingLayerPlay.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D3991DCB1B9FBF1B00C63286 /* RingLayerPlayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D3991DD91B9FBF1B00C63286 /* Build configuration list for PBXNativeTarget "RingLayerPlayTests" */;
+			buildPhases = (
+				D3991DC81B9FBF1B00C63286 /* Sources */,
+				D3991DC91B9FBF1B00C63286 /* Frameworks */,
+				D3991DCA1B9FBF1B00C63286 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D3991DCE1B9FBF1B00C63286 /* PBXTargetDependency */,
+			);
+			name = RingLayerPlayTests;
+			productName = RingLayerPlayTests;
+			productReference = D3991DCC1B9FBF1B00C63286 /* RingLayerPlayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -333,6 +470,13 @@
 					D340CC871B6D3E7600BB17E3 = {
 						CreatedOnToolsVersion = 6.4;
 						TestTargetID = D340CC721B6D3E7600BB17E3;
+					};
+					D3991DB71B9FBF1B00C63286 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					D3991DCB1B9FBF1B00C63286 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = D3991DB71B9FBF1B00C63286;
 					};
 				};
 			};
@@ -351,6 +495,8 @@
 			targets = (
 				D340CC721B6D3E7600BB17E3 /* GeekSpeak Show Timer */,
 				D340CC871B6D3E7600BB17E3 /* GeekSpeak Show TimerTests */,
+				D3991DB71B9FBF1B00C63286 /* RingLayerPlay */,
+				D3991DCB1B9FBF1B00C63286 /* RingLayerPlayTests */,
 			);
 		};
 /* End PBXProject section */
@@ -363,11 +509,29 @@
 				D3463F681B713E0D002C68A8 /* Settings.bundle in Resources */,
 				D340CC7E1B6D3E7600BB17E3 /* Main.storyboard in Resources */,
 				D340CC831B6D3E7600BB17E3 /* LaunchScreen.xib in Resources */,
+				D3A845A51BA39E8B00062B02 /* flash.png in Resources */,
 				D340CC801B6D3E7600BB17E3 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D340CC861B6D3E7600BB17E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D3991DB61B9FBF1B00C63286 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3991DC21B9FBF1B00C63286 /* Main.storyboard in Resources */,
+				D3991DC71B9FBF1B00C63286 /* LaunchScreen.xib in Resources */,
+				D3991DC41B9FBF1B00C63286 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D3991DCA1B9FBF1B00C63286 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -400,8 +564,8 @@
 				D37C2AAB1B75B7C8008826D5 /* GSTRing.m in Sources */,
 				D36742831B9D343100EE13F7 /* ShapesButton.swift in Sources */,
 				D39DAD1A1B917229007D797C /* Appearance.swift in Sources */,
+				D3FB37FE1BA3F2A4003C6BB2 /* Device.swift in Sources */,
 				D340CCB51B6D939F00BB17E3 /* UIColor+DarkenColor.swift in Sources */,
-				D340CCBE1B6DE30100BB17E3 /* TimerSplitViewController.swift in Sources */,
 				D320C3611B6FF5E90046F785 /* UIImage+ImageEffects.m in Sources */,
 				D3C487B31B726F3300B8067E /* Timer+StatePreservation.swift in Sources */,
 				D3912C771B6F1476003B42F1 /* Timer+Types.swift in Sources */,
@@ -417,7 +581,6 @@
 				D32B9DED1B77F6740098DCCF /* UIImage+WithColor.swift in Sources */,
 				D3C0807B1B9BB6290020A4A0 /* PlayPauseWipeButton.swift in Sources */,
 				D340CCA41B6D556D00BB17E3 /* AccumulatedAngle.swift in Sources */,
-				D384BC581B7F05B20024BCB0 /* TimerSplitViewController+Coding.swift in Sources */,
 				D340CC9E1B6D504500BB17E3 /* PieShapeView.swift in Sources */,
 				D3F699A11B72DE0900BD21FD /* PieShapeView+Progress.swift in Sources */,
 				D3FD35061B9B650A00CE15F6 /* TimeWipeButton.swift in Sources */,
@@ -427,13 +590,16 @@
 				D3FD350C1B9B939200CE15F6 /* SizeToSuperView.swift in Sources */,
 				D340CC9F1B6D504500BB17E3 /* GSTPieLayer.m in Sources */,
 				D340CCB11B6D8B9600BB17E3 /* RingView.swift in Sources */,
+				D3DFF55E1BA5EF8700A4700D /* RingCircle.swift in Sources */,
 				D36742811B9D33FE00EE13F7 /* NextSegmentButton.swift in Sources */,
-				D3A9B7E01B980E8F00745F56 /* TimerSplitViewController+Delegate.swift in Sources */,
+				D3A9B7E01B980E8F00745F56 /* TimerSplitViewControllerDelegate.swift in Sources */,
 				D340CCB71B6D9C6400BB17E3 /* FillView.swift in Sources */,
+				D3DFF55C1BA5EF8000A4700D /* RingPoint.swift in Sources */,
 				D3FD350A1B9B727C00CE15F6 /* SizableBezierPath.swift in Sources */,
 				D340CCB31B6D91FF00BB17E3 /* TimerViewController.swift in Sources */,
 				D340CC791B6D3E7600BB17E3 /* AppDelegate.swift in Sources */,
 				D367427F1B9CDDED00EE13F7 /* Array+Bool.swift in Sources */,
+				D31864EC1BA6605A0083B46E /* RingDrawing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +611,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D3991DB41B9FBF1B00C63286 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3F7BA6F1B9FBF7500BA2936 /* SizeToSuperView.swift in Sources */,
+				D3F7BA6E1B9FBF6600BA2936 /* GSTRing.m in Sources */,
+				D31864ED1BA6605A0083B46E /* RingDrawing.swift in Sources */,
+				D3F7BA731B9FC1C600BA2936 /* AngularType.swift in Sources */,
+				D3F7BA6B1B9FBF6600BA2936 /* RingView.swift in Sources */,
+				D3991DBF1B9FBF1B00C63286 /* ViewController.swift in Sources */,
+				D3F7BA721B9FC1C600BA2936 /* AccumulatedAngle.swift in Sources */,
+				D3F7BA711B9FC1C600BA2936 /* Angle.swift in Sources */,
+				D3991DBD1B9FBF1B00C63286 /* AppDelegate.swift in Sources */,
+				D3DFF55F1BA5F27300A4700D /* RingPoint.swift in Sources */,
+				D3DFF5601BA5F27300A4700D /* RingCircle.swift in Sources */,
+				D3F7BA6A1B9FBF6600BA2936 /* RingView+Progress.swift in Sources */,
+				D3F7BA6D1B9FBF6600BA2936 /* GSTRingLayer.m in Sources */,
+				D3F7BA6C1B9FBF6600BA2936 /* RingFillView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D3991DC81B9FBF1B00C63286 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3991DD31B9FBF1B00C63286 /* RingLayerPlayTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -452,6 +647,11 @@
 			isa = PBXTargetDependency;
 			target = D340CC721B6D3E7600BB17E3 /* GeekSpeak Show Timer */;
 			targetProxy = D340CC891B6D3E7600BB17E3 /* PBXContainerItemProxy */;
+		};
+		D3991DCE1B9FBF1B00C63286 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D3991DB71B9FBF1B00C63286 /* RingLayerPlay */;
+			targetProxy = D3991DCD1B9FBF1B00C63286 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -468,6 +668,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				D340CC821B6D3E7600BB17E3 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		D3991DC01B9FBF1B00C63286 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D3991DC11B9FBF1B00C63286 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D3991DC51B9FBF1B00C63286 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D3991DC61B9FBF1B00C63286 /* Base */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -495,6 +711,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -540,6 +757,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -617,6 +835,70 @@
 			};
 			name = Release;
 		};
+		D3991DD41B9FBF1B00C63286 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RingLayerPlay/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RingLayerPlay/RingLayerPlay-Bridging-Header.h";
+			};
+			name = Debug;
+		};
+		D3991DD51B9FBF1B00C63286 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = RingLayerPlay/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RingLayerPlay/RingLayerPlay-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		D3991DD61B9FBF1B00C63286 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RingLayerPlayTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RingLayerPlay.app/RingLayerPlay";
+			};
+			name = Debug;
+		};
+		D3991DD71B9FBF1B00C63286 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RingLayerPlayTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RingLayerPlay.app/RingLayerPlay";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -643,6 +925,24 @@
 			buildConfigurations = (
 				D340CC961B6D3E7600BB17E3 /* Debug */,
 				D340CC971B6D3E7600BB17E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D3991DD81B9FBF1B00C63286 /* Build configuration list for PBXNativeTarget "RingLayerPlay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D3991DD41B9FBF1B00C63286 /* Debug */,
+				D3991DD51B9FBF1B00C63286 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D3991DD91B9FBF1B00C63286 /* Build configuration list for PBXNativeTarget "RingLayerPlayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D3991DD61B9FBF1B00C63286 /* Debug */,
+				D3991DD71B9FBF1B00C63286 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
