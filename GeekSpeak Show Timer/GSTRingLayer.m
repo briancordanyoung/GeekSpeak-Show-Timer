@@ -277,29 +277,22 @@
       
       GSTRing* maskRing = self.primaryRing;
       
-      maskRing.start = -(M_PI / 2);
-      maskRing.end   = maskRing.start + (M_PI * 2);
-
-//      if (self.start > -(M_PI / 2)) {
-//        CGFloat aditionRotation = fabs(self.start - (M_PI / 2));
-//        CGContextRotateCTM(maskCTX,aditionRotation);
-//      }
-      
-      maskRing.start = maskRing.start;
+      maskRing.start = self.start;
       maskRing.end   = maskRing.start + (M_PI * 2);
       
+      
+      // TODO: Between 180° and 270° the ring mask does not draw correctly.
       if (maskRing.end > (M_PI * 2)) {
         maskRing.start = maskRing.start - (M_PI * 2);
-        maskRing.end   = maskRing.start - (M_PI * 2);
+        maskRing.end   = maskRing.end   - (M_PI * 2);
       }
-//      NSLog(@"start: %f           end: %f",maskRing.start,maskRing.end);
+      
+      
+      // NSLog(@"start: %f           end: %f",maskRing.start,maskRing.end);
       
       maskRing.color = maskInColor;
       maskRing.cornerRoundingPercentage = self.cornerRounding;
       [self drawRing: maskRing inContext: maskCTX];
-
-
-      
       
       self.roundedMask = CGBitmapContextCreateImage(maskCTX);
       CGContextRelease(maskCTX);
