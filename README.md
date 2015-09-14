@@ -6,15 +6,20 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly placed breaks
 
 ## Known issues:
 - SplitViewController subclass causing my layout and navigation controller glitches.
-- secondary ring colors can become confussed when going to next section before it completes
 
 ## Todo:
 
+- Create About viewController to explain
+	- what GeepSeak is
+	- who I am
+	- request feedback about developing the app into a genera purpose timer
 - Create graphics for Add & Remove seconds buttons.
-- round the ends of the rings
-- Animations:
-	On section3 warning & alarm color, animate visibility of each ring radiating out (to catch everyone's eye)
-- GeekSpeak logo need to be scaled and optimized for: @1x,@2x,@3x
+- Add socket connection to GeekSpeak.org API
+	- use site for syncing concurrent timers
+	- keep histery of past timers
+	- sync pending bits to a table view
+	- tapping on a bit marks the time and posts to site
+	
 - Add GameKit discovery and networking between timers on multiple devices
 - SplitViewController Subclass issues
 	- iPhone: swipping back does not animate, but pops instead
