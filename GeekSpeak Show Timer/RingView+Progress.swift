@@ -39,8 +39,7 @@ extension RingView {
     set(newPercentage) {
       endAngle = Rotation(degrees: 360 * newPercentage)
       if endAngle > Rotation(degrees: 360) {
-        let past360 = endAngle - Rotation(degrees: 360)
-        startAngle = past360 + Rotation(degrees: 5)
+        startAngle = endAngle - Rotation(degrees: 360)
       } else {
         startAngle = Rotation(degrees: 0)
       }

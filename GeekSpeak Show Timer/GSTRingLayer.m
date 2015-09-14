@@ -233,6 +233,11 @@
 }
 
 -(void)createMaskInContext:(CGContextRef) ctx {
+  if (self.start > -(M_PI / 2)) {
+    CGImageRelease(self.roundedMask);
+    self.roundedMask = nil;
+  }
+  
   if (self.roundedMask != nil) {
     CGFloat maskHeight =  CGImageGetHeight(self.roundedMask);
     CGFloat ctxHeight  =  CGBitmapContextGetHeight(ctx);
@@ -271,11 +276,30 @@
       CGContextFillRect(maskCTX, rect);
       
       GSTRing* maskRing = self.primaryRing;
-      maskRing.start = 0 - (M_PI / 2);
-      maskRing.end   = (M_PI * 2) - (M_PI / 2);
+      
+      maskRing.start = -(M_PI / 2);
+      maskRing.end   = maskRing.start + (M_PI * 2);
+
+//      if (self.start > -(M_PI / 2)) {
+//        CGFloat aditionRotation = fabs(self.start - (M_PI / 2));
+//        CGContextRotateCTM(maskCTX,aditionRotation);
+//      }
+      
+      maskRing.start = maskRing.start;
+      maskRing.end   = maskRing.start + (M_PI * 2);
+      
+      if (maskRing.end > (M_PI * 2)) {
+        maskRing.start = maskRing.start - (M_PI * 2);
+        maskRing.end   = maskRing.start - (M_PI * 2);
+      }
+//      NSLog(@"start: %f           end: %f",maskRing.start,maskRing.end);
+      
       maskRing.color = maskInColor;
       maskRing.cornerRoundingPercentage = self.cornerRounding;
       [self drawRing: maskRing inContext: maskCTX];
+
+
+      
       
       self.roundedMask = CGBitmapContextCreateImage(maskCTX);
       CGContextRelease(maskCTX);
