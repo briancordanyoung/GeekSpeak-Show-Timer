@@ -117,6 +117,35 @@ final class Timer: NSObject, NSCoding {
     return 1.0 - percentageRemaining
   }
   
+  
+  func percentageComplete(phase: ShowPhase) -> CGFloat {
+    var percentageComplete = Double(0.0)
+    
+    switch phase {
+    case .PreShow,
+         .Break1,
+         .Break2:
+      percentageComplete = Double(self.percentageComplete)
+    case .Section1:
+      let a = timing.durations.section1
+      let b = timing.timeElapsed.section1
+//      percentageComplete =  1 - ((a - b) / a)
+      
+      percentageComplete =  (timing.durations.section1 - timing.timeElapsed.section1) /
+                                          timing.durations.section1
+    case .Section2:
+      percentageComplete =  (timing.durations.section2 - timing.timeElapsed.section2) /
+                                          timing.durations.section2
+    case .Section3:
+      percentageComplete =  (timing.durations.section3 - timing.timeElapsed.section3) /
+                                          timing.durations.section3
+    case .PostShow:
+      percentageComplete = 0.0
+    }
+    
+    return CGFloat(percentageComplete)
+  }
+  
   var percentageCompleteUnlimited: CGFloat {
     // The secondsRemaining computed property is limited so that 
     // it can not be less than 0.  This property is unlimited allowing

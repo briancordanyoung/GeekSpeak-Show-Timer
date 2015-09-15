@@ -21,7 +21,6 @@
 
 @interface GSTRingLayer ()
 
-@property (nonatomic) CGImageRef roundedMask;
 -(void)createMaskInContext:(CGContextRef) ctx;
 
 @end
@@ -35,7 +34,6 @@
 @dynamic    cornerRounding;
 @synthesize color;
 @synthesize additionalColors = _additionalColors;
-@synthesize roundedMask;
 
 
 // MARK: -
@@ -197,7 +195,9 @@
 // MARK: Drawing
 -(void)drawInContext: (CGContextRef) ctx {
 
-  [self createMaskInContext: ctx];
+  if (self.cornerRounding > 0) {
+    [self createMaskInContext: ctx];
+  }
   
   GSTRing* ring = self.primaryRing;
   
@@ -233,74 +233,49 @@
 }
 
 -(void)createMaskInContext:(CGContextRef) ctx {
-  if (self.start > -(M_PI / 2)) {
-    CGImageRelease(self.roundedMask);
-    self.roundedMask = nil;
-  }
   
-  if (self.roundedMask != nil) {
-    CGFloat maskHeight =  CGImageGetHeight(self.roundedMask);
-    CGFloat ctxHeight  =  CGBitmapContextGetHeight(ctx);
-    CGFloat maskWidth =  CGImageGetWidth(self.roundedMask);
-    CGFloat ctxWidth  =  CGBitmapContextGetWidth(ctx);
-    
-    if ((maskHeight != ctxHeight) || (maskWidth != ctxWidth)) {
-      CGImageRelease(self.roundedMask);
-      self.roundedMask = nil;
-    }
-  }
+  CGRect rect = CGRectMake(0 , 0,  CGBitmapContextGetWidth(ctx),
+                                 CGBitmapContextGetHeight(ctx));
+  
+  CGColorSpaceRef greySpace = CGColorSpaceCreateDeviceGray();
+  
+  CGContextRef maskCTX =  CGBitmapContextCreate( NULL,
+                                    CGBitmapContextGetWidth(ctx),
+                                    CGBitmapContextGetHeight(ctx),
+                                    CGBitmapContextGetBitsPerComponent(ctx),
+                                    CGBitmapContextGetBytesPerRow(ctx),
+                                    greySpace,
+                                    (CGBitmapInfo)kCGImageAlphaNone);
+  
+  CGColorSpaceRelease(greySpace);
+  
+  CGColorRef maskOutColor = [[UIColor blackColor] CGColor];
+  CGColorRef maskInColor  = [[UIColor whiteColor] CGColor];
+  
+  CGContextSetFillColorWithColor(maskCTX, maskOutColor);
+  CGContextFillRect(maskCTX, rect);
+  
+  GSTRing* maskRing = self.primaryRing;
+  
+  maskRing.start = self.start;
+  maskRing.end   = maskRing.start + (M_PI * 2);
   
   
-  if (self.cornerRounding > 0) {
-    CGRect rect = CGRectMake(0 , 0,  CGBitmapContextGetWidth(ctx),
-                             CGBitmapContextGetHeight(ctx));
-    
-    if (self.roundedMask == nil)  {
-      
-      CGColorSpaceRef greySpace = CGColorSpaceCreateDeviceGray();
-      
-      CGContextRef maskCTX =  CGBitmapContextCreate( NULL,
-                                        CGBitmapContextGetWidth(ctx),
-                                        CGBitmapContextGetHeight(ctx),
-                                        CGBitmapContextGetBitsPerComponent(ctx),
-                                        CGBitmapContextGetBytesPerRow(ctx),
-                                        greySpace,
-                                        (CGBitmapInfo)kCGImageAlphaNone);
-      
-      CGColorSpaceRelease(greySpace);
-      
-      CGColorRef maskOutColor = [[UIColor blackColor] CGColor];
-      CGColorRef maskInColor  = [[UIColor whiteColor] CGColor];
-      
-      CGContextSetFillColorWithColor(maskCTX, maskOutColor);
-      CGContextFillRect(maskCTX, rect);
-      
-      GSTRing* maskRing = self.primaryRing;
-      
-      maskRing.start = self.start;
-      maskRing.end   = maskRing.start + (M_PI * 2);
-      
-      
-      // TODO: Between 180° and 270° the ring mask does not draw correctly.
-      if (maskRing.end > (M_PI * 2)) {
-        maskRing.start = maskRing.start - (M_PI * 2);
-        maskRing.end   = maskRing.end   - (M_PI * 2);
-      }
-      
-      
-      // NSLog(@"start: %f           end: %f",maskRing.start,maskRing.end);
-      
-      maskRing.color = maskInColor;
-      maskRing.cornerRoundingPercentage = self.cornerRounding;
-      [self drawRing: maskRing inContext: maskCTX];
-      
-      self.roundedMask = CGBitmapContextCreateImage(maskCTX);
-      CGContextRelease(maskCTX);
-      
-    }
-    CGContextClipToMask(ctx, rect, self.roundedMask);
+  // TODO: Between 180° and 270° the ring mask does not draw correctly.
+  if (maskRing.end > (M_PI * 2)) {
+    maskRing.start = maskRing.start - (M_PI * 2);
+    maskRing.end   = maskRing.end   - (M_PI * 2);
   }
 
+  maskRing.color = maskInColor;
+  maskRing.cornerRoundingPercentage = self.cornerRounding;
+  [self drawRing: maskRing inContext: maskCTX];
+  
+  CGImageRef roundedMask = CGBitmapContextCreateImage(maskCTX);
+  CGContextRelease(maskCTX);
+    
+  CGContextClipToMask(ctx, rect, roundedMask);
+  CGImageRelease(roundedMask);
 }
 
 -(void)drawRing: (GSTRing*) ring
