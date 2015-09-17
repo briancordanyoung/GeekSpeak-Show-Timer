@@ -34,8 +34,8 @@ class FillView: UIView {
       let sizeInactive = createHeightAndWidthContraintsForView( self,
                                          toSuperview: superview,
                                      usingMultiplier: percentageOfSuperviewSize)
-      sizeInactive.map({$0.priority = $0.priority * 0.1})
-      sizeConstraintsInactive.map({superview.removeConstraint($0)})
+      sizeInactive.forEach({$0.priority = $0.priority * 0.1})
+      sizeConstraintsInactive.forEach({superview.removeConstraint($0)})
       sizeConstraintsInactive = sizeInactive
       superview.addConstraints(sizeInactive)
     }
@@ -45,9 +45,9 @@ class FillView: UIView {
       
       
       func changePercentage() {
-        println("changePercentage")
-        self.sizeConstraintsInactive.map({$0.priority = $0.priority * 10 })
-        self.sizeConstraintsActive.map(  {$0.priority = $0.priority * 0.1})
+        print("changePercentage")
+        self.sizeConstraintsInactive.forEach({$0.priority = $0.priority * 10 })
+        self.sizeConstraintsActive.forEach(  {$0.priority = $0.priority * 0.1})
         let newInactive = self.sizeConstraintsActive
         let newActive   = self.sizeConstraintsInactive
         self.sizeConstraintsInactive = newInactive
@@ -56,7 +56,7 @@ class FillView: UIView {
       }
       
       if duration == 0 {
-        println("duration == 0 ")
+        print("duration == 0 ")
         changePercentage()
       }
       
@@ -80,7 +80,7 @@ class FillView: UIView {
 
   
   func addSelfContraints() {
-    self.setTranslatesAutoresizingMaskIntoConstraints(false)
+    self.translatesAutoresizingMaskIntoConstraints = false
     
     if let superview = self.superview {
       
@@ -94,7 +94,7 @@ class FillView: UIView {
                                     toSuperview: superview,
                                     usingMultiplier: percentageOfSuperviewSize)
       
-      sizeInactive.map({$0.priority = $0.priority * 0.1})
+      sizeInactive.forEach({$0.priority = $0.priority * 0.1})
       
       superview.addConstraints(centerContraints)
       superview.addConstraints(sizeActive)

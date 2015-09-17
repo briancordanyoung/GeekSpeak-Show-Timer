@@ -55,7 +55,7 @@ class ShapesButton: UIButton {
     super.init(frame: frame)
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   
@@ -66,7 +66,7 @@ class ShapesButton: UIButton {
   // MARK:
   // MARK: UIControl Methods
   override func beginTrackingWithTouch(touch: UITouch,
-                                            withEvent event: UIEvent) -> Bool {
+                                            withEvent event: UIEvent?) -> Bool {
       let superResult =  super.beginTrackingWithTouch(touch, withEvent: event)
       highlight()
       return superResult
@@ -77,7 +77,7 @@ class ShapesButton: UIButton {
     unhighlight()
   }
   
-  override func endTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) {
+  override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
     super.endTrackingWithTouch(touch, withEvent: event)
     unhighlight()
   }
@@ -119,10 +119,10 @@ class ShapesButton: UIButton {
   
   
   // MARK: CAAnimation delegate callbacks
-  override func animationDidStart(anim: CAAnimation!) {
+  override func animationDidStart(anim: CAAnimation) {
   }
   
-  override func animationDidStop(animation: CAAnimation! ,finished: Bool) {
+  override func animationDidStop(animation: CAAnimation ,finished: Bool) {
     if finished {
     }
   }

@@ -331,7 +331,7 @@ class RingDrawing: NSObject {
     CGContextSetLineWidth(context, lineWidth)
     
     // Draw in context
-    CGContextDrawPath(context, kCGPathFillStroke);
+    CGContextDrawPath(context, CGPathDrawingMode.FillStroke);
   }
   
   func drawGuides(context: CGContextRef) {
@@ -340,19 +340,19 @@ class RingDrawing: NSObject {
 
     CGContextMoveToPoint(context, center.x, center.y)
     CGContextAddLineToPoint(context, outerBezStart.x, outerBezStart.y)
-    CGContextDrawPath(context, kCGPathFillStroke);
+    CGContextDrawPath(context, CGPathDrawingMode.FillStroke);
 
     CGContextMoveToPoint(context, center.x, center.y)
     CGContextAddLineToPoint(context, outerBezEnd.x, outerBezEnd.y)
-    CGContextDrawPath(context, kCGPathFillStroke);
+    CGContextDrawPath(context, CGPathDrawingMode.FillStroke);
 
     CGContextMoveToPoint(context, center.x, center.y)
     CGContextAddLineToPoint(context, innerBezStart.x, innerBezStart.y)
-    CGContextDrawPath(context, kCGPathFillStroke);
+    CGContextDrawPath(context, CGPathDrawingMode.FillStroke);
     
     CGContextMoveToPoint(context, center.x, center.y)
     CGContextAddLineToPoint(context, innerBezEnd.x, innerBezEnd.y)
-    CGContextDrawPath(context, kCGPathFillStroke);
+    CGContextDrawPath(context, CGPathDrawingMode.FillStroke);
   }
   
 
@@ -374,7 +374,7 @@ class RingDrawing: NSObject {
     CGContextSetLineWidth(context, lineWidth)
     
     // Draw in context
-    CGContextDrawPath(context, kCGPathFillStroke);
+    CGContextDrawPath(context, CGPathDrawingMode.FillStroke);
   }
   
   func drawInContext(context: CGContextRef) {

@@ -20,7 +20,7 @@ extension Timer {
       _state = .Ready
     }
     
-    let demoTimings = aDecoder.decodeBoolForKey(Constants.UseDemoDurations)
+//    let demoTimings = aDecoder.decodeBoolForKey(Constants.UseDemoDurations)
 
     
     let countingStartTimeDecoded =

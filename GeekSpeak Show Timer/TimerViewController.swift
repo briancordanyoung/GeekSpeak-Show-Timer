@@ -1,7 +1,7 @@
 import UIKit
 
 
-enum TimerLabelDisplay: String, Printable {
+enum TimerLabelDisplay: String, CustomStringConvertible {
   case Remaining = "Remaining"
   case Elapsed   = "Elapsed"
   
@@ -325,13 +325,13 @@ final class TimerViewController: UIViewController {
   
   
   func setContraintPriorityForVerticalLayout() {
-    verticalContraints.map(    activateContraint )
-    horizontalContraints.map(deactivateContraint )
+    verticalContraints.forEach(    activateContraint )
+    horizontalContraints.forEach(deactivateContraint )
   }
   
   func setContraintPriorityForHorizontalLayout() {
-    verticalContraints.map(  deactivateContraint )
-    horizontalContraints.map(  activateContraint )
+    verticalContraints.forEach(  deactivateContraint )
+    horizontalContraints.forEach(  activateContraint )
   }
   
   func activateContraint(constraint: NSLayoutConstraint) {
@@ -367,7 +367,7 @@ final class TimerViewController: UIViewController {
   func animateBlackToWhite() {
     UIView.animateWithDuration( 0.05,
       delay: 0.0,
-      options: nil,
+      options: [],
       animations: {
         self.flashImageView.alpha = 1.0
         self.view.backgroundColor = Constants.BreakColor
@@ -386,7 +386,7 @@ final class TimerViewController: UIViewController {
   func animateWhiteToBlack() {
     UIView.animateWithDuration( 0.05,
       delay: 0.0,
-      options: nil,
+      options: [],
       animations: {
         self.flashImageView.alpha = 0.0
         self.view.backgroundColor = UIColor.blackColor()
@@ -480,10 +480,11 @@ final class TimerViewController: UIViewController {
                 totalLength: Int, pad: Character,
       inDirection direction: Direction) -> String {
         
-    var i = 0
-    for character in string {
-      i++
-    }
+//    var i = 0
+//    for character in string.characters {
+//      i++
+//    }
+    let i = string.characters.count
     
     let amountToPad = totalLength - i
     if amountToPad < 1 {

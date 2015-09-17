@@ -127,8 +127,8 @@ final class Timer: NSObject, NSCoding {
          .Break2:
       percentageComplete = Double(self.percentageComplete)
     case .Section1:
-      let a = timing.durations.section1
-      let b = timing.timeElapsed.section1
+//      let a = timing.durations.section1
+//      let b = timing.timeElapsed.section1
 //      percentageComplete =  1 - ((a - b) / a)
       
       percentageComplete =  (timing.durations.section1 - timing.timeElapsed.section1) /
@@ -177,7 +177,7 @@ final class Timer: NSObject, NSCoding {
     super.init()
   }
   
-  init(coder aDecoder: NSCoder) {
+  init?(coder aDecoder: NSCoder) {
     super.init()
     decodeWithCoder(coder: aDecoder)
   }

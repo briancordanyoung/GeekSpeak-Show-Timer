@@ -178,7 +178,7 @@ class PlayPauseButton: TimeWipeButton {
     setupPlayPauseView()
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setupPlayPauseView()
   }

@@ -49,7 +49,7 @@ class RingFillView: UIView {
 
   
   func addSelfContraints() {
-    self.setTranslatesAutoresizingMaskIntoConstraints(false)
+    self.translatesAutoresizingMaskIntoConstraints = false
     
     if let superview = self.superview {
       

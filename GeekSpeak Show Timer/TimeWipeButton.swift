@@ -85,7 +85,7 @@ class TimeWipeButton: UIButton {
   
   var frontView: ShapesView? {
     var frontView: ShapesView?
-    for (i,view) in enumerate(subviews)  {
+    for view in subviews {
       if view === viewA  { frontView = view as? ShapesView }
       if view === viewB  { frontView = view as? ShapesView }
     }
@@ -94,7 +94,7 @@ class TimeWipeButton: UIButton {
   
   var backView: ShapesView? {
     var backView: ShapesView?
-    for (i,view) in enumerate(reverse(subviews))  {
+    for view in subviews.reverse() {
       if view === viewA  { backView = view as? ShapesView }
       if view === viewB  { backView = view as? ShapesView }
     }
@@ -103,7 +103,7 @@ class TimeWipeButton: UIButton {
 
   var frontMask: PieShapeView? {
     var frontMask: PieShapeView?
-    for (i,view) in enumerate(subviews)  {
+    for view in subviews {
       if view === viewA  { frontMask = maskA }
       if view === viewB  { frontMask = maskB }
     }
@@ -112,7 +112,7 @@ class TimeWipeButton: UIButton {
   
   var backMask: PieShapeView? {
     var backMask: PieShapeView?
-    for (i,view) in enumerate(reverse(subviews))  {
+    for view in subviews.reverse()  {
       if view === viewA  { backMask = maskA }
       if view === viewB  { backMask = maskB }
     }
@@ -140,7 +140,7 @@ class TimeWipeButton: UIButton {
     setupPieShapeViews()
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setupPieShapeViews()
   }
@@ -181,7 +181,7 @@ class TimeWipeButton: UIButton {
   // MARK:
   // MARK: UIControl Methods
   override func beginTrackingWithTouch(touch: UITouch,
-                             withEvent event: UIEvent) -> Bool {
+                             withEvent event: UIEvent?) -> Bool {
     let superResult =  super.beginTrackingWithTouch(touch, withEvent: event)
                                                             
     if animationExistsOnLayers() {
@@ -197,7 +197,7 @@ class TimeWipeButton: UIButton {
     unhighlight()
   }
   
-  override func endTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) {
+  override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
     super.endTrackingWithTouch(touch, withEvent: event)
     if !touchInside {
       unhighlight()
@@ -419,12 +419,12 @@ class TimeWipeButton: UIButton {
   
   
   // MARK: CAAnimation delegate callbacks
-  override func animationDidStart(anim: CAAnimation!) {
+  override func animationDidStart(anim: CAAnimation) {
     viewA?.alpha = 1.0
     viewB?.alpha = 1.0
   }
 
-  override func animationDidStop(animation: CAAnimation! ,finished: Bool) {
+  override func animationDidStop(animation: CAAnimation ,finished: Bool) {
     if finished {
       animationCompleted()
     }

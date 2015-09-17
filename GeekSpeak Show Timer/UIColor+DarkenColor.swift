@@ -11,6 +11,6 @@ extension UIColor {
     let b = rgba[2] * mult
     let a = rgba[3]
     
-    return UIColor(red: r, green: b, blue: b, alpha: a)
+    return UIColor(red: r, green: g, blue: b, alpha: a)
   }
 }

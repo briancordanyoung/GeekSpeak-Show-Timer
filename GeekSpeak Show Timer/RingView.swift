@@ -35,7 +35,7 @@ class RingView: RingFillView {
     ringWidth  = CGFloat(0.12228)
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     startAngle = Rotation(aDecoder.decodeDoubleForKey(Constants.StartAngle))
     endAngle   = Rotation(aDecoder.decodeDoubleForKey(Constants.EndAngle))

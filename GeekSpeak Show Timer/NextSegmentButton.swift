@@ -48,11 +48,11 @@ class NextSegmentButton: ShapesButton {
 
     
     let arrowPath = UIBezierPath()
-    arrowPath.moveToPoint(   modifyPoint(500.5, 93.5))
-    arrowPath.addLineToPoint(modifyPoint(500.5, 4.5))
-    arrowPath.addLineToPoint(modifyPoint(739.5, 160.5))
-    arrowPath.addLineToPoint(modifyPoint(500.5, 319.5))
-    arrowPath.addLineToPoint(modifyPoint(500.5, 228.5))
+    arrowPath.moveToPoint(   modifyPoint(500.5, y: 93.5))
+    arrowPath.addLineToPoint(modifyPoint(500.5, y: 4.5))
+    arrowPath.addLineToPoint(modifyPoint(739.5, y: 160.5))
+    arrowPath.addLineToPoint(modifyPoint(500.5, y: 319.5))
+    arrowPath.addLineToPoint(modifyPoint(500.5, y: 228.5))
     return arrowPath
   }
   
@@ -75,28 +75,28 @@ class NextSegmentButton: ShapesButton {
     
 
     let circlePath = UIBezierPath()
-    circlePath.moveToPoint(    modifyPoint(501.5, 94.5))
-    circlePath.addCurveToPoint(modifyPoint(94.5, 500.5),
-                controlPoint1: modifyPoint(265.5, 94.5),
-                controlPoint2: modifyPoint(94.5, 287.5))
-    circlePath.addCurveToPoint(modifyPoint(501.5, 908.5),
-                controlPoint1: modifyPoint(94.5, 713.5),
-                controlPoint2: modifyPoint(266.5, 908.5))
-    circlePath.addCurveToPoint(modifyPoint(906.5, 500.5),
-                controlPoint1: modifyPoint(736.5, 908.5),
-                controlPoint2: modifyPoint(906.5, 712.5))
-    circlePath.addCurveToPoint(modifyPoint(773.5, 500.5),
-                  controlPoint1: modifyPoint(862, 500.5),
-                  controlPoint2: modifyPoint(835, 500.5))
-    circlePath.addCurveToPoint(modifyPoint(501.5, 774.5),
-                controlPoint1: modifyPoint(773.5, 640.5),
-                controlPoint2: modifyPoint(662.5, 774.5))
-    circlePath.addCurveToPoint(modifyPoint(227.5, 500.5),
-                controlPoint1: modifyPoint(340.5, 774.5),
-                controlPoint2: modifyPoint(227.5, 642.5))
-    circlePath.addCurveToPoint(modifyPoint(500.5, 228.5),
-                controlPoint1: modifyPoint(227.5, 358.5),
-                controlPoint2: modifyPoint(343.5, 228.5))
+    circlePath.moveToPoint(    modifyPoint(501.5, y: 94.5))
+    circlePath.addCurveToPoint(modifyPoint(94.5, y: 500.5),
+                controlPoint1: modifyPoint(265.5, y: 94.5),
+                controlPoint2: modifyPoint(94.5, y: 287.5))
+    circlePath.addCurveToPoint(modifyPoint(501.5, y: 908.5),
+                controlPoint1: modifyPoint(94.5, y: 713.5),
+                controlPoint2: modifyPoint(266.5, y: 908.5))
+    circlePath.addCurveToPoint(modifyPoint(906.5, y: 500.5),
+                controlPoint1: modifyPoint(736.5, y: 908.5),
+                controlPoint2: modifyPoint(906.5, y: 712.5))
+    circlePath.addCurveToPoint(modifyPoint(773.5, y: 500.5),
+                  controlPoint1: modifyPoint(862, y: 500.5),
+                  controlPoint2: modifyPoint(835, y: 500.5))
+    circlePath.addCurveToPoint(modifyPoint(501.5, y: 774.5),
+                controlPoint1: modifyPoint(773.5, y: 640.5),
+                controlPoint2: modifyPoint(662.5, y: 774.5))
+    circlePath.addCurveToPoint(modifyPoint(227.5, y: 500.5),
+                controlPoint1: modifyPoint(340.5, y: 774.5),
+                controlPoint2: modifyPoint(227.5, y: 642.5))
+    circlePath.addCurveToPoint(modifyPoint(500.5, y: 228.5),
+                controlPoint1: modifyPoint(227.5, y: 358.5),
+                controlPoint2: modifyPoint(343.5, y: 228.5))
     return circlePath
   }
   
@@ -108,14 +108,14 @@ class NextSegmentButton: ShapesButton {
     setup()
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setup()
   }
 
   override func layoutSubviews() {
     super.layoutSubviews()
-    rings.map({$0.layer.setNeedsDisplay()})
+    rings.forEach({$0.layer.setNeedsDisplay()})
   }
   
   func setup() {
@@ -126,8 +126,8 @@ class NextSegmentButton: ShapesButton {
   
   func setupRingViews() {
     container.userInteractionEnabled = false
-    rings.map({self.configureRing($0)})
-    darkRings.map({ self.container.sendSubviewToBack($0) })
+    rings.forEach({self.configureRing($0)})
+    darkRings.forEach({ self.container.sendSubviewToBack($0) })
     darkRing1.percentageOfSuperviewSize  = 0.95
     lightRing1.percentageOfSuperviewSize = 0.95
     darkRing2.percentageOfSuperviewSize  = 0.64
@@ -181,7 +181,7 @@ class NextSegmentButton: ShapesButton {
   // MARK:
   // MARK: UIControl Methods
   override func beginTrackingWithTouch(touch: UITouch,
-    withEvent event: UIEvent) -> Bool {
+    withEvent event: UIEvent?) -> Bool {
       let superResult =  super.beginTrackingWithTouch(touch, withEvent: event)
       
       interuptAnimation()
@@ -192,7 +192,7 @@ class NextSegmentButton: ShapesButton {
     super.cancelTrackingWithEvent(event)
   }
   
-  override func endTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) {
+  override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
     super.endTrackingWithTouch(touch, withEvent: event)
     if touchInside {
       animateRings()
@@ -225,7 +225,7 @@ class NextSegmentButton: ShapesButton {
   func animationStep1() {
       UIView.animateWithDuration( instant,
                            delay: stepDuration,
-                         options: nil,
+                         options: [],
                       animations: {
                                     self.darkRing3.alpha = 1.0
                                   },
@@ -237,7 +237,7 @@ class NextSegmentButton: ShapesButton {
   func animationStep2() {
       UIView.animateWithDuration( instant,
                            delay: stepDuration,
-                         options: nil,
+                         options: [],
                       animations: {
                                     self.darkRing3.alpha = 0.0
                                   },
@@ -249,7 +249,7 @@ class NextSegmentButton: ShapesButton {
   func animationStep3() {
       UIView.animateWithDuration( instant,
                            delay: stepDuration,
-                         options: nil,
+                         options: [],
                       animations: {
                                     self.darkRing2.alpha = 1.0
                                   },
@@ -261,7 +261,7 @@ class NextSegmentButton: ShapesButton {
   func animationStep4() {
       UIView.animateWithDuration( instant,
                            delay: stepDuration,
-                         options: nil,
+                         options: [],
                       animations: {
                                     self.darkRing2.alpha = 0.0
                                   },
@@ -273,7 +273,7 @@ class NextSegmentButton: ShapesButton {
   func animationStep5() {
       UIView.animateWithDuration( instant,
                            delay: stepDuration,
-                         options: nil,
+                         options: [],
                       animations: {
                                     self.darkRing1.alpha = 1.0
                                   },
@@ -285,7 +285,7 @@ class NextSegmentButton: ShapesButton {
   func animationStep6() {
       UIView.animateWithDuration( instant,
                            delay: stepDuration,
-                         options: nil,
+                         options: [],
                       animations: {
                                     self.darkRing1.alpha = 0.0
                                   },
@@ -299,16 +299,16 @@ class NextSegmentButton: ShapesButton {
                            delay: instant,
                          options: .CurveEaseOut,
                       animations: {
-                                    rings.map( {$0.alpha = 0.0} )
+                                    self.rings.forEach( {$0.alpha = 0.0} )
                                   },
                       completion: { completed in
-                                    rings.map( {$0.alpha = 0.0} )
+                                    self.rings.forEach( {$0.alpha = 0.0} )
                                   })
   }
   
   func interuptAnimation() {
-    rings.map({$0.layer.removeAllAnimations()})
-    rings.map({$0.alpha = 0.0} )
+    rings.forEach({$0.layer.removeAllAnimations()})
+    rings.forEach({$0.alpha = 0.0} )
   }
   
 }

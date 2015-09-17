@@ -183,25 +183,25 @@ class SettingsViewController: UIViewController {
       // that will actually be visible.    
       let subRect = CGRectMake(0, 0, self.view.frame.size.width / scaleValue,
                                      self.view.frame.size.height / scaleValue)
-      let subImage = CGImageCreateWithImageInRect(snapshotImage.CGImage, subRect)
-    
-      if let backgroundImage = UIImage(CGImage: subImage) {
-        // CGImageRelease(subImage)
-        
-        // Now actually apply the blur to the snapshot and set the background
-        // behind our master view controller
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+      if let subImage = CGImageCreateWithImageInRect(snapshotImage.CGImage, subRect) {
+      
+        let backgroundImage = UIImage(CGImage: subImage)
+          // CGImageRelease(subImage)
+          
+          // Now actually apply the blur to the snapshot and set the background
+          // behind our master view controller
+          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 
-        let blurredBackgroundImage = backgroundImage.applyBlurWithRadius( 20,
-                                                tintColor: UIColor.clearColor(),
-                                    saturationDeltaFactor: 1.8,
-                                                maskImage: nil)
-            dispatch_sync(dispatch_get_main_queue(), {
-                self.backgroundImageView.image = blurredBackgroundImage
-                self.blurringBackground = false
+          let blurredBackgroundImage = backgroundImage.applyBlurWithRadius( 20,
+                                                  tintColor: UIColor.clearColor(),
+                                      saturationDeltaFactor: 1.8,
+                                                  maskImage: nil)
+              dispatch_sync(dispatch_get_main_queue(), {
+                  self.backgroundImageView.image = blurredBackgroundImage
+                  self.blurringBackground = false
+              })
             })
-          })
-      }
+        }
     } else {
       backgroundImageView.image = UIImage.imageWithColor(UIColor.blackColor())
     }

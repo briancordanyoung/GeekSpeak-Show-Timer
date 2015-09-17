@@ -50,9 +50,9 @@ class TimerSplitViewControllerDelegate: NSObject, UISplitViewControllerDelegate 
   
   
   
-  func splitViewControllerSupportedInterfaceOrientations( splitViewController: UISplitViewController) -> Int {
-    println("splitViewControllerSupportedInterfaceOrientations:")
-    return Int(UIInterfaceOrientationMask.All.rawValue)
+  func splitViewControllerSupportedInterfaceOrientations( splitViewController: UISplitViewController) -> UIInterfaceOrientationMask {
+    print("splitViewControllerSupportedInterfaceOrientations:")
+    return UIInterfaceOrientationMask.All
   }
   
   
@@ -96,10 +96,10 @@ class TimerSplitViewControllerDelegate: NSObject, UISplitViewControllerDelegate 
   // Make sure the Settings View (Primary view) is displayed on startup
   // http://stackoverflow.com/questions/25875618/uisplitviewcontroller-in-portrait-on-iphone-shows-detail-vc-instead-of-master
   func splitViewController(splitViewController: UISplitViewController,
-    collapseSecondaryViewController secondaryViewController: UIViewController!,
-    ontoPrimaryViewController primaryViewController: UIViewController!)
+    collapseSecondaryViewController secondaryViewController: UIViewController,
+    ontoPrimaryViewController primaryViewController: UIViewController)
     -> Bool {
-      println("splitViewController:collapseSecondaryViewController:ontoPrimaryViewController:")
+      print("splitViewController:collapseSecondaryViewController:ontoPrimaryViewController:")
       return true
   }
   
