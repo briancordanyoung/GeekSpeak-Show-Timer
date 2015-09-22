@@ -33,7 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     setupSplitViewController()
     resetTimerIfShowTimeElapsed()
     registerForTimerNotifications()
-    tauTest()
     return true
   }
 
@@ -188,44 +187,6 @@ extension AppDelegate {
     NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
   }
 
-  
-  
-  
-  func tauTest() {
-    (0...720).forEach({ i in
-      let n = i - 180
-      let angle = TauAngle(degrees: n)
-      
-      print("angle: \(n) (\(angle.degrees))    \(angle.value)")
-    })
-
-  }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
 }
 

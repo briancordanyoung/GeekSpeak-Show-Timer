@@ -79,6 +79,15 @@ class RingView: SizeToSuperView {
     }
   }
   
+  var colors: [RingColor] {
+    get {
+      return ringLayer.colors
+    }
+    set(newColors) {
+      ringLayer.colors = newColors
+    }
+  }
+  
   var percent: CGFloat {
     get {
       let minAngle = min(startAngle,endAngle)

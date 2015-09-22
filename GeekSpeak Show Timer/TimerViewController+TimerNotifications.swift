@@ -50,35 +50,31 @@ extension TimerViewController {
     //       is abstracted out to some sort of generalized definition
     
 // TODO: Move to new TimerView
-//    let section2Seconds: NSTimeInterval
-//    let section3Seconds: NSTimeInterval
-//    
+    let section2Seconds: NSTimeInterval
+    let section3Seconds: NSTimeInterval
+    
     if let timer = timer {
-//      if timer.demoTimings {
-//        section2Seconds = 2
-//        section3Seconds = 1
-//      } else {
-//        section2Seconds = 120
-//        section3Seconds = 30
-//      }
-//    
-//      switch timer.timing.phase {
-//      case .Section3:
-//        
-//        timerViews?.ring3fg.additionalColors.removeAll(keepCapacity: true)
-//        
-//        let twoMinuteWarning = timer.percentageFromSecondsToEnd(section2Seconds)
-//        let sectionColor2   = RingView.sectionColor( Constants.WarningColor,
-//                                       atPercentage: twoMinuteWarning)
-//        timerViews?.ring3fg.additionalColors.append(sectionColor2)
-//        
-//        let halfMinuteWarning = timer.percentageFromSecondsToEnd(section3Seconds)
-//        let sectionColor3   = RingView.sectionColor( Constants.AlarmColor,
-//                                       atPercentage: halfMinuteWarning)
-//        timerViews?.ring3fg.additionalColors.append(sectionColor3)
-//      default:
-//        break
-//      }
+      if timer.demoTimings {
+        section2Seconds = 2
+        section3Seconds = 1
+      } else {
+        section2Seconds = 120
+        section3Seconds = 30
+      }
+    
+      switch timer.timing.phase {
+      case .Section3:
+        let timing1 = CGFloat(timer.timing.duration - section2Seconds - section3Seconds)
+        let color1 = RingColor( portion: timing1,
+                                  color: Constants.GeekSpeakBlueColor)
+        let color2 = RingColor( portion: CGFloat(section2Seconds),
+                                  color: Constants.WarningColor)
+        let color3 = RingColor( portion: CGFloat(section3Seconds),
+                                  color: Constants.AlarmColor)
+        timerViews?.ring3fg.colors = [color1,color2,color3]
+      default:
+        break
+      }
     
       // end todo move
       

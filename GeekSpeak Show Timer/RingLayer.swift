@@ -1,13 +1,31 @@
 import Foundation
 
 
-struct RingSection {
-  let percentage: CGFloat
+// RingColor - A simple container for a color and how much of the ring the
+//             color fills.
+//             portion property is relative. 
+//             Any number can be assigned.
+//             Before the portion property is used, it is compared to all the
+//             other RingColors in an array and translated to a ColorSection.
+
+struct RingColor {
+  let portion: CGFloat
   let color: UIColor
 }
 
 
+
 class RingLayer : CALayer {
+
+  // ColorSection - The ColorSection is a simple container for a color and
+  //                how much of the ring the color fills.
+  //                percentToEnd property is a value from 0-1 representing
+  //                how far around the ring the color fills before stopping.
+  struct ColorSection {
+    let percentToEnd: CGFloat
+    let color: UIColor
+  }
+  
   
   struct Constants {
     static let DefaultColor = UIColor.whiteColor()
@@ -24,7 +42,7 @@ class RingLayer : CALayer {
   @NSManaged var endAngle:   CGFloat // radians
   @NSManaged var ringWidth:  CGFloat // percentage of the view size (0-1)
   @NSManaged var fillScale:  CGFloat // percentage of the view size (0-1)
-  private var _colors: [RingSection] = [RingSection(percentage: 1.0,
+  private var _colors: [RingColor] = [RingColor(portion: 1.0,
                                                   color: Constants.DefaultColor)]
   var ringStyle: RingDrawing.Style = .Rounded {
     didSet {
@@ -32,20 +50,17 @@ class RingLayer : CALayer {
     }
   }
   
-  var colors: [RingSection] {
+  var colors: [RingColor] {
     get {
       return _colors
     }
     set(newColors) {
-      do {
-        try self._colors = validateMultipleColors(newColors)
-        setNeedsDisplay()
-      } catch {
-        print("Error: Could not set new colors")
-      }
+      self._colors = newColors
+      setNeedsDisplay()
     }
   }
   
+  // A convience property that sets the colors array to a single color
   var color: UIColor {
     get {
       if let color = _colors.first?.color {
@@ -55,8 +70,24 @@ class RingLayer : CALayer {
       }
     }
     set(newColor) {
-      _colors = [RingSection(percentage: 1.0, color: newColor)]
-      setNeedsDisplay()
+      _colors = [RingColor(portion: 1.0, color: newColor)]
+    }
+  }
+  
+  // Translate the RingColor array to a ColorSection array
+  var colorSections: [ColorSection] {
+    get {
+      let portionTotal = colors.reduce(CGFloat(0), combine: {$0 + $1.portion})
+      var sections: [ColorSection] = []
+      var portionTally = CGFloat(0)
+      
+      for section in colors {
+        portionTally += section.portion
+        sections.append(ColorSection(percentToEnd: portionTally / portionTotal,
+                                            color: section.color))
+      }
+      
+      return sections
     }
   }
 
@@ -73,19 +104,14 @@ class RingLayer : CALayer {
   init?(startAngle: CGFloat,
          endAngle: CGFloat,
         ringWidth: CGFloat,
-           colors: [RingSection]) {
+           colors: [RingColor]) {
           
-    do {
-      super.init()
-      let validColors = try validateMultipleColors(colors)
-      self.startAngle = startAngle
-      self.endAngle   = endAngle
-      self.ringWidth  = ringWidth
-      self._colors    = validColors
-      self.needsDisplay()
-    } catch {
-      return nil
-    }
+    super.init()
+    self.startAngle = startAngle
+    self.endAngle   = endAngle
+    self.ringWidth  = ringWidth
+    self._colors    = colors
+    self.needsDisplay()
   }
   
   convenience init?(startAngle: CGFloat,
@@ -93,7 +119,7 @@ class RingLayer : CALayer {
                     ringWidth: CGFloat,
                         color: UIColor) {
                       
-    let colors = [RingSection(percentage: 1.0, color: color)]
+    let colors = [RingColor(portion: 1.0, color: color)]
     self.init(startAngle: startAngle,
                 endAngle: endAngle,
                ringWidth: ringWidth,
@@ -126,7 +152,7 @@ class RingLayer : CALayer {
     aCoder.encodeDouble(Double(fillScale),  forKey: Constants.FillScale)
     switch ringStyle {
     case .Rounded,
-    .RoundedWithGuides:
+         .RoundedWithGuides:
       aCoder.encodeInt(0, forKey: Constants.RingStyle)
     case .Sharp:
       aCoder.encodeInt(1, forKey: Constants.RingStyle)
@@ -179,22 +205,6 @@ class RingLayer : CALayer {
   }
   
   
-  // MARK:
-  enum AdditionalColorError: ErrorType {
-    case GreaterThan100Percent
-  }
-  
-  func validateMultipleColors(colors: [RingSection]) throws -> [RingSection] {
-    // Make sure the array of RingSection make sense and don't add up to more
-    // than 100%
-    var totalPercentage = CGFloat(0.0)
-    for color in colors { totalPercentage += color.percentage }
-    if totalPercentage >= 1.0 {throw AdditionalColorError.GreaterThan100Percent}
-    
-    return colors
-  }
-  
-  
   // MARK: Drawing
   override func drawInContext(ctx: CGContext) {
     
@@ -202,12 +212,10 @@ class RingLayer : CALayer {
     
     let percentVisible = endAngle / Constants.Tau
     
-    for section in colors.reverse() {
-      if section.percentage >= percentVisible {
-        drawColor(section.color, fromStartTo: percentVisible, inContext: ctx)
-      } else {
-        drawColor(section.color, fromStartTo: section.percentage, inContext: ctx)
-      }
+    for section in colorSections.reverse() {
+      drawColor(       section.color,
+          fromStartTo: min(section.percentToEnd, percentVisible),
+            inContext: ctx)
     }
   }
   
@@ -248,9 +256,9 @@ class RingLayer : CALayer {
   }
   
   
-  func drawColor(                  color: UIColor,
+  func drawColor(    color: UIColor,
     fromStartTo percentage: CGFloat,
-    inContext ctx: CGContext) {
+             inContext ctx: CGContext) {
       let radius     = max(self.bounds.size.width, self.bounds.size.height)
       let north      = CGFloat(TauAngle(degrees: 0)) - Constants.Quarter
       let northPoint = CGPointMake(center.x + radius * cos(north),

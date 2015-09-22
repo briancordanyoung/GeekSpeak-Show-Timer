@@ -174,6 +174,7 @@ final class TimerViewController: UIViewController {
     ring1bg.fillScale = 0.33
     ring1fg.fillScale = 0.33
 
+    
     timerViews = TimerViews(  ring1bg: ring1bg,
                               ring1fg: ring1fg,
                               ring2bg: ring2bg,
