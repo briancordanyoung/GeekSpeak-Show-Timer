@@ -101,6 +101,21 @@ class RingLayer : CALayer {
     self.needsDisplay()
   }
   
+  override init(layer: AnyObject) {
+    super.init(layer: layer)
+    if let layer = layer as? RingLayer {
+      startAngle = layer.startAngle
+      endAngle   = layer.endAngle
+      ringWidth  = layer.ringWidth
+      fillScale  = layer.fillScale
+    } else {
+      startAngle = CGFloat(TauAngle(degrees: 0))
+      endAngle   = CGFloat(TauAngle(degrees: 360))
+      ringWidth  = CGFloat(0.2)
+      fillScale  = CGFloat(1.0)
+    }
+  }
+  
   init?(startAngle: CGFloat,
          endAngle: CGFloat,
         ringWidth: CGFloat,

@@ -17,7 +17,7 @@ class SettingsViewController: UIViewController {
   // Required properties
   @IBOutlet weak var contentView: UIView!
   @IBOutlet weak var backgroundImageView: UIImageView!
-  @IBOutlet weak var leftNavButton: UIBarButtonItem!
+//  @IBOutlet weak var leftNavButton: UIBarButtonItem!
   
   @IBOutlet weak var add1SecondButton: UIButton!
   @IBOutlet weak var add5SecondsButton: UIButton!
@@ -141,9 +141,9 @@ class SettingsViewController: UIViewController {
       // collapsed = true  is iPhone
       // collapsed = false is iPad & Plus
       if splitViewController.collapsed == true {
-        leftNavButton.title = "Show Timer"
+//        leftNavButton.title = "Show Timer"
       } else {
-        leftNavButton.title = "Hide"
+//        leftNavButton.title = "Hide"
       }
     }
   }
@@ -212,7 +212,7 @@ class SettingsViewController: UIViewController {
   func addContraintsForContentView() {
     
     let leftConstraint = NSLayoutConstraint(item: contentView,
-                                       attribute: .Leading,
+                                       attribute: .Left,
                                        relatedBy: .Equal,
                                           toItem: view,
                                        attribute: .Left,
@@ -221,7 +221,7 @@ class SettingsViewController: UIViewController {
     view.addConstraint(leftConstraint)
     
     let rightConstraint = NSLayoutConstraint(item: contentView,
-                                        attribute: .Trailing,
+                                        attribute: .Right,
                                         relatedBy: .Equal,
                                            toItem: view,
                                         attribute: .Right,
