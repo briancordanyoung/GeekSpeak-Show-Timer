@@ -20,6 +20,11 @@ final class TimerViewController: UIViewController {
                                            blue: 192/255,
                                           alpha: 1.0)
     
+    static let GeekSpeakBlueInactiveColor = UIColor(red: 14/255,
+                                                  green: 115/255,
+                                                   blue: 115/255,
+                                                  alpha: 1.0)
+    
     static let BreakColor         = UIColor(red: 0.75,
                                           green: 0.0,
                                            blue: 0.0,
@@ -67,8 +72,8 @@ final class TimerViewController: UIViewController {
     return self.layoutSize.width < self.layoutSize.height
   }
   
- // TODO: The Timer Property should be injected by the SplitViewController
-  //       during the segue. Revisit and stop pulling from the app delegate
+ // TODO:  The Timer Property should be injected by the SplitViewController
+  //       during the segue. Revisit and stop pulling from the app delegate!
   var timer: Timer? {
     if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate  {
       return appDelegate.timer
@@ -153,17 +158,17 @@ final class TimerViewController: UIViewController {
     timerCirclesView.addSubview(breakView)
     
     let ring1bg   = configureBGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueColor)
+                          withColor: Constants.GeekSpeakBlueInactiveColor)
     let ring1fg   = configureFGRing( RingView(),
                           withColor: Constants.GeekSpeakBlueColor)
     
     let ring2bg   = configureBGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueColor)
+                          withColor: Constants.GeekSpeakBlueInactiveColor)
     let ring2fg   = configureFGRing( RingView(),
                           withColor: Constants.GeekSpeakBlueColor)
     
     let ring3bg   = configureBGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueColor)
+                          withColor: Constants.GeekSpeakBlueInactiveColor)
     let ring3fg   = configureFGRing( RingView(),
                           withColor: Constants.GeekSpeakBlueColor)
     
