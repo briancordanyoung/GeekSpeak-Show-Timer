@@ -1,10 +1,10 @@
 import UIKit
 
 
-// MARK: Angle - A number that represents an angle in both
+// MARK: TauAngle - A type that represents an angle in both
 //               degrees or radians.
-//       Unlike AccumulatedAngle, Angle is limited to representing
-//       a single circle from -π to π
+//       Unlike AccumulatedAngle, TauAngle is limited to representing
+//       a single circle from 0 to 2π
 struct TauAngle: AngularType {
   
   var value: Double {
