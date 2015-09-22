@@ -123,45 +123,45 @@ extension TimerViewController {
       
       switch phase {
       case .PreShow:
-        timerViews?.fill.percent    = timer.percentageComplete
-        timerViews?.ring1fg.percent = 0.0
-        timerViews?.ring2fg.percent = 0.0
-        timerViews?.ring3fg.percent = 0.0
+        timerViews?.fill.progress    = timer.percentageComplete
+        timerViews?.ring1fg.progress = 0.0
+        timerViews?.ring2fg.progress = 0.0
+        timerViews?.ring3fg.progress = 0.0
         segmentLabelText = " Pre Show"
         
       case .Section1:
-        timerViews?.fill.percent    = 0.0
+        timerViews?.fill.progress    = 0.0
         timerViews?.ring1fg.progress = timer.percentageCompleteUnlimited //timer.percentageComplete(.Section1)
-        timerViews?.ring2fg.percent = 0.0
-        timerViews?.ring3fg.percent = 0.0
+        timerViews?.ring2fg.progress = 0.0
+        timerViews?.ring3fg.progress = 0.0
         segmentLabelText = "Section 1"
         
       case .Break1:
-        timerViews?.ring1fg.percent = 1.0 // timer.percentageComplete(.Section1)
-        timerViews?.fill.percent    = timer.percentageComplete
-        timerViews?.ring2fg.percent = 0.0
-        timerViews?.ring3fg.percent = 0.0
+        timerViews?.ring1fg.progress = 1.0 // timer.percentageComplete(.Section1)
+        timerViews?.fill.progress    = timer.percentageComplete
+        timerViews?.ring2fg.progress = 0.0
+        timerViews?.ring3fg.progress = 0.0
         segmentLabelText = "    Break"
         
       case .Section2:
-        timerViews?.fill.percent    = 0.0
-        timerViews?.ring1fg.percent = 1.0 // timer.percentageComplete(.Section1)
+        timerViews?.fill.progress    = 0.0
+        timerViews?.ring1fg.progress = 1.0 // timer.percentageComplete(.Section1)
         timerViews?.ring2fg.progress = timer.percentageCompleteUnlimited // timer.percentageComplete(.Section2)
-        timerViews?.ring3fg.percent = 0.0
+        timerViews?.ring3fg.progress = 0.0
         segmentLabelText = "Section 2"
         
       case .Break2:
-        timerViews?.ring1fg.percent = 1.0 // timer.percentageComplete(.Section1)
-        timerViews?.ring2fg.percent = 1.0 // timer.percentageComplete(.Section2)
-        timerViews?.fill.percent    = timer.percentageComplete
-        timerViews?.ring3fg.percent = 0.0
+        timerViews?.ring1fg.progress = 1.0 // timer.percentageComplete(.Section1)
+        timerViews?.ring2fg.progress = 1.0 // timer.percentageComplete(.Section2)
+        timerViews?.fill.progress    = timer.percentageComplete
+        timerViews?.ring3fg.progress = 0.0
         segmentLabelText = "    Break"
         
       case .Section3:
-        timerViews?.fill.percent    = 0.0
-        timerViews?.ring1fg.percent = 1.0 // timer.percentageComplete(.Section1)
-        timerViews?.ring2fg.percent = 1.0 // timer.percentageComplete(.Section2)
-        timerViews?.ring3fg.percent = timer.percentageComplete // timer.percentageComplete(.Section3)
+        timerViews?.fill.progress    = 0.0
+        timerViews?.ring1fg.progress = 1.0 // timer.percentageComplete(.Section1)
+        timerViews?.ring2fg.progress = 1.0 // timer.percentageComplete(.Section2)
+        timerViews?.ring3fg.progress = timer.percentageComplete // timer.percentageComplete(.Section3)
         segmentLabelText = "Section 3"
         
         // TODO:  Move this in to the ShowTiming struct
@@ -186,9 +186,9 @@ extension TimerViewController {
         
         
       case .PostShow:
-        timerViews?.ring1fg.percent = 1.0 // timer.percentageComplete(.Section1)
-        timerViews?.ring2fg.percent = 1.0 // timer.percentageComplete(.Section2)
-        timerViews?.ring3fg.percent = 1.0 // timer.percentageComplete(.Section3)
+        timerViews?.ring1fg.progress = 1.0 // timer.percentageComplete(.Section1)
+        timerViews?.ring2fg.progress = 1.0 // timer.percentageComplete(.Section2)
+        timerViews?.ring3fg.progress = 1.0 // timer.percentageComplete(.Section3)
         timerViews?.fill.percent = 0.0
         segmentLabelText = "Post Show"
       }

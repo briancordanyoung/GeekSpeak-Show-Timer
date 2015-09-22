@@ -2,10 +2,12 @@ import UIKit
 
 class RingView: SizeToSuperView {
   
-  struct Constants {
+  private var progressPastCompleted = CGFloat(0) {
+    didSet {
+      let rotation = CGFloat(TauAngle.tau) * progressPastCompleted
+      transform = CGAffineTransformMakeRotation(rotation)
+    }
   }
-  
-  private var _progressPastCompleted = CGFloat(0)
   
   convenience init() {
     self.init(frame: CGRectMake(0,0,100,100))
@@ -88,20 +90,20 @@ class RingView: SizeToSuperView {
     }
   }
   
-  var percent: CGFloat {
-    get {
-      let minAngle = min(startAngle,endAngle)
-      let maxAngle = max(startAngle,endAngle)
-      let diff     = maxAngle - minAngle
-      let percent  = CGFloat(TauAngle(degrees: 360)) / CGFloat(diff)
-      
-      return percent
-    }
-    set(newPercentage) {
-      let additional = TauAngle(degrees: 360 * newPercentage)
-      endAngle = startAngle + additional
-    }
-  }
+//  var percent: CGFloat {
+//    get {
+//      let minAngle = min(startAngle,endAngle)
+//      let maxAngle = max(startAngle,endAngle)
+//      let diff     = maxAngle - minAngle
+//      let percent  = CGFloat(TauAngle(degrees: 360)) / CGFloat(diff)
+//      
+//      return percent
+//    }
+//    set(newPercentage) {
+//      let additional = TauAngle(degrees: 360 * newPercentage)
+//      endAngle = startAngle + additional
+//    }
+//  }
   
   // Unlike the percent property which accounts for the startAngle and adds
   // the "percentage complete" to the startAngle to get the endAngle....
@@ -123,12 +125,10 @@ class RingView: SizeToSuperView {
       return percent
     }
     set(newPercentage) {
-      endAngle = TauAngle(degrees: 360 * newPercentage)
-      if endAngle > TauAngle(degrees: 360) {
-        startAngle = endAngle - TauAngle(degrees: 360)
-      } else {
-        startAngle = TauAngle(degrees: 0)
-      }
+      progressPastCompleted = (newPercentage > 1) ? (newPercentage - 1) : 0
+      let limitedPercentage = min(1, newPercentage)
+      startAngle = TauAngle(degrees: 0)
+      endAngle   = TauAngle(degrees: 360 * limitedPercentage)
     }
   }
   
