@@ -1,20 +1,5 @@
-// Ring Classes:  Refactor!!!
-//                The classes for drawing and layingout the ring are completely
-//                messing confussing, uses similar but different propery  names
-//                mix obj-c and swift cause type conversions that are confusing
-//                and general a mess.  Clean this mess up!!!
-//                Draw cleanly and be nice.  ;)
-//
-//                  GSTRing.h
-//                  GSTRing.m
-//                  GSTRingLayer.h
-//                  RingCircle.swift
-//                  RingFillView.swift
-//                  RingPoint.swift
-//                  RingView+Progress.swift
-//                  RingView.swift
-
 import Foundation
+
 
 class RingPoint: NSObject {
   
@@ -54,19 +39,23 @@ class RingPoint: NSObject {
   }
   
   func angleBetweenPoint( point: RingPoint, fromMutualCenter center: RingPoint)
-                                                                   -> Rotation {
+                                                                   -> TauAngle {
     let selfAngle  = self.dynamicType.angleFrom2Points(self,center)
     let otherAngle = self.dynamicType.angleFrom2Points(point,center)
     
     return selfAngle - otherAngle
   }
   
+  func angleFromCenter(center: RingPoint)  -> TauAngle {
+    return self.dynamicType.angleFrom2Points(self,center)
+  }
+  
   class func angleFrom2Points(point1: RingPoint, _ point2: RingPoint)
-                                                                   -> Rotation {
+                                                                   -> TauAngle {
     let dx = point1.x - point2.x
     let dy = point1.y - point2.y
     let radian = atan2(dy,dx)
-    return Rotation(radian)
+    return TauAngle(radian)
   }
 
   override var description: String {
