@@ -148,15 +148,15 @@ class TimeWipeButton: UIButton {
   func setupPieShapeViews() {
     maskA.opaque = false
     maskA.pieLayer.clipToCircle = false
-    maskA.startAngle = Rotation(degrees: 0)
-    maskA.endAngle   = Rotation(degrees: 360)
+    maskA.startAngle = TauAngle(degrees: 0)
+    maskA.endAngle   = TauAngle(degrees: 360)
     maskAContainer.opaque = false
     maskAContainer.addSubview(maskA)
 
     maskB.opaque = false
     maskB.pieLayer.clipToCircle = false
-    maskB.startAngle = Rotation(degrees: 0)
-    maskB.endAngle   = Rotation(degrees: 360)
+    maskB.startAngle = TauAngle(degrees: 0)
+    maskB.endAngle   = TauAngle(degrees: 360)
     maskBContainer.opaque = false
     maskBContainer.addSubview(maskB)
     
@@ -257,10 +257,10 @@ class TimeWipeButton: UIButton {
   
   
   func resetMasks() {
-    maskA.startAngle = Rotation(degrees: 0)
-    maskA.endAngle   = Rotation(degrees: 360)
-    maskB.startAngle = Rotation(degrees: 0)
-    maskB.endAngle   = Rotation(degrees: 360)
+    maskA.startAngle = TauAngle(degrees: 0)
+    maskA.endAngle   = TauAngle(degrees: 360)
+    maskB.startAngle = TauAngle(degrees: 0)
+    maskB.endAngle   = TauAngle(degrees: 360)
   }
   
   func highlight() {
@@ -409,11 +409,11 @@ class TimeWipeButton: UIButton {
     let animation = CABasicAnimation(keyPath:key)
     
     animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-    animation.fromValue      = CGFloat(Rotation(degrees: 0))
-    animation.toValue        = CGFloat(Rotation(degrees: 360))
+    animation.fromValue      = CGFloat(TauAngle(degrees: 0))
+    animation.toValue        = CGFloat(TauAngle(degrees: 360))
     animation.duration       = wipeDuration
     animation.delegate       = self
-    layer.setValue(CGFloat(Rotation(degrees: 360)), forKey: key)
+    layer.setValue(CGFloat(TauAngle(degrees: 360)), forKey: key)
     layer.addAnimation(animation, forKey: key)
   }
   

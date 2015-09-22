@@ -48,36 +48,38 @@ extension TimerViewController {
   func timerDurationChanged() {
     // TODO: Remove this logic and replace it when the ShowTiming struct
     //       is abstracted out to some sort of generalized definition
-    let section2Seconds: NSTimeInterval
-    let section3Seconds: NSTimeInterval
     
+// TODO: Move to new TimerView
+//    let section2Seconds: NSTimeInterval
+//    let section3Seconds: NSTimeInterval
+//    
     if let timer = timer {
-      if timer.demoTimings {
-        section2Seconds = 2
-        section3Seconds = 1
-      } else {
-        section2Seconds = 120
-        section3Seconds = 30
-      }
+//      if timer.demoTimings {
+//        section2Seconds = 2
+//        section3Seconds = 1
+//      } else {
+//        section2Seconds = 120
+//        section3Seconds = 30
+//      }
+//    
+//      switch timer.timing.phase {
+//      case .Section3:
+//        
+//        timerViews?.ring3fg.additionalColors.removeAll(keepCapacity: true)
+//        
+//        let twoMinuteWarning = timer.percentageFromSecondsToEnd(section2Seconds)
+//        let sectionColor2   = RingView.sectionColor( Constants.WarningColor,
+//                                       atPercentage: twoMinuteWarning)
+//        timerViews?.ring3fg.additionalColors.append(sectionColor2)
+//        
+//        let halfMinuteWarning = timer.percentageFromSecondsToEnd(section3Seconds)
+//        let sectionColor3   = RingView.sectionColor( Constants.AlarmColor,
+//                                       atPercentage: halfMinuteWarning)
+//        timerViews?.ring3fg.additionalColors.append(sectionColor3)
+//      default:
+//        break
+//      }
     
-      switch timer.timing.phase {
-      case .Section3:
-        
-        timerViews?.ring3fg.additionalColors.removeAll(keepCapacity: true)
-        
-        let twoMinuteWarning = timer.percentageFromSecondsToEnd(section2Seconds)
-        let sectionColor2   = RingView.sectionColor( Constants.WarningColor,
-                                       atPercentage: twoMinuteWarning)
-        timerViews?.ring3fg.additionalColors.append(sectionColor2)
-        
-        let halfMinuteWarning = timer.percentageFromSecondsToEnd(section3Seconds)
-        let sectionColor3   = RingView.sectionColor( Constants.AlarmColor,
-                                       atPercentage: halfMinuteWarning)
-        timerViews?.ring3fg.additionalColors.append(sectionColor3)
-      default:
-        break
-      }
-      
       // end todo move
       
       

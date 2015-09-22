@@ -14,17 +14,17 @@ extension PieShapeView {
       let minAngle = min(startAngle,endAngle)
       let maxAngle = max(startAngle,endAngle)
       let diff     = maxAngle - minAngle
-      let percent  = CGFloat(Rotation(degrees: 360)) / CGFloat(diff)
+      let percent  = CGFloat(TauAngle(degrees: 360)) / CGFloat(diff)
       
       return percent
     }
     set(newPercentage) {
-      endAngle = Rotation(degrees: 360 * newPercentage)
-      if endAngle > Rotation(degrees: 360) {
-        let past360 = endAngle - Rotation(degrees: 360)
-        startAngle = past360 + Rotation(degrees: 5)
+      endAngle = TauAngle(degrees: 360 * newPercentage)
+      if endAngle > TauAngle(degrees: 360) {
+        let past360 = endAngle - TauAngle(degrees: 360)
+        startAngle = past360 + TauAngle(degrees: 5)
       } else {
-        startAngle = Rotation(degrees: 0)
+        startAngle = TauAngle(degrees: 0)
       }
     }
   }

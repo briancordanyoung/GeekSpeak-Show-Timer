@@ -157,34 +157,6 @@ extension Int {
 
 
 
-func isWithinAngleLimits(value: Double) -> Bool {
-  var isWithinLimits = true
-  
-  if value > M_PI {
-    isWithinLimits = false
-  }
-  
-  if value < -M_PI {
-    isWithinLimits = false
-  }
-  
-  return isWithinLimits
-}
-
-func isWithinAngleLimits(value: CGFloat) -> Bool {
-  var isWithinLimits = true
-  
-  if value > CGFloat(M_PI) {
-    isWithinLimits = false
-  }
-  
-  if value < CGFloat(-M_PI) {
-    isWithinLimits = false
-  }
-  
-  return isWithinLimits
-}
-
 
 
 extension Angle {

@@ -148,14 +148,6 @@ class NextSegmentButton: ShapesButton {
       ringView.color     = TimerViewController.Constants.GeekSpeakBlueColor
                                             .darkenColorWithMultiplier(darkenBy)
       ringView.ringWidth = TimerViewController.Constants.LineWidth
-      ringView.viewSize  = {[weak shapesView] in
-                              if let shapesView = shapesView {
-                                return min(shapesView.bounds.height,
-                                           shapesView.bounds.width)
-                              } else {
-                                return .None
-                              }
-                            }
       container.addSubview(ringView)
   }
  

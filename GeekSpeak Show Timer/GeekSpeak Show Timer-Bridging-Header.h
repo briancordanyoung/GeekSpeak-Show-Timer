@@ -4,5 +4,3 @@
 
 #import "UIImage+ImageEffects.h"
 #import "GSTPieLayer.h"
-#import "GSTRingLayer.h"
-#import "GSTRing.h"

@@ -35,7 +35,7 @@ final class TimerViewController: UIViewController {
                                            blue: 166/255,
                                           alpha: 1.0)
     
-    static let LineWidth              = CGFloat(90) / CGFloat(736)
+    static let LineWidth              = (CGFloat(90) / CGFloat(736)) * (1 / 0.95) * 2
     static let RingDarkeningFactor    = CGFloat(0.2)
     
     static let ActiveLayoutPriority   = UILayoutPriority(751)
@@ -132,9 +132,7 @@ final class TimerViewController: UIViewController {
   }
   
   override func viewWillAppear(animated: Bool) {
-//    nextSegmentButton.lineColor = Constants.GeekSpeakBlueColor
     nextSegmentButton.tintColor = Constants.GeekSpeakBlueColor
-//    startPauseButton.lineColor  = Constants.GeekSpeakBlueColor
     startPauseButton.tintColor  = Constants.GeekSpeakBlueColor
     
     if let timer = timer {
@@ -148,8 +146,8 @@ final class TimerViewController: UIViewController {
     
     let breakView  = PieShapeView()
     breakView.opaque     = false
-    breakView.startAngle = Rotation(degrees: 0)
-    breakView.endAngle   = Rotation(degrees: 0)
+    breakView.startAngle = TauAngle(degrees: 0)
+    breakView.endAngle   = TauAngle(degrees: 0)
     breakView.color      = Constants.BreakColor
     breakView.pieLayer.clipToCircle = true
     timerCirclesView.addSubview(breakView)
@@ -169,12 +167,12 @@ final class TimerViewController: UIViewController {
     let ring3fg   = configureFGRing( RingView(),
                           withColor: Constants.GeekSpeakBlueColor)
     
-    ring3bg.percentageOfSuperviewSize = 0.95
-    ring3fg.percentageOfSuperviewSize = 0.95
-    ring2bg.percentageOfSuperviewSize = 0.64
-    ring2fg.percentageOfSuperviewSize = 0.64
-    ring1bg.percentageOfSuperviewSize = 0.33
-    ring1fg.percentageOfSuperviewSize = 0.33
+    ring3bg.fillScale = 0.95
+    ring3fg.fillScale = 0.95
+    ring2bg.fillScale = 0.64
+    ring2fg.fillScale = 0.64
+    ring1bg.fillScale = 0.33
+    ring1fg.fillScale = 0.33
 
     timerViews = TimerViews(  ring1bg: ring1bg,
                               ring1fg: ring1fg,
@@ -410,9 +408,9 @@ final class TimerViewController: UIViewController {
                                                                    -> RingView {
                                                                     
     ringView.color          = color
-    ringView.startAngle     = Rotation(degrees: 0)
-    ringView.endAngle       = Rotation(degrees: 0)
-    ringView.cornerRounding = CGFloat(0.333)
+    ringView.startAngle     = TauAngle(degrees: 0)
+    ringView.endAngle       = TauAngle(degrees: 0)
+    ringView.ringStyle      = .Rounded
     configureRing(ringView)
     return ringView
   }
@@ -420,21 +418,17 @@ final class TimerViewController: UIViewController {
   func configureBGRing(ringView: RingView, withColor color: UIColor)
                                                                    -> RingView {
     let darkenBy = Constants.RingDarkeningFactor
-    ringView.color     = color.darkenColorWithMultiplier(darkenBy)
+    ringView.color          = color.darkenColorWithMultiplier(darkenBy)
+    ringView.startAngle     = TauAngle(degrees: 0)
+    ringView.endAngle       = TauAngle(degrees: 360)
+    ringView.ringStyle      = .Sharp
+
     configureRing(ringView)
     return ringView
   }
   
   func configureRing(ringView: RingView) {
     ringView.ringWidth = Constants.LineWidth
-    ringView.viewSize  = {[weak timerCirclesView] in
-                            if let timerCirclesView = timerCirclesView {
-                              return min(timerCirclesView.bounds.height,
-                                         timerCirclesView.bounds.width)
-                            } else {
-                              return .None
-                            }
-                          }
     timerCirclesView.addSubview(ringView)
     ringView.opaque              = false
   }
@@ -480,10 +474,6 @@ final class TimerViewController: UIViewController {
                 totalLength: Int, pad: Character,
       inDirection direction: Direction) -> String {
         
-//    var i = 0
-//    for character in string.characters {
-//      i++
-//    }
     let i = string.characters.count
     
     let amountToPad = totalLength - i

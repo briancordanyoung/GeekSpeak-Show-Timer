@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D30F6F1D1BAF306A00CF069A /* RingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F6F1C1BAF306A00CF069A /* RingLayer.swift */; settings = {ASSET_TAGS = (); }; };
+		D30F6F1E1BAF306A00CF069A /* RingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F6F1C1BAF306A00CF069A /* RingLayer.swift */; settings = {ASSET_TAGS = (); }; };
+		D30F6F201BAF95A000CF069A /* TauAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F6F1F1BAF95A000CF069A /* TauAngle.swift */; settings = {ASSET_TAGS = (); }; };
+		D30F6F211BAF95A000CF069A /* TauAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F6F1F1BAF95A000CF069A /* TauAngle.swift */; settings = {ASSET_TAGS = (); }; };
 		D31864EC1BA6605A0083B46E /* RingDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31864EB1BA6605A0083B46E /* RingDrawing.swift */; };
 		D31864ED1BA6605A0083B46E /* RingDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31864EB1BA6605A0083B46E /* RingDrawing.swift */; };
 		D320C3611B6FF5E90046F785 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = D320C3601B6FF5E90046F785 /* UIImage+ImageEffects.m */; };
@@ -27,13 +31,9 @@
 		D340CCB71B6D9C6400BB17E3 /* FillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB61B6D9C6400BB17E3 /* FillView.swift */; };
 		D340CCBA1B6DDD5400BB17E3 /* TimerViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB91B6DDD5400BB17E3 /* TimerViews.swift */; };
 		D3463F681B713E0D002C68A8 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3463F671B713E0D002C68A8 /* Settings.bundle */; };
-		D35F34341B73B90E0038CF4C /* GSTRingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D35F34331B73B90E0038CF4C /* GSTRingLayer.m */; };
-		D35F34371B73C4D80038CF4C /* RingView+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35F34361B73C4D80038CF4C /* RingView+Progress.swift */; };
 		D367427F1B9CDDED00EE13F7 /* Array+Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D367427E1B9CDDED00EE13F7 /* Array+Bool.swift */; };
 		D36742811B9D33FE00EE13F7 /* NextSegmentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36742801B9D33FE00EE13F7 /* NextSegmentButton.swift */; };
 		D36742831B9D343100EE13F7 /* ShapesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36742821B9D343100EE13F7 /* ShapesButton.swift */; };
-		D36742861B9D465700EE13F7 /* RingFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36742851B9D465700EE13F7 /* RingFillView.swift */; };
-		D37C2AAB1B75B7C8008826D5 /* GSTRing.m in Sources */ = {isa = PBXBuildFile; fileRef = D37C2AAA1B75B7C8008826D5 /* GSTRing.m */; };
 		D384BC541B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384BC531B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift */; };
 		D384BC561B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384BC551B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift */; };
 		D3912C711B6E93B7003B42F1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */; };
@@ -56,11 +56,7 @@
 		D3DFF55F1BA5F27300A4700D /* RingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DFF55B1BA5EF8000A4700D /* RingPoint.swift */; };
 		D3DFF5601BA5F27300A4700D /* RingCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DFF55D1BA5EF8700A4700D /* RingCircle.swift */; };
 		D3F699A11B72DE0900BD21FD /* PieShapeView+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F699A01B72DE0900BD21FD /* PieShapeView+Progress.swift */; };
-		D3F7BA6A1B9FBF6600BA2936 /* RingView+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35F34361B73C4D80038CF4C /* RingView+Progress.swift */; };
 		D3F7BA6B1B9FBF6600BA2936 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCB01B6D8B9600BB17E3 /* RingView.swift */; };
-		D3F7BA6C1B9FBF6600BA2936 /* RingFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36742851B9D465700EE13F7 /* RingFillView.swift */; };
-		D3F7BA6D1B9FBF6600BA2936 /* GSTRingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D35F34331B73B90E0038CF4C /* GSTRingLayer.m */; };
-		D3F7BA6E1B9FBF6600BA2936 /* GSTRing.m in Sources */ = {isa = PBXBuildFile; fileRef = D37C2AAA1B75B7C8008826D5 /* GSTRing.m */; };
 		D3F7BA6F1B9FBF7500BA2936 /* SizeToSuperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FD350B1B9B939200CE15F6 /* SizeToSuperView.swift */; };
 		D3F7BA711B9FC1C600BA2936 /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCA01B6D556D00BB17E3 /* Angle.swift */; };
 		D3F7BA721B9FC1C600BA2936 /* AccumulatedAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CCA11B6D556D00BB17E3 /* AccumulatedAngle.swift */; };
@@ -90,6 +86,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D30F6F1C1BAF306A00CF069A /* RingLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingLayer.swift; sourceTree = "<group>"; };
+		D30F6F1F1BAF95A000CF069A /* TauAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TauAngle.swift; sourceTree = "<group>"; };
 		D31864EB1BA6605A0083B46E /* RingDrawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingDrawing.swift; sourceTree = "<group>"; };
 		D320C35F1B6FF5E90046F785 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		D320C3601B6FF5E90046F785 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
@@ -116,15 +114,9 @@
 		D340CCB61B6D9C6400BB17E3 /* FillView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillView.swift; sourceTree = "<group>"; };
 		D340CCB91B6DDD5400BB17E3 /* TimerViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViews.swift; sourceTree = "<group>"; };
 		D3463F671B713E0D002C68A8 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		D35F34321B73B90E0038CF4C /* GSTRingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSTRingLayer.h; sourceTree = "<group>"; };
-		D35F34331B73B90E0038CF4C /* GSTRingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSTRingLayer.m; sourceTree = "<group>"; };
-		D35F34361B73C4D80038CF4C /* RingView+Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RingView+Progress.swift"; sourceTree = "<group>"; };
 		D367427E1B9CDDED00EE13F7 /* Array+Bool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Bool.swift"; sourceTree = "<group>"; };
 		D36742801B9D33FE00EE13F7 /* NextSegmentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextSegmentButton.swift; sourceTree = "<group>"; };
 		D36742821B9D343100EE13F7 /* ShapesButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapesButton.swift; sourceTree = "<group>"; };
-		D36742851B9D465700EE13F7 /* RingFillView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingFillView.swift; sourceTree = "<group>"; };
-		D37C2AA91B75B7C8008826D5 /* GSTRing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSTRing.h; sourceTree = "<group>"; };
-		D37C2AAA1B75B7C8008826D5 /* GSTRing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSTRing.m; sourceTree = "<group>"; };
 		D384BC531B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimerViewController+TimerNotifications.swift"; sourceTree = "<group>"; };
 		D384BC551B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SettingsViewController+TimerNotifications.swift"; sourceTree = "<group>"; };
 		D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -282,6 +274,7 @@
 			children = (
 				D340CCA01B6D556D00BB17E3 /* Angle.swift */,
 				D340CCA11B6D556D00BB17E3 /* AccumulatedAngle.swift */,
+				D30F6F1F1BAF95A000CF069A /* TauAngle.swift */,
 				D340CCA21B6D556D00BB17E3 /* AngularType.swift */,
 			);
 			name = "Rotation & Angle Types";
@@ -314,13 +307,8 @@
 		D35F34351B73B92C0038CF4C /* Ring */ = {
 			isa = PBXGroup;
 			children = (
-				D35F34361B73C4D80038CF4C /* RingView+Progress.swift */,
 				D340CCB01B6D8B9600BB17E3 /* RingView.swift */,
-				D36742851B9D465700EE13F7 /* RingFillView.swift */,
-				D35F34321B73B90E0038CF4C /* GSTRingLayer.h */,
-				D35F34331B73B90E0038CF4C /* GSTRingLayer.m */,
-				D37C2AA91B75B7C8008826D5 /* GSTRing.h */,
-				D37C2AAA1B75B7C8008826D5 /* GSTRing.m */,
+				D30F6F1C1BAF306A00CF069A /* RingLayer.swift */,
 				D3DFF55B1BA5EF8000A4700D /* RingPoint.swift */,
 				D3DFF55D1BA5EF8700A4700D /* RingCircle.swift */,
 				D31864EB1BA6605A0083B46E /* RingDrawing.swift */,
@@ -562,7 +550,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D37C2AAB1B75B7C8008826D5 /* GSTRing.m in Sources */,
 				D36742831B9D343100EE13F7 /* ShapesButton.swift in Sources */,
 				D39DAD1A1B917229007D797C /* Appearance.swift in Sources */,
 				D3FB37FE1BA3F2A4003C6BB2 /* Device.swift in Sources */,
@@ -570,13 +557,12 @@
 				D320C3611B6FF5E90046F785 /* UIImage+ImageEffects.m in Sources */,
 				D3C487B31B726F3300B8067E /* Timer+StatePreservation.swift in Sources */,
 				D3912C771B6F1476003B42F1 /* Timer+Types.swift in Sources */,
-				D35F34371B73C4D80038CF4C /* RingView+Progress.swift in Sources */,
 				D3FD35081B9B6B8B00CE15F6 /* ShapesView.swift in Sources */,
-				D36742861B9D465700EE13F7 /* RingFillView.swift in Sources */,
 				D384BC541B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift in Sources */,
 				D3912C751B6E9D73003B42F1 /* BCYStandardLibrary.swift in Sources */,
 				D340CCA51B6D556D00BB17E3 /* AngularType.swift in Sources */,
 				D340CCBA1B6DDD5400BB17E3 /* TimerViews.swift in Sources */,
+				D30F6F1D1BAF306A00CF069A /* RingLayer.swift in Sources */,
 				D340CCA31B6D556D00BB17E3 /* Angle.swift in Sources */,
 				D3912C731B6E9CED003B42F1 /* Timer.swift in Sources */,
 				D32B9DED1B77F6740098DCCF /* UIImage+WithColor.swift in Sources */,
@@ -586,7 +572,6 @@
 				D3F699A11B72DE0900BD21FD /* PieShapeView+Progress.swift in Sources */,
 				D3FD35061B9B650A00CE15F6 /* TimeWipeButton.swift in Sources */,
 				D3912C711B6E93B7003B42F1 /* SettingsViewController.swift in Sources */,
-				D35F34341B73B90E0038CF4C /* GSTRingLayer.m in Sources */,
 				D384BC561B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift in Sources */,
 				D3FD350C1B9B939200CE15F6 /* SizeToSuperView.swift in Sources */,
 				D340CC9F1B6D504500BB17E3 /* GSTPieLayer.m in Sources */,
@@ -596,6 +581,7 @@
 				D3A9B7E01B980E8F00745F56 /* TimerSplitViewControllerDelegate.swift in Sources */,
 				D340CCB71B6D9C6400BB17E3 /* FillView.swift in Sources */,
 				D3DFF55C1BA5EF8000A4700D /* RingPoint.swift in Sources */,
+				D30F6F201BAF95A000CF069A /* TauAngle.swift in Sources */,
 				D3FD350A1B9B727C00CE15F6 /* SizableBezierPath.swift in Sources */,
 				D340CCB31B6D91FF00BB17E3 /* TimerViewController.swift in Sources */,
 				D340CC791B6D3E7600BB17E3 /* AppDelegate.swift in Sources */,
@@ -617,19 +603,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3F7BA6F1B9FBF7500BA2936 /* SizeToSuperView.swift in Sources */,
-				D3F7BA6E1B9FBF6600BA2936 /* GSTRing.m in Sources */,
 				D31864ED1BA6605A0083B46E /* RingDrawing.swift in Sources */,
 				D3F7BA731B9FC1C600BA2936 /* AngularType.swift in Sources */,
+				D30F6F211BAF95A000CF069A /* TauAngle.swift in Sources */,
 				D3F7BA6B1B9FBF6600BA2936 /* RingView.swift in Sources */,
 				D3991DBF1B9FBF1B00C63286 /* ViewController.swift in Sources */,
 				D3F7BA721B9FC1C600BA2936 /* AccumulatedAngle.swift in Sources */,
 				D3F7BA711B9FC1C600BA2936 /* Angle.swift in Sources */,
 				D3991DBD1B9FBF1B00C63286 /* AppDelegate.swift in Sources */,
 				D3DFF55F1BA5F27300A4700D /* RingPoint.swift in Sources */,
+				D30F6F1E1BAF306A00CF069A /* RingLayer.swift in Sources */,
 				D3DFF5601BA5F27300A4700D /* RingCircle.swift in Sources */,
-				D3F7BA6A1B9FBF6600BA2936 /* RingView+Progress.swift in Sources */,
-				D3F7BA6D1B9FBF6600BA2936 /* GSTRingLayer.m in Sources */,
-				D3F7BA6C1B9FBF6600BA2936 /* RingFillView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
