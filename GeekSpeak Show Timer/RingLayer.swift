@@ -228,7 +228,7 @@ class RingLayer : CALayer {
     let percentVisible = endAngle / Constants.Tau
     
     for section in colorSections.reverse() {
-      drawColor(       section.color,
+      drawRing(       section.color,
           fromStartTo: min(section.percentToEnd, percentVisible),
             inContext: ctx)
     }
@@ -270,27 +270,23 @@ class RingLayer : CALayer {
     CGContextClipToMask(ctx, rect, ringMask)
   }
   
-  
-  func drawColor(    color: UIColor,
+
+  func drawRing(    color: UIColor,
     fromStartTo percentage: CGFloat,
-             inContext ctx: CGContext) {
-      let radius     = max(self.bounds.size.width, self.bounds.size.height)
-      let north      = CGFloat(TauAngle(degrees: 0)) - Constants.Quarter
-      let northPoint = CGPointMake(center.x + radius * cos(north),
-                                   center.y + radius * sin(north))
+    inContext ctx: CGContext) {
+
+      let maxRingWidthInPoints = maxRingRadius * ringWidth
+      let ringWidthInPoints  = min(ringRadius, maxRingWidthInPoints)
       
-      let sectionEnd = CGFloat(Constants.Tau * percentage) - Constants.Quarter
+      let maskDrawing = RingDrawing(center: center,
+                               outerRadius: ringRadius + 2,
+                                 ringWidth: ringWidthInPoints + 2,
+                                startAngle: TauAngle(degrees: 0),
+                                  endAngle: TauAngle(degrees: (360 * percentage)))
+      maskDrawing.fillColor = color
+      maskDrawing.style     = .Sharp
       
-      
-      CGContextBeginPath(ctx)
-      CGContextMoveToPoint(ctx, center.x, center.y)
-      CGContextAddLineToPoint(ctx, northPoint.x, northPoint.y)
-      CGContextAddArc(ctx, center.x, center.y, radius, north, sectionEnd, Int32(0))
-      CGContextClosePath(ctx)
-      CGContextSetFillColorWithColor(ctx, color.CGColor)
-      CGContextSetStrokeColorWithColor(ctx, UIColor.clearColor().CGColor)
-      CGContextSetLineWidth(ctx, 0.0)
-      CGContextFillPath(ctx)
+      maskDrawing.drawInContext(ctx)
   }
   
   
