@@ -6,11 +6,18 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly placed breaks
 
 =======
 
-## Known issues:
-- SplitViewController subclass causing my layout and navigation controller glitches.
 
 ## Todo:
 
+- Switch to fading play button
+- when compact as glowing background to setting view controller
+- add spacing to timerView number lables
+- SplitViewController
+	- Compact
+		- figure out layout below navigation bar
+		- add button to settings navbar to show timer
+	- Regular
+		- iOS 9 transitionToSize is wrong
 - Create About viewController to explain
 	- what GeepSeak is
 	- who I am
@@ -21,6 +28,7 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly placed breaks
 	- keep histery of past timers
 	- sync pending bits to a table view
 	- tapping on a bit marks the time and posts to site
+- Add tracking of all pause/play events
 	
 - Add GameKit discovery and networking between timers on multiple devices
 - SplitViewController Subclass issues

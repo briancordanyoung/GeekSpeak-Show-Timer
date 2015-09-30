@@ -62,6 +62,7 @@ class SettingsViewController: UIViewController {
   // MARK: ViewController
   override func viewDidLoad() {
     addContraintsForContentView()
+    addSwipeGesture()
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -110,17 +111,64 @@ class SettingsViewController: UIViewController {
   
 
   @IBAction func showTimerNavButtonPressed(sender: UIBarButtonItem) {
+    showDetail()
+  }
+  
+  
+  
+  // MARK: -
+  // MARK: Gestures
+
+  func addSwipeGesture() {
+    let gestureRight = UISwipeGestureRecognizer(target: self, action: "swipeRight")
+    gestureRight.direction = .Right
+    view.addGestureRecognizer(gestureRight)
+    
+    let gestureLeft = UISwipeGestureRecognizer(target: self, action: "swipeLeft")
+    gestureLeft.direction = .Left
+    view.addGestureRecognizer(gestureLeft)
+  }
+  
+  func swipeLeft() {
+    showDetail()
+  }
+  
+  func swipeRight() {
+    showMasterWhileRegular()
+  }
+
+  func showDetail() {
     if let splitViewController = splitViewController {
-      // collapsed = true  is iPhone
-      // collapsed = false is iPad & Plus
       if splitViewController.collapsed {
-        self.performSegueWithIdentifier("showTimer", sender: self)
+        showDetailWhileCollapsed()
       } else {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.pressButtonBarItem()
+        showDetailWhileRegular()
       }
     }
   }
+  
+  func showDetailWhileCollapsed() {
+    performSegueWithIdentifier("showTimer", sender: self)
+  }
+  
+  func showDetailWhileRegular() {
+    if let splitViewController = splitViewController {
+      UIView.animateWithDuration(NSTimeInterval(0.25), animations: {
+        splitViewController.preferredDisplayMode = .PrimaryHidden
+      })
+    }
+  }
+  
+  func showMasterWhileRegular() {
+    if let splitViewController = splitViewController {
+      if splitViewController.collapsed == false {
+        UIView.animateWithDuration(NSTimeInterval(0.25), animations: {
+          splitViewController.preferredDisplayMode = .PrimaryOverlay
+        })
+      }
+    }
+  }
+  
   
   
   // MARK: -

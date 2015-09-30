@@ -144,25 +144,32 @@ extension AppDelegate {
 //        navItem.leftItemsSupplementBackButton = true
 
       splitViewController.delegate = splitViewControllerDelegate
+      splitViewController.presentsWithGesture = true
       
-      // This is a hack.  Once I find the correct place to tell the splitViewController
-      // to use .PrimaryOverlay when in horizontal regular, I can remove this.
-      switch Device() {
-      case  .iPhone4,
-            .iPhone4s,
-            .iPhone5,
-            .iPhone5c,
-            .iPhone5s,
-            .iPodTouch5,
-            .iPhone6:
-        break
-      case .iPhone6Plus:
-        break
-      case .Simulator:
-        break
-      default:
+      let os = NSProcessInfo().operatingSystemVersion
+      switch (os.majorVersion, os.minorVersion, os.patchVersion) {
+      case (9, _, _):
+        // iOS >= 9.0.0
         splitViewController.preferredDisplayMode = .PrimaryOverlay
+      default:
+        // iOS >= 8.0.0
+        // In iOS 8.x .PrimaryOverlay causes terrible autolayout explotions on
+        // compact size classes
+        switch Device() {
+        case  .iPad2,
+              .iPad3,
+              .iPad4,
+              .iPadAir,
+              .iPadAir2,
+              .iPadMini,
+              .iPadMini2,
+              .iPadMini3, .Simulator:
+          splitViewController.preferredDisplayMode = .PrimaryOverlay
+        default:
+          splitViewController.preferredDisplayMode = .Automatic
+        }
       }
+
     }
   }
 
@@ -180,8 +187,15 @@ extension AppDelegate {
   
   // Setup the default defaults in app memory
   func registerUserDefaults() {
+    let useDebugTimings: Bool
+    #if DEBUG
+      useDebugTimings = true
+    #else
+      useDebugTimings = false
+    #endif
+    
     let defaults: [String:AnyObject] = [
-      Timer.Constants.UseDemoDurations: false
+      Timer.Constants.UseDemoDurations: useDebugTimings
     ]
     
     NSUserDefaults.standardUserDefaults().registerDefaults(defaults)

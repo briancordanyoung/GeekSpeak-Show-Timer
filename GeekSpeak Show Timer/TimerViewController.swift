@@ -132,7 +132,7 @@ final class TimerViewController: UIViewController {
                             hControlsToContainerTrailing,
     hFlashImageViewTrailingEdge]
     
-    
+    addSwipeGesture()
     super.viewDidLoad()
   }
   
@@ -212,11 +212,14 @@ final class TimerViewController: UIViewController {
   
   override func viewWillTransitionToSize(size: CGSize,
         withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
     
+    print("CGSize \(size)")
     let duration = coordinator.transitionDuration()
     layoutViewsForSize(size, animateWithDuration: duration)
           
   }
+  
   
   
   
@@ -350,7 +353,72 @@ final class TimerViewController: UIViewController {
     }
   }
   
+  // MARK: -
+  // MARK: Gestures
   
+  
+  func addSwipeGesture() {
+    let gestureRight = UISwipeGestureRecognizer(target: self,
+                                                action: "swipeRight")
+    gestureRight.direction = .Right
+    gestureRight.delaysTouchesBegan = true
+    gestureRight.cancelsTouchesInView = true
+    view.addGestureRecognizer(gestureRight)
+    
+    let gestureLeft = UISwipeGestureRecognizer(target: self,
+                                               action: "swipeLeft")
+    gestureLeft.direction = .Left
+    gestureLeft.cancelsTouchesInView = true
+    gestureLeft.delaysTouchesBegan = true
+    view.addGestureRecognizer(gestureLeft)
+  }
+  
+  func swipeLeft() {
+    hideMasterWhileRegular()
+  }
+  
+  func swipeRight() {
+    showMaster()
+  }
+  
+  func hideMasterWhileRegular() {
+    if let splitViewController = splitViewController {
+      if splitViewController.collapsed == false {
+        UIView.animateWithDuration(NSTimeInterval(0.25), animations: {
+          splitViewController.preferredDisplayMode = .PrimaryHidden
+        })
+      }
+    }
+  }
+  
+  func showMaster() {
+    if let splitViewController = splitViewController {
+      if splitViewController.collapsed {
+        showMasterWhileColapsed()
+      } else {
+        showMasterWhileRegular()
+      }
+    }
+  }
+  
+  func showMasterWhileRegular() {
+    if let splitViewController = splitViewController {
+      UIView.animateWithDuration(NSTimeInterval(0.25), animations: {
+        splitViewController.preferredDisplayMode = .PrimaryOverlay
+      })
+    }
+  }
+
+  
+  func showMasterWhileColapsed() {
+    if let detailNavController = self.parentViewController as? UINavigationController {
+      if let masterNavController = detailNavController.parentViewController as? UINavigationController {
+        masterNavController.popToRootViewControllerAnimated(true)
+      } else {
+        detailNavController.popToRootViewControllerAnimated(true)
+      }
+    }
+  }
   
   // MARK: -
   // MARK: Warning Animation
