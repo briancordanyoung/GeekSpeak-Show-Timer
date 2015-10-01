@@ -9,15 +9,12 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly placed breaks
 
 ## Todo:
 
+- Remove SplitViewController and use REFrostedViewController
 - Switch to fading play button
-- when compact as glowing background to setting view controller
+- Add next button
+	- max button size 100
+	- min button size 50
 - add spacing to timerView number lables
-- SplitViewController
-	- Compact
-		- figure out layout below navigation bar
-		- add button to settings navbar to show timer
-	- Regular
-		- iOS 9 transitionToSize is wrong
 - Create About viewController to explain
 	- what GeepSeak is
 	- who I am
@@ -50,7 +47,6 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly placed breaks
 - Layout issues
 	- Fix labels under show times to scale based on text width
 - Abstract out the hard coded definition of 3 segments with one minute breaks, into a definition file. Auto generate views based on this definition, allowing multiple show formats
-
 
 ## Versions:
 # v0.1

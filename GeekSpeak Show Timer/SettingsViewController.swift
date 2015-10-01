@@ -17,7 +17,6 @@ class SettingsViewController: UIViewController {
   // Required properties
   @IBOutlet weak var contentView: UIView!
   @IBOutlet weak var backgroundImageView: UIImageView!
-//  @IBOutlet weak var leftNavButton: UIBarButtonItem!
   
   @IBOutlet weak var add1SecondButton: UIButton!
   @IBOutlet weak var add5SecondsButton: UIButton!
@@ -33,22 +32,7 @@ class SettingsViewController: UIViewController {
   
   
   // MARK: Convience Properties
-  var timerViewController: TimerViewController? {
-    var timerViewController: TimerViewController? = .None
-    if let splitViewController = splitViewController {
-      if let navController: AnyObject? =
-                                      splitViewController.viewControllers.last {
-        if let navController = navController as? UINavigationController {
-          if let tmpTimerViewController =
-                       navController.topViewController as? TimerViewController {
-            timerViewController = tmpTimerViewController
-          }
-        }
-      }
-    }
-    return timerViewController
-  }
-  
+  var timerViewController: TimerViewController?
   
   var useDemoDurations = false
   func updateUseDemoDurations() {
@@ -62,7 +46,6 @@ class SettingsViewController: UIViewController {
   // MARK: ViewController
   override func viewDidLoad() {
     addContraintsForContentView()
-    addSwipeGesture()
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -111,65 +94,9 @@ class SettingsViewController: UIViewController {
   
 
   @IBAction func showTimerNavButtonPressed(sender: UIBarButtonItem) {
-    showDetail()
-  }
-  
-  
-  
-  // MARK: -
-  // MARK: Gestures
-
-  func addSwipeGesture() {
-    let gestureRight = UISwipeGestureRecognizer(target: self, action: "swipeRight")
-    gestureRight.direction = .Right
-    view.addGestureRecognizer(gestureRight)
-    
-    let gestureLeft = UISwipeGestureRecognizer(target: self, action: "swipeLeft")
-    gestureLeft.direction = .Left
-    view.addGestureRecognizer(gestureLeft)
-  }
-  
-  func swipeLeft() {
-    showDetail()
-  }
-  
-  func swipeRight() {
-    showMasterWhileRegular()
+//    showDetail()
   }
 
-  func showDetail() {
-    if let splitViewController = splitViewController {
-      if splitViewController.collapsed {
-        showDetailWhileCollapsed()
-      } else {
-        showDetailWhileRegular()
-      }
-    }
-  }
-  
-  func showDetailWhileCollapsed() {
-    performSegueWithIdentifier("showTimer", sender: self)
-  }
-  
-  func showDetailWhileRegular() {
-    if let splitViewController = splitViewController {
-      UIView.animateWithDuration(NSTimeInterval(0.25), animations: {
-        splitViewController.preferredDisplayMode = .PrimaryHidden
-      })
-    }
-  }
-  
-  func showMasterWhileRegular() {
-    if let splitViewController = splitViewController {
-      if splitViewController.collapsed == false {
-        UIView.animateWithDuration(NSTimeInterval(0.25), animations: {
-          splitViewController.preferredDisplayMode = .PrimaryOverlay
-        })
-      }
-    }
-  }
-  
-  
   
   // MARK: -
   // MARK: Timer management
@@ -253,8 +180,7 @@ class SettingsViewController: UIViewController {
     } else {
       backgroundImageView.image = UIImage.imageWithColor(UIColor.blackColor())
     }
-    
-  } // generateBluredBackground
+}  //generateBluredBackground
   
   
   func addContraintsForContentView() {

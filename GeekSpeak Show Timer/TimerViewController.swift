@@ -133,6 +133,7 @@ final class TimerViewController: UIViewController {
     hFlashImageViewTrailingEdge]
     
     addSwipeGesture()
+    
     super.viewDidLoad()
   }
   
@@ -358,67 +359,23 @@ final class TimerViewController: UIViewController {
   
   
   func addSwipeGesture() {
-    let gestureRight = UISwipeGestureRecognizer(target: self,
-                                                action: "swipeRight")
-    gestureRight.direction = .Right
-    gestureRight.delaysTouchesBegan = true
-    gestureRight.cancelsTouchesInView = true
-    view.addGestureRecognizer(gestureRight)
-    
-    let gestureLeft = UISwipeGestureRecognizer(target: self,
-                                               action: "swipeLeft")
-    gestureLeft.direction = .Left
-    gestureLeft.cancelsTouchesInView = true
-    gestureLeft.delaysTouchesBegan = true
-    view.addGestureRecognizer(gestureLeft)
+    let gesture = UIPanGestureRecognizer(target: self,
+                                                action: "panGestureRecognized:")
+    gesture.delaysTouchesBegan = true
+    gesture.cancelsTouchesInView = true
+    view.addGestureRecognizer(gesture)
   }
   
-  func swipeLeft() {
-    hideMasterWhileRegular()
-  }
-  
-  func swipeRight() {
-    showMaster()
-  }
-  
-  func hideMasterWhileRegular() {
-    if let splitViewController = splitViewController {
-      if splitViewController.collapsed == false {
-        UIView.animateWithDuration(NSTimeInterval(0.25), animations: {
-          splitViewController.preferredDisplayMode = .PrimaryHidden
-        })
-      }
+  func panGestureRecognized(sender: UIPanGestureRecognizer) {
+    guard let primaryViewController = UIApplication.sharedApplication().keyWindow?.rootViewController as? PrimaryViewController else {
+      assertionFailure("Could not find PrimaryViewController as root View controller")
+      return
     }
+    primaryViewController.panGestureRecognized(sender)
   }
   
-  func showMaster() {
-    if let splitViewController = splitViewController {
-      if splitViewController.collapsed {
-        showMasterWhileColapsed()
-      } else {
-        showMasterWhileRegular()
-      }
-    }
-  }
-  
-  func showMasterWhileRegular() {
-    if let splitViewController = splitViewController {
-      UIView.animateWithDuration(NSTimeInterval(0.25), animations: {
-        splitViewController.preferredDisplayMode = .PrimaryOverlay
-      })
-    }
-  }
 
   
-  func showMasterWhileColapsed() {
-    if let detailNavController = self.parentViewController as? UINavigationController {
-      if let masterNavController = detailNavController.parentViewController as? UINavigationController {
-        masterNavController.popToRootViewControllerAnimated(true)
-      } else {
-        detailNavController.popToRootViewControllerAnimated(true)
-      }
-    }
-  }
   
   // MARK: -
   // MARK: Warning Animation

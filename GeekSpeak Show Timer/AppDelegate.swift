@@ -12,7 +12,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
 
   var timer = Timer()
-  var splitViewControllerDelegate = TimerSplitViewControllerDelegate()
   var window: UIWindow?
   
   var splitViewController: UISplitViewController? {
@@ -143,7 +142,6 @@ extension AppDelegate {
 //        navItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
 //        navItem.leftItemsSupplementBackButton = true
 
-      splitViewController.delegate = splitViewControllerDelegate
       splitViewController.presentsWithGesture = true
       
       let os = NSProcessInfo().operatingSystemVersion
