@@ -14,22 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var timer = Timer()
   var window: UIWindow?
   
-  var splitViewController: UISplitViewController? {
-    if let splitViewController = self.window?.rootViewController
-      as? UISplitViewController {
-      return splitViewController
-    } else {
-      return .None
-    }
-  }
-
-
   func application(application: UIApplication,
        didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?)
                                                                        -> Bool {
     registerUserDefaults()
     Appearance.apply()
-    setupSplitViewController()
     resetTimerIfShowTimeElapsed()
     registerForTimerNotifications()
     return true
@@ -132,56 +121,7 @@ extension AppDelegate {
     }
   }
   
-  func setupSplitViewController() {
-    if let splitViewController = splitViewController {
-      // setup nav bar buttons
-//        let index = splitViewController.viewControllers.count - 1
-//        let navigationController = splitViewController
-//                              .viewControllers[index] as! UINavigationController
-//        let navItem = navigationController.topViewController.navigationItem
-//        navItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
-//        navItem.leftItemsSupplementBackButton = true
 
-      splitViewController.presentsWithGesture = true
-      
-      let os = NSProcessInfo().operatingSystemVersion
-      switch (os.majorVersion, os.minorVersion, os.patchVersion) {
-      case (9, _, _):
-        // iOS >= 9.0.0
-        splitViewController.preferredDisplayMode = .PrimaryOverlay
-      default:
-        // iOS >= 8.0.0
-        // In iOS 8.x .PrimaryOverlay causes terrible autolayout explotions on
-        // compact size classes
-        switch Device() {
-        case  .iPad2,
-              .iPad3,
-              .iPad4,
-              .iPadAir,
-              .iPadAir2,
-              .iPadMini,
-              .iPadMini2,
-              .iPadMini3, .Simulator:
-          splitViewController.preferredDisplayMode = .PrimaryOverlay
-        default:
-          splitViewController.preferredDisplayMode = .Automatic
-        }
-      }
-
-    }
-  }
-
-  func pressButtonBarItem() {
-    func setupSplitViewController() {
-      if let splitViewController = splitViewController {
-          let barButtonItem = splitViewController.displayModeButtonItem()
-            UIApplication.sharedApplication().sendAction( barButtonItem.action,
-                                                      to: barButtonItem.target,
-                                                    from: nil,
-                                                forEvent: nil)
-          }
-      }
-  }
   
   // Setup the default defaults in app memory
   func registerUserDefaults() {

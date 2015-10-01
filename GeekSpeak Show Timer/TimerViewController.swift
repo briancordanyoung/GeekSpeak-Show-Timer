@@ -57,11 +57,7 @@ final class TimerViewController: UIViewController {
   
   
   private var layoutSize: CGSize {
-    if let splitViewController = splitViewController {
-      return splitViewController.view.frame.size
-    } else {
-      return view.frame.size
-    }
+    return view.frame.size
   }
   
   private var layoutIsVertical: Bool {
@@ -72,16 +68,8 @@ final class TimerViewController: UIViewController {
     return self.layoutSize.width < self.layoutSize.height
   }
   
- // TODO:  The Timer Property should be injected by the SplitViewController
-  //       during the segue. Revisit and stop pulling from the app delegate!
-  var timer: Timer? {
-    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate  {
-      return appDelegate.timer
-    } else {
-      return .None
-    }
-  }
-
+  var timer: Timer?
+  
   // Required on load
   @IBOutlet weak var timerCirclesView: UIView!
   @IBOutlet weak var totalTimeLabel: UILabel!
@@ -238,11 +226,6 @@ final class TimerViewController: UIViewController {
   
   // MARK: -
   // MARK: Actions
-  @IBAction func showSettingsButtonPressed(sender: UIBarButtonItem) {
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    appDelegate.pressButtonBarItem()
-  }
-  
   @IBAction func nextSegmentButtonPressed(sender: NextSegmentButton) {
     timer?.next()
   }

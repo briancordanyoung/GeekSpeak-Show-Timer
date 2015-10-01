@@ -2,16 +2,7 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
-  // TODO: The Timer Property should be injected by the SplitViewController
-  //       during the segue. Revisit and stop pulling from the app delegate
-  var timer: Timer? {
-    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate  {
-      return appDelegate.timer
-    } else {
-      return .None
-    }
-  }
-
+  var timer: Timer?
   var blurringBackground = false
   
   // Required properties
@@ -41,8 +32,6 @@ class SettingsViewController: UIViewController {
                                    .boolForKey(Timer.Constants.UseDemoDurations)
   }
   
-
-  
   // MARK: ViewController
   override func viewDidLoad() {
     addContraintsForContentView()
@@ -53,7 +42,6 @@ class SettingsViewController: UIViewController {
     if let navigationController = navigationController {
       Appearance.appearanceForNavigationController(navigationController)
     }
-    manageButtonBarButtons()
     updateElapsedTimeLabels()
     registerForTimerNotifications()
   }
@@ -94,7 +82,7 @@ class SettingsViewController: UIViewController {
   
 
   @IBAction func showTimerNavButtonPressed(sender: UIBarButtonItem) {
-//    showDetail()
+
   }
 
   
@@ -106,20 +94,6 @@ class SettingsViewController: UIViewController {
       timer?.reset(usingDemoTiming: true)
     } else {
       timer?.reset(usingDemoTiming: false)
-    }
-  }
-  
-  
-  
-  func manageButtonBarButtons() {
-    if let splitViewController = splitViewController  {
-      // collapsed = true  is iPhone
-      // collapsed = false is iPad & Plus
-      if splitViewController.collapsed == true {
-//        leftNavButton.title = "Show Timer"
-      } else {
-//        leftNavButton.title = "Hide"
-      }
     }
   }
   

@@ -11,6 +11,10 @@ class PrimaryViewController: REFrostedViewController,
       return
     }
     
+
+    
+    
+    
     let timerViewController = storyboard
                 .instantiateViewControllerWithIdentifier("timerViewController")
     let settingsViewController = storyboard
@@ -20,6 +24,11 @@ class PrimaryViewController: REFrostedViewController,
     if let timerViewController = timerViewController as? TimerViewController,
     settingsViewController = settingsViewController as? SettingsViewController {
       settingsViewController.timerViewController = timerViewController
+
+      if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate  {
+        timerViewController.timer = appDelegate.timer
+        settingsViewController.timer = appDelegate.timer
+      }
     }
     
     contentViewController = timerViewController
