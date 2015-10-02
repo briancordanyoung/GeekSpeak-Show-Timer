@@ -3,11 +3,15 @@ import UIKit
 class SettingsViewController: UIViewController {
 
   var timer: Timer?
-  var blurringBackground = false
+  var backgroundBlurringInProgress = false
   
   // Required properties
   @IBOutlet weak var contentView: UIView!
+  
+  // The backupImageView is only a gross fix to hide that the backgroundImageView
+  // is disappearing when the REFrostedViewController animates is out of view
   @IBOutlet weak var backgroundImageView: UIImageView!
+  @IBOutlet weak var backupImageView: UIImageView!
   
   @IBOutlet weak var add1SecondButton: UIButton!
   @IBOutlet weak var add5SecondsButton: UIButton!
@@ -24,6 +28,7 @@ class SettingsViewController: UIViewController {
   
   // MARK: Convience Properties
   var timerViewController: TimerViewController?
+  var blurredImageLeftsideContraint: NSLayoutConstraint?
   
   var useDemoDurations = false
   func updateUseDemoDurations() {
@@ -38,12 +43,10 @@ class SettingsViewController: UIViewController {
   }
   
   override func viewWillAppear(animated: Bool) {
-    generateBluredBackground()
-    if let navigationController = navigationController {
-      Appearance.appearanceForNavigationController(navigationController)
-    }
+    generateBlurredBackground()
     updateElapsedTimeLabels()
     registerForTimerNotifications()
+    addContraintForBlurredImage()
   }
   
   override func viewDidAppear(animated: Bool) {
@@ -53,38 +56,37 @@ class SettingsViewController: UIViewController {
     unregisterForTimerNotifications()
   }
   
+  override func viewDidDisappear(animated: Bool) {
+    removeContraintForBlurredImage()
+  }
+  
   
   // MARK: Actions
   @IBAction func add1SecondButtonPressed(sender: UIButton) {
     timer?.duration += 1.0
-    generateBluredBackground()
+    generateBlurredBackground()
   }
   
   @IBAction func add5SecondsButtonPressed(sender: UIButton) {
     timer?.duration += 5.0
-    generateBluredBackground()
+    generateBlurredBackground()
   }
   
   @IBAction func add10SecondsButtonPressed(sender: UIButton) {
     timer?.duration += 10.0
-    generateBluredBackground()
+    generateBlurredBackground()
   }
   
   @IBAction func remove1SecondButtonPressed(sender: UIButton) {
     timer?.duration -= 1.0
-    generateBluredBackground()
+    generateBlurredBackground()
   }
   
   @IBAction func resetButtonPressed(sender: UIButton) {
     resetTimer()
-    generateBluredBackground()
+    generateBlurredBackground()
   }
   
-
-  @IBAction func showTimerNavButtonPressed(sender: UIBarButtonItem) {
-
-  }
-
   
   // MARK: -
   // MARK: Timer management
@@ -99,17 +101,18 @@ class SettingsViewController: UIViewController {
   
   
 
-  func generateBluredBackground() {
+  func generateBlurredBackground() {
 
-    if blurringBackground { return }
-    blurringBackground = true
+    if backgroundBlurringInProgress { return }
+    
+    backgroundBlurringInProgress = true
     
     if let underneathViewController = timerViewController {
       // set up the graphics context to render the screen snapshot.
       // Note the scale value... Values greater than 1 make a context smaller
       // than the detail view controller. Smaller context means faster rendering
       // of the final blurred background image
-      let scaleValue = CGFloat(8)
+      let scaleValue = CGFloat(32)
       let underneathViewControllerSize = underneathViewController.view.frame.size
       let contextSize =
                     CGSizeMake(underneathViewControllerSize.width  / scaleValue,
@@ -141,20 +144,25 @@ class SettingsViewController: UIViewController {
           // behind our master view controller
           dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 
-          let blurredBackgroundImage = backgroundImage.applyBlurWithRadius( 20,
-                                                  tintColor: UIColor.clearColor(),
+          let blurredBackgroundImage = backgroundImage.applyBlurWithRadius(2,
+                                                  tintColor: UIColor(red: 0.0,
+                                                                   green: 0.0,
+                                                                    blue: 0.0,
+                                                                   alpha: 0.5),
                                       saturationDeltaFactor: 1.8,
                                                   maskImage: nil)
               dispatch_sync(dispatch_get_main_queue(), {
                   self.backgroundImageView.image = blurredBackgroundImage
-                  self.blurringBackground = false
+                  self.backupImageView.image = blurredBackgroundImage
+                  self.backgroundBlurringInProgress = false
               })
             })
         }
     } else {
       backgroundImageView.image = UIImage.imageWithColor(UIColor.blackColor())
+      backupImageView.image     = backgroundImageView.image
     }
-}  //generateBluredBackground
+}  //generateBlurredBackground
   
   
   func addContraintsForContentView() {
@@ -179,6 +187,36 @@ class SettingsViewController: UIViewController {
     
   }
   
+  func addContraintForBlurredImage() {
+    guard let parent = parentViewController else {return}
+    
+    if blurredImageLeftsideContraint.hasNoValue {
+      let leftConstraint = NSLayoutConstraint(item: backgroundImageView,
+                                         attribute: .Left,
+                                         relatedBy: .Equal,
+                                            toItem: parent.view,
+                                         attribute: .Left,
+                                        multiplier: 1.0,
+                                          constant: 0.0)
+      blurredImageLeftsideContraint = leftConstraint
+      parent.view.addConstraint(leftConstraint)
+    }
+  }
+  
+  
+  func removeContraintForBlurredImage() {
+    guard let parent = parentViewController else {
+      blurredImageLeftsideContraint = .None
+      return
+    }
 
+    if let contraint = blurredImageLeftsideContraint {
+      parent.view.removeConstraint(contraint)
+      blurredImageLeftsideContraint = .None
+    }
+    
+  }
+
+  
 }
 

@@ -177,10 +177,6 @@ final class TimerViewController: UIViewController {
                               ring3fg: ring3fg,
                                  fill: breakView)
     
-    if let navigationController = navigationController {
-      Appearance.appearanceForNavigationController( navigationController,
-                                       transparent: true)
-    }
     registerForTimerNotifications()
     timerUpdatedTime()
     timerChangedCountingStatus()
@@ -203,7 +199,6 @@ final class TimerViewController: UIViewController {
         withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
     super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
     
-    print("CGSize \(size)")
     let duration = coordinator.transitionDuration()
     layoutViewsForSize(size, animateWithDuration: duration)
           

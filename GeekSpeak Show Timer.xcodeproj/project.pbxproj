@@ -38,7 +38,6 @@
 		D34C13E21BBCEEB500649676 /* UIView+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C13DB1BBCEEB500649676 /* UIView+REFrostedViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D34C13E31BBCEEB500649676 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C13DD1BBCEEB500649676 /* UIViewController+REFrostedViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D34C13E51BBCF03500649676 /* PrimaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C13E41BBCF03500649676 /* PrimaryViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		D34C13E71BBCFB9500649676 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34C13E61BBCFB9500649676 /* Accelerate.framework */; };
 		D367427F1B9CDDED00EE13F7 /* Array+Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D367427E1B9CDDED00EE13F7 /* Array+Bool.swift */; };
 		D36742811B9D33FE00EE13F7 /* NextSegmentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36742801B9D33FE00EE13F7 /* NextSegmentButton.swift */; };
 		D36742831B9D343100EE13F7 /* ShapesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36742821B9D343100EE13F7 /* ShapesButton.swift */; };
@@ -174,7 +173,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D34C13E71BBCFB9500649676 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

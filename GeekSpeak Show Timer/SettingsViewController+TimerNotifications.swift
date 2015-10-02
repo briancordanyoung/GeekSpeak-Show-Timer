@@ -62,7 +62,7 @@ extension SettingsViewController {
       segment3Label.text = segment3
       postShowLabel.text = postshow
       
-      generateBluredBackground()
+      generateBlurredBackground()
     }
   }
 

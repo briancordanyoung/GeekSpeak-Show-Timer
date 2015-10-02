@@ -12,9 +12,6 @@ class PrimaryViewController: REFrostedViewController,
     }
     
 
-    
-    
-    
     let timerViewController = storyboard
                 .instantiateViewControllerWithIdentifier("timerViewController")
     let settingsViewController = storyboard
@@ -25,16 +22,16 @@ class PrimaryViewController: REFrostedViewController,
     settingsViewController = settingsViewController as? SettingsViewController {
       settingsViewController.timerViewController = timerViewController
 
-      if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate  {
-        timerViewController.timer = appDelegate.timer
+      if let appDelegate = UIApplication.sharedApplication().delegate
+                                                              as? AppDelegate  {
+        timerViewController.timer    = appDelegate.timer
         settingsViewController.timer = appDelegate.timer
       }
     }
     
     contentViewController = timerViewController
-    menuViewController = settingsViewController
+    menuViewController    = settingsViewController
     
-  
     panGestureEnabled         = true
     direction                 = .Left
     liveBlurBackgroundStyle   = .Dark
@@ -46,11 +43,7 @@ class PrimaryViewController: REFrostedViewController,
     blurRadius                = 0
     blurSaturationDeltaFactor = 0
     blurTintColor             = UIColor.clearColor()
-    
-    
   }
-  
-  
   
   
   func frostedViewController(frostedViewController: REFrostedViewController!,
@@ -76,12 +69,24 @@ class PrimaryViewController: REFrostedViewController,
   func frostedViewController(frostedViewController: REFrostedViewController!,
       willAnimateRotationToInterfaceOrientation toInterfaceOrientation: UIInterfaceOrientation,
                                           duration: NSTimeInterval) {
-    
+                                            
+      UIView.animateWithDuration(duration,
+        animations: {},
+        completion: { finished in
+          self.updateSettingViewControllerBlurredBackground()
+      })
+  }
+  
+  func updateSettingViewControllerBlurredBackground() {
+    if let settingsViewController = menuViewController as? SettingsViewController {
+      settingsViewController.generateBlurredBackground()
+    }
   }
   
   func frostedViewController(frostedViewController: REFrostedViewController!,
                    didRecognizePanGesture recognizer: UIPanGestureRecognizer!) {
-
   }
+  
+
   
 }
