@@ -85,6 +85,7 @@
     }
   
     [self.view addGestureRecognizer:self.frostedViewController.panGestureRecognizer];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -92,8 +93,9 @@
     [super viewWillAppear:animated];
     
     if(!self.frostedViewController.visible) {
-        self.backgroundImageView.image = self.screenshotImage;
         self.backgroundImageView.frame = self.view.bounds;
+        self.backgroundImageView.image = self.screenshotImage;
+
         self.frostedViewController.menuViewController.view.frame = self.containerView.bounds;
         
         if (self.frostedViewController.direction == REFrostedViewControllerDirectionLeft) {
@@ -115,6 +117,7 @@
         if (self.animateApperance)
             [self show];
     }
+  
 }
 
 - (void)setContainerFrame:(CGRect)frame
@@ -277,7 +280,7 @@
 
 - (void)refreshBackgroundImage
 {
-    self.backgroundImageView.image = self.screenshotImage;
+    self.backgroundImageView.image = self.screenshotImage;  
 }
 
 #pragma mark -
