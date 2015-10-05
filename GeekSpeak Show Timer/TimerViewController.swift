@@ -449,7 +449,7 @@ final class TimerViewController: UIViewController {
                                relatedBy: .Equal,
                                   toItem: label.superview,
                                attribute: .Width,
-                              multiplier: 199 / 736,
+                              multiplier: 160 / 736,
                                 constant: 0.0)
     width.priority = 1000
     label.superview?.addConstraint(width)

@@ -33,10 +33,10 @@ extension SettingsViewController {
       
       let timing   = timer.timing
       
-      var segment1 = timing.asString(timing.timeElapsed.section1)
-      var segment2 = timing.asString(timing.timeElapsed.section2)
-      var segment3 = timing.asString(timing.timeElapsed.section3)
-      var postshow = timing.asString(timing.timeElapsed.postShow)
+      var segment1 = timing.asShortString(timing.timeElapsed.section1)
+      var segment2 = timing.asShortString(timing.timeElapsed.section2)
+      var segment3 = timing.asShortString(timing.timeElapsed.section3)
+      var postshow = timing.asShortString(timing.timeElapsed.postShow)
       
       switch timing.phase {
       case .PreShow,
@@ -45,16 +45,16 @@ extension SettingsViewController {
         break
         
       case .Section1:
-        segment1 = timing.asString(timer.secondsElapsed)
+        segment1 = timing.asShortString(timer.secondsElapsed)
         
       case .Section2:
-        segment2 = timing.asString(timer.secondsElapsed)
+        segment2 = timing.asShortString(timer.secondsElapsed)
         
       case .Section3:
-        segment3 = timing.asString(timer.secondsElapsed)
+        segment3 = timing.asShortString(timer.secondsElapsed)
         
       case .PostShow:
-        postshow = timing.asString(timer.secondsElapsed)
+        postshow = timing.asShortString(timer.secondsElapsed)
       }
       
       segment1Label.text = segment1

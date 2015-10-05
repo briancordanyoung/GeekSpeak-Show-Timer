@@ -198,7 +198,7 @@ extension TimerViewController {
                                  pad: " ",
                          inDirection: .Right)
       
-      totalTimeLabel.text     = timing.asString(timer.totalShowTimeElapsed)
+      totalTimeLabel.text     = timing.asShortString(timer.totalShowTimeElapsed)
       
         updateTimerLabels()
       }
@@ -209,9 +209,9 @@ extension TimerViewController {
         let timing = timer.timing
         switch timerLabelDisplay {
         case .Remaining:
-          sectionTimeLabel.text = timing.asString(timer.secondsRemaining)
+          sectionTimeLabel.text = timing.asShortString(timer.secondsRemaining)
         case .Elapsed:
-          sectionTimeLabel.text = timing.asString(timer.secondsElapsed)
+          sectionTimeLabel.text = timing.asShortString(timer.secondsElapsed)
       }
     }
   }
