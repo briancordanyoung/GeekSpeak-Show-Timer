@@ -14,15 +14,15 @@ class PieShapeView: FillView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     contentMode = .Redraw
-    startAngle = Rotation(degrees: 0)
-    endAngle   = Rotation(degrees: 360)
+    startAngle = TauAngle(degrees: 0)
+    endAngle   = TauAngle(degrees: 360)
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     contentMode = .Redraw
-    startAngle = Rotation(aDecoder.decodeDoubleForKey(Constants.StartAngle))
-    endAngle   = Rotation(aDecoder.decodeDoubleForKey(Constants.EndAngle))
+    startAngle = TauAngle(aDecoder.decodeDoubleForKey(Constants.StartAngle))
+    endAngle   = TauAngle(aDecoder.decodeDoubleForKey(Constants.EndAngle))
   }
   
   override func encodeWithCoder(aCoder: NSCoder) {
@@ -31,18 +31,18 @@ class PieShapeView: FillView {
     aCoder.encodeDouble(endAngle.value,   forKey: Constants.EndAngle)
   }
   
-  var startAngle: Rotation {
+  var startAngle: TauAngle {
     get {
-      return Rotation(pieLayer.startAngle)
+      return TauAngle(pieLayer.startAngle)
     }
     set(newAngle) {
       pieLayer.startAngle = CGFloat(newAngle)
     }
   }
   
-  var endAngle: Rotation {
+  var endAngle: TauAngle {
     get {
-      return Rotation(pieLayer.endAngle)
+      return TauAngle(pieLayer.endAngle)
     }
     set(newAngle) {
       pieLayer.endAngle = CGFloat(newAngle)
@@ -54,12 +54,12 @@ class PieShapeView: FillView {
       let minAngle = min(startAngle,endAngle)
       let maxAngle = max(startAngle,endAngle)
       let diff     = maxAngle - minAngle
-      let percent  = CGFloat(Rotation(degrees: 360)) / CGFloat(diff)
+      let percent  = CGFloat(TauAngle(degrees: 360)) / CGFloat(diff)
       
       return percent
     }
     set(newPercentage) {
-      let additional = Rotation(degrees: 360 * newPercentage)
+      let additional = TauAngle(degrees: 360 * newPercentage)
       endAngle = startAngle + additional
     }
   }

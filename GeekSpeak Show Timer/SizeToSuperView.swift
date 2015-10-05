@@ -34,8 +34,8 @@ class SizeToSuperView: UIView {
     let sizeInactive = createHeightAndWidthContraintsForView( self,
                                           toSuperview: superview,
                                       usingMultiplier: percentageOfSuperviewSize)
-      sizeInactive.map({$0.priority = $0.priority * 0.1})
-      sizeConstraintsInactive.map({superview.removeConstraint($0)})
+      sizeInactive.forEach({$0.priority = $0.priority * 0.1})
+      sizeConstraintsInactive.forEach({superview.removeConstraint($0)})
       sizeConstraintsInactive = sizeInactive
       superview.addConstraints(sizeInactive)
     }
@@ -44,8 +44,8 @@ class SizeToSuperView: UIView {
       layoutIfNeeded()
       
       func changePercentage() {
-        self.sizeConstraintsInactive.map({$0.priority = $0.priority * 10 })
-        self.sizeConstraintsActive.map(  {$0.priority = $0.priority * 0.1})
+        self.sizeConstraintsInactive.forEach({$0.priority = $0.priority * 10 })
+        self.sizeConstraintsActive.forEach(  {$0.priority = $0.priority * 0.1})
         let newInactive = self.sizeConstraintsActive
         let newActive   = self.sizeConstraintsInactive
         self.sizeConstraintsInactive = newInactive
@@ -76,7 +76,7 @@ class SizeToSuperView: UIView {
   
   
   func addSelfContraints() {
-    self.setTranslatesAutoresizingMaskIntoConstraints(false)
+    self.translatesAutoresizingMaskIntoConstraints = false
     
     if let superview = self.superview {
       
@@ -90,7 +90,7 @@ class SizeToSuperView: UIView {
                                          toSuperview: superview,
                                      usingMultiplier: percentageOfSuperviewSize)
       
-      sizeInactive.map({$0.priority = $0.priority * 0.1})
+      sizeInactive.forEach({$0.priority = $0.priority * 0.1})
       
       superview.addConstraints(centerContraints)
       superview.addConstraints(sizeActive)

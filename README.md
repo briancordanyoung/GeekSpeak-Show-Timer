@@ -2,13 +2,19 @@
 
 During the recording of GeekSpeak, we need to plan for 2 inexactly placed breaks and a precise show length.  This is the timer we use to make that as easy as possible.
 
+
+
 =======
 
-## Known issues:
-- SplitViewController subclass causing my layout and navigation controller glitches.
 
 ## Todo:
 
+- Remove SplitViewController and use REFrostedViewController
+- Switch to fading play button
+- Add next button
+	- max button size 100
+	- min button size 50
+- add spacing to timerView number lables
 - Create About viewController to explain
 	- what GeepSeak is
 	- who I am
@@ -19,6 +25,7 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly placed breaks
 	- keep histery of past timers
 	- sync pending bits to a table view
 	- tapping on a bit marks the time and posts to site
+- Add tracking of all pause/play events
 	
 - Add GameKit discovery and networking between timers on multiple devices
 - SplitViewController Subclass issues
@@ -64,3 +71,5 @@ This is the initial version of the timer and used on the 8/3/15 recording of the
 - Dependancy injection
 	- Does everything I want.  But, I am 
 
+## Notes:
+- xcode7 introduced errors that can be ignored:  [ Error: CGContextSaveGState: invalid context 0x0.](https://forums.developer.apple.com/thread/13683#50137)

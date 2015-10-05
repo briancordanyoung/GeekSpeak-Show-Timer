@@ -1,27 +1,12 @@
-// Ring Classes:  Refactor!!!
-//                The classes for drawing and layingout the ring are completely
-//                messing confussing, uses similar but different propery  names
-//                mix obj-c and swift cause type conversions that are confusing
-//                and general a mess.  Clean this mess up!!!
-//                Draw cleanly and be nice.  ;)
-//
-//                  GSTRing.h
-//                  GSTRing.m
-//                  GSTRingLayer.h
-//                  RingCircle.swift
-//                  RingFillView.swift
-//                  RingPoint.swift
-//                  RingView+Progress.swift
-//                  RingView.swift
-
 import UIKit
 
-class RingView: RingFillView {
+class RingView: SizeToSuperView {
   
-  struct Constants {
-    static let StartAngle = "ringViewStartAngleId"
-    static let EndAngle   = "ringViewEndAngleId"
-    static let RingWidth  = "ringViewRingWidthId"
+  private var progressPastCompleted = CGFloat(0) {
+    didSet {
+      let rotation = CGFloat(TauAngle.tau) * progressPastCompleted
+      transform = CGAffineTransformMakeRotation(rotation)
+    }
   }
   
   convenience init() {
@@ -30,47 +15,29 @@ class RingView: RingFillView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    startAngle = Rotation(degrees: 0)
-    endAngle   = Rotation(degrees: 360)
+    startAngle = TauAngle(degrees: 0)
+    endAngle   = TauAngle(degrees: 360)
     ringWidth  = CGFloat(0.12228)
   }
   
-  required init(coder aDecoder: NSCoder) {
+
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    startAngle = Rotation(aDecoder.decodeDoubleForKey(Constants.StartAngle))
-    endAngle   = Rotation(aDecoder.decodeDoubleForKey(Constants.EndAngle))
-    ringWidth  = CGFloat( aDecoder.decodeDoubleForKey(Constants.RingWidth))
   }
   
-  override func encodeWithCoder(aCoder: NSCoder) {
-    super.encodeWithCoder(aCoder)
-    aCoder.encodeDouble(startAngle.value,  forKey: Constants.StartAngle)
-    aCoder.encodeDouble(endAngle.value,    forKey: Constants.EndAngle)
-    aCoder.encodeDouble(Double(ringWidth), forKey: Constants.RingWidth)
-  }
   
-  class func sectionColor(color: UIColor,
-        atPercentage percentage: Double ) -> [String:AnyObject] {
-
-    var dictionary: [String:AnyObject] = [:]
-    dictionary["color"] = color
-    dictionary["percentage"] = percentage
-
-    return dictionary
-  }
-  
-  var startAngle: Rotation {
+  var startAngle: TauAngle {
     get {
-      return Rotation(ringLayer.startAngle)
+      return TauAngle(ringLayer.startAngle)
     }
     set(newAngle) {
       ringLayer.startAngle = CGFloat(newAngle)
     }
   }
   
-  var endAngle: Rotation {
+  var endAngle: TauAngle {
     get {
-      return Rotation(ringLayer.endAngle)
+      return TauAngle(ringLayer.endAngle)
     }
     set(newAngle) {
       ringLayer.endAngle = CGFloat(newAngle)
@@ -79,46 +46,31 @@ class RingView: RingFillView {
   
   var ringWidth: CGFloat {
     get {
-      return CGFloat(ringLayer.ringWidth)
+      return ringLayer.ringWidth
     }
     set(newRingWidth) {
-      ringLayer.ringWidth = CGFloat(newRingWidth)
+      ringLayer.ringWidth = newRingWidth
     }
   }
   
-  var viewSize: relativeViewSize? {
+  var fillScale: CGFloat {
     get {
-      return ringLayer.viewSize
+      return ringLayer.fillScale
     }
-    set(newViewSize) {
-      ringLayer.viewSize = newViewSize
+    set(newFillScale) {
+      ringLayer.fillScale = newFillScale
     }
   }
   
-  var cornerRounding: CGFloat {
+  var ringStyle: RingDrawing.Style {
     get {
-      return ringLayer.cornerRounding
+      return ringLayer.ringStyle
     }
-    set(newCornerRounding) {
-      ringLayer.cornerRounding = newCornerRounding
+    set(newStyle) {
+      ringLayer.ringStyle = newStyle
     }
   }
-  
 
-  var percent: CGFloat {
-    get {
-      let minAngle = min(startAngle,endAngle)
-      let maxAngle = max(startAngle,endAngle)
-      let diff     = maxAngle - minAngle
-      let percent  = CGFloat(Rotation(degrees: 360)) / CGFloat(diff)
-      
-      return percent
-    }
-    set(newPercentage) {
-      let additional = Rotation(degrees: 360 * newPercentage)
-      endAngle = startAngle + additional
-    }
-  }
   
   var color: UIColor {
     get {
@@ -126,31 +78,67 @@ class RingView: RingFillView {
     }
     set(newColor) {
       ringLayer.color = newColor
-      ringLayer.setNeedsDisplay()
     }
   }
   
-  var additionalColors: [[String:AnyObject]] {
+  var colors: [RingColor] {
     get {
-      var castColors: [[String:AnyObject]] = []
-      for colorDictionary in ringLayer.additionalColors {
-        if let dictionary = colorDictionary as? [String:AnyObject] {
-          castColors.append(dictionary)
-        }
-      }
-      return castColors
+      return ringLayer.colors
     }
-    set(newArray) {
-      ringLayer.additionalColors = newArray
+    set(newColors) {
+      ringLayer.colors = newColors
     }
   }
   
+//  var percent: CGFloat {
+//    get {
+//      let minAngle = min(startAngle,endAngle)
+//      let maxAngle = max(startAngle,endAngle)
+//      let diff     = maxAngle - minAngle
+//      let percent  = CGFloat(TauAngle(degrees: 360)) / CGFloat(diff)
+//      
+//      return percent
+//    }
+//    set(newPercentage) {
+//      let additional = TauAngle(degrees: 360 * newPercentage)
+//      endAngle = startAngle + additional
+//    }
+//  }
+  
+  // Unlike the percent property which accounts for the startAngle and adds
+  // the "percentage complete" to the startAngle to get the endAngle....
+  // This progress progress property assumes the startAngle is at 0 degrees.
+  // But, if the endAngle is greater than 360 degrees then the startAngle is
+  // 0 + 5 + the degrees past 360 that the endAngle is at.
+  // This makes a 5 degree gap in the circle the indicates the progress
+  // past 100%
+  var progress: CGFloat {
+    get {
+      let minAngle = min(startAngle,endAngle)
+      let maxAngle = max(startAngle,endAngle)
+      let diff     = maxAngle - minAngle
+      let percent  = CGFloat(TauAngle(degrees: 360)) / CGFloat(diff)
+      if percent == 1.0 {
+        
+      }
+      
+      return percent
+    }
+    set(newPercentage) {
+      progressPastCompleted = (newPercentage > 1) ? (newPercentage - 1) : 0
+      let limitedPercentage = min(1, newPercentage)
+      startAngle = TauAngle(degrees: 0)
+      endAngle   = TauAngle(degrees: 360 * limitedPercentage)
+    }
+  }
+  
+
   
   override class func layerClass() -> AnyClass {
-    return GSTRingLayer.self
+    return RingLayer.self
   }
   
-  var ringLayer: GSTRingLayer {
-    return self.layer as! GSTRingLayer
+  var ringLayer: RingLayer {
+    return self.layer as! RingLayer
   }
 }

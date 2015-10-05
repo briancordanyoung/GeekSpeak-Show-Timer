@@ -4,7 +4,7 @@ typealias Rotation = AccumulatedAngle
 
 // MARK: AccumulatedAngle - A number that represents an angle in both 
 //                          degrees or radians.
-struct AccumulatedAngle: AngularType, Printable {
+struct AccumulatedAngle: AngularType, CustomStringConvertible {
   
   var value: Double
   

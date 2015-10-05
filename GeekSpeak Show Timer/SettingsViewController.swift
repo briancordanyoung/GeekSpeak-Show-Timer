@@ -2,22 +2,16 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
-  // TODO: The Timer Property should be injected by the SplitViewController
-  //       during the segue. Revisit and stop pulling from the app delegate
-  var timer: Timer? {
-    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate  {
-      return appDelegate.timer
-    } else {
-      return .None
-    }
-  }
-
-  var blurringBackground = false
+  var timer: Timer?
+  var backgroundBlurringInProgress = false
   
   // Required properties
   @IBOutlet weak var contentView: UIView!
+  
+  // The backupImageView is only a gross fix to hide that the backgroundImageView
+  // is disappearing when the REFrostedViewController animates is out of view
   @IBOutlet weak var backgroundImageView: UIImageView!
-  @IBOutlet weak var leftNavButton: UIBarButtonItem!
+  @IBOutlet weak var backupImageView: UIImageView!
   
   @IBOutlet weak var add1SecondButton: UIButton!
   @IBOutlet weak var add5SecondsButton: UIButton!
@@ -33,22 +27,8 @@ class SettingsViewController: UIViewController {
   
   
   // MARK: Convience Properties
-  var timerViewController: TimerViewController? {
-    var timerViewController: TimerViewController? = .None
-    if let splitViewController = splitViewController {
-      if let navController: AnyObject? =
-                                      splitViewController.viewControllers.last {
-        if let navController = navController as? UINavigationController {
-          if let tmpTimerViewController =
-                       navController.topViewController as? TimerViewController {
-            timerViewController = tmpTimerViewController
-          }
-        }
-      }
-    }
-    return timerViewController
-  }
-  
+  var timerViewController: TimerViewController?
+  var blurredImageLeftsideContraint: NSLayoutConstraint?
   
   var useDemoDurations = false
   func updateUseDemoDurations() {
@@ -57,21 +37,16 @@ class SettingsViewController: UIViewController {
                                    .boolForKey(Timer.Constants.UseDemoDurations)
   }
   
-
-  
   // MARK: ViewController
   override func viewDidLoad() {
     addContraintsForContentView()
   }
   
   override func viewWillAppear(animated: Bool) {
-    generateBluredBackground()
-    if let navigationController = navigationController {
-      Appearance.appearanceForNavigationController(navigationController)
-    }
-    manageButtonBarButtons()
+    generateBlurredBackground()
     updateElapsedTimeLabels()
     registerForTimerNotifications()
+    addContraintForBlurredImage()
   }
   
   override func viewDidAppear(animated: Bool) {
@@ -81,45 +56,35 @@ class SettingsViewController: UIViewController {
     unregisterForTimerNotifications()
   }
   
+  override func viewDidDisappear(animated: Bool) {
+    removeContraintForBlurredImage()
+  }
+  
   
   // MARK: Actions
   @IBAction func add1SecondButtonPressed(sender: UIButton) {
     timer?.duration += 1.0
-    generateBluredBackground()
+    generateBlurredBackground()
   }
   
   @IBAction func add5SecondsButtonPressed(sender: UIButton) {
     timer?.duration += 5.0
-    generateBluredBackground()
+    generateBlurredBackground()
   }
   
   @IBAction func add10SecondsButtonPressed(sender: UIButton) {
     timer?.duration += 10.0
-    generateBluredBackground()
+    generateBlurredBackground()
   }
   
   @IBAction func remove1SecondButtonPressed(sender: UIButton) {
     timer?.duration -= 1.0
-    generateBluredBackground()
+    generateBlurredBackground()
   }
   
   @IBAction func resetButtonPressed(sender: UIButton) {
     resetTimer()
-    generateBluredBackground()
-  }
-  
-
-  @IBAction func showTimerNavButtonPressed(sender: UIBarButtonItem) {
-    if let splitViewController = splitViewController {
-      // collapsed = true  is iPhone
-      // collapsed = false is iPad & Plus
-      if splitViewController.collapsed {
-        self.performSegueWithIdentifier("showTimer", sender: self)
-      } else {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.pressButtonBarItem()
-      }
-    }
+    generateBlurredBackground()
   }
   
   
@@ -135,32 +100,19 @@ class SettingsViewController: UIViewController {
   }
   
   
-  
-  func manageButtonBarButtons() {
-    if let splitViewController = splitViewController  {
-      // collapsed = true  is iPhone
-      // collapsed = false is iPad & Plus
-      if splitViewController.collapsed == true {
-        leftNavButton.title = "Show Timer"
-      } else {
-        leftNavButton.title = "Hide"
-      }
-    }
-  }
-  
-  
 
-  func generateBluredBackground() {
+  func generateBlurredBackground() {
 
-    if blurringBackground { return }
-    blurringBackground = true
+    if backgroundBlurringInProgress { return }
+    
+    backgroundBlurringInProgress = true
     
     if let underneathViewController = timerViewController {
       // set up the graphics context to render the screen snapshot.
       // Note the scale value... Values greater than 1 make a context smaller
       // than the detail view controller. Smaller context means faster rendering
       // of the final blurred background image
-      let scaleValue = CGFloat(8)
+      let scaleValue = CGFloat(32)
       let underneathViewControllerSize = underneathViewController.view.frame.size
       let contextSize =
                     CGSizeMake(underneathViewControllerSize.width  / scaleValue,
@@ -183,36 +135,40 @@ class SettingsViewController: UIViewController {
       // that will actually be visible.    
       let subRect = CGRectMake(0, 0, self.view.frame.size.width / scaleValue,
                                      self.view.frame.size.height / scaleValue)
-      let subImage = CGImageCreateWithImageInRect(snapshotImage.CGImage, subRect)
-    
-      if let backgroundImage = UIImage(CGImage: subImage) {
-        // CGImageRelease(subImage)
-        
-        // Now actually apply the blur to the snapshot and set the background
-        // behind our master view controller
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+      if let subImage = CGImageCreateWithImageInRect(snapshotImage.CGImage, subRect) {
+      
+        let backgroundImage = UIImage(CGImage: subImage)
+          // CGImageRelease(subImage)
+          
+          // Now actually apply the blur to the snapshot and set the background
+          // behind our master view controller
+          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 
-        let blurredBackgroundImage = backgroundImage.applyBlurWithRadius( 20,
-                                                tintColor: UIColor.clearColor(),
-                                    saturationDeltaFactor: 1.8,
-                                                maskImage: nil)
-            dispatch_sync(dispatch_get_main_queue(), {
-                self.backgroundImageView.image = blurredBackgroundImage
-                self.blurringBackground = false
+          let blurredBackgroundImage = backgroundImage.applyBlurWithRadius(2,
+                                                  tintColor: UIColor(red: 0.0,
+                                                                   green: 0.0,
+                                                                    blue: 0.0,
+                                                                   alpha: 0.5),
+                                      saturationDeltaFactor: 1.8,
+                                                  maskImage: nil)
+              dispatch_sync(dispatch_get_main_queue(), {
+                  self.backgroundImageView.image = blurredBackgroundImage
+                  self.backupImageView.image = blurredBackgroundImage
+                  self.backgroundBlurringInProgress = false
+              })
             })
-          })
-      }
+        }
     } else {
       backgroundImageView.image = UIImage.imageWithColor(UIColor.blackColor())
+      backupImageView.image     = backgroundImageView.image
     }
-    
-  } // generateBluredBackground
+}  //generateBlurredBackground
   
   
   func addContraintsForContentView() {
     
     let leftConstraint = NSLayoutConstraint(item: contentView,
-                                       attribute: .Leading,
+                                       attribute: .Left,
                                        relatedBy: .Equal,
                                           toItem: view,
                                        attribute: .Left,
@@ -221,7 +177,7 @@ class SettingsViewController: UIViewController {
     view.addConstraint(leftConstraint)
     
     let rightConstraint = NSLayoutConstraint(item: contentView,
-                                        attribute: .Trailing,
+                                        attribute: .Right,
                                         relatedBy: .Equal,
                                            toItem: view,
                                         attribute: .Right,
@@ -231,6 +187,36 @@ class SettingsViewController: UIViewController {
     
   }
   
+  func addContraintForBlurredImage() {
+    guard let parent = parentViewController else {return}
+    
+    if blurredImageLeftsideContraint.hasNoValue {
+      let leftConstraint = NSLayoutConstraint(item: backgroundImageView,
+                                         attribute: .Left,
+                                         relatedBy: .Equal,
+                                            toItem: parent.view,
+                                         attribute: .Left,
+                                        multiplier: 1.0,
+                                          constant: 0.0)
+      blurredImageLeftsideContraint = leftConstraint
+      parent.view.addConstraint(leftConstraint)
+    }
+  }
+  
+  
+  func removeContraintForBlurredImage() {
+    guard let parent = parentViewController else {
+      blurredImageLeftsideContraint = .None
+      return
+    }
 
+    if let contraint = blurredImageLeftsideContraint {
+      parent.view.removeConstraint(contraint)
+      blurredImageLeftsideContraint = .None
+    }
+    
+  }
+
+  
 }
 

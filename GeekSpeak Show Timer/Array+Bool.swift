@@ -5,7 +5,7 @@ import Swift
 
 
 extension Array {
-  func anyAreTrue(transform: (T) -> Bool) -> Bool {
+  func anyAreTrue(transform: (Element) -> Bool) -> Bool {
     return self
             .map(transform)
             .reduce(false, combine: {
@@ -14,7 +14,7 @@ extension Array {
   }
   
   
-  func anyAreFalse(transform: (T) -> Bool) -> Bool {
+  func anyAreFalse(transform: (Element) -> Bool) -> Bool {
     return self
             .map(transform)
             .reduce(false, combine: {

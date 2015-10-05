@@ -1,7 +1,7 @@
 import UIKit
 
 
-enum TimerLabelDisplay: String, Printable {
+enum TimerLabelDisplay: String, CustomStringConvertible {
   case Remaining = "Remaining"
   case Elapsed   = "Elapsed"
   
@@ -20,6 +20,11 @@ final class TimerViewController: UIViewController {
                                            blue: 192/255,
                                           alpha: 1.0)
     
+    static let GeekSpeakBlueInactiveColor = UIColor(red: 14/255,
+                                                  green: 115/255,
+                                                   blue: 115/255,
+                                                  alpha: 1.0)
+    
     static let BreakColor         = UIColor(red: 0.75,
                                           green: 0.0,
                                            blue: 0.0,
@@ -35,7 +40,7 @@ final class TimerViewController: UIViewController {
                                            blue: 166/255,
                                           alpha: 1.0)
     
-    static let LineWidth              = CGFloat(90) / CGFloat(736)
+    static let LineWidth              = (CGFloat(90) / CGFloat(736)) * (1 / 0.95) * 2
     static let RingDarkeningFactor    = CGFloat(0.2)
     
     static let ActiveLayoutPriority   = UILayoutPriority(751)
@@ -52,11 +57,7 @@ final class TimerViewController: UIViewController {
   
   
   private var layoutSize: CGSize {
-    if let splitViewController = splitViewController {
-      return splitViewController.view.frame.size
-    } else {
-      return view.frame.size
-    }
+    return view.frame.size
   }
   
   private var layoutIsVertical: Bool {
@@ -67,16 +68,8 @@ final class TimerViewController: UIViewController {
     return self.layoutSize.width < self.layoutSize.height
   }
   
- // TODO: The Timer Property should be injected by the SplitViewController
-  //       during the segue. Revisit and stop pulling from the app delegate
-  var timer: Timer? {
-    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate  {
-      return appDelegate.timer
-    } else {
-      return .None
-    }
-  }
-
+  var timer: Timer?
+  
   // Required on load
   @IBOutlet weak var timerCirclesView: UIView!
   @IBOutlet weak var totalTimeLabel: UILabel!
@@ -127,14 +120,13 @@ final class TimerViewController: UIViewController {
                             hControlsToContainerTrailing,
     hFlashImageViewTrailingEdge]
     
+    addSwipeGesture()
     
     super.viewDidLoad()
   }
   
   override func viewWillAppear(animated: Bool) {
-//    nextSegmentButton.lineColor = Constants.GeekSpeakBlueColor
     nextSegmentButton.tintColor = Constants.GeekSpeakBlueColor
-//    startPauseButton.lineColor  = Constants.GeekSpeakBlueColor
     startPauseButton.tintColor  = Constants.GeekSpeakBlueColor
     
     if let timer = timer {
@@ -148,34 +140,35 @@ final class TimerViewController: UIViewController {
     
     let breakView  = PieShapeView()
     breakView.opaque     = false
-    breakView.startAngle = Rotation(degrees: 0)
-    breakView.endAngle   = Rotation(degrees: 0)
+    breakView.startAngle = TauAngle(degrees: 0)
+    breakView.endAngle   = TauAngle(degrees: 0)
     breakView.color      = Constants.BreakColor
     breakView.pieLayer.clipToCircle = true
     timerCirclesView.addSubview(breakView)
     
     let ring1bg   = configureBGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueColor)
+                          withColor: Constants.GeekSpeakBlueInactiveColor)
     let ring1fg   = configureFGRing( RingView(),
                           withColor: Constants.GeekSpeakBlueColor)
     
     let ring2bg   = configureBGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueColor)
+                          withColor: Constants.GeekSpeakBlueInactiveColor)
     let ring2fg   = configureFGRing( RingView(),
                           withColor: Constants.GeekSpeakBlueColor)
     
     let ring3bg   = configureBGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueColor)
+                          withColor: Constants.GeekSpeakBlueInactiveColor)
     let ring3fg   = configureFGRing( RingView(),
                           withColor: Constants.GeekSpeakBlueColor)
     
-    ring3bg.percentageOfSuperviewSize = 0.95
-    ring3fg.percentageOfSuperviewSize = 0.95
-    ring2bg.percentageOfSuperviewSize = 0.64
-    ring2fg.percentageOfSuperviewSize = 0.64
-    ring1bg.percentageOfSuperviewSize = 0.33
-    ring1fg.percentageOfSuperviewSize = 0.33
+    ring3bg.fillScale = 0.95
+    ring3fg.fillScale = 0.95
+    ring2bg.fillScale = 0.64
+    ring2fg.fillScale = 0.64
+    ring1bg.fillScale = 0.33
+    ring1fg.fillScale = 0.33
 
+    
     timerViews = TimerViews(  ring1bg: ring1bg,
                               ring1fg: ring1fg,
                               ring2bg: ring2bg,
@@ -184,10 +177,6 @@ final class TimerViewController: UIViewController {
                               ring3fg: ring3fg,
                                  fill: breakView)
     
-    if let navigationController = navigationController {
-      Appearance.appearanceForNavigationController( navigationController,
-                                       transparent: true)
-    }
     registerForTimerNotifications()
     timerUpdatedTime()
     timerChangedCountingStatus()
@@ -208,11 +197,13 @@ final class TimerViewController: UIViewController {
   
   override func viewWillTransitionToSize(size: CGSize,
         withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
     
     let duration = coordinator.transitionDuration()
     layoutViewsForSize(size, animateWithDuration: duration)
           
   }
+  
   
   
   
@@ -230,11 +221,6 @@ final class TimerViewController: UIViewController {
   
   // MARK: -
   // MARK: Actions
-  @IBAction func showSettingsButtonPressed(sender: UIBarButtonItem) {
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    appDelegate.pressButtonBarItem()
-  }
-  
   @IBAction func nextSegmentButtonPressed(sender: NextSegmentButton) {
     timer?.next()
   }
@@ -325,13 +311,13 @@ final class TimerViewController: UIViewController {
   
   
   func setContraintPriorityForVerticalLayout() {
-    verticalContraints.map(    activateContraint )
-    horizontalContraints.map(deactivateContraint )
+    verticalContraints.forEach(    activateContraint )
+    horizontalContraints.forEach(deactivateContraint )
   }
   
   func setContraintPriorityForHorizontalLayout() {
-    verticalContraints.map(  deactivateContraint )
-    horizontalContraints.map(  activateContraint )
+    verticalContraints.forEach(  deactivateContraint )
+    horizontalContraints.forEach(  activateContraint )
   }
   
   func activateContraint(constraint: NSLayoutConstraint) {
@@ -346,6 +332,27 @@ final class TimerViewController: UIViewController {
     }
   }
   
+  // MARK: -
+  // MARK: Gestures
+  
+  
+  func addSwipeGesture() {
+    let gesture = UIPanGestureRecognizer(target: self,
+                                                action: "panGestureRecognized:")
+    gesture.delaysTouchesBegan = true
+    gesture.cancelsTouchesInView = true
+    view.addGestureRecognizer(gesture)
+  }
+  
+  func panGestureRecognized(sender: UIPanGestureRecognizer) {
+    guard let primaryViewController = UIApplication.sharedApplication().keyWindow?.rootViewController as? PrimaryViewController else {
+      assertionFailure("Could not find PrimaryViewController as root View controller")
+      return
+    }
+    primaryViewController.panGestureRecognized(sender)
+  }
+  
+
   
   
   // MARK: -
@@ -367,7 +374,7 @@ final class TimerViewController: UIViewController {
   func animateBlackToWhite() {
     UIView.animateWithDuration( 0.05,
       delay: 0.0,
-      options: nil,
+      options: [],
       animations: {
         self.flashImageView.alpha = 1.0
         self.view.backgroundColor = Constants.BreakColor
@@ -386,7 +393,7 @@ final class TimerViewController: UIViewController {
   func animateWhiteToBlack() {
     UIView.animateWithDuration( 0.05,
       delay: 0.0,
-      options: nil,
+      options: [],
       animations: {
         self.flashImageView.alpha = 0.0
         self.view.backgroundColor = UIColor.blackColor()
@@ -410,9 +417,9 @@ final class TimerViewController: UIViewController {
                                                                    -> RingView {
                                                                     
     ringView.color          = color
-    ringView.startAngle     = Rotation(degrees: 0)
-    ringView.endAngle       = Rotation(degrees: 0)
-    ringView.cornerRounding = CGFloat(0.333)
+    ringView.startAngle     = TauAngle(degrees: 0)
+    ringView.endAngle       = TauAngle(degrees: 0)
+    ringView.ringStyle      = .Rounded
     configureRing(ringView)
     return ringView
   }
@@ -420,21 +427,17 @@ final class TimerViewController: UIViewController {
   func configureBGRing(ringView: RingView, withColor color: UIColor)
                                                                    -> RingView {
     let darkenBy = Constants.RingDarkeningFactor
-    ringView.color     = color.darkenColorWithMultiplier(darkenBy)
+    ringView.color          = color.darkenColorWithMultiplier(darkenBy)
+    ringView.startAngle     = TauAngle(degrees: 0)
+    ringView.endAngle       = TauAngle(degrees: 360)
+    ringView.ringStyle      = .Sharp
+
     configureRing(ringView)
     return ringView
   }
   
   func configureRing(ringView: RingView) {
     ringView.ringWidth = Constants.LineWidth
-    ringView.viewSize  = {[weak timerCirclesView] in
-                            if let timerCirclesView = timerCirclesView {
-                              return min(timerCirclesView.bounds.height,
-                                         timerCirclesView.bounds.width)
-                            } else {
-                              return .None
-                            }
-                          }
     timerCirclesView.addSubview(ringView)
     ringView.opaque              = false
   }
@@ -446,7 +449,7 @@ final class TimerViewController: UIViewController {
                                relatedBy: .Equal,
                                   toItem: label.superview,
                                attribute: .Width,
-                              multiplier: 199 / 736,
+                              multiplier: 160 / 736,
                                 constant: 0.0)
     width.priority = 1000
     label.superview?.addConstraint(width)
@@ -480,10 +483,7 @@ final class TimerViewController: UIViewController {
                 totalLength: Int, pad: Character,
       inDirection direction: Direction) -> String {
         
-    var i = 0
-    for character in string {
-      i++
-    }
+    let i = string.characters.count
     
     let amountToPad = totalLength - i
     if amountToPad < 1 {

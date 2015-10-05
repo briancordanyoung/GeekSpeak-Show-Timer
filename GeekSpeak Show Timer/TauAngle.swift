@@ -1,20 +1,20 @@
 import UIKit
 
 
-// MARK: Angle - A number that represents an angle in both
+// MARK: TauAngle - A type that represents an angle in both
 //               degrees or radians.
-//       Unlike AccumulatedAngle, Angle is limited to representing
-//       a single circle from -π to π
-struct Angle: AngularType {
+//       Unlike AccumulatedAngle, TauAngle is limited to representing
+//       a single circle from 0 to 2π
+struct TauAngle: AngularType {
   
   var value: Double {
     didSet(oldValue) {
-      value = Angle.limit(value)
+      value = TauAngle.limit(value)
     }
   }
   
   init(_ value: Double) {
-    self.value = Angle.limit(value)
+    self.value = TauAngle.limit(value)
   }
   
   
@@ -93,7 +93,7 @@ struct Angle: AngularType {
 
 // Angle conversions:
 // degrees <--> radians
-extension Angle {
+extension TauAngle {
   static func radians2Degrees(radians:Double) -> Double {
     return radians * 180.0 / Double(M_PI)
   }
@@ -103,21 +103,16 @@ extension Angle {
   }
 
   static func limit(var angle:Double) -> Double {
-    let pi  = M_PI
     let tau = M_PI * 2
     
-    if angle >  pi {
-      angle += pi
+    if angle >  tau {
       let totalRotations = floor(angle / tau)
       angle  = angle - (tau * totalRotations)
-      angle -= pi
     }
     
-    if angle < -pi {
-      angle -= pi
+    if angle < 0.0 {
       let totalRotations = floor(abs(angle) / tau)
       angle  = angle + (tau * totalRotations)
-      angle += pi
     }
     
     return angle
@@ -126,7 +121,7 @@ extension Angle {
 
 // Extend CGFloat to convert from radians
 extension CGFloat {
-  init(_ angle: Angle) {
+  init(_ angle: TauAngle) {
     self.init(CGFloat(angle.radians))
   }
 }
@@ -134,13 +129,13 @@ extension CGFloat {
 
 
 // MARK: Protocol Conformance
-extension Angle: IntegerLiteralConvertible {
+extension TauAngle: IntegerLiteralConvertible {
   init(integerLiteral: IntegerLiteralType) {
     self.init(Double(integerLiteral))
   }
 }
 
-extension Angle: FloatLiteralConvertible {
+extension TauAngle: FloatLiteralConvertible {
   init(floatLiteral: FloatLiteralType) {
     self.init(Double(floatLiteral))
   }
@@ -149,7 +144,7 @@ extension Angle: FloatLiteralConvertible {
 
 // MARK: Extend Int to initialize with an Angle
 extension Int {
-  init(_ angle: Angle) {
+  init(_ angle: TauAngle) {
     self = Int(angle.value)
   }
 }
@@ -158,37 +153,49 @@ extension Int {
 
 
 
-
-extension Angle {
+extension TauAngle {
   enum Preset {
     case halfCircle
     case quarterCircle
     case pi
+    case fullCircle
+    case tau
   }
 }
 
 // MARK: Static Methods
-extension Angle {
-  static func preset(preset: Preset) -> Angle {
+extension TauAngle {
+  static func preset(preset: Preset) -> TauAngle {
     switch preset {
+    case .fullCircle,
+         .tau:
+      return TauAngle(M_PI * 2)
     case .halfCircle,
          .pi:
-      return Angle(M_PI)
+      return TauAngle(M_PI)
     case .quarterCircle:
-      return Angle(M_PI * 0.50)
+      return TauAngle(M_PI * 0.50)
     }
   }
   
-  static var pi: Angle {
-    return Angle.preset(.pi)
+  static var pi: TauAngle {
+    return TauAngle.preset(.pi)
   }
   
-  static var halfCircle: Angle {
-    return Angle.preset(.halfCircle)
+  static var halfCircle: TauAngle {
+    return TauAngle.preset(.halfCircle)
   }
   
-  static var quarterCircle: Angle {
-    return Angle.preset(.quarterCircle)
+  static var quarterCircle: TauAngle {
+    return TauAngle.preset(.quarterCircle)
+  }
+
+  static var tau: TauAngle {
+    return TauAngle.preset(.tau)
+  }
+
+  static var fullCircle: TauAngle {
+    return TauAngle.preset(.fullCircle)
   }
 }
 
@@ -197,60 +204,60 @@ extension Angle {
 
 // MARK: Angle & Int specific overloads
 
-func % (lhs: Angle, rhs: Int) -> Angle {
-  return Angle(lhs.value % Double(rhs))
+func % (lhs: TauAngle, rhs: Int) -> TauAngle {
+  return TauAngle(lhs.value % Double(rhs))
 }
 
 
-func + (lhs: Int, rhs: Angle) -> Angle {
-  return Angle(Double(lhs) + rhs.value)
+func + (lhs: Int, rhs: TauAngle) -> TauAngle {
+  return TauAngle(Double(lhs) + rhs.value)
 }
 
-func - (lhs: Int, rhs: Angle) -> Angle {
-  return Angle(Double(lhs) - rhs.value)
+func - (lhs: Int, rhs: TauAngle) -> TauAngle {
+  return TauAngle(Double(lhs) - rhs.value)
 }
 
-func + (lhs: Angle, rhs: Int) -> Angle {
-  return Angle(lhs.value + Double(rhs))
+func + (lhs: TauAngle, rhs: Int) -> TauAngle {
+  return TauAngle(lhs.value + Double(rhs))
 }
 
-func - (lhs: Angle, rhs: Int) -> Angle {
-  return Angle(lhs.value - Double(rhs))
+func - (lhs: TauAngle, rhs: Int) -> TauAngle {
+  return TauAngle(lhs.value - Double(rhs))
 }
 
 
 
 
-func < (lhs: Int, rhs: Angle) -> Bool {
+func < (lhs: Int, rhs: TauAngle) -> Bool {
   return Double(lhs) < rhs.value
 }
 
-func == (lhs: Int, rhs: Angle) -> Bool {
+func == (lhs: Int, rhs: TauAngle) -> Bool {
   return Double(lhs) == rhs.value
 }
 
-func < (lhs: Angle, rhs: Int) -> Bool {
+func < (lhs: TauAngle, rhs: Int) -> Bool {
   return lhs.value < Double(rhs)
 }
 
-func == (lhs: Angle, rhs: Int) -> Bool {
+func == (lhs: TauAngle, rhs: Int) -> Bool {
   return lhs.value == Double(rhs)
 }
 
 
 
-func += (inout lhs: Angle, rhs: Int) {
+func += (inout lhs: TauAngle, rhs: Int) {
   lhs.value = lhs.value + Double(rhs)
 }
 
-func -= (inout lhs: Angle, rhs: Int) {
+func -= (inout lhs: TauAngle, rhs: Int) {
   lhs.value = lhs.value - Double(rhs)
 }
 
-func / (lhs: Angle, rhs: Int) -> Angle {
-  return Angle(lhs.value / Double(rhs))
+func / (lhs: TauAngle, rhs: Int) -> TauAngle {
+  return TauAngle(lhs.value / Double(rhs))
 }
 
-func * (lhs: Angle, rhs: Int) -> Angle {
-  return Angle(lhs.value * Double(rhs))
+func * (lhs: TauAngle, rhs: Int) -> TauAngle {
+  return TauAngle(lhs.value * Double(rhs))
 }

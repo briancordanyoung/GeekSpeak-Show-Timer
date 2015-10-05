@@ -12,7 +12,7 @@ extension Timer {
   
   
   // MARK: - Enums
-  enum CountingState: String, Printable {
+  enum CountingState: String, CustomStringConvertible {
     case Ready                 = "Ready"
     case Counting              = "Counting"
     case Paused                = "Paused"
@@ -24,7 +24,7 @@ extension Timer {
     }
   }
 
-  enum ShowPhase: String, Printable {
+  enum ShowPhase: String, CustomStringConvertible {
     case PreShow  = "PreShow"
     case Section1 = "Section1"
     case Break1   = "Break1"
@@ -181,7 +181,7 @@ extension Timer {
       let roundedInterval = Int(interval)
       let seconds = roundedInterval % 60
       let minutes = (roundedInterval / 60) % 60
-      let hours   = (roundedInterval / 3600)
+//      let hours   = (roundedInterval / 3600)
       let subSeconds = formatter.stringFromNumber(interval * 100)!
       return String(format: "%02d:%02d:\(subSeconds)",  minutes, seconds)
     }
@@ -190,7 +190,7 @@ extension Timer {
       let roundedInterval = Int(interval)
       let seconds = roundedInterval % 60
       let minutes = (roundedInterval / 60) % 60
-      let hours   = (roundedInterval / 3600)
+//      let hours   = (roundedInterval / 3600)
       return String(format: "%02d:%02d",  minutes, seconds)
     }
     
