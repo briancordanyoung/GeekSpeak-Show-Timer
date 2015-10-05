@@ -37,7 +37,7 @@ class PrimaryViewController: REFrostedViewController,
     liveBlurBackgroundStyle   = .Dark
     liveBlur                  = false
     limitMenuViewSize         = true
-    backgroundFadeAmount      = CGFloat(0)
+    backgroundFadeAmount      = CGFloat(1)
     menuViewSize              = CGSize(width: 320, height: 0)
     delegate                  = self
     blurRadius                = 0
