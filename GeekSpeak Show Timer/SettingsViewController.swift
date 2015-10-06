@@ -11,7 +11,6 @@ class SettingsViewController: UIViewController {
   // The backupImageView is only a gross fix to hide that the backgroundImageView
   // is disappearing when the REFrostedViewController animates is out of view
   @IBOutlet weak var backgroundImageView: UIImageView!
-  @IBOutlet weak var backupImageView: UIImageView!
   
   @IBOutlet weak var add1SecondButton: UIButton!
   @IBOutlet weak var add5SecondsButton: UIButton!
@@ -153,14 +152,12 @@ class SettingsViewController: UIViewController {
                                                   maskImage: nil)
               dispatch_sync(dispatch_get_main_queue(), {
                   self.backgroundImageView.image = blurredBackgroundImage
-                  self.backupImageView.image = blurredBackgroundImage
                   self.backgroundBlurringInProgress = false
               })
             })
         }
     } else {
       backgroundImageView.image = UIImage.imageWithColor(UIColor.blackColor())
-      backupImageView.image     = backgroundImageView.image
     }
 }  //generateBlurredBackground
   

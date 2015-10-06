@@ -4,7 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Timer View Controller-->
@@ -243,10 +242,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8UH-QO-MoP" userLabel="blurredBackgroundBackup">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="1024"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vDu-Wv-iqT" userLabel="blurredBackground">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vDu-Wv-iqT" userLabel="blurredBackground">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="1024"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="settingsScrollView" translatesAutoresizingMaskIntoConstraints="NO" id="eal-fe-nSn">
@@ -531,18 +527,14 @@
                             </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="8UH-QO-MoP" firstAttribute="width" secondItem="oiW-vz-1PI" secondAttribute="width" id="2KI-TP-dzf"/>
                             <constraint firstItem="vDu-Wv-iqT" firstAttribute="width" secondItem="oiW-vz-1PI" secondAttribute="width" id="AXW-lS-ouf"/>
                             <constraint firstAttribute="trailing" secondItem="eal-fe-nSn" secondAttribute="trailing" id="Fnv-iu-d8k"/>
-                            <constraint firstItem="8UH-QO-MoP" firstAttribute="centerY" secondItem="oiW-vz-1PI" secondAttribute="centerY" id="Uvh-sz-o0G"/>
                             <constraint firstItem="vDu-Wv-iqT" firstAttribute="height" secondItem="oiW-vz-1PI" secondAttribute="height" id="XTu-8s-7V1"/>
                             <constraint firstItem="hFy-xq-Ehk" firstAttribute="top" secondItem="eal-fe-nSn" secondAttribute="bottom" id="dW3-wi-nGL"/>
                             <constraint firstItem="vDu-Wv-iqT" firstAttribute="centerY" secondItem="oiW-vz-1PI" secondAttribute="centerY" id="eXw-ow-HfI"/>
-                            <constraint firstItem="vDu-Wv-iqT" firstAttribute="leading" secondItem="oiW-vz-1PI" secondAttribute="leadingMargin" constant="-20" placeholder="YES" id="r0U-YF-iN3"/>
+                            <constraint firstItem="vDu-Wv-iqT" firstAttribute="leading" secondItem="oiW-vz-1PI" secondAttribute="leading" placeholder="YES" id="r0U-YF-iN3"/>
                             <constraint firstItem="eal-fe-nSn" firstAttribute="leading" secondItem="oiW-vz-1PI" secondAttribute="leading" id="snE-4j-dvi"/>
-                            <constraint firstItem="8UH-QO-MoP" firstAttribute="centerX" secondItem="oiW-vz-1PI" secondAttribute="centerX" id="suE-QI-KXf"/>
                             <constraint firstItem="eal-fe-nSn" firstAttribute="top" secondItem="oiW-vz-1PI" secondAttribute="top" id="zXS-yU-5Wk"/>
-                            <constraint firstItem="8UH-QO-MoP" firstAttribute="height" secondItem="oiW-vz-1PI" secondAttribute="height" id="zXm-pm-9L4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="eC9-0S-DLt"/>
@@ -552,7 +544,6 @@
                         <outlet property="add1SecondButton" destination="59I-kf-b1M" id="5hf-Af-SuP"/>
                         <outlet property="add5SecondsButton" destination="vSY-I5-brJ" id="dZf-Z8-BfA"/>
                         <outlet property="backgroundImageView" destination="vDu-Wv-iqT" id="aDt-w2-Pi9"/>
-                        <outlet property="backupImageView" destination="8UH-QO-MoP" id="64r-bb-UUz"/>
                         <outlet property="contentView" destination="cOC-kN-gfy" id="d5d-eZ-HCx"/>
                         <outlet property="postShowLabel" destination="hSU-AR-jve" id="ZRY-zb-oD0"/>
                         <outlet property="remove1SecondButton" destination="hi0-GX-r7Y" id="cOo-NR-aXc"/>
@@ -565,24 +556,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tBI-zJ-Era" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-645" y="-546"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="CH7-ZI-YXK">
-            <objects>
-                <viewController storyboardIdentifier="testVC" id="ffj-Cg-f6c" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Pr0-Y4-rIe"/>
-                        <viewControllerLayoutGuide type="bottom" id="lDF-NJ-KJh"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="hiC-cU-1HA">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ddS-PI-DAq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="354" y="-1465"/>
         </scene>
     </scenes>
     <resources>
