@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func applicationWillEnterForeground(application: UIApplication) {
     resetTimerIfShowTimeElapsed()
+    timerChangedCountingStatus()
   }
 
   func applicationDidBecomeActive(application: UIApplication) {
@@ -110,8 +111,8 @@ extension AppDelegate {
     // reset the timer if it hasn't started, so that it uses the UserDefaults
     // to set which timing to use (demo or show)
     let useDemoDurations = NSUserDefaults
-                                  .standardUserDefaults()
-                                  .boolForKey(Timer.Constants.UseDemoDurations)
+                                   .standardUserDefaults()
+                                   .boolForKey(Timer.Constants.UseDemoDurations)
     if timer.totalShowTimeElapsed == 0 {
       if useDemoDurations {
         timer.reset(usingDemoTiming: true)
