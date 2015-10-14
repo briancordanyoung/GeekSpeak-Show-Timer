@@ -40,7 +40,8 @@ final class TimerViewController: UIViewController {
                                            blue: 166/255,
                                           alpha: 1.0)
     
-    static let LineWidth              = (CGFloat(90) / CGFloat(736)) * (1 / 0.95) * 2
+//    static let LineWidth              = (CGFloat(90) / CGFloat(736)) * (1 / 0.95) * 2
+    static let LineWidth              = (CGFloat(90) / CGFloat(736)) * (1 / 0.95) * 2 * 0.75
     static let RingDarkeningFactor    = CGFloat(0.2)
     
     static let ActiveLayoutPriority   = UILayoutPriority(751)
@@ -161,10 +162,17 @@ final class TimerViewController: UIViewController {
     let ring3fg   = configureFGRing( RingView(),
                           withColor: Constants.GeekSpeakBlueColor)
     
-    ring3bg.fillScale = 0.95
-    ring3fg.fillScale = 0.95
-    ring2bg.fillScale = 0.64
-    ring2fg.fillScale = 0.64
+    let ring4bg   = configureBGRing( RingView(),
+                          withColor: Constants.GeekSpeakBlueInactiveColor)
+    let ring4fg   = configureFGRing( RingView(),
+                          withColor: Constants.GeekSpeakBlueColor)
+    
+    ring4bg.fillScale = 0.95
+    ring4fg.fillScale = 0.95
+    ring3bg.fillScale = 0.75
+    ring3fg.fillScale = 0.75
+    ring2bg.fillScale = 0.54
+    ring2fg.fillScale = 0.54
     ring1bg.fillScale = 0.33
     ring1fg.fillScale = 0.33
 
@@ -175,6 +183,8 @@ final class TimerViewController: UIViewController {
                               ring2fg: ring2fg,
                               ring3bg: ring3bg,
                               ring3fg: ring3fg,
+                              ring4bg: ring4bg,
+                              ring4fg: ring4fg,
                                  fill: breakView)
     
     registerForTimerNotifications()

@@ -21,6 +21,7 @@ class SettingsViewController: UIViewController {
   @IBOutlet weak var segment1Label: UILabel!
   @IBOutlet weak var segment2Label: UILabel!
   @IBOutlet weak var segment3Label: UILabel!
+  @IBOutlet weak var segment4Label: UILabel!
   @IBOutlet weak var postShowLabel: UILabel!
   
   

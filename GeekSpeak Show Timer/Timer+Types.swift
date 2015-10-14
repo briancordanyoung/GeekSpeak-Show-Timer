@@ -31,6 +31,8 @@ extension Timer {
     case Section2 = "Section2"
     case Break2   = "Break2"
     case Section3 = "Section3"
+    case Break3   = "Break3"
+    case Section4 = "Section4"
     case PostShow = "PostShow"
     
     var description: String {
@@ -78,6 +80,10 @@ extension Timer {
           return timeElapsed.break2
         case .Section3:
           return timeElapsed.section3
+        case .Break3:
+          return timeElapsed.break3
+        case .Section4:
+          return timeElapsed.section4
         case .PostShow:
           return timeElapsed.postShow
         }
@@ -96,6 +102,10 @@ extension Timer {
           timeElapsed.break2   = newElapsed
         case .Section3:
           timeElapsed.section3 = newElapsed
+        case .Break3:
+          timeElapsed.break3   = newElapsed
+        case .Section4:
+          timeElapsed.section4 = newElapsed
         case .PostShow:
           timeElapsed.postShow = newElapsed
         }
@@ -117,6 +127,10 @@ extension Timer {
           return durations.break2
         case .Section3:
           return durations.section3
+        case .Break3:
+          return durations.break3
+        case .Section4:
+          return durations.section4
         case .PostShow:
           return NSTimeInterval(0.0)
         }
@@ -135,6 +149,10 @@ extension Timer {
           durations.break2   = newDuration
         case .Section3:
           durations.section3 = newDuration
+        case .Break3:
+          durations.break3   = newDuration
+        case .Section4:
+          durations.section4 = newDuration
         case .PostShow:
           break
         }
@@ -170,6 +188,16 @@ extension Timer {
       case .Break2:
         phase = .Section3
       case .Section3:
+        // Before moving to the next phase of the show,
+        // get the difference between the planned duration and the elapsed time
+        // and add that to the next show section.
+        let difference = duration - elapsed
+        durations.section3 -= difference
+        durations.section4 += difference
+        phase = .Break3
+      case .Break3:
+        phase = .Section4
+      case .Section4:
         phase = .PostShow
       case .PostShow:
         break
@@ -207,13 +235,15 @@ extension Timer {
     var section2:          NSTimeInterval = 0
     var break2:            NSTimeInterval = 0
     var section3:          NSTimeInterval = 0
+    var break3:            NSTimeInterval = 0
+    var section4:          NSTimeInterval = 0
 
     init() {
       useGeekSpeakDurations()
     }
     
     var totalShowTime: NSTimeInterval {
-      return section1 + section2 + section3
+      return section1 + section2 + section3  + section4
     }
     
     func advancePhaseOnCompletion(phase: ShowPhase) -> Bool {
@@ -221,10 +251,12 @@ extension Timer {
       case .PreShow,
            .Break1,
            .Break2,
-           .Section3:
+           .Break3,
+           .Section4:
         return true
       case .Section1,
            .Section2,
+           .Section3,
            .PostShow:
         return false
       }
@@ -238,15 +270,19 @@ extension Timer {
       section2 = 10.0
       break2   =  5.0
       section3 = 10.0
+      break3   =  5.0
+      section4 = 10.0
     }
     
     mutating func useGeekSpeakDurations() {
       preShow  =  1.0 * oneMinute
-      section1 = 14.0 * oneMinute
+      section1 =  8.0 * oneMinute
       break1   =  1.0 * oneMinute
-      section2 = 18.0 * oneMinute
+      section2 =  8.0 * oneMinute
       break2   =  1.0 * oneMinute
-      section3 = 19.0 * oneMinute
+      section3 = 10.0 * oneMinute
+      break3   =  1.0 * oneMinute
+      section4 = 11.0 * oneMinute
     }
 
   }
@@ -260,10 +296,12 @@ extension Timer {
     var section2: NSTimeInterval = 0.0
     var break2:   NSTimeInterval = 0.0
     var section3: NSTimeInterval = 0.0
+    var break3:   NSTimeInterval = 0.0
+    var section4: NSTimeInterval = 0.0
     var postShow: NSTimeInterval = 0.0
 
     var totalShowTime: NSTimeInterval {
-      return section1 + section2 + section3
+      return section1 + section2 + section3 + section4
     }
   }
   

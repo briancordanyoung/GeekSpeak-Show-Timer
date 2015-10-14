@@ -25,8 +25,10 @@ final class Timer: NSObject, NSCoding {
       static let Section1Id = "timerShowTimingDurationSection1Id"
       static let Section2Id = "timerShowTimingDurationSection2Id"
       static let Section3Id = "timerShowTimingDurationSection3Id"
+      static let Section4Id = "timerShowTimingDurationSection4Id"
       static let Break1Id   = "timerShowTimingDurationBreak1Id"
       static let Break2Id   = "timerShowTimingDurationBreak2Id"
+      static let Break3Id   = "timerShowTimingDurationBreak2Id"
     }
     
     struct ElapsedTime {
@@ -34,8 +36,10 @@ final class Timer: NSObject, NSCoding {
       static let Section1Id  = "timerShowTimingElapsedSection1Id"
       static let Section2Id  = "timerShowTimingElapsedSection2Id"
       static let Section3Id  = "timerShowTimingElapsedSection3Id"
+      static let Section4Id  = "timerShowTimingElapsedSection4Id"
       static let Break1Id    = "timerShowTimingElapsedBreak1Id"
       static let Break2Id    = "timerShowTimingElapsedBreak2Id"
+      static let Break3Id    = "timerShowTimingElapsedBreak3Id"
       static let PostShowId  = "timerShowTimingElapsedPostShowId"
     }
   }
@@ -93,18 +97,18 @@ final class Timer: NSObject, NSCoding {
   
   var totalShowTimeRemaining: NSTimeInterval {
     switch timing.phase {
-    case .PreShow, .Break1, .Break2, .PostShow:
+    case .PreShow, .Break1, .Break2, .Break3, .PostShow:
       return max(timing.totalShowTimeRemaining,0)
-    case .Section1, .Section2, .Section3:
+    case .Section1, .Section2, .Section3, .Section4:
       return max(timing.totalShowTimeRemaining - secondsElapsed,0)
     }
   }
   
   var totalShowTimeElapsed: NSTimeInterval {
     switch timing.phase {
-    case .PreShow, .Break1, .Break2, .PostShow:
+    case .PreShow, .Break1, .Break2, .Break3, .PostShow:
       return max(timing.totalShowTimeElapsed,0)
-    case .Section1, .Section2, .Section3:
+    case .Section1, .Section2, .Section3, .Section4:
       return max(timing.totalShowTimeElapsed + secondsElapsed,0)
     }
   }
@@ -124,7 +128,8 @@ final class Timer: NSObject, NSCoding {
     switch phase {
     case .PreShow,
          .Break1,
-         .Break2:
+         .Break2,
+         .Break3:
       percentageComplete = Double(self.percentageComplete)
     case .Section1:
 //      let a = timing.durations.section1
@@ -139,6 +144,9 @@ final class Timer: NSObject, NSCoding {
     case .Section3:
       percentageComplete =  (timing.durations.section3 - timing.timeElapsed.section3) /
                                           timing.durations.section3
+    case .Section4:
+      percentageComplete =  (timing.durations.section4 - timing.timeElapsed.section4) /
+                                          timing.durations.section4
     case .PostShow:
       percentageComplete = 0.0
     }

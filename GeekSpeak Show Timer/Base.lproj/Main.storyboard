@@ -252,7 +252,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="308" height="1024"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="50U-fS-RUV" userLabel="TImesView">
-                                                <rect key="frame" x="0.0" y="470" width="308" height="84"/>
+                                                <rect key="frame" x="0.0" y="450" width="308" height="124"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SGr-Xf-42M" userLabel="Segment1">
                                                         <rect key="frame" x="0.0" y="0.0" width="308" height="21"/>
@@ -313,16 +313,36 @@
                                                             <constraint firstAttribute="bottom" secondItem="DD0-ad-hT1" secondAttribute="bottom" id="wob-mf-Vqj"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2EU-9s-WJW" userLabel="Segment3">
-                                                        <rect key="frame" x="0.0" y="42" width="308" height="21"/>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qCg-rG-NP8" userLabel="Segment3">
+                                                        <rect key="frame" x="66" y="50" width="140" height="23"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Segment 3:" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ixv-6d-Pbc">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Segment 3:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HmX-6Y-R3K" userLabel="Segment 3:">
+                                                                <rect key="frame" x="0.0" y="2" width="79" height="21"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O4b-tg-WMA" userLabel="Segment3 Label:">
+                                                                <rect key="frame" x="98" y="0.0" width="74" height="21"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="HmX-6Y-R3K" firstAttribute="top" secondItem="O4b-tg-WMA" secondAttribute="top" id="FGJ-Jv-yKS"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2EU-9s-WJW" userLabel="Segment4">
+                                                        <rect key="frame" x="0.0" y="82" width="308" height="21"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Segment 3:" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ixv-6d-Pbc" userLabel="Segment 4:">
                                                                 <rect key="frame" x="8" y="0.0" width="142" height="21"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLl-wL-nDt">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLl-wL-nDt" userLabel="Segment4 Label">
                                                                 <rect key="frame" x="158" y="0.0" width="142" height="21"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -341,7 +361,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZdV-gH-koD" userLabel="PostShow">
-                                                        <rect key="frame" x="0.0" y="63" width="308" height="21"/>
+                                                        <rect key="frame" x="0.0" y="103" width="308" height="21"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post Show:" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EK0-aT-lcZ">
                                                                 <rect key="frame" x="8" y="0.0" width="142" height="21"/>
@@ -387,7 +407,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="2EU-9s-WJW" secondAttribute="trailing" id="n8L-aj-qaz"/>
                                                     <constraint firstAttribute="trailing" secondItem="tiB-7B-0CH" secondAttribute="trailing" id="onP-0F-q7v"/>
                                                     <constraint firstItem="tiB-7B-0CH" firstAttribute="leading" secondItem="50U-fS-RUV" secondAttribute="leading" id="oph-CL-rkc"/>
-                                                    <constraint firstItem="2EU-9s-WJW" firstAttribute="top" secondItem="tiB-7B-0CH" secondAttribute="bottom" id="wpJ-iG-hb5"/>
+                                                    <constraint firstItem="2EU-9s-WJW" firstAttribute="top" secondItem="tiB-7B-0CH" secondAttribute="bottom" constant="40" id="wpJ-iG-hb5"/>
                                                 </constraints>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GeekSpeakWhite" translatesAutoresizingMaskIntoConstraints="NO" id="ncX-03-XBY">
@@ -463,7 +483,7 @@
                                                 </connections>
                                             </button>
                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R4y-xt-Amz" userLabel="timesViewTopSpacer">
-                                                <rect key="frame" x="0.0" y="280" width="308" height="190"/>
+                                                <rect key="frame" x="0.0" y="280" width="308" height="170"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -471,7 +491,7 @@
                                                 </constraints>
                                             </view>
                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="poo-7U-67N" userLabel="timesViewBottomSpacer">
-                                                <rect key="frame" x="0.0" y="554" width="308" height="190"/>
+                                                <rect key="frame" x="0.0" y="574" width="308" height="170"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -550,12 +570,47 @@
                         <outlet property="resetButton" destination="W5L-5D-Beh" id="ydf-4f-BAg"/>
                         <outlet property="segment1Label" destination="enZ-yY-nPJ" id="wJ8-QL-INW"/>
                         <outlet property="segment2Label" destination="fHF-7j-CuN" id="tpo-f7-uwI"/>
-                        <outlet property="segment3Label" destination="iLl-wL-nDt" id="du9-dg-MxY"/>
+                        <outlet property="segment3Label" destination="O4b-tg-WMA" id="T6i-0v-CdM"/>
+                        <outlet property="segment4Label" destination="iLl-wL-nDt" id="ccJ-R2-T6R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tBI-zJ-Era" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-645" y="-546"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="y7V-BB-CkG">
+            <objects>
+                <viewController id="qKX-m8-ku1" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2uG-YM-XyE"/>
+                        <viewControllerLayoutGuide type="bottom" id="a4f-q6-zjl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="a5E-Jb-fJl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qnX-PU-OE7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="mVS-UT-BYj">
+            <objects>
+                <viewController id="Wr8-Sq-a1o" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mde-Tb-TGB"/>
+                        <viewControllerLayoutGuide type="bottom" id="iF6-K0-Kxd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Wm4-P2-8hg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CdB-fi-33p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <resources>

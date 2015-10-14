@@ -46,6 +46,10 @@ extension Timer {
     case 6:
       timing.phase = .Section3
     case 7:
+      timing.phase = .Break3
+    case 8:
+      timing.phase = .Section4
+    case 9:
       timing.phase = .PostShow
     default:
       timing.phase = .PreShow
@@ -59,11 +63,15 @@ extension Timer {
                      aDecoder.decodeDoubleForKey(Constants.Durations.Section2Id)
     timing.durations.section3 =
                      aDecoder.decodeDoubleForKey(Constants.Durations.Section3Id)
+    timing.durations.section4 =
+                     aDecoder.decodeDoubleForKey(Constants.Durations.Section4Id)
     timing.durations.break1   =
                        aDecoder.decodeDoubleForKey(Constants.Durations.Break1Id)
     timing.durations.break2   =
                        aDecoder.decodeDoubleForKey(Constants.Durations.Break2Id)
-    
+     timing.durations.break3   =
+                       aDecoder.decodeDoubleForKey(Constants.Durations.Break3Id)
+   
     timing.timeElapsed.preShow  =
                     aDecoder.decodeDoubleForKey(Constants.ElapsedTime.PreShowId)
     timing.timeElapsed.section1 =
@@ -121,8 +129,12 @@ extension Timer {
       aCoder.encodeInt(5, forKey: Constants.PhaseId)
     case .Section3:
       aCoder.encodeInt(6, forKey: Constants.PhaseId)
-    case .PostShow:
+    case .Break3:
       aCoder.encodeInt(7, forKey: Constants.PhaseId)
+    case .Section4:
+      aCoder.encodeInt(8, forKey: Constants.PhaseId)
+    case .PostShow:
+      aCoder.encodeInt(9, forKey: Constants.PhaseId)
     }
     
     let d = timing.durations
@@ -132,6 +144,8 @@ extension Timer {
     aCoder.encodeDouble(d.section2, forKey: Constants.Durations.Section2Id)
     aCoder.encodeDouble(d.break2,   forKey: Constants.Durations.Break2Id)
     aCoder.encodeDouble(d.section3, forKey: Constants.Durations.Section3Id)
+    aCoder.encodeDouble(d.break3,   forKey: Constants.Durations.Break3Id)
+    aCoder.encodeDouble(d.section4, forKey: Constants.Durations.Section4Id)
     
     let t = timing.timeElapsed
     aCoder.encodeDouble(t.preShow,  forKey: Constants.ElapsedTime.PreShowId)
@@ -140,6 +154,8 @@ extension Timer {
     aCoder.encodeDouble(t.section2, forKey: Constants.ElapsedTime.Section2Id)
     aCoder.encodeDouble(t.break2,   forKey: Constants.ElapsedTime.Break2Id)
     aCoder.encodeDouble(t.section3, forKey: Constants.ElapsedTime.Section3Id)
+    aCoder.encodeDouble(t.break3,   forKey: Constants.ElapsedTime.Break3Id)
+    aCoder.encodeDouble(t.section4, forKey: Constants.ElapsedTime.Section4Id)
     aCoder.encodeDouble(t.postShow, forKey: Constants.ElapsedTime.PostShowId)
   }
   
