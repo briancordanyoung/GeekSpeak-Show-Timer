@@ -14,9 +14,9 @@ class PrimaryViewController: REFrostedViewController,
 
     let timerViewController = storyboard
                  .instantiateViewControllerWithIdentifier("timerViewController")
+    
     let settingsViewController = storyboard
               .instantiateViewControllerWithIdentifier("settingsViewController")
-    
     
     if let timerViewController = timerViewController as? TimerViewController,
     settingsViewController = settingsViewController as? SettingsViewController {

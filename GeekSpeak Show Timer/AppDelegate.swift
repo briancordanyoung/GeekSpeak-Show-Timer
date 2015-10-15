@@ -81,6 +81,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     registerForTimerNotifications()
     return true
   }
+  
+  func application(application: UIApplication,
+                            willEncodeRestorableStateWithCoder coder: NSCoder) {
+    timer.encodeWithCoder(coder)
+  }
+  
+  func application(application: UIApplication,
+                             didDecodeRestorableStateWithCoder coder: NSCoder) {
+    timer.decodeWithCoder(coder: coder)
+  }
 
 }
 

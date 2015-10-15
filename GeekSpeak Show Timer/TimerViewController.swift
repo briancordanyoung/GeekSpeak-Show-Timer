@@ -335,25 +335,23 @@ final class TimerViewController: UIViewController {
   // MARK: -
   // MARK: Gestures
   
-  
   func addSwipeGesture() {
-    let gesture = UIPanGestureRecognizer(target: self,
+    let gesture = UIScreenEdgePanGestureRecognizer(target: self,
                                                 action: "panGestureRecognized:")
-    gesture.delaysTouchesBegan = true
-    gesture.cancelsTouchesInView = true
+    gesture.edges = .Left
     view.addGestureRecognizer(gesture)
   }
   
   func panGestureRecognized(sender: UIPanGestureRecognizer) {
-    guard let primaryViewController = UIApplication.sharedApplication().keyWindow?.rootViewController as? PrimaryViewController else {
+    guard let primaryViewController = UIApplication.sharedApplication()
+                 .keyWindow?.rootViewController as? PrimaryViewController else {
       assertionFailure("Could not find PrimaryViewController as root View controller")
       return
     }
+
     primaryViewController.panGestureRecognized(sender)
   }
-  
 
-  
   
   // MARK: -
   // MARK: Warning Animation
