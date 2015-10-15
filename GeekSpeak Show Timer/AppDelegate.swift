@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   
+  // MARK: App Delegate
   func application(application: UIApplication,
        didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?)
                                                                        -> Bool {
@@ -83,6 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+// MARK: Additional
 
 extension AppDelegate {
   
