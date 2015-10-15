@@ -14,6 +14,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var timer = Timer()
   var window: UIWindow?
   
+  // Convenience property to make intentions clear what is gonig on.
+  var allowDeviceToSleepDisplay: Bool {
+    get {
+      return !UIApplication.sharedApplication().idleTimerDisabled
+    }
+    set(allowed) {
+      UIApplication.sharedApplication().idleTimerDisabled = !allowed
+    }
+  }
+  
+  
   func application(application: UIApplication,
        didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?)
                                                                        -> Bool {
@@ -51,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func applicationDidEnterBackground(application: UIApplication) {
-    UIApplication.sharedApplication().idleTimerDisabled = false
+    allowDeviceToSleepDisplay = true
   }
 
   
@@ -98,11 +109,11 @@ extension AppDelegate {
     case .Ready,
          .Paused,
          .PausedAfterComplete:
-      UIApplication.sharedApplication().idleTimerDisabled = false
+      allowDeviceToSleepDisplay = true
       
     case .Counting,
          .CountingAfterComplete:
-      UIApplication.sharedApplication().idleTimerDisabled = true
+      allowDeviceToSleepDisplay = false
     }
 
   }
