@@ -91,11 +91,12 @@ class SettingsViewController: UIViewController {
   // MARK: Timer management
   func resetTimer() {
     updateUseDemoDurations()
-    if useDemoDurations {
-      timer?.reset(usingDemoTiming: true)
-    } else {
-      timer?.reset(usingDemoTiming: false)
-    }
+    timer?.reset(usingDemoTiming: useDemoDurations)
+    
+    // Delay the generateBlurredBackground until the TimerViews are drawn
+    // by waiting until the next run loop.
+    self.performSelector("generateBlurredBackground", withObject: .None,
+                                                      afterDelay: 0.0)
   }
   
   
