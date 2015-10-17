@@ -77,6 +77,7 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var totalLabel: UILabel!
   @IBOutlet weak var segmentLabel: UILabel!
   @IBOutlet weak var flashImageView: UIImageView!
+  @IBOutlet weak var backButton: BackButton!
   @IBOutlet weak var startPauseButton: PlayPauseButton!
   @IBOutlet weak var nextSegmentButton: NextSegmentButton!
   
@@ -221,6 +222,14 @@ final class TimerViewController: UIViewController {
   
   // MARK: -
   // MARK: Actions
+  @IBAction func backButtonPressed(sender: AnyObject) {
+    if let primaryViewController = parentViewController
+                                                     as? PrimaryViewController {
+                                                  
+      primaryViewController.presentMenuViewController()
+    }
+  }
+  
   @IBAction func nextSegmentButtonPressed(sender: NextSegmentButton) {
     timer?.next()
   }

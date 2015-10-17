@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D30119FE1BD0B7940008D04A /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30119FD1BD0B7940008D04A /* BackButton.swift */; settings = {ASSET_TAGS = (); }; };
 		D30F6F1D1BAF306A00CF069A /* RingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F6F1C1BAF306A00CF069A /* RingLayer.swift */; settings = {ASSET_TAGS = (); }; };
 		D30F6F1E1BAF306A00CF069A /* RingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F6F1C1BAF306A00CF069A /* RingLayer.swift */; settings = {ASSET_TAGS = (); }; };
 		D30F6F201BAF95A000CF069A /* TauAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F6F1F1BAF95A000CF069A /* TauAngle.swift */; settings = {ASSET_TAGS = (); }; };
@@ -91,6 +92,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D30119FD1BD0B7940008D04A /* BackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		D30F6F1C1BAF306A00CF069A /* RingLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingLayer.swift; sourceTree = "<group>"; };
 		D30F6F1F1BAF95A000CF069A /* TauAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TauAngle.swift; sourceTree = "<group>"; };
 		D31864EB1BA6605A0083B46E /* RingDrawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingDrawing.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 		D36742841B9D377F00EE13F7 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				D30119FD1BD0B7940008D04A /* BackButton.swift */,
 				D3EC191B1B94EB5000A8E426 /* PlayPauseWipeButton.swift */,
 				D36742801B9D33FE00EE13F7 /* NextSegmentButton.swift */,
 				D3FD35051B9B650A00CE15F6 /* TimeWipeButton.swift */,
@@ -605,6 +608,7 @@
 				D34C13E31BBCEEB500649676 /* UIViewController+REFrostedViewController.m in Sources */,
 				D340CCA31B6D556D00BB17E3 /* Angle.swift in Sources */,
 				D3912C731B6E9CED003B42F1 /* Timer.swift in Sources */,
+				D30119FE1BD0B7940008D04A /* BackButton.swift in Sources */,
 				D34C13DF1BBCEEB500649676 /* REFrostedContainerViewController.m in Sources */,
 				D32B9DED1B77F6740098DCCF /* UIImage+WithColor.swift in Sources */,
 				D3C0807B1B9BB6290020A4A0 /* PlayPauseWipeButton.swift in Sources */,

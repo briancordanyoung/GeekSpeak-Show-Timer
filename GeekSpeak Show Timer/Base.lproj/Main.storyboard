@@ -137,6 +137,16 @@
                                             <action selector="nextSegmentButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4vC-nM-WnJ"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12Z-1g-lxX" userLabel="BackButton" customClass="BackButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="54" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="54" id="W7A-L2-7Jk"/>
+                                            <constraint firstAttribute="height" constant="50" id="olv-qc-IeD"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="backButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hkt-8i-Z2D"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -149,8 +159,10 @@
                                     <constraint firstItem="tY2-lc-OlN" firstAttribute="width" relation="lessThanOrEqual" secondItem="gWc-zk-mRv" secondAttribute="width" priority="751" constant="-40" id="AfI-f3-uUe" userLabel="vCirclesWidth"/>
                                     <constraint firstItem="tY2-lc-OlN" firstAttribute="width" secondItem="gWc-zk-mRv" secondAttribute="width" priority="1" constant="-40" id="DxK-Au-5EJ" userLabel="circlesWidth"/>
                                     <constraint firstItem="tY2-lc-OlN" firstAttribute="height" secondItem="gWc-zk-mRv" secondAttribute="height" priority="1" constant="-40" id="EB8-jo-4aQ" userLabel="circlesHeight"/>
+                                    <constraint firstItem="12Z-1g-lxX" firstAttribute="top" secondItem="gWc-zk-mRv" secondAttribute="top" id="Eb1-fN-MAM"/>
                                     <constraint firstItem="edy-5J-yaK" firstAttribute="width" secondItem="tY2-lc-OlN" secondAttribute="width" id="FwL-Kw-RYG" userLabel="skipButtonWidth"/>
                                     <constraint firstItem="edy-5J-yaK" firstAttribute="centerX" secondItem="tY2-lc-OlN" secondAttribute="centerX" id="IUN-ct-Wmg" userLabel="skipButtonCenterX"/>
+                                    <constraint firstItem="12Z-1g-lxX" firstAttribute="leading" secondItem="gWc-zk-mRv" secondAttribute="leading" id="JOC-wl-Kln"/>
                                     <constraint firstItem="N48-Wj-ZUq" firstAttribute="centerX" secondItem="gWc-zk-mRv" secondAttribute="centerX" priority="751" id="LuQ-Li-hQE" userLabel="vControlsCenteredX"/>
                                     <constraint firstItem="N48-Wj-ZUq" firstAttribute="trailing" secondItem="gWc-zk-mRv" secondAttribute="trailing" priority="749" id="NoN-NY-Dqm" userLabel="hControlsToContainerTrailing"/>
                                     <constraint firstItem="tY2-lc-OlN" firstAttribute="bottom" secondItem="N48-Wj-ZUq" secondAttribute="top" priority="751" id="NsY-01-HVA" userLabel="vCirclesToControls"/>
@@ -182,6 +194,7 @@
                     <navigationItem key="navigationItem" id="wM9-rF-CHT"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
+                        <outlet property="backButton" destination="12Z-1g-lxX" id="85o-6k-grF"/>
                         <outlet property="flashImageView" destination="5o7-Gc-suh" id="h9q-K0-hB6"/>
                         <outlet property="hCirclesCenteredY" destination="5lf-ye-AdK" id="Zv5-tc-BRk"/>
                         <outlet property="hCirclesHeight" destination="qHi-5a-v30" id="Zos-Oo-WHf"/>
