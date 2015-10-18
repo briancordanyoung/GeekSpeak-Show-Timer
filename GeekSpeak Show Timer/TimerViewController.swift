@@ -81,48 +81,12 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var startPauseButton: PlayPauseButton!
   @IBOutlet weak var nextSegmentButton: NextSegmentButton!
   
-  // Vertical Layout
-  @IBOutlet weak var vCirclesCenteredX: NSLayoutConstraint!
-  @IBOutlet weak var vControlsCenteredX: NSLayoutConstraint!
-  @IBOutlet weak var vCirclesToContainerTop: NSLayoutConstraint!
-  @IBOutlet weak var vCirclesToControls: NSLayoutConstraint!
-  @IBOutlet weak var vControlsToContainerBottom: NSLayoutConstraint!
-  @IBOutlet weak var vCirclesWidth: NSLayoutConstraint!
-  @IBOutlet weak var vControlsWidth: NSLayoutConstraint!
-  @IBOutlet weak var vFlashImageViewBottomEdge: NSLayoutConstraint!
-  var verticalContraints: [NSLayoutConstraint] = []
-  
-  // Horizontal Layout
-  @IBOutlet weak var hCirclesCenteredY: NSLayoutConstraint!
-  @IBOutlet weak var hControlsCenteredY: NSLayoutConstraint!
-  @IBOutlet weak var hCirclesToContainerLeading: NSLayoutConstraint!
-  @IBOutlet weak var hCirclesToControls: NSLayoutConstraint!
-  @IBOutlet weak var hControlsToContainerTrailing: NSLayoutConstraint!
-  @IBOutlet weak var hCirclesHeight: NSLayoutConstraint!
-  @IBOutlet weak var hControlsHeight: NSLayoutConstraint!
-  @IBOutlet weak var hFlashImageViewTrailingEdge: NSLayoutConstraint!
-  var horizontalContraints: [NSLayoutConstraint] = []
+  @IBOutlet weak var containerStackView: UIStackView!
+  @IBOutlet weak var controlsStackView: UIStackView!
   
   
   override func viewDidLoad() {
-    verticalContraints = [vCirclesCenteredX,
-                          vControlsCenteredX,
-                          vCirclesToContainerTop,
-                          vCirclesToControls,
-                          vControlsToContainerBottom,
-                          vCirclesWidth,
-                          vControlsWidth,
-                          vFlashImageViewBottomEdge]
-    
-    horizontalContraints = [hCirclesCenteredY,
-                            hControlsCenteredY,
-                            hCirclesToContainerLeading,
-                            hCirclesToControls,
-                            hControlsToContainerTrailing,
-    hFlashImageViewTrailingEdge]
-    
     addSwipeGesture()
-    
     super.viewDidLoad()
   }
   
@@ -230,6 +194,10 @@ final class TimerViewController: UIViewController {
     }
   }
   
+  @IBAction func nextSegmentButtonPressedToo(sender: NextSegmentButton) {
+    timer?.next()
+  }
+  
   @IBAction func nextSegmentButtonPressed(sender: NextSegmentButton) {
     timer?.next()
   }
@@ -305,40 +273,21 @@ final class TimerViewController: UIViewController {
   func layoutViewsForSize(          size: CGSize,
             animateWithDuration duration: NSTimeInterval) {
 
-    view.layoutIfNeeded()
-    UIView.animateWithDuration(duration, animations: {
-      if size.width < size.height {
-        self.setContraintPriorityForVerticalLayout()
-      } else {
-        self.setContraintPriorityForHorizontalLayout()
-      }
-      self.view.layoutIfNeeded()
-    })
-  }
-  
-  
-  
-  
-  func setContraintPriorityForVerticalLayout() {
-    verticalContraints.forEach(    activateContraint )
-    horizontalContraints.forEach(deactivateContraint )
-  }
-  
-  func setContraintPriorityForHorizontalLayout() {
-    verticalContraints.forEach(  deactivateContraint )
-    horizontalContraints.forEach(  activateContraint )
-  }
-  
-  func activateContraint(constraint: NSLayoutConstraint) {
-    if constraint.priority == Constants.InactiveLayoutPriority {
-      constraint.priority = Constants.ActiveLayoutPriority
+    if size.width < size.height {
+      self.setContraintsForVerticalLayout()
+    } else {
+      self.setContraintsForHorizontalLayout()
     }
   }
   
-  func deactivateContraint(constraint: NSLayoutConstraint) {
-    if constraint.priority == Constants.ActiveLayoutPriority {
-      constraint.priority = Constants.InactiveLayoutPriority
-    }
+  func setContraintsForVerticalLayout() {
+    containerStackView.axis = .Vertical
+    controlsStackView.axis = .Horizontal
+  }
+  
+  func setContraintsForHorizontalLayout() {
+    containerStackView.axis = .Horizontal
+    controlsStackView.axis = .Vertical
   }
   
   // MARK: -

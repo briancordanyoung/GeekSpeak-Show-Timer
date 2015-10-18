@@ -19,9 +19,10 @@ class BackButton: UIButton {
     color.setStroke()
     
     let origSizeX = CGFloat(37)
-    let origSizeY = CGFloat(47)
+//    let origSizeY = CGFloat(47)
+    let origSizeY = CGFloat(50)
     let xOffset = center.x - (origSizeX / 2)
-    let yOffset = center.y - (origSizeY / 2)
+    let yOffset = center.y - (origSizeY)
     
     
     let backPath = UIBezierPath()

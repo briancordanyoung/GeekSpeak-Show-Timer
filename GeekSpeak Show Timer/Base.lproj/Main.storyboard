@@ -4,6 +4,8 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Timer View Controller-->
@@ -18,21 +20,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gWc-zk-mRv" userLabel="Container">
-                                <rect key="frame" x="0.0" y="60" width="768" height="964"/>
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flash.png" translatesAutoresizingMaskIntoConstraints="NO" id="5o7-Gc-suh" userLabel="FlashImageView">
+                                <rect key="frame" x="-640" y="-640" width="2048" height="2048"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" image="YES"/>
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="5o7-Gc-suh" secondAttribute="height" multiplier="1:1" id="Duc-Ea-NmZ" userLabel="Aspect-1:1"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eTm-Vw-Y1W">
+                                <rect key="frame" x="20" y="20" width="728" height="1004"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flash.png" translatesAutoresizingMaskIntoConstraints="NO" id="5o7-Gc-suh" userLabel="FlashImageView">
-                                        <rect key="frame" x="-216" y="-236" width="1200" height="1200"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" image="YES"/>
-                                            <bool key="isElement" value="YES"/>
-                                        </accessibility>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="5o7-Gc-suh" secondAttribute="height" multiplier="1:1" id="Duc-Ea-NmZ" userLabel="Aspect-1:1"/>
-                                        </constraints>
-                                    </imageView>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tY2-lc-OlN" userLabel="TimerCircles">
-                                        <rect key="frame" x="20" y="0.0" width="728" height="728"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="728" height="728"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="totalTime" text="00:00" lineBreakMode="tailTruncation" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="iLg-Ok-lxM" userLabel="totalTime">
                                                 <rect key="frame" x="40" y="0.0" width="160" height="51"/>
@@ -85,125 +87,103 @@
                                             <constraint firstItem="vPK-rh-OhK" firstAttribute="leading" secondItem="iLg-Ok-lxM" secondAttribute="leading" id="GdH-YQ-hnu"/>
                                             <constraint firstAttribute="trailing" secondItem="fhW-lj-LnF" secondAttribute="trailing" constant="40" id="O8v-RL-dQ4"/>
                                             <constraint firstAttribute="width" secondItem="tY2-lc-OlN" secondAttribute="height" multiplier="1:1" id="az5-AX-nZ5"/>
+                                            <constraint firstAttribute="height" priority="270" constant="10000" id="cG2-i8-bH4"/>
+                                            <constraint firstAttribute="width" priority="270" constant="10000" id="iNM-aa-FMU"/>
                                             <constraint firstItem="iLg-Ok-lxM" firstAttribute="leading" secondItem="tY2-lc-OlN" secondAttribute="leading" constant="40" id="lE0-bf-I4V"/>
                                             <constraint firstItem="6Xz-Ti-gwy" firstAttribute="top" secondItem="fhW-lj-LnF" secondAttribute="bottom" id="ndy-De-khM"/>
                                             <constraint firstItem="iLg-Ok-lxM" firstAttribute="top" secondItem="tY2-lc-OlN" secondAttribute="top" id="odo-FQ-xt6"/>
                                             <constraint firstItem="fhW-lj-LnF" firstAttribute="top" secondItem="tY2-lc-OlN" secondAttribute="top" id="xox-Q5-xJI"/>
                                         </constraints>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="16" y="16" width="992" height="992"/>
-                                        </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="16" y="16" width="700" height="700"/>
-                                        </variation>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N48-Wj-ZUq" userLabel="Controls">
-                                        <rect key="frame" x="0.0" y="728" width="768" height="236"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="e0T-08-1gm" userLabel="ControlsStackView">
+                                        <rect key="frame" x="0.0" y="728" width="728" height="276"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PdP-pn-H8o" userLabel="startPauseButton" customClass="PlayPauseButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="768" height="236"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="276"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="2qE-n8-vjG" userLabel="minWidth"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="MRW-lH-k27" userLabel="minHeight"/>
+                                                    <constraint firstAttribute="width" priority="260" constant="10000" id="Z2e-kt-CfL"/>
+                                                    <constraint firstAttribute="height" priority="260" constant="10000" id="yEI-G5-7cf"/>
+                                                </constraints>
                                                 <state key="normal">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
-                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="724" y="16" width="284" height="349"/>
-                                                </variation>
                                                 <connections>
                                                     <action selector="startPauseButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="675-vk-O2X"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jIB-5T-jtJ" userLabel="next" customClass="NextSegmentButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
+                                                <rect key="frame" x="364" y="0.0" width="364" height="276"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" priority="260" constant="10000" id="6OX-6U-HTJ"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="8Z4-nr-n2U" userLabel="minHeight"/>
+                                                    <constraint firstAttribute="height" priority="260" constant="10000" id="TFY-rq-An0"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="TSC-I6-wnC" userLabel="minWidth"/>
+                                                </constraints>
+                                                <state key="normal">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="nextSegmentButtonPressedToo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="559-8M-rny"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="J1a-qS-a7Z" userLabel="controlsMinWidth"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="75" id="McR-jz-VZj" userLabel="controlsMinHeight"/>
-                                            <constraint firstItem="PdP-pn-H8o" firstAttribute="leading" secondItem="N48-Wj-ZUq" secondAttribute="leading" id="U0y-p0-gmg"/>
-                                            <constraint firstAttribute="bottom" secondItem="PdP-pn-H8o" secondAttribute="bottom" id="elw-4a-3rW"/>
-                                            <constraint firstItem="PdP-pn-H8o" firstAttribute="top" secondItem="N48-Wj-ZUq" secondAttribute="top" id="v2o-5L-ipj"/>
-                                            <constraint firstAttribute="trailing" secondItem="PdP-pn-H8o" secondAttribute="trailing" id="v7x-2E-xam"/>
-                                        </constraints>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-5J-yaK" userLabel="SkipButton">
-                                        <rect key="frame" x="20" y="0.0" width="728" height="728"/>
-                                        <state key="normal">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="724" y="373" width="284" height="375"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="nextSegmentButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4vC-nM-WnJ"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12Z-1g-lxX" userLabel="BackButton" customClass="BackButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="54" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="54" id="W7A-L2-7Jk"/>
-                                            <constraint firstAttribute="height" constant="50" id="olv-qc-IeD"/>
-                                        </constraints>
-                                        <connections>
-                                            <action selector="backButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hkt-8i-Z2D"/>
-                                        </connections>
-                                    </button>
+                                    </stackView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-5J-yaK" userLabel="SkipButton">
+                                <rect key="frame" x="20" y="20" width="728" height="728"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="724" y="373" width="284" height="375"/>
+                                </variation>
+                                <connections>
+                                    <action selector="nextSegmentButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4vC-nM-WnJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12Z-1g-lxX" userLabel="BackButton" customClass="BackButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="54" height="50"/>
                                 <constraints>
-                                    <constraint firstItem="N48-Wj-ZUq" firstAttribute="bottom" secondItem="gWc-zk-mRv" secondAttribute="bottom" priority="751" id="2dZ-j3-aAh" userLabel="vControlsToContainerBottom"/>
-                                    <constraint firstItem="5o7-Gc-suh" firstAttribute="bottom" secondItem="gWc-zk-mRv" secondAttribute="bottom" priority="751" id="4Va-GK-Ujy" userLabel="vFlashImageViewBottomEdge"/>
-                                    <constraint firstItem="tY2-lc-OlN" firstAttribute="centerY" secondItem="gWc-zk-mRv" secondAttribute="centerY" priority="749" id="5lf-ye-AdK" userLabel="hCirclesCenteredY"/>
-                                    <constraint firstItem="N48-Wj-ZUq" firstAttribute="height" relation="lessThanOrEqual" secondItem="gWc-zk-mRv" secondAttribute="height" priority="749" id="7T6-Ol-kOV" userLabel="hControlsHeight"/>
-                                    <constraint firstItem="edy-5J-yaK" firstAttribute="height" secondItem="tY2-lc-OlN" secondAttribute="height" id="9gv-wh-1O8" userLabel="skipButtonHeight"/>
-                                    <constraint firstItem="N48-Wj-ZUq" firstAttribute="width" relation="greaterThanOrEqual" secondItem="gWc-zk-mRv" secondAttribute="width" priority="751" id="AHu-SS-Fd4" userLabel="vControlsWidth"/>
-                                    <constraint firstItem="tY2-lc-OlN" firstAttribute="width" relation="lessThanOrEqual" secondItem="gWc-zk-mRv" secondAttribute="width" priority="751" constant="-40" id="AfI-f3-uUe" userLabel="vCirclesWidth"/>
-                                    <constraint firstItem="tY2-lc-OlN" firstAttribute="width" secondItem="gWc-zk-mRv" secondAttribute="width" priority="1" constant="-40" id="DxK-Au-5EJ" userLabel="circlesWidth"/>
-                                    <constraint firstItem="tY2-lc-OlN" firstAttribute="height" secondItem="gWc-zk-mRv" secondAttribute="height" priority="1" constant="-40" id="EB8-jo-4aQ" userLabel="circlesHeight"/>
-                                    <constraint firstItem="12Z-1g-lxX" firstAttribute="top" secondItem="gWc-zk-mRv" secondAttribute="top" id="Eb1-fN-MAM"/>
-                                    <constraint firstItem="edy-5J-yaK" firstAttribute="width" secondItem="tY2-lc-OlN" secondAttribute="width" id="FwL-Kw-RYG" userLabel="skipButtonWidth"/>
-                                    <constraint firstItem="edy-5J-yaK" firstAttribute="centerX" secondItem="tY2-lc-OlN" secondAttribute="centerX" id="IUN-ct-Wmg" userLabel="skipButtonCenterX"/>
-                                    <constraint firstItem="12Z-1g-lxX" firstAttribute="leading" secondItem="gWc-zk-mRv" secondAttribute="leading" id="JOC-wl-Kln"/>
-                                    <constraint firstItem="N48-Wj-ZUq" firstAttribute="centerX" secondItem="gWc-zk-mRv" secondAttribute="centerX" priority="751" id="LuQ-Li-hQE" userLabel="vControlsCenteredX"/>
-                                    <constraint firstItem="N48-Wj-ZUq" firstAttribute="trailing" secondItem="gWc-zk-mRv" secondAttribute="trailing" priority="749" id="NoN-NY-Dqm" userLabel="hControlsToContainerTrailing"/>
-                                    <constraint firstItem="tY2-lc-OlN" firstAttribute="bottom" secondItem="N48-Wj-ZUq" secondAttribute="top" priority="751" id="NsY-01-HVA" userLabel="vCirclesToControls"/>
-                                    <constraint firstItem="edy-5J-yaK" firstAttribute="centerY" secondItem="tY2-lc-OlN" secondAttribute="centerY" id="Uug-H6-Dsh" userLabel="skipButtonCenterY"/>
-                                    <constraint firstAttribute="height" secondItem="N48-Wj-ZUq" secondAttribute="height" priority="1" id="Yz7-tV-hac" userLabel="controlsHeight"/>
-                                    <constraint firstItem="tY2-lc-OlN" firstAttribute="centerX" secondItem="gWc-zk-mRv" secondAttribute="centerX" priority="751" id="amj-Tl-7DM" userLabel="vCirclesCenteredX"/>
-                                    <constraint firstItem="tY2-lc-OlN" firstAttribute="leading" secondItem="gWc-zk-mRv" secondAttribute="leading" priority="749" id="cRT-Og-qdL" userLabel="hCirclesToContainerLeading"/>
-                                    <constraint firstItem="5o7-Gc-suh" firstAttribute="centerY" secondItem="tY2-lc-OlN" secondAttribute="centerY" id="htc-mL-1dH" userLabel="flashImageViewCenteredY"/>
-                                    <constraint firstItem="tY2-lc-OlN" firstAttribute="top" secondItem="gWc-zk-mRv" secondAttribute="top" priority="751" id="iyz-WB-h6a" userLabel="vCirclesToContainerTop"/>
-                                    <constraint firstItem="tY2-lc-OlN" firstAttribute="trailing" secondItem="N48-Wj-ZUq" secondAttribute="leading" priority="749" id="jef-g1-gbn" userLabel="hCirclesToControls"/>
-                                    <constraint firstItem="N48-Wj-ZUq" firstAttribute="centerY" secondItem="gWc-zk-mRv" secondAttribute="centerY" priority="749" id="kbj-I9-w0U" userLabel="hControlsCenteredY"/>
-                                    <constraint firstAttribute="right" secondItem="5o7-Gc-suh" secondAttribute="right" priority="749" id="ldD-8i-zgb" userLabel="hFlashImageViewTrailingEdge"/>
-                                    <constraint firstItem="N48-Wj-ZUq" firstAttribute="width" secondItem="gWc-zk-mRv" secondAttribute="width" priority="1" id="q9W-6m-oRN" userLabel="controlsWidth"/>
-                                    <constraint firstItem="tY2-lc-OlN" firstAttribute="height" relation="lessThanOrEqual" secondItem="gWc-zk-mRv" secondAttribute="height" priority="749" constant="-40" id="qHi-5a-v30" userLabel="hCirclesHeight"/>
-                                    <constraint firstItem="5o7-Gc-suh" firstAttribute="centerX" secondItem="tY2-lc-OlN" secondAttribute="centerX" id="xFy-RG-QQa" userLabel="flashImageViewCenteredX"/>
+                                    <constraint firstAttribute="width" constant="54" id="W7A-L2-7Jk"/>
+                                    <constraint firstAttribute="height" constant="50" id="olv-qc-IeD"/>
                                 </constraints>
-                            </view>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hkt-8i-Z2D"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="tY2-lc-OlN" firstAttribute="height" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="height" id="GLM-kE-o8n"/>
-                            <constraint firstItem="gWc-zk-mRv" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="T1X-EF-ZHc" userLabel="containerToSuperTrailing"/>
-                            <constraint firstItem="gWc-zk-mRv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="U2G-rl-XeB" userLabel="containerToSuperLeading"/>
-                            <constraint firstItem="gWc-zk-mRv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="top" constant="40" id="Xxo-f3-x05" userLabel="containerToSuperTop"/>
-                            <constraint firstItem="tY2-lc-OlN" firstAttribute="width" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="width" id="lMM-dq-h6S"/>
-                            <constraint firstItem="gWc-zk-mRv" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="bottom" id="wGn-um-rOe" userLabel="containerToSuperBottom"/>
+                            <constraint firstItem="edy-5J-yaK" firstAttribute="height" secondItem="tY2-lc-OlN" secondAttribute="height" id="1HD-nf-gKy"/>
+                            <constraint firstItem="eTm-Vw-Y1W" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="DLG-GC-nCU"/>
+                            <constraint firstItem="5o7-Gc-suh" firstAttribute="width" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="2" id="EFt-aX-Gnm"/>
+                            <constraint firstItem="12Z-1g-lxX" firstAttribute="left" secondItem="8bC-Xf-vdC" secondAttribute="left" id="RL1-de-b1D"/>
+                            <constraint firstItem="edy-5J-yaK" firstAttribute="width" secondItem="tY2-lc-OlN" secondAttribute="width" id="Td8-du-2QA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eTm-Vw-Y1W" secondAttribute="trailing" id="WQD-RF-ZVo"/>
+                            <constraint firstItem="5o7-Gc-suh" firstAttribute="centerY" secondItem="tY2-lc-OlN" secondAttribute="centerY" id="Z5p-Tr-7RO"/>
+                            <constraint firstItem="eTm-Vw-Y1W" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="bP2-Qh-AmY"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="eTm-Vw-Y1W" secondAttribute="bottom" id="gDE-6i-I3S"/>
+                            <constraint firstItem="edy-5J-yaK" firstAttribute="centerY" secondItem="tY2-lc-OlN" secondAttribute="centerY" id="kh0-vG-Xys"/>
+                            <constraint firstItem="12Z-1g-lxX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="lSb-Fp-BxO"/>
+                            <constraint firstItem="edy-5J-yaK" firstAttribute="centerX" secondItem="tY2-lc-OlN" secondAttribute="centerX" id="qiS-2P-5DQ"/>
+                            <constraint firstItem="5o7-Gc-suh" firstAttribute="height" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="2" id="tJj-ZM-AgQ"/>
+                            <constraint firstItem="5o7-Gc-suh" firstAttribute="centerX" secondItem="tY2-lc-OlN" secondAttribute="centerX" id="ysM-uQ-vZK"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="wM9-rF-CHT"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="backButton" destination="12Z-1g-lxX" id="85o-6k-grF"/>
+                        <outlet property="containerStackView" destination="eTm-Vw-Y1W" id="ewX-Fv-Ca4"/>
+                        <outlet property="controlsStackView" destination="e0T-08-1gm" id="yHU-Hh-AJ6"/>
                         <outlet property="flashImageView" destination="5o7-Gc-suh" id="h9q-K0-hB6"/>
-                        <outlet property="hCirclesCenteredY" destination="5lf-ye-AdK" id="Zv5-tc-BRk"/>
-                        <outlet property="hCirclesHeight" destination="qHi-5a-v30" id="Zos-Oo-WHf"/>
-                        <outlet property="hCirclesToContainerLeading" destination="cRT-Og-qdL" id="qD2-r1-0as"/>
-                        <outlet property="hCirclesToControls" destination="jef-g1-gbn" id="hzL-t8-JQn"/>
-                        <outlet property="hControlsCenteredY" destination="kbj-I9-w0U" id="4JU-Gb-dKh"/>
-                        <outlet property="hControlsHeight" destination="7T6-Ol-kOV" id="fys-5R-Gfg"/>
-                        <outlet property="hControlsToContainerTrailing" destination="NoN-NY-Dqm" id="Ask-5h-VA7"/>
-                        <outlet property="hFlashImageViewTrailingEdge" destination="ldD-8i-zgb" id="k8b-x4-u4r"/>
                         <outlet property="nextSegmentButton" destination="edy-5J-yaK" id="aip-vC-v9i"/>
                         <outlet property="sectionTimeLabel" destination="fhW-lj-LnF" id="PUl-lz-n33"/>
                         <outlet property="segmentLabel" destination="6Xz-Ti-gwy" id="Hdh-QZ-ZTt"/>
@@ -211,14 +191,6 @@
                         <outlet property="timerCirclesView" destination="tY2-lc-OlN" id="Tzt-0B-3ti"/>
                         <outlet property="totalLabel" destination="vPK-rh-OhK" id="Bgz-Ou-WQO"/>
                         <outlet property="totalTimeLabel" destination="iLg-Ok-lxM" id="WkL-JZ-5QJ"/>
-                        <outlet property="vCirclesCenteredX" destination="amj-Tl-7DM" id="raG-be-cY1"/>
-                        <outlet property="vCirclesToContainerTop" destination="iyz-WB-h6a" id="qDR-Wa-WRv"/>
-                        <outlet property="vCirclesToControls" destination="NsY-01-HVA" id="dgi-3s-Fif"/>
-                        <outlet property="vCirclesWidth" destination="AfI-f3-uUe" id="NuD-Ll-drj"/>
-                        <outlet property="vControlsCenteredX" destination="LuQ-Li-hQE" id="LKW-1z-zmp"/>
-                        <outlet property="vControlsToContainerBottom" destination="2dZ-j3-aAh" id="IRS-PL-rnj"/>
-                        <outlet property="vControlsWidth" destination="AHu-SS-Fd4" id="wQL-bZ-Sbk"/>
-                        <outlet property="vFlashImageViewBottomEdge" destination="4Va-GK-Ujy" id="pYH-2t-dQE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
