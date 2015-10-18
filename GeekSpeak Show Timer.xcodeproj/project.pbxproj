@@ -16,6 +16,7 @@
 		D31864ED1BA6605A0083B46E /* RingDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31864EB1BA6605A0083B46E /* RingDrawing.swift */; };
 		D320C3611B6FF5E90046F785 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = D320C3601B6FF5E90046F785 /* UIImage+ImageEffects.m */; };
 		D32B9DED1B77F6740098DCCF /* UIImage+WithColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32B9DEC1B77F6740098DCCF /* UIImage+WithColor.swift */; };
+		D33789BD1BD3687900ACC28D /* BackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33789BC1BD3687900ACC28D /* BackView.swift */; settings = {ASSET_TAGS = (); }; };
 		D340CC791B6D3E7600BB17E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */; };
 		D340CC7E1B6D3E7600BB17E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D340CC7C1B6D3E7600BB17E3 /* Main.storyboard */; };
 		D340CC801B6D3E7600BB17E3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */; };
@@ -99,6 +100,7 @@
 		D320C35F1B6FF5E90046F785 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		D320C3601B6FF5E90046F785 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		D32B9DEC1B77F6740098DCCF /* UIImage+WithColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+WithColor.swift"; sourceTree = "<group>"; };
+		D33789BC1BD3687900ACC28D /* BackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackView.swift; sourceTree = "<group>"; };
 		D340CC731B6D3E7600BB17E3 /* GeekSpeak Show Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GeekSpeak Show Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D340CC771B6D3E7600BB17E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D340CC781B6D3E7600BB17E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -213,7 +215,6 @@
 		D340CC6A1B6D3E7600BB17E3 = {
 			isa = PBXGroup;
 			children = (
-				D34C13E61BBCFB9500649676 /* Accelerate.framework */,
 				D340CC751B6D3E7600BB17E3 /* GeekSpeak Show Timer */,
 				D340CC8B1B6D3E7600BB17E3 /* GeekSpeak Show TimerTests */,
 				D3991DB91B9FBF1B00C63286 /* RingLayerPlay */,
@@ -258,6 +259,7 @@
 				D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */,
 				D3A845A41BA39E8B00062B02 /* flash.png */,
 				D340CC811B6D3E7600BB17E3 /* LaunchScreen.xib */,
+				D34C13E61BBCFB9500649676 /* Accelerate.framework */,
 				D340CC761B6D3E7600BB17E3 /* Supporting Files */,
 				D340CC9A1B6D504400BB17E3 /* GeekSpeak Show Timer-Bridging-Header.h */,
 			);
@@ -359,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				D30119FD1BD0B7940008D04A /* BackButton.swift */,
+				D33789BC1BD3687900ACC28D /* BackView.swift */,
 				D3EC191B1B94EB5000A8E426 /* PlayPauseWipeButton.swift */,
 				D36742801B9D33FE00EE13F7 /* NextSegmentButton.swift */,
 				D3FD35051B9B650A00CE15F6 /* TimeWipeButton.swift */,
@@ -623,6 +626,7 @@
 				D3FD350C1B9B939200CE15F6 /* SizeToSuperView.swift in Sources */,
 				D340CC9F1B6D504500BB17E3 /* GSTPieLayer.m in Sources */,
 				D340CCB11B6D8B9600BB17E3 /* RingView.swift in Sources */,
+				D33789BD1BD3687900ACC28D /* BackView.swift in Sources */,
 				D3DFF55E1BA5EF8700A4700D /* RingCircle.swift in Sources */,
 				D36742811B9D33FE00EE13F7 /* NextSegmentButton.swift in Sources */,
 				D340CCB71B6D9C6400BB17E3 /* FillView.swift in Sources */,

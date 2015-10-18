@@ -78,6 +78,7 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var segmentLabel: UILabel!
   @IBOutlet weak var flashImageView: UIImageView!
   @IBOutlet weak var backButton: BackButton!
+  @IBOutlet weak var backView: BackView!
   @IBOutlet weak var startPauseButton: PlayPauseButton!
   @IBOutlet weak var nextSegmentButton: NextSegmentButton!
   
@@ -86,8 +87,10 @@ final class TimerViewController: UIViewController {
   
   
   override func viewDidLoad() {
-    addSwipeGesture()
     super.viewDidLoad()
+    addSwipeGesture()
+    backView.unhighlight()
+    backButton.backView = backView
   }
   
   override func viewWillAppear(animated: Bool) {
