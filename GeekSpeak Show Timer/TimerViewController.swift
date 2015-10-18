@@ -23,7 +23,7 @@ final class TimerViewController: UIViewController {
     static let GeekSpeakBlueInactiveColor = UIColor(red: 14/255,
                                                   green: 115/255,
                                                    blue: 115/255,
-                                                  alpha: 1.0)
+                                                  alpha: 0.2)
     
     static let BreakColor         = UIColor(red: 0.75,
                                           green: 0.0,
@@ -41,7 +41,7 @@ final class TimerViewController: UIViewController {
                                           alpha: 1.0)
     
     static let LineWidth              = (CGFloat(90) / CGFloat(736)) * (1 / 0.95) * 2
-    static let RingDarkeningFactor    = CGFloat(0.2)
+    static let RingDarkeningFactor    = CGFloat(1.0)
     
     static let ActiveLayoutPriority   = UILayoutPriority(751)
     static let InactiveLayoutPriority = UILayoutPriority(749)

@@ -112,7 +112,7 @@ class SettingsViewController: UIViewController {
       // Note the scale value... Values greater than 1 make a context smaller
       // than the detail view controller. Smaller context means faster rendering
       // of the final blurred background image
-      let scaleValue = CGFloat(32)
+      let scaleValue = CGFloat(16)
       let underneathViewControllerSize = underneathViewController.view.frame.size
       let contextSize =
                     CGSizeMake(underneathViewControllerSize.width  / scaleValue,
