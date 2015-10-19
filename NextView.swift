@@ -131,7 +131,7 @@ class NextView: UIStackView {
     unhighlight()
     
     
-    label.text = "Next Segment"
+    label.text = "Next Section"
     label.textColor = tintColor
     if let font = UIFont(name: "Helvetica Neue", size: 12) {
       label.font = font

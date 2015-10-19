@@ -229,16 +229,7 @@ final class TimerViewController: UIViewController {
   }
   
   func setupButtonLayout(timer: Timer) {
-    switch timer.state {
-    case .Ready,
-         .Paused,
-         .PausedAfterComplete:
-      startPauseButton.startPauseView?.label.text = "Start Timer"
-    
-    case .Counting,
-      .CountingAfterComplete:
-      startPauseButton.startPauseView?.label.text = "Pause Timer"
-    }
+    updateButtonLayout(timer)
   }
 
   
@@ -248,11 +239,40 @@ final class TimerViewController: UIViewController {
          .Paused,
          .PausedAfterComplete:
       startPauseButton.startPauseView?.label.text = "Start Timer"
-      
+      startPauseButton.startPauseView?.currentButton = .Pause
     case .Counting,
          .CountingAfterComplete:
       startPauseButton.startPauseView?.label.text = "Pause Timer"
+      startPauseButton.startPauseView?.currentButton = .Start
     }
+    
+    if timer.state == .Ready {
+      startPauseButton.startPauseView?.unhighlightUsingBehavior(.Instant)
+    }
+    
+    switch timer.state {
+    case .Ready,
+         .PausedAfterComplete,
+         .CountingAfterComplete:
+      let inactiveColor = Appearance.Constants.GeekSpeakBlueInactiveColor
+      nextButton.enabled = false
+      nextButtonTimerOverlay.enabled = false
+      nextButton.nextView?.tintColor       = inactiveColor
+      nextButton.nextView?.highlightColor  = inactiveColor
+      nextButton.nextView?.label.textColor = inactiveColor
+      nextButton.nextView?.highlight()
+      
+    case .Counting,
+         .Paused:
+      let activeColor = Appearance.Constants.GeekSpeakBlueColor
+      nextButton.enabled = true
+      nextButtonTimerOverlay.enabled = true
+      nextButton.nextView?.tintColor       = activeColor
+      nextButton.nextView?.highlightColor  = activeColor
+      nextButton.nextView?.label.textColor = activeColor
+      nextButton.nextView?.unhighlight()
+    }
+    
   }
   
   
