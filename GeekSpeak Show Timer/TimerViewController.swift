@@ -12,42 +12,6 @@ enum TimerLabelDisplay: String, CustomStringConvertible {
 
 final class TimerViewController: UIViewController {
   
-  struct Constants {
-    static let DeemphisisedButtonScale = CGFloat(0.25)
-    static let EmphisisedButtonScale   = CGFloat(1.0 )
-    static let GeekSpeakBlueColor = UIColor(red: 14/255,
-                                          green: 115/255,
-                                           blue: 192/255,
-                                          alpha: 1.0)
-    
-    static let GeekSpeakBlueInactiveColor = UIColor(red: 14/255,
-                                                  green: 115/255,
-                                                   blue: 115/255,
-                                                  alpha: 0.2)
-    
-    static let BreakColor         = UIColor(red: 0.75,
-                                          green: 0.0,
-                                           blue: 0.0,
-                                          alpha: 1.0)
-    
-    static let WarningColor       = UIColor(red: 23/255,
-                                          green: 157/255,
-                                           blue: 172/255,
-                                          alpha: 1.0)
-    
-    static let AlarmColor         = UIColor(red: 30/255,
-                                          green: 226/255,
-                                           blue: 166/255,
-                                          alpha: 1.0)
-    
-    static let LineWidth              = (CGFloat(90) / CGFloat(736)) * (1 / 0.95) * 2
-    static let RingDarkeningFactor    = CGFloat(1.0)
-    
-    static let ActiveLayoutPriority   = UILayoutPriority(751)
-    static let InactiveLayoutPriority = UILayoutPriority(749)
-    static let IgnoreLayoutPriority   = UILayoutPriority(1)
-  }
-  
   var timerViews: TimerViews?
   var timerLabelDisplay: TimerLabelDisplay = .Remaining {
     didSet {
@@ -79,8 +43,6 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var flashImageView: UIImageView!
   @IBOutlet weak var backButton: BackButton!
   @IBOutlet weak var backView: BackView!
-//  @IBOutlet weak var startPauseButton: PlayPauseButton!
-//  @IBOutlet weak var nextSegmentButton: NextSegmentButton!
   @IBOutlet weak var startPauseButton: StartPauseButton!
   @IBOutlet weak var nextButton: NextButton!
   @IBOutlet weak var nextButtonTimerOverlay: NextButton!
@@ -109,7 +71,7 @@ final class TimerViewController: UIViewController {
   
   
   func setupNextButton() {
-    let geekSpeakBlueColor = TimerViewController.Constants.GeekSpeakBlueColor
+    let geekSpeakBlueColor = Appearance.Constants.GeekSpeakBlueColor
 
     let nextView = NextView()
     nextView.highlightColor = geekSpeakBlueColor
@@ -127,7 +89,7 @@ final class TimerViewController: UIViewController {
   
   
   func setupStartPauseButton() {
-    let geekSpeakBlueColor = TimerViewController.Constants.GeekSpeakBlueColor
+    let geekSpeakBlueColor = Appearance.Constants.GeekSpeakBlueColor
 
     let startPauseView = StartPauseView()
     startPauseView.highlightColor = geekSpeakBlueColor
@@ -159,24 +121,27 @@ final class TimerViewController: UIViewController {
     breakView.opaque     = false
     breakView.startAngle = TauAngle(degrees: 0)
     breakView.endAngle   = TauAngle(degrees: 0)
-    breakView.color      = Constants.BreakColor
+    breakView.color      = Appearance.Constants.BreakColor
     breakView.pieLayer.clipToCircle = true
     timerCirclesView.addSubview(breakView)
     
     let ring1bg   = configureBGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueInactiveColor)
+                          withColor: Appearance
+                                          .Constants.GeekSpeakBlueInactiveColor)
     let ring1fg   = configureFGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueColor)
+                          withColor: Appearance.Constants.GeekSpeakBlueColor)
     
     let ring2bg   = configureBGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueInactiveColor)
+                          withColor: Appearance
+                                          .Constants.GeekSpeakBlueInactiveColor)
     let ring2fg   = configureFGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueColor)
+                          withColor: Appearance.Constants.GeekSpeakBlueColor)
     
     let ring3bg   = configureBGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueInactiveColor)
+                          withColor: Appearance
+                                          .Constants.GeekSpeakBlueInactiveColor)
     let ring3fg   = configureFGRing( RingView(),
-                          withColor: Constants.GeekSpeakBlueColor)
+                          withColor: Appearance.Constants.GeekSpeakBlueColor)
     
     ring3bg.fillScale = 0.95
     ring3fg.fillScale = 0.95
@@ -249,9 +214,7 @@ final class TimerViewController: UIViewController {
   }
   
   
-  var startPauseButtonCount: Int = 0
   @IBAction func startPauseButtonPressed(sender: StartPauseButton) {
-    startPauseButtonCount++
     if let timer = timer {
       switch timer.state {
       case .Ready,
@@ -271,13 +234,10 @@ final class TimerViewController: UIViewController {
          .Paused,
          .PausedAfterComplete:
       startPauseButton.startPauseView?.label.text = "Start Timer"
-//      startPauseButton.showPlayView()
-      
     
     case .Counting,
       .CountingAfterComplete:
       startPauseButton.startPauseView?.label.text = "Pause Timer"
-//      startPauseButton.showPauseView()
     }
   }
 
@@ -287,23 +247,12 @@ final class TimerViewController: UIViewController {
     case .Ready,
          .Paused,
          .PausedAfterComplete:
-      if startPauseButtonCount > 0 {
-//        startPauseButton.animateToPlayView()
-      } else {
-//        startPauseButton.showPlayView()
-      }
+      startPauseButton.startPauseView?.label.text = "Start Timer"
       
     case .Counting,
          .CountingAfterComplete:
-      if startPauseButtonCount > 0 {
-//        startPauseButton.animateToPauseView()
-      } else {
-//        startPauseButton.showPauseView()
-      }
-      
+      startPauseButton.startPauseView?.label.text = "Pause Timer"
     }
-    startPauseButtonCount--
-    startPauseButtonCount = max(0,startPauseButtonCount)
   }
   
   
@@ -410,7 +359,7 @@ final class TimerViewController: UIViewController {
       options: [],
       animations: {
         self.flashImageView.alpha = 1.0
-        self.view.backgroundColor = Constants.BreakColor
+        self.view.backgroundColor = Appearance.Constants.BreakColor
       },
       completion: { completed in
         if (self.warningStartTime + self.warningDuration) > NSDate().timeIntervalSince1970 {
@@ -459,7 +408,7 @@ final class TimerViewController: UIViewController {
   
   func configureBGRing(ringView: RingView, withColor color: UIColor)
                                                                    -> RingView {
-    let darkenBy = Constants.RingDarkeningFactor
+    let darkenBy = Appearance.Constants.RingDarkeningFactor
     ringView.color          = color.darkenColorWithMultiplier(darkenBy)
     ringView.startAngle     = TauAngle(degrees: 0)
     ringView.endAngle       = TauAngle(degrees: 360)
@@ -470,7 +419,7 @@ final class TimerViewController: UIViewController {
   }
   
   func configureRing(ringView: RingView) {
-    ringView.ringWidth = Constants.LineWidth
+    ringView.ringWidth = Appearance.Constants.RingWidth
     timerCirclesView.addSubview(ringView)
     ringView.opaque              = false
   }

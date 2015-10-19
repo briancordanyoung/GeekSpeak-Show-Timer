@@ -57,8 +57,8 @@ class BackView: UIView {
     let backPath = UIBezierPath()
     backPath.moveToPoint(     CGPointMake(13.5  + xOffset,  2 + yOffset))
     backPath.addCurveToPoint( CGPointMake( 4    + xOffset, 12 + yOffset),
-      controlPoint1: CGPointMake( 4    + xOffset, 12 + yOffset),
-      controlPoint2: CGPointMake( 4    + xOffset, 12 + yOffset))
+               controlPoint1: CGPointMake( 4    + xOffset, 12 + yOffset),
+               controlPoint2: CGPointMake( 4    + xOffset, 12 + yOffset))
     backPath.addLineToPoint(  CGPointMake(13.5  + xOffset, 21 + yOffset))
     backPath.lineWidth = 3.5
     backPath.stroke()

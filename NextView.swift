@@ -1,140 +1,37 @@
 import UIKit
 
 
-class UnselectedNextView: UIView {
+// MARK: -
+// MARK: UnselectedNextView
 
-  var color = UIColor.whiteColor() {
-    didSet {
-      setNeedsDisplay()
-    }
-  }
-  
-  let origSizeX = CGFloat(75)
-  let origSizeY = CGFloat(75)
-
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  func setup() {
-    clipsToBounds = false
-    opaque        = false
-    translatesAutoresizingMaskIntoConstraints = false
-
-    self.heightAnchor.constraintEqualToConstant(origSizeX).active = true
-    self.widthAnchor.constraintEqualToConstant(origSizeY).active  = true
-  }
-  
-  override func didMoveToSuperview() {
-    guard let parent = superview else {
-      assertionFailure("superview does not exist")
-      return
-    }
-    
-    self.centerXAnchor.constraintEqualToAnchor(parent.centerXAnchor).active = true
-    self.centerYAnchor.constraintEqualToAnchor(parent.centerYAnchor).active = true
-  }
-
-  
+class UnselectedNextView: ControlsView {
   override func drawRect(rect: CGRect) {
-
     color.setStroke()
-    UIRectFrame(rect)
-    
-    // drawDebugRect(rect)
+    NextShapes.rightBezier().stroke()
+    NextShapes.leftBezier().stroke()
   }
-
-  func drawDebugRect(rect: CGRect) {
-    UIColor.yellowColor().setStroke()
-    UIRectFrame(rect)
-  }
-  
 }
 
 
+// MARK: -
+// MARK: SelectedNextView
 
-
-
-
-
-
-
-
-class SelectedNextView: UIView {
-  var color = UIColor.whiteColor() {
-    didSet {
-      setNeedsDisplay()
-    }
-  }
-  
-  let origSizeX = CGFloat(75)
-  let origSizeY = CGFloat(75)
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  func setup() {
-    clipsToBounds = false
-    opaque        = false
-    translatesAutoresizingMaskIntoConstraints = false
-
-    self.heightAnchor.constraintEqualToConstant(origSizeX).active = true
-    self.widthAnchor.constraintEqualToConstant(origSizeY).active  = true
-  }
-  
-  override func didMoveToSuperview() {
-    guard let parent = superview else {
-      assertionFailure("superview does not exist")
-      return
-    }
-    
-    self.centerXAnchor.constraintEqualToAnchor(parent.centerXAnchor).active = true
-    self.centerYAnchor.constraintEqualToAnchor(parent.centerYAnchor).active = true
-  }
-  
+class SelectedNextView: ControlsView {
   override func drawRect(rect: CGRect) {
-    
     color.setFill()
-    UIRectFill(rect)
-    
-    // drawDebugRect(rect)
+    NextShapes.rightBezier().fill()
+    NextShapes.leftBezier().fill()
   }
-  
-  func drawDebugRect(rect: CGRect) {
-    UIColor.yellowColor().setStroke()
-    UIRectFrame(rect)
-  }
-
 }
 
 
 
-
-
-
-
-
-
-
-
-
+// MARK: -
+// MARK: NextView
 
 class NextView: UIStackView {
   
-  var unhighlightDuration = NSTimeInterval(0.25)
+  var unhighlightDuration = Appearance.Constants.ButtonFadeDuration
   
   enum UnhighlightBehavior {
     case Instant
@@ -179,12 +76,15 @@ class NextView: UIStackView {
   
   let label = UILabel()
   
-          let symbolContainer = UIView()
-  private let unselectedView  = UnselectedNextView()
-  private let selectedView    = SelectedNextView()
+  private let dimention = Appearance.Constants.ButtonDimension
+  private let symbolContainer = UIView()
+  private let unselectedView  = UnselectedNextView(frame: CGRect(x:0, y:0,
+                                   width: Appearance.Constants.ButtonDimension,
+                                  height: Appearance.Constants.ButtonDimension))
+  private let selectedView    = SelectedNextView(frame: CGRect(x:0, y:0,
+                                   width: Appearance.Constants.ButtonDimension,
+                                  height: Appearance.Constants.ButtonDimension))
   
-  
-
   
   // MARK: -
   // MARK: Setup
@@ -196,8 +96,8 @@ class NextView: UIStackView {
   convenience init() {
     let defaultRect = CGRect(x: CGFloat(0),
                              y: CGFloat(0),
-                         width: CGFloat(75),
-                        height: CGFloat(75))
+                         width: CGFloat(Appearance.Constants.ButtonDimension),
+                        height: CGFloat(Appearance.Constants.ButtonDimension))
     
     self.init(frame: defaultRect)
   }
@@ -217,8 +117,10 @@ class NextView: UIStackView {
     addArrangedSubview(label)
 
     symbolContainer.translatesAutoresizingMaskIntoConstraints = false
-    symbolContainer.heightAnchor.constraintEqualToConstant(75.0).active = true
-    symbolContainer.widthAnchor.constraintEqualToConstant(75.0).active  = true
+    symbolContainer.heightAnchor
+                             .constraintEqualToConstant(dimention).active = true
+    symbolContainer.widthAnchor
+                            .constraintEqualToConstant(dimention).active  = true
     symbolContainer.opaque = false
 
     symbolContainer.addSubview(unselectedView)

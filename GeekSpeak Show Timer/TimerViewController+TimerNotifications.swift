@@ -66,11 +66,11 @@ extension TimerViewController {
       case .Section3:
         let timing1 = CGFloat(timer.timing.duration - section2Seconds - section3Seconds)
         let color1 = RingColor( portion: timing1,
-                                  color: Constants.GeekSpeakBlueColor)
+                                  color: Appearance.Constants.GeekSpeakBlueColor)
         let color2 = RingColor( portion: CGFloat(section2Seconds),
-                                  color: Constants.WarningColor)
+                                  color: Appearance.Constants.WarningColor)
         let color3 = RingColor( portion: CGFloat(section3Seconds),
-                                  color: Constants.AlarmColor)
+                                  color: Appearance.Constants.AlarmColor)
         timerViews?.ring3fg.colors = [color1,color2,color3]
       default:
         break
@@ -92,8 +92,8 @@ extension TimerViewController {
         
       case .PostShow:
         timerLabelDisplay = .Elapsed
-        sectionTimeLabel.textColor = Constants.GeekSpeakBlueColor
-        totalTimeLabel.textColor   = Constants.GeekSpeakBlueColor
+        sectionTimeLabel.textColor = Appearance.Constants.GeekSpeakBlueColor
+        totalTimeLabel.textColor   = Appearance.Constants.GeekSpeakBlueColor
       }
     }
   }

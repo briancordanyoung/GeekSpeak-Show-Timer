@@ -63,6 +63,8 @@
 		D3A845A51BA39E8B00062B02 /* flash.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A845A41BA39E8B00062B02 /* flash.png */; };
 		D3C0807B1B9BB6290020A4A0 /* PlayPauseWipeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EC191B1B94EB5000A8E426 /* PlayPauseWipeButton.swift */; };
 		D3C487B31B726F3300B8067E /* Timer+StatePreservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */; };
+		D3C8F10D1BD4ABA3009E2A61 /* ButtonShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C8F10C1BD4ABA3009E2A61 /* ButtonShapes.swift */; settings = {ASSET_TAGS = (); }; };
+		D3C8F10F1BD4AD74009E2A61 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C8F10E1BD4AD74009E2A61 /* ControlsView.swift */; settings = {ASSET_TAGS = (); }; };
 		D3DFF55C1BA5EF8000A4700D /* RingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DFF55B1BA5EF8000A4700D /* RingPoint.swift */; };
 		D3DFF55E1BA5EF8700A4700D /* RingCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DFF55D1BA5EF8700A4700D /* RingCircle.swift */; };
 		D3DFF55F1BA5F27300A4700D /* RingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DFF55B1BA5EF8000A4700D /* RingPoint.swift */; };
@@ -167,6 +169,8 @@
 		D39DAD191B917229007D797C /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		D3A845A41BA39E8B00062B02 /* flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash.png; sourceTree = "<group>"; };
 		D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timer+StatePreservation.swift"; sourceTree = "<group>"; };
+		D3C8F10C1BD4ABA3009E2A61 /* ButtonShapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonShapes.swift; sourceTree = "<group>"; };
+		D3C8F10E1BD4AD74009E2A61 /* ControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
 		D3DFF55B1BA5EF8000A4700D /* RingPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingPoint.swift; sourceTree = "<group>"; };
 		D3DFF55D1BA5EF8700A4700D /* RingCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingCircle.swift; sourceTree = "<group>"; };
 		D3EC191B1B94EB5000A8E426 /* PlayPauseWipeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayPauseWipeButton.swift; sourceTree = "<group>"; };
@@ -368,18 +372,15 @@
 		D36742841B9D377F00EE13F7 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				D3C8F10E1BD4AD74009E2A61 /* ControlsView.swift */,
+				D3C8F10C1BD4ABA3009E2A61 /* ButtonShapes.swift */,
 				D37795381BD41C84003DC048 /* StartPauseButton.swift */,
 				D377953A1BD41C97003DC048 /* StartPauseView.swift */,
 				D377953C1BD41D44003DC048 /* NextButton.swift */,
 				D377953E1BD41D53003DC048 /* NextView.swift */,
 				D30119FD1BD0B7940008D04A /* BackButton.swift */,
 				D33789BC1BD3687900ACC28D /* BackView.swift */,
-				D3EC191B1B94EB5000A8E426 /* PlayPauseWipeButton.swift */,
-				D36742801B9D33FE00EE13F7 /* NextSegmentButton.swift */,
-				D3FD35051B9B650A00CE15F6 /* TimeWipeButton.swift */,
-				D36742821B9D343100EE13F7 /* ShapesButton.swift */,
-				D3FD35071B9B6B8B00CE15F6 /* ShapesView.swift */,
-				D3FD35091B9B727C00CE15F6 /* SizableBezierPath.swift */,
+				D3BFD9361BD4BF84001A29F6 /* Unused */,
 			);
 			name = Buttons;
 			sourceTree = "<group>";
@@ -421,6 +422,19 @@
 				D3991DD11B9FBF1B00C63286 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D3BFD9361BD4BF84001A29F6 /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				D3EC191B1B94EB5000A8E426 /* PlayPauseWipeButton.swift */,
+				D36742801B9D33FE00EE13F7 /* NextSegmentButton.swift */,
+				D3FD35051B9B650A00CE15F6 /* TimeWipeButton.swift */,
+				D36742821B9D343100EE13F7 /* ShapesButton.swift */,
+				D3FD35071B9B6B8B00CE15F6 /* ShapesView.swift */,
+				D3FD35091B9B727C00CE15F6 /* SizableBezierPath.swift */,
+			);
+			name = Unused;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -622,6 +636,7 @@
 				D377953D1BD41D44003DC048 /* NextButton.swift in Sources */,
 				D340CCA51B6D556D00BB17E3 /* AngularType.swift in Sources */,
 				D340CCBA1B6DDD5400BB17E3 /* TimerViews.swift in Sources */,
+				D3C8F10D1BD4ABA3009E2A61 /* ButtonShapes.swift in Sources */,
 				D30F6F1D1BAF306A00CF069A /* RingLayer.swift in Sources */,
 				D34C13E31BBCEEB500649676 /* UIViewController+REFrostedViewController.m in Sources */,
 				D340CCA31B6D556D00BB17E3 /* Angle.swift in Sources */,
@@ -652,6 +667,7 @@
 				D340CCB31B6D91FF00BB17E3 /* TimerViewController.swift in Sources */,
 				D340CC791B6D3E7600BB17E3 /* AppDelegate.swift in Sources */,
 				D367427F1B9CDDED00EE13F7 /* Array+Bool.swift in Sources */,
+				D3C8F10F1BD4AD74009E2A61 /* ControlsView.swift in Sources */,
 				D31864EC1BA6605A0083B46E /* RingDrawing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
