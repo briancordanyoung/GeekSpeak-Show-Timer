@@ -224,14 +224,6 @@ class StartPauseView: UIStackView {
   }
   
   func unhighlightUsingBehavior(behavior: UnhighlightBehavior) {
-    
-    switch currentButton {
-      case .Start:
-        currentButton = .Pause
-      case .Pause:
-        currentButton = .Start
-    }
-
     switch behavior {
     case .Instant:
       unhighlight()

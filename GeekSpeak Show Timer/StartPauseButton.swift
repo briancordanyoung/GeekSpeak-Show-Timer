@@ -23,7 +23,17 @@ class StartPauseButton: UIButton {
     super.endTrackingWithTouch(touch, withEvent: event)
     
     if touchInside {
+      if let startPauseView = startPauseView {
+        switch startPauseView.currentButton {
+        case .Start:
+          startPauseView.currentButton = .Pause
+        case .Pause:
+          startPauseView.currentButton = .Start
+        }
+      }
       startPauseView?.unhighlightUsingBehavior(.Fade)
+
+
     } else {
       startPauseView?.unhighlight()
     }

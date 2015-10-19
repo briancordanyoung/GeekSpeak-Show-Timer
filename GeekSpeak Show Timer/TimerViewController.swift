@@ -235,49 +235,57 @@ final class TimerViewController: UIViewController {
 
   
   func updateButtonLayout(timer: Timer) {
+
+    
+    // StartPause Button
     switch timer.state {
     case .Ready,
          .Paused,
          .PausedAfterComplete:
       startPauseButton.startPauseView?.label.text = "Start Timer"
-      startPauseButton.startPauseView?.currentButton = .Pause
     case .Counting,
          .CountingAfterComplete:
       startPauseButton.startPauseView?.label.text = "Pause Timer"
-      startPauseButton.startPauseView?.currentButton = .Start
     }
     
     if timer.state == .Ready {
-      startPauseButton.startPauseView?.unhighlightUsingBehavior(.Instant)
+      startPauseButton.startPauseView?.currentButton = .Start
+      startPauseButton.startPauseView?.unhighlight()
     }
     
+    // Next Button
     switch timer.state {
     case .Ready,
          .PausedAfterComplete,
          .CountingAfterComplete:
-      let inactiveColor = Appearance.Constants.GeekSpeakBlueInactiveColor
-      nextButton.enabled = false
-      nextButtonTimerOverlay.enabled = false
-      nextButton.nextView?.tintColor       = inactiveColor
-      nextButton.nextView?.highlightColor  = inactiveColor
-      nextButton.nextView?.label.textColor = inactiveColor
-      nextButton.nextView?.highlight()
-      
+      disableNextButton()
     case .Counting,
          .Paused:
-      let activeColor = Appearance.Constants.GeekSpeakBlueColor
-      nextButton.enabled = true
-      nextButtonTimerOverlay.enabled = true
-      nextButton.nextView?.tintColor       = activeColor
-      nextButton.nextView?.highlightColor  = activeColor
-      nextButton.nextView?.label.textColor = activeColor
-      nextButton.nextView?.unhighlight()
+      enableNextButton()
     }
     
   }
   
   
+  func disableNextButton() {
+    let inactiveColor = Appearance.Constants.GeekSpeakBlueInactiveColor
+    nextButton.enabled = false
+    nextButtonTimerOverlay.enabled = false
+    nextButton.nextView?.tintColor       = inactiveColor
+    nextButton.nextView?.highlightColor  = inactiveColor
+    nextButton.nextView?.label.textColor = inactiveColor
+    nextButton.nextView?.highlight()
+  }
   
+  func enableNextButton() {
+    let activeColor = Appearance.Constants.GeekSpeakBlueColor
+    nextButton.enabled = true
+    nextButtonTimerOverlay.enabled = true
+    nextButton.nextView?.tintColor       = activeColor
+    nextButton.nextView?.highlightColor  = activeColor
+    nextButton.nextView?.label.textColor = activeColor
+    nextButton.nextView?.unhighlight()
+  }
   
   
   // MARK: -
