@@ -61,6 +61,7 @@
 		D3991DD31B9FBF1B00C63286 /* RingLayerPlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3991DD21B9FBF1B00C63286 /* RingLayerPlayTests.swift */; };
 		D39DAD1A1B917229007D797C /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39DAD191B917229007D797C /* Appearance.swift */; };
 		D3A845A51BA39E8B00062B02 /* flash.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A845A41BA39E8B00062B02 /* flash.png */; };
+		D3BFD9381BD4C902001A29F6 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BFD9371BD4C902001A29F6 /* ActivityView.swift */; settings = {ASSET_TAGS = (); }; };
 		D3C0807B1B9BB6290020A4A0 /* PlayPauseWipeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EC191B1B94EB5000A8E426 /* PlayPauseWipeButton.swift */; };
 		D3C487B31B726F3300B8067E /* Timer+StatePreservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */; };
 		D3C8F10D1BD4ABA3009E2A61 /* ButtonShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C8F10C1BD4ABA3009E2A61 /* ButtonShapes.swift */; settings = {ASSET_TAGS = (); }; };
@@ -168,6 +169,7 @@
 		D3991DD21B9FBF1B00C63286 /* RingLayerPlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingLayerPlayTests.swift; sourceTree = "<group>"; };
 		D39DAD191B917229007D797C /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		D3A845A41BA39E8B00062B02 /* flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash.png; sourceTree = "<group>"; };
+		D3BFD9371BD4C902001A29F6 /* ActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timer+StatePreservation.swift"; sourceTree = "<group>"; };
 		D3C8F10C1BD4ABA3009E2A61 /* ButtonShapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonShapes.swift; sourceTree = "<group>"; };
 		D3C8F10E1BD4AD74009E2A61 /* ControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 				D3C8F10C1BD4ABA3009E2A61 /* ButtonShapes.swift */,
 				D37795381BD41C84003DC048 /* StartPauseButton.swift */,
 				D377953A1BD41C97003DC048 /* StartPauseView.swift */,
+				D3BFD9371BD4C902001A29F6 /* ActivityView.swift */,
 				D377953C1BD41D44003DC048 /* NextButton.swift */,
 				D377953E1BD41D53003DC048 /* NextView.swift */,
 				D30119FD1BD0B7940008D04A /* BackButton.swift */,
@@ -664,6 +667,7 @@
 				D3DFF55C1BA5EF8000A4700D /* RingPoint.swift in Sources */,
 				D30F6F201BAF95A000CF069A /* TauAngle.swift in Sources */,
 				D3FD350A1B9B727C00CE15F6 /* SizableBezierPath.swift in Sources */,
+				D3BFD9381BD4C902001A29F6 /* ActivityView.swift in Sources */,
 				D340CCB31B6D91FF00BB17E3 /* TimerViewController.swift in Sources */,
 				D340CC791B6D3E7600BB17E3 /* AppDelegate.swift in Sources */,
 				D367427F1B9CDDED00EE13F7 /* Array+Bool.swift in Sources */,

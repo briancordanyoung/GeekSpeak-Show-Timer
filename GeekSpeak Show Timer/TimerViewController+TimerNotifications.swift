@@ -182,7 +182,9 @@ extension TimerViewController {
             animateWarning()
           }
         }
+        
         // end todo move
+
         
         
       case .PostShow:
@@ -200,7 +202,9 @@ extension TimerViewController {
       
       totalTimeLabel.text     = timing.asShortString(timer.totalShowTimeElapsed)
       
-        updateTimerLabels()
+      updateTimerLabels()
+      activityView.activity = CGFloat(timer.totalShowTimeElapsed)
+
       }
     }
   

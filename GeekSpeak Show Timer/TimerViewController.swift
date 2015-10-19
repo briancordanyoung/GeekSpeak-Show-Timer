@@ -50,6 +50,7 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var containerStackView: UIStackView!
   @IBOutlet weak var controlsStackView: UIStackView!
   
+  @IBOutlet weak var activityView: ActivityView!
 
   override func viewDidLoad() {
     super.viewDidLoad()
