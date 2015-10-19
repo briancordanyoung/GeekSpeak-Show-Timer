@@ -93,64 +93,73 @@ class StartPauseShapes: NSObject {
     return startBezier
   }
   
+  
+  
+  class func pointMakeAndScale(x: CGFloat,_ y:CGFloat) -> CGPoint {
+    let scaleFactor = CGFloat(0.7)
+    let xx = ((x - 50) * scaleFactor) + 50
+    let yy = ((y - 50) * scaleFactor) + 50
+    return CGPointMake( ✂️xx, ✂️yy)
+  }
+  
   class func rightPauseBezier() -> UIBezierPath {
     let rightPauseBezier = UIBezierPath()
-    rightPauseBezier.moveToPoint(      CGPointMake( ✂️64.01,  ✂️0.31))
-    rightPauseBezier.addCurveToPoint(  CGPointMake( ✂️61.43,  ✂️2.57),
-                        controlPoint1: CGPointMake( ✂️62.05,  ✂️0.31),
-                        controlPoint2: CGPointMake( ✂️61.43,  ✂️1.46))
-    rightPauseBezier.addCurveToPoint(  CGPointMake( ✂️61.43,  ✂️97.04),
-                        controlPoint1: CGPointMake( ✂️61.43,  ✂️3.68),
-                        controlPoint2: CGPointMake( ✂️61.43,  ✂️95.16))
-    rightPauseBezier.addCurveToPoint(  CGPointMake( ✂️63.95,  ✂️99.26),
-                        controlPoint1: CGPointMake( ✂️61.43,  ✂️98.92),
-                        controlPoint2: CGPointMake( ✂️62.08,  ✂️99.26))
-    rightPauseBezier.addCurveToPoint(  CGPointMake( ✂️84.12,  ✂️99.26),
-                        controlPoint1: CGPointMake( ✂️65.82,  ✂️99.26),
-                        controlPoint2: CGPointMake( ✂️82.22,  ✂️99.26))
-    rightPauseBezier.addCurveToPoint(  CGPointMake( ✂️86.61,  ✂️96.76),
-                        controlPoint1: CGPointMake( ✂️86.01,  ✂️99.26),
-                        controlPoint2: CGPointMake( ✂️86.61,  ✂️98.91))
-    rightPauseBezier.addCurveToPoint(  CGPointMake( ✂️86.61,  ✂️3.54),
-                        controlPoint1: CGPointMake( ✂️86.61,  ✂️94.62),
-                        controlPoint2: CGPointMake( ✂️86.61,  ✂️5.57))
-    rightPauseBezier.addCurveToPoint(  CGPointMake( ✂️84.17,  ✂️0.29),
-                        controlPoint1: CGPointMake( ✂️86.61,  ✂️1.5),
-                        controlPoint2: CGPointMake( ✂️86.48,  ✂️0.29))
-    rightPauseBezier.addCurveToPoint( CGPointMake( ✂️64.01,  ✂️0.31),
-                      controlPoint1: CGPointMake( ✂️81.85,  ✂️0.29),
-                      controlPoint2: CGPointMake( ✂️65.97,  ✂️0.31))
+    rightPauseBezier.moveToPoint(      pointMakeAndScale( 64.01,  0.31))
+    rightPauseBezier.addCurveToPoint(  pointMakeAndScale( 61.43,  2.57),
+                        controlPoint1: pointMakeAndScale( 62.05,  0.31),
+                        controlPoint2: pointMakeAndScale( 61.43,  1.46))
+    rightPauseBezier.addCurveToPoint(  pointMakeAndScale( 61.43,  97.04),
+                        controlPoint1: pointMakeAndScale( 61.43,  3.68),
+                        controlPoint2: pointMakeAndScale( 61.43,  95.16))
+    rightPauseBezier.addCurveToPoint(  pointMakeAndScale( 63.95,  99.26),
+                        controlPoint1: pointMakeAndScale( 61.43,  98.92),
+                        controlPoint2: pointMakeAndScale( 62.08,  99.26))
+    rightPauseBezier.addCurveToPoint(  pointMakeAndScale( 84.12,  99.26),
+                        controlPoint1: pointMakeAndScale( 65.82,  99.26),
+                        controlPoint2: pointMakeAndScale( 82.22,  99.26))
+    rightPauseBezier.addCurveToPoint(  pointMakeAndScale( 86.61,  96.76),
+                        controlPoint1: pointMakeAndScale( 86.01,  99.26),
+                        controlPoint2: pointMakeAndScale( 86.61,  98.91))
+    rightPauseBezier.addCurveToPoint(  pointMakeAndScale( 86.61,  3.54),
+                        controlPoint1: pointMakeAndScale( 86.61,  94.62),
+                        controlPoint2: pointMakeAndScale( 86.61,  5.57))
+    rightPauseBezier.addCurveToPoint(  pointMakeAndScale( 84.17,  0.29),
+                        controlPoint1: pointMakeAndScale( 86.61,  1.5),
+                        controlPoint2: pointMakeAndScale( 86.48,  0.29))
+    rightPauseBezier.addCurveToPoint(  pointMakeAndScale( 64.01,  0.31),
+                        controlPoint1: pointMakeAndScale( 81.85,  0.29),
+                        controlPoint2: pointMakeAndScale( 65.97,  0.31))
     rightPauseBezier.closePath()
     return rightPauseBezier
   }
 
   class func leftPauseBezier() -> UIBezierPath {
     let leftPauseBezier = UIBezierPath()
-    leftPauseBezier.moveToPoint(     CGPointMake( ✂️14.01,  ✂️0.31))
-    leftPauseBezier.addCurveToPoint( CGPointMake( ✂️11.43,  ✂️2.57),
-                      controlPoint1: CGPointMake( ✂️12.05,  ✂️0.31),
-                      controlPoint2: CGPointMake( ✂️11.43,  ✂️1.46))
-    leftPauseBezier.addCurveToPoint( CGPointMake( ✂️11.43,  ✂️97.04),
-                      controlPoint1: CGPointMake( ✂️11.43,  ✂️3.68),
-                      controlPoint2: CGPointMake( ✂️11.43,  ✂️95.16))
-    leftPauseBezier.addCurveToPoint( CGPointMake( ✂️13.95,  ✂️99.26),
-                      controlPoint1: CGPointMake( ✂️11.43,  ✂️98.92),
-                      controlPoint2: CGPointMake( ✂️12.08,  ✂️99.26))
-    leftPauseBezier.addCurveToPoint( CGPointMake( ✂️34.12,  ✂️99.26),
-                      controlPoint1: CGPointMake( ✂️15.82,  ✂️99.26),
-                      controlPoint2: CGPointMake( ✂️32.22,  ✂️99.26))
-    leftPauseBezier.addCurveToPoint( CGPointMake( ✂️36.61,  ✂️96.76),
-                      controlPoint1: CGPointMake( ✂️36.01,  ✂️99.26),
-                      controlPoint2: CGPointMake( ✂️36.61,  ✂️98.91))
-    leftPauseBezier.addCurveToPoint( CGPointMake( ✂️36.61,  ✂️3.54),
-                      controlPoint1: CGPointMake( ✂️36.61,  ✂️94.62),
-                      controlPoint2: CGPointMake( ✂️36.61,  ✂️5.57))
-    leftPauseBezier.addCurveToPoint( CGPointMake( ✂️34.17,  ✂️0.29),
-                      controlPoint1: CGPointMake( ✂️36.61,  ✂️1.5),
-                      controlPoint2: CGPointMake( ✂️36.48,  ✂️0.29))
-    leftPauseBezier.addCurveToPoint( CGPointMake( ✂️14.01,  ✂️0.31),
-                      controlPoint1: CGPointMake( ✂️31.85,  ✂️0.29),
-                      controlPoint2: CGPointMake( ✂️15.97,  ✂️0.31))
+    leftPauseBezier.moveToPoint(     pointMakeAndScale( 14.01,  0.31))
+    leftPauseBezier.addCurveToPoint( pointMakeAndScale( 11.43,  2.57),
+                      controlPoint1: pointMakeAndScale( 12.05,  0.31),
+                      controlPoint2: pointMakeAndScale( 11.43,  1.46))
+    leftPauseBezier.addCurveToPoint( pointMakeAndScale( 11.43,  97.04),
+                      controlPoint1: pointMakeAndScale( 11.43,  3.68),
+                      controlPoint2: pointMakeAndScale( 11.43,  95.16))
+    leftPauseBezier.addCurveToPoint( pointMakeAndScale( 13.95,  99.26),
+                      controlPoint1: pointMakeAndScale( 11.43,  98.92),
+                      controlPoint2: pointMakeAndScale( 12.08,  99.26))
+    leftPauseBezier.addCurveToPoint( pointMakeAndScale( 34.12,  99.26),
+                      controlPoint1: pointMakeAndScale( 15.82,  99.26),
+                      controlPoint2: pointMakeAndScale( 32.22,  99.26))
+    leftPauseBezier.addCurveToPoint( pointMakeAndScale( 36.61,  96.76),
+                      controlPoint1: pointMakeAndScale( 36.01,  99.26),
+                      controlPoint2: pointMakeAndScale( 36.61,  98.91))
+    leftPauseBezier.addCurveToPoint( pointMakeAndScale( 36.61,  3.54),
+                      controlPoint1: pointMakeAndScale( 36.61,  94.62),
+                      controlPoint2: pointMakeAndScale( 36.61,  5.57))
+    leftPauseBezier.addCurveToPoint( pointMakeAndScale( 34.17,  0.29),
+                      controlPoint1: pointMakeAndScale( 36.61,  1.5),
+                      controlPoint2: pointMakeAndScale( 36.48,  0.29))
+    leftPauseBezier.addCurveToPoint( pointMakeAndScale( 14.01,  0.31),
+                      controlPoint1: pointMakeAndScale( 31.85,  0.29),
+                      controlPoint2: pointMakeAndScale( 15.97,  0.31))
     leftPauseBezier.closePath()
     return leftPauseBezier
   }
