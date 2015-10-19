@@ -59,7 +59,6 @@ class SettingsViewController: UIViewController {
     removeContraintForBlurredImage()
   }
   
-  
   // MARK: Actions
   @IBAction func add1SecondButtonPressed(sender: UIButton) {
     timer?.duration += 1.0

@@ -97,7 +97,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="e0T-08-1gm" userLabel="ControlsStackView">
                                         <rect key="frame" x="0.0" y="728" width="728" height="276"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PdP-pn-H8o" userLabel="startPauseButton" customClass="PlayPauseButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PdP-pn-H8o" userLabel="startPauseButton" customClass="StartPauseButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="364" height="276"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="2qE-n8-vjG" userLabel="minWidth"/>
@@ -110,10 +110,10 @@
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="startPauseButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="675-vk-O2X"/>
+                                                    <action selector="startPauseButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FBb-9X-obi"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jIB-5T-jtJ" userLabel="next" customClass="NextSegmentButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jIB-5T-jtJ" userLabel="nextButton" customClass="NextButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
                                                 <rect key="frame" x="364" y="0.0" width="364" height="276"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" priority="265" constant="10000" id="6OX-6U-HTJ"/>
@@ -126,14 +126,14 @@
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="nextSegmentButtonPressedToo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="559-8M-rny"/>
+                                                    <action selector="nextButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A0e-Aw-Xqo"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-5J-yaK" userLabel="SkipButton">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-5J-yaK" userLabel="NextButtonOverlay" customClass="NextButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
                                 <rect key="frame" x="20" y="20" width="728" height="728"/>
                                 <state key="normal">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -143,11 +143,11 @@
                                     <rect key="frame" x="724" y="373" width="284" height="375"/>
                                 </variation>
                                 <connections>
-                                    <action selector="nextSegmentButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4vC-nM-WnJ"/>
+                                    <action selector="nextButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yBt-cb-bvj"/>
                                 </connections>
                             </button>
-                            <view opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ddp-73-GXt" customClass="BackView" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
-                                <rect key="frame" x="20" y="35" width="18" height="23"/>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddp-73-GXt" customClass="BackView" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
+                                <rect key="frame" x="12" y="34" width="18" height="23"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="Zk7-T5-TpL"/>
@@ -196,10 +196,11 @@
                         <outlet property="containerStackView" destination="eTm-Vw-Y1W" id="ewX-Fv-Ca4"/>
                         <outlet property="controlsStackView" destination="e0T-08-1gm" id="yHU-Hh-AJ6"/>
                         <outlet property="flashImageView" destination="5o7-Gc-suh" id="h9q-K0-hB6"/>
-                        <outlet property="nextSegmentButton" destination="edy-5J-yaK" id="aip-vC-v9i"/>
+                        <outlet property="nextButton" destination="jIB-5T-jtJ" id="93C-BQ-Ohe"/>
+                        <outlet property="nextButtonTimerOverlay" destination="edy-5J-yaK" id="fu6-7A-Qad"/>
                         <outlet property="sectionTimeLabel" destination="fhW-lj-LnF" id="PUl-lz-n33"/>
                         <outlet property="segmentLabel" destination="6Xz-Ti-gwy" id="Hdh-QZ-ZTt"/>
-                        <outlet property="startPauseButton" destination="PdP-pn-H8o" id="wKF-n7-nGL"/>
+                        <outlet property="startPauseButton" destination="PdP-pn-H8o" id="mUl-3w-EeM"/>
                         <outlet property="timerCirclesView" destination="tY2-lc-OlN" id="Tzt-0B-3ti"/>
                         <outlet property="totalLabel" destination="vPK-rh-OhK" id="Bgz-Ou-WQO"/>
                         <outlet property="totalTimeLabel" destination="iLg-Ok-lxM" id="WkL-JZ-5QJ"/>

@@ -79,23 +79,72 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var flashImageView: UIImageView!
   @IBOutlet weak var backButton: BackButton!
   @IBOutlet weak var backView: BackView!
-  @IBOutlet weak var startPauseButton: PlayPauseButton!
-  @IBOutlet weak var nextSegmentButton: NextSegmentButton!
+//  @IBOutlet weak var startPauseButton: PlayPauseButton!
+//  @IBOutlet weak var nextSegmentButton: NextSegmentButton!
+  @IBOutlet weak var startPauseButton: StartPauseButton!
+  @IBOutlet weak var nextButton: NextButton!
+  @IBOutlet weak var nextButtonTimerOverlay: NextButton!
   
   @IBOutlet weak var containerStackView: UIStackView!
   @IBOutlet weak var controlsStackView: UIStackView!
   
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     addSwipeGesture()
-    backView.unhighlight()
+    setupBackButton()
+    setupStartPauseButton()
+    setupNextButton()
+  }
+
+  
+  
+  // MARK: -
+  // MARK: Setup
+  
+  func setupBackButton() {
     backButton.backView = backView
+    backView.unhighlight()
   }
   
+  
+  func setupNextButton() {
+    let geekSpeakBlueColor = TimerViewController.Constants.GeekSpeakBlueColor
+
+    let nextView = NextView()
+    nextView.highlightColor = geekSpeakBlueColor
+    nextView.tintColor      = geekSpeakBlueColor
+    view.insertSubview( nextView,
+          belowSubview: containerStackView)
+    
+    centerView( nextView,
+                     ToView: nextButton,
+        WithContraintParent: view)
+    
+    nextButton.nextView = nextView
+    nextButtonTimerOverlay.nextView = nextView
+  }
+  
+  
+  func setupStartPauseButton() {
+    let geekSpeakBlueColor = TimerViewController.Constants.GeekSpeakBlueColor
+
+    let startPauseView = StartPauseView()
+    startPauseView.highlightColor = geekSpeakBlueColor
+    startPauseView.tintColor      = geekSpeakBlueColor
+    view.insertSubview( startPauseView,
+          belowSubview: containerStackView)
+    
+    centerView( startPauseView,
+                     ToView: startPauseButton,
+        WithContraintParent: view)
+    
+    startPauseButton.startPauseView = startPauseView
+    
+  }
+  
+  
   override func viewWillAppear(animated: Bool) {
-    nextSegmentButton.tintColor = Constants.GeekSpeakBlueColor
-    startPauseButton.tintColor  = Constants.GeekSpeakBlueColor
     
     if let timer = timer {
       setupButtonLayout(timer)
@@ -150,8 +199,9 @@ final class TimerViewController: UIViewController {
     timerChangedCountingStatus()
     timerDurationChanged()
     layoutViewsForSize(layoutSize)
-    startPauseButton.percentageOfSuperviewSize = CGFloat(0.1)
   }
+  
+  
   
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
@@ -183,9 +233,6 @@ final class TimerViewController: UIViewController {
     super.didReceiveMemoryWarning()
   }
 
-
-  
-
   
   // MARK: -
   // MARK: Actions
@@ -197,16 +244,13 @@ final class TimerViewController: UIViewController {
     }
   }
   
-  @IBAction func nextSegmentButtonPressedToo(sender: NextSegmentButton) {
+  @IBAction func nextButtonPressed(sender: NextButton) {
     timer?.next()
   }
   
-  @IBAction func nextSegmentButtonPressed(sender: NextSegmentButton) {
-    timer?.next()
-  }
   
   var startPauseButtonCount: Int = 0
-  @IBAction func startPauseButtonPressed(sender: PlayPauseButton) {
+  @IBAction func startPauseButtonPressed(sender: StartPauseButton) {
     startPauseButtonCount++
     if let timer = timer {
       switch timer.state {
@@ -226,12 +270,14 @@ final class TimerViewController: UIViewController {
     case .Ready,
          .Paused,
          .PausedAfterComplete:
-      startPauseButton.showPlayView()
+      startPauseButton.startPauseView?.label.text = "Start Timer"
+//      startPauseButton.showPlayView()
+      
     
     case .Counting,
       .CountingAfterComplete:
-      startPauseButton.showPauseView()
-      
+      startPauseButton.startPauseView?.label.text = "Pause Timer"
+//      startPauseButton.showPauseView()
     }
   }
 
@@ -242,17 +288,17 @@ final class TimerViewController: UIViewController {
          .Paused,
          .PausedAfterComplete:
       if startPauseButtonCount > 0 {
-        startPauseButton.animateToPlayView()
+//        startPauseButton.animateToPlayView()
       } else {
-        startPauseButton.showPlayView()
+//        startPauseButton.showPlayView()
       }
       
     case .Counting,
          .CountingAfterComplete:
       if startPauseButtonCount > 0 {
-        startPauseButton.animateToPauseView()
+//        startPauseButton.animateToPauseView()
       } else {
-        startPauseButton.showPauseView()
+//        startPauseButton.showPauseView()
       }
       
     }
@@ -293,6 +339,32 @@ final class TimerViewController: UIViewController {
     controlsStackView.axis = .Vertical
   }
   
+  
+  func centerView(view: UIView, ToView toView: UIView, WithContraintParent parent: UIView) {
+    
+    let y =      NSLayoutConstraint(item: view,
+                               attribute: .CenterY,
+                               relatedBy: .Equal,
+                                  toItem: toView,
+                               attribute: .CenterY,
+                              multiplier: 1.0,
+                                constant: 0.0)
+
+    let x =      NSLayoutConstraint(item: view,
+                               attribute: .CenterX,
+                               relatedBy: .Equal,
+                                  toItem: toView,
+                               attribute: .CenterX,
+                              multiplier: 1.0,
+                                constant: 0.0)
+    parent.addConstraints([x,y])
+  }
+
+  
+  
+  
+  
+  
   // MARK: -
   // MARK: Gestures
   
@@ -312,6 +384,8 @@ final class TimerViewController: UIViewController {
 
     primaryViewController.panGestureRecognized(sender)
   }
+
+  
 
   
   // MARK: -

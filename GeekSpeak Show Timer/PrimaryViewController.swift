@@ -3,7 +3,17 @@ import UIKit
 class PrimaryViewController: REFrostedViewController,
                              REFrostedViewControllerDelegate {
   
-  
+// TODO: sharedApplication().setStatusBarStyle is depricated. The following does
+//       not do the same thing, but I thought it should.  Research and impliment
+//
+//  override func preferredStatusBarStyle() -> UIStatusBarStyle {
+//    print("PrimaryViewController preferredStatusBarStyle")
+//    return .LightContent
+//  }
+//
+//  override func viewDidAppear(animated: Bool) {
+//    setNeedsStatusBarAppearanceUpdate()
+//  }
   
   override func awakeFromNib() {
     guard let storyboard = storyboard else {
