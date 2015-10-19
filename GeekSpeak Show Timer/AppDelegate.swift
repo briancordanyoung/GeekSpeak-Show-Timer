@@ -14,6 +14,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var timer = Timer()
   var window: UIWindow?
   
+  // Convenience property to make intentions clear what is gonig on.
+  var allowDeviceToSleepDisplay: Bool {
+    get {
+      return !UIApplication.sharedApplication().idleTimerDisabled
+    }
+    set(allowed) {
+      UIApplication.sharedApplication().idleTimerDisabled = !allowed
+    }
+  }
+  
+  
+  // MARK: App Delegate
   func application(application: UIApplication,
        didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?)
                                                                        -> Bool {
@@ -40,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func applicationWillEnterForeground(application: UIApplication) {
     resetTimerIfShowTimeElapsed()
+    timerChangedCountingStatus()
   }
 
   func applicationDidBecomeActive(application: UIApplication) {
@@ -50,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func applicationDidEnterBackground(application: UIApplication) {
-    UIApplication.sharedApplication().idleTimerDisabled = false
+    allowDeviceToSleepDisplay = true
   }
 
   
@@ -68,9 +81,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     registerForTimerNotifications()
     return true
   }
+  
+  func application(application: UIApplication,
+                            willEncodeRestorableStateWithCoder coder: NSCoder) {
+    timer.encodeWithCoder(coder)
+  }
+  
+  func application(application: UIApplication,
+                             didDecodeRestorableStateWithCoder coder: NSCoder) {
+    timer.decodeWithCoder(coder: coder)
+  }
 
 }
 
+// MARK: Additional
 
 extension AppDelegate {
   
@@ -97,11 +121,11 @@ extension AppDelegate {
     case .Ready,
          .Paused,
          .PausedAfterComplete:
-      UIApplication.sharedApplication().idleTimerDisabled = false
+      allowDeviceToSleepDisplay = true
       
     case .Counting,
          .CountingAfterComplete:
-      UIApplication.sharedApplication().idleTimerDisabled = true
+      allowDeviceToSleepDisplay = false
     }
 
   }
@@ -110,8 +134,8 @@ extension AppDelegate {
     // reset the timer if it hasn't started, so that it uses the UserDefaults
     // to set which timing to use (demo or show)
     let useDemoDurations = NSUserDefaults
-                                  .standardUserDefaults()
-                                  .boolForKey(Timer.Constants.UseDemoDurations)
+                                   .standardUserDefaults()
+                                   .boolForKey(Timer.Constants.UseDemoDurations)
     if timer.totalShowTimeElapsed == 0 {
       if useDemoDurations {
         timer.reset(usingDemoTiming: true)

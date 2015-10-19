@@ -11,7 +11,6 @@ class SettingsViewController: UIViewController {
   // The backupImageView is only a gross fix to hide that the backgroundImageView
   // is disappearing when the REFrostedViewController animates is out of view
   @IBOutlet weak var backgroundImageView: UIImageView!
-  @IBOutlet weak var backupImageView: UIImageView!
   
   @IBOutlet weak var add1SecondButton: UIButton!
   @IBOutlet weak var add5SecondsButton: UIButton!
@@ -60,7 +59,6 @@ class SettingsViewController: UIViewController {
     removeContraintForBlurredImage()
   }
   
-  
   // MARK: Actions
   @IBAction func add1SecondButtonPressed(sender: UIButton) {
     timer?.duration += 1.0
@@ -92,11 +90,12 @@ class SettingsViewController: UIViewController {
   // MARK: Timer management
   func resetTimer() {
     updateUseDemoDurations()
-    if useDemoDurations {
-      timer?.reset(usingDemoTiming: true)
-    } else {
-      timer?.reset(usingDemoTiming: false)
-    }
+    timer?.reset(usingDemoTiming: useDemoDurations)
+    
+    // Delay the generateBlurredBackground until the TimerViews are drawn
+    // by waiting until the next run loop.
+    self.performSelector("generateBlurredBackground", withObject: .None,
+                                                      afterDelay: 0.0)
   }
   
   
@@ -112,7 +111,7 @@ class SettingsViewController: UIViewController {
       // Note the scale value... Values greater than 1 make a context smaller
       // than the detail view controller. Smaller context means faster rendering
       // of the final blurred background image
-      let scaleValue = CGFloat(32)
+      let scaleValue = CGFloat(16)
       let underneathViewControllerSize = underneathViewController.view.frame.size
       let contextSize =
                     CGSizeMake(underneathViewControllerSize.width  / scaleValue,
@@ -153,14 +152,12 @@ class SettingsViewController: UIViewController {
                                                   maskImage: nil)
               dispatch_sync(dispatch_get_main_queue(), {
                   self.backgroundImageView.image = blurredBackgroundImage
-                  self.backupImageView.image = blurredBackgroundImage
                   self.backgroundBlurringInProgress = false
               })
             })
         }
     } else {
       backgroundImageView.image = UIImage.imageWithColor(UIColor.blackColor())
-      backupImageView.image     = backgroundImageView.image
     }
 }  //generateBlurredBackground
   

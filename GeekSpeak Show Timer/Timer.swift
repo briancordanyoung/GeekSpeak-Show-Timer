@@ -212,7 +212,7 @@ final class Timer: NSObject, NSCoding {
     } else {
       self.demoTimings = false
     }
-    notify()
+    notifyAll()
   }
   
   func start() {
@@ -298,7 +298,7 @@ final class Timer: NSObject, NSCoding {
                                        object: self)
   }
   
-  func notify() {
+  func notifyAll() {
     notifyTimerUpdated()
     notifyCountingStateUpdated()
     notifyTimerDurationUpdated()

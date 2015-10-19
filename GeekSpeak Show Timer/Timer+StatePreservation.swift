@@ -79,7 +79,7 @@ extension Timer {
     timing.timeElapsed.postShow =
                    aDecoder.decodeDoubleForKey(Constants.ElapsedTime.PostShowId)
     
-    notify()
+    notifyAll()
     incrementTimer()
   }
   

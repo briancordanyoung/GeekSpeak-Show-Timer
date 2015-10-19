@@ -135,19 +135,19 @@ class NextSegmentButton: ShapesButton {
     darkRing3.percentageOfSuperviewSize  = 0.33
     lightRing3.percentageOfSuperviewSize = 0.33
     
-    lightRing1.color = TimerViewController.Constants.GeekSpeakBlueColor
-    lightRing2.color = TimerViewController.Constants.GeekSpeakBlueColor
-    lightRing3.color = TimerViewController.Constants.GeekSpeakBlueColor
+    lightRing1.color = Appearance.Constants.GeekSpeakBlueColor
+    lightRing2.color = Appearance.Constants.GeekSpeakBlueColor
+    lightRing3.color = Appearance.Constants.GeekSpeakBlueColor
   }
 
   func configureRing(ringView: RingView) {
       ringView.userInteractionEnabled = false
       ringView.opaque    = false
       ringView.alpha     = 0.0
-      let darkenBy       = TimerViewController.Constants.RingDarkeningFactor
-      ringView.color     = TimerViewController.Constants.GeekSpeakBlueColor
+      let darkenBy       = Appearance.Constants.RingDarkeningFactor
+      ringView.color     = Appearance.Constants.GeekSpeakBlueColor
                                             .darkenColorWithMultiplier(darkenBy)
-      ringView.ringWidth = TimerViewController.Constants.LineWidth
+      ringView.ringWidth = Appearance.Constants.RingWidth
       container.addSubview(ringView)
   }
  
