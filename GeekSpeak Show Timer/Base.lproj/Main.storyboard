@@ -29,11 +29,11 @@
                                     <constraint firstAttribute="width" secondItem="5o7-Gc-suh" secondAttribute="height" multiplier="1:1" id="Duc-Ea-NmZ" userLabel="Aspect-1:1"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZGB-kc-n9R" userLabel="activityView" customClass="ActivityView" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
-                                <rect key="frame" x="730" y="28" width="35" height="35"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZGB-kc-n9R" userLabel="ActivityView" customClass="ActivityView" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
+                                <rect key="frame" x="733" y="33" width="25" height="25"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="31o-zx-nPQ"/>
+                                    <constraint firstAttribute="width" constant="25" id="31o-zx-nPQ"/>
                                     <constraint firstAttribute="width" secondItem="ZGB-kc-n9R" secondAttribute="height" multiplier="1:1" id="Hb1-gG-xQo"/>
                                 </constraints>
                             </view>
@@ -178,7 +178,6 @@
                             <constraint firstItem="12Z-1g-lxX" firstAttribute="height" secondItem="iLg-Ok-lxM" secondAttribute="height" priority="750" id="2QY-hY-qXA"/>
                             <constraint firstItem="eTm-Vw-Y1W" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="DLG-GC-nCU"/>
                             <constraint firstItem="5o7-Gc-suh" firstAttribute="width" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="2" id="EFt-aX-Gnm"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ZGB-kc-n9R" secondAttribute="trailing" constant="-17" id="Klq-2l-Oh0"/>
                             <constraint firstItem="ddp-73-GXt" firstAttribute="top" relation="greaterThanOrEqual" secondItem="12Z-1g-lxX" secondAttribute="top" id="MKM-sh-OaF"/>
                             <constraint firstItem="12Z-1g-lxX" firstAttribute="left" secondItem="8bC-Xf-vdC" secondAttribute="left" id="RL1-de-b1D"/>
                             <constraint firstItem="edy-5J-yaK" firstAttribute="width" secondItem="tY2-lc-OlN" secondAttribute="width" id="Td8-du-2QA"/>
@@ -194,6 +193,7 @@
                             <constraint firstItem="edy-5J-yaK" firstAttribute="centerX" secondItem="tY2-lc-OlN" secondAttribute="centerX" id="qiS-2P-5DQ"/>
                             <constraint firstItem="ZGB-kc-n9R" firstAttribute="centerY" secondItem="ddp-73-GXt" secondAttribute="centerY" id="rJg-bf-8Ua"/>
                             <constraint firstItem="5o7-Gc-suh" firstAttribute="height" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="2" id="tJj-ZM-AgQ"/>
+                            <constraint firstItem="ZGB-kc-n9R" firstAttribute="leading" secondItem="fhW-lj-LnF" secondAttribute="trailing" constant="5" id="y3J-J6-evm"/>
                             <constraint firstItem="5o7-Gc-suh" firstAttribute="centerX" secondItem="tY2-lc-OlN" secondAttribute="centerX" id="ysM-uQ-vZK"/>
                         </constraints>
                     </view>

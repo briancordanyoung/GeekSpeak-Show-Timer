@@ -203,7 +203,7 @@ extension TimerViewController {
       totalTimeLabel.text     = timing.asShortString(timer.totalShowTimeElapsed)
       
       updateTimerLabels()
-      activityView.activity = CGFloat(timer.totalShowTimeElapsed)
+      activityView.activity = CGFloat(timer.secondsElapsed)
 
       }
     }

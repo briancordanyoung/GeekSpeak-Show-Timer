@@ -54,6 +54,7 @@ final class TimerViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    activityView.fillColor = Appearance.Constants.GeekSpeakBlueColor
     addSwipeGesture()
     setupBackButton()
     setupStartPauseButton()

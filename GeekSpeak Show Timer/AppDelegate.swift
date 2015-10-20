@@ -42,11 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?)
                                                                        -> Bool {
     self.window?.makeKeyAndVisible()
-    UIApplication.sharedApplication()
-                 .setStatusBarStyle( UIStatusBarStyle.Default,
-                           animated: false)
-                                                                        
-
     return true
   }
   
@@ -113,7 +108,6 @@ extension AppDelegate {
     //    notifyCenter.removeObserver( self,
     //                     forKeyPath: Timer.Constants.CountingStatusChanged)
     notifyCenter.removeObserver(self)
-    
   }
 
   func timerChangedCountingStatus() {
