@@ -52,8 +52,12 @@ final class TimerViewController: UIViewController {
   
   @IBOutlet weak var activityView: ActivityView!
 
+  
+  private var controlsInOrder: [UIButton] = []
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    controlsInOrder = [startPauseButton, nextButton]
     activityView.fillColor = Appearance.Constants.GeekSpeakBlueColor
     addSwipeGesture()
     setupBackButton()
@@ -311,11 +315,19 @@ final class TimerViewController: UIViewController {
   func setContraintsForVerticalLayout() {
     containerStackView.axis = .Vertical
     controlsStackView.axis = .Horizontal
+    flipControlViews(controlsInOrder)
   }
   
   func setContraintsForHorizontalLayout() {
     containerStackView.axis = .Horizontal
     controlsStackView.axis = .Vertical
+    flipControlViews(controlsInOrder.reverse())
+  }
+  
+  func flipControlViews(controls : [UIButton]) {
+    let arrangedViews = controlsStackView.arrangedSubviews.reverse()
+    arrangedViews.forEach {controlsStackView.removeArrangedSubview($0)}
+    controls.forEach {controlsStackView.addArrangedSubview($0)}
   }
   
   
