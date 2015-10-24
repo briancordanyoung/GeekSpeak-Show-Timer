@@ -1,6 +1,6 @@
 import UIKit
 
-// TODO: Refaction and abstract out the following hard coded time.
+// TODO: Refactor and abstract out the following hard coded time.
 //       These structs and enums were a quick and dirty way to get the
 //       Timer up and running.  This should be abstrated out and use
 //       some sort of configuration file that allows the timer to have

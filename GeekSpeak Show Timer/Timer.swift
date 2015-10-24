@@ -16,6 +16,8 @@ final class Timer: NSObject, NSCoding {
 
     static let UseDemoDurations    = "useDemoDurations"
 
+    static let UUIDId              = "timerUUIDId"
+    static let DemoId              = "timerDemoId"
     static let StateId             = "timerCountingStateId"
     static let PhaseId             = "timerShowTimingPhaseId"
     static let CountingStartTimeId = "timerCountingStartTimeId"
@@ -41,6 +43,7 @@ final class Timer: NSObject, NSCoding {
   }
   
   // MARK: Properties
+  var uuid = NSUUID()
   var countingStartTime: NSTimeInterval?
   var timing = ShowTiming()
   var demoTimings = false
@@ -181,6 +184,7 @@ final class Timer: NSObject, NSCoding {
     super.init()
     decodeWithCoder(coder: aDecoder)
   }
+  
   
   // MARK: -
   // MARK: Timer Actions

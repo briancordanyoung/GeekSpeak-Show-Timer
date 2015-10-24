@@ -28,17 +28,6 @@ class PrimaryViewController: REFrostedViewController,
     let settingsViewController = storyboard
               .instantiateViewControllerWithIdentifier("settingsViewController")
     
-    if let timerViewController = timerViewController as? TimerViewController,
-    settingsViewController = settingsViewController as? SettingsViewController {
-      settingsViewController.timerViewController = timerViewController
-
-      if let appDelegate = UIApplication.sharedApplication().delegate
-                                                              as? AppDelegate  {
-        timerViewController.timer    = appDelegate.timer
-        settingsViewController.timer = appDelegate.timer
-      }
-    }
-    
     contentViewController = timerViewController
     menuViewController    = settingsViewController
     
@@ -53,6 +42,10 @@ class PrimaryViewController: REFrostedViewController,
     blurRadius                = 0
     blurSaturationDeltaFactor = 0
     blurTintColor             = UIColor.clearColor()
+  }
+  
+  override func viewWillAppear(animated: Bool) {
+    injectTimerIntoContainedViewControllers()
   }
   
   
@@ -98,5 +91,19 @@ class PrimaryViewController: REFrostedViewController,
   }
   
 
+  func injectTimerIntoContainedViewControllers() {
+    if let timerViewController = contentViewController as? TimerViewController,
+        settingsViewController = menuViewController as? SettingsViewController {
+        
+        settingsViewController.timerViewController = timerViewController
+        
+        if let appDelegate = UIApplication.sharedApplication().delegate
+                                                              as? AppDelegate  {
+            let timer = appDelegate.timer
+            timerViewController.timer    = timer
+            settingsViewController.timer = timer
+        }
+    }
+  }
   
 }

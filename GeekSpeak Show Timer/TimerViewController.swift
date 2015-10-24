@@ -12,6 +12,7 @@ enum TimerLabelDisplay: String, CustomStringConvertible {
 
 final class TimerViewController: UIViewController {
   
+  var timer: Timer?
   var timerViews: TimerViews?
   var timerLabelDisplay: TimerLabelDisplay = .Remaining {
     didSet {
@@ -32,7 +33,6 @@ final class TimerViewController: UIViewController {
     return self.layoutSize.width < self.layoutSize.height
   }
   
-  var timer: Timer?
   
   // Required on load
   @IBOutlet weak var timerCirclesView: UIView!
@@ -166,6 +166,7 @@ final class TimerViewController: UIViewController {
                                  fill: breakView)
     
     registerForTimerNotifications()
+    displayAllTime()
     timerUpdatedTime()
     timerChangedCountingStatus()
     timerDurationChanged()

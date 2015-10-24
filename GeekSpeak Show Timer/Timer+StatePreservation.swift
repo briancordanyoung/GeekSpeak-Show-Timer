@@ -7,6 +7,10 @@ extension Timer {
   // MARK: -
   // MARK: State Preservation and Restoration
   func decodeWithCoder(coder aDecoder: NSCoder) {
+
+    let decodedObject = aDecoder.decodeObjectForKey(Constants.UUIDId) as! NSUUID
+    uuid = decodedObject
+    demoTimings = aDecoder.decodeBoolForKey(Constants.DemoId)
     
     let countingState = aDecoder.decodeIntForKey(Constants.StateId)
     switch countingState {
@@ -20,11 +24,10 @@ extension Timer {
       _state = .Ready
     }
     
-//    let demoTimings = aDecoder.decodeBoolForKey(Constants.UseDemoDurations)
 
     
     let countingStartTimeDecoded =
-    aDecoder.decodeDoubleForKey(Constants.CountingStartTimeId)
+                      aDecoder.decodeDoubleForKey(Constants.CountingStartTimeId)
     if countingStartTimeDecoded == DBL_MAX {
       countingStartTime = .None
     } else {
@@ -32,24 +35,20 @@ extension Timer {
     }
     
     timing = ShowTiming()
-    switch aDecoder.decodeIntForKey(Constants.PhaseId) {
-    case 1:
-      timing.phase = .PreShow
-    case 2:
-      timing.phase = .Section1
-    case 3:
-      timing.phase = .Break2
-    case 4:
-      timing.phase = .Section2
-    case 5:
-      timing.phase = .Break2
-    case 6:
-      timing.phase = .Section3
-    case 7:
-      timing.phase = .PostShow
-    default:
-      timing.phase = .PreShow
+    let int = aDecoder.decodeIntForKey(Constants.PhaseId)
+    let phase: ShowPhase
+    
+    switch int {
+    case 1:  phase = .PreShow
+    case 2:  phase = .Section1
+    case 3:  phase = .Break2
+    case 4:  phase = .Section2
+    case 5:  phase = .Break2
+    case 6:  phase = .Section3
+    case 7:  phase = .PostShow
+    default: phase = .PreShow
     }
+    timing.phase = phase
     
     timing.durations.preShow  =
                       aDecoder.decodeDoubleForKey(Constants.Durations.PreShowId)
@@ -78,12 +77,19 @@ extension Timer {
                      aDecoder.decodeDoubleForKey(Constants.ElapsedTime.Break2Id)
     timing.timeElapsed.postShow =
                    aDecoder.decodeDoubleForKey(Constants.ElapsedTime.PostShowId)
-    
-    notifyAll()
-    incrementTimer()
   }
   
+  
+  
+  
+  
+  
+  
+  
   func encodeWithCoder(aCoder: NSCoder) {
+    
+    aCoder.encodeObject(uuid, forKey: Constants.UUIDId)
+    aCoder.encodeBool(demoTimings, forKey: Constants.DemoId)
     
     switch _state {
     case .Ready:
@@ -108,22 +114,20 @@ extension Timer {
     
     aCoder.encodeBool(demoTimings, forKey: Constants.UseDemoDurations)
     
+    let int: Int32
+
     switch timing.phase {
-    case .PreShow:
-      aCoder.encodeInt(1, forKey: Constants.PhaseId)
-    case .Section1:
-      aCoder.encodeInt(2, forKey: Constants.PhaseId)
-    case .Break1:
-      aCoder.encodeInt(3, forKey: Constants.PhaseId)
-    case .Section2:
-      aCoder.encodeInt(4, forKey: Constants.PhaseId)
-    case .Break2:
-      aCoder.encodeInt(5, forKey: Constants.PhaseId)
-    case .Section3:
-      aCoder.encodeInt(6, forKey: Constants.PhaseId)
-    case .PostShow:
-      aCoder.encodeInt(7, forKey: Constants.PhaseId)
+    case .PreShow:  int = 1
+    case .Section1: int = 2
+    case .Break1:   int = 3
+    case .Section2: int = 4
+    case .Break2:   int = 5
+    case .Section3: int = 6
+    case .PostShow: int = 7
     }
+
+    aCoder.encodeInt(int, forKey: Constants.PhaseId)
+
     
     let d = timing.durations
     aCoder.encodeDouble(d.preShow,  forKey: Constants.Durations.PreShowId)

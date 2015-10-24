@@ -45,7 +45,6 @@ class FillView: UIView {
       
       
       func changePercentage() {
-        print("changePercentage")
         self.sizeConstraintsInactive.forEach({$0.priority = $0.priority * 10 })
         self.sizeConstraintsActive.forEach(  {$0.priority = $0.priority * 0.1})
         let newInactive = self.sizeConstraintsActive
@@ -56,7 +55,6 @@ class FillView: UIView {
       }
       
       if duration == 0 {
-        print("duration == 0 ")
         changePercentage()
       }
       
