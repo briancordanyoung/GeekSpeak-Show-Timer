@@ -1,4 +1,5 @@
 import Foundation
+import AngleGear
 
 
 // RingColor - A simple container for a color and how much of the ring the

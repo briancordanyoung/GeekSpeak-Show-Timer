@@ -1,89 +1,90 @@
 import UIKit
 
+
 // MARK: TauAngle - A type that represents an angle in both
 //               degrees or radians.
 //       Unlike AccumulatedAngle, TauAngle is limited to representing
 //       a single circle from 0 to 2π
-struct TauAngle: AngularType {
+public struct TauAngle: AngularType {
   
-  var value: Double {
+  public var value: Double {
     didSet(oldValue) {
       value = TauAngle.limit(value)
     }
   }
   
-  init(_ value: Double) {
+  public init(_ value: Double) {
     self.value = TauAngle.limit(value)
   }
   
   
   // All other initilizers call the above init()
-  init(_ angle: Angle) {
+  public init(_ angle: Angle) {
     self.init(angle.value)
   }
   
-  init(_ angle: AccumulatedAngle) {
+  public init(_ angle: AccumulatedAngle) {
     self.init(angle.value)
   }
   
-  init(_ value: CGFloat) {
+  public init(_ value: CGFloat) {
     self.init(Double(value))
   }
   
-  init(_ value: Int) {
+  public init(_ value: Int) {
     self.init(Double(value))
   }
   
-  init(transform: CGAffineTransform) {
+  public init(transform: CGAffineTransform) {
     let b = transform.b
     let a = transform.a
     let angle = atan2(b, a)
     self.init(radians: angle)
   }
   
-  init(radians: Double) {
+  public init(radians: Double) {
     self.init(radians)
   }
   
-  init(radians: CGFloat) {
+  public init(radians: CGFloat) {
     self.init(Double(radians))
   }
   
-  init(radians: Int) {
+  public init(radians: Int) {
     self.init(Double(radians))
   }
   
   
-  init(degrees: Double) {
+  public init(degrees: Double) {
     self.init(radians: Angle.degrees2radians(degrees))
   }
   
-  init(degrees: CGFloat) {
+  public init(degrees: CGFloat) {
     self.init(degrees: Double(degrees))
   }
   
-  init(degrees: Int) {
+  public init(degrees: Int) {
     self.init(degrees: Double(degrees))
   }
   
   
-  var radians: Double  {
+  public var radians: Double  {
     return value
   }
   
-  var degrees: Double {
+  public var degrees: Double {
     return Angle.radians2Degrees(value)
   }
   
-  var accumulatedAngle: AccumulatedAngle {
+  public var accumulatedAngle: AccumulatedAngle {
     return AccumulatedAngle(radians)
   }
 
-  var rotation: AccumulatedAngle {
+  public var rotation: AccumulatedAngle {
     return AccumulatedAngle(radians)
   }
 
-  var description: String {
+  public var description: String {
     return "\(value)"
   }
 }
@@ -120,7 +121,7 @@ extension TauAngle {
 
 // Extend CGFloat to convert from radians
 extension CGFloat {
-  init(_ angle: TauAngle) {
+  public init(_ angle: TauAngle) {
     self.init(CGFloat(angle.radians))
   }
 }
@@ -129,13 +130,13 @@ extension CGFloat {
 
 // MARK: Protocol Conformance
 extension TauAngle: IntegerLiteralConvertible {
-  init(integerLiteral: IntegerLiteralType) {
+  public init(integerLiteral: IntegerLiteralType) {
     self.init(Double(integerLiteral))
   }
 }
 
 extension TauAngle: FloatLiteralConvertible {
-  init(floatLiteral: FloatLiteralType) {
+  public init(floatLiteral: FloatLiteralType) {
     self.init(Double(floatLiteral))
   }
 }
@@ -143,7 +144,7 @@ extension TauAngle: FloatLiteralConvertible {
 
 // MARK: Extend Int to initialize with an Angle
 extension Int {
-  init(_ angle: TauAngle) {
+  public init(_ angle: TauAngle) {
     self = Int(angle.value)
   }
 }
@@ -177,23 +178,23 @@ extension TauAngle {
     }
   }
   
-  static var pi: TauAngle {
+  public static var pi: TauAngle {
     return TauAngle.preset(.pi)
   }
   
-  static var halfCircle: TauAngle {
+  public static var halfCircle: TauAngle {
     return TauAngle.preset(.halfCircle)
   }
   
-  static var quarterCircle: TauAngle {
+  public static var quarterCircle: TauAngle {
     return TauAngle.preset(.quarterCircle)
   }
 
-  static var tau: TauAngle {
+  public static var tau: TauAngle {
     return TauAngle.preset(.tau)
   }
 
-  static var fullCircle: TauAngle {
+  public static var fullCircle: TauAngle {
     return TauAngle.preset(.fullCircle)
   }
 }
@@ -203,60 +204,60 @@ extension TauAngle {
 
 // MARK: Angle & Int specific overloads
 
-func % (lhs: TauAngle, rhs: Int) -> TauAngle {
+public func % (lhs: TauAngle, rhs: Int) -> TauAngle {
   return TauAngle(lhs.value % Double(rhs))
 }
 
 
-func + (lhs: Int, rhs: TauAngle) -> TauAngle {
+public func + (lhs: Int, rhs: TauAngle) -> TauAngle {
   return TauAngle(Double(lhs) + rhs.value)
 }
 
-func - (lhs: Int, rhs: TauAngle) -> TauAngle {
+public func - (lhs: Int, rhs: TauAngle) -> TauAngle {
   return TauAngle(Double(lhs) - rhs.value)
 }
 
-func + (lhs: TauAngle, rhs: Int) -> TauAngle {
+public func + (lhs: TauAngle, rhs: Int) -> TauAngle {
   return TauAngle(lhs.value + Double(rhs))
 }
 
-func - (lhs: TauAngle, rhs: Int) -> TauAngle {
+public func - (lhs: TauAngle, rhs: Int) -> TauAngle {
   return TauAngle(lhs.value - Double(rhs))
 }
 
 
 
 
-func < (lhs: Int, rhs: TauAngle) -> Bool {
+public func < (lhs: Int, rhs: TauAngle) -> Bool {
   return Double(lhs) < rhs.value
 }
 
-func == (lhs: Int, rhs: TauAngle) -> Bool {
+public func == (lhs: Int, rhs: TauAngle) -> Bool {
   return Double(lhs) == rhs.value
 }
 
-func < (lhs: TauAngle, rhs: Int) -> Bool {
+public func < (lhs: TauAngle, rhs: Int) -> Bool {
   return lhs.value < Double(rhs)
 }
 
-func == (lhs: TauAngle, rhs: Int) -> Bool {
+public func == (lhs: TauAngle, rhs: Int) -> Bool {
   return lhs.value == Double(rhs)
 }
 
 
 
-func += (inout lhs: TauAngle, rhs: Int) {
+public func += (inout lhs: TauAngle, rhs: Int) {
   lhs.value = lhs.value + Double(rhs)
 }
 
-func -= (inout lhs: TauAngle, rhs: Int) {
+public func -= (inout lhs: TauAngle, rhs: Int) {
   lhs.value = lhs.value - Double(rhs)
 }
 
-func / (lhs: TauAngle, rhs: Int) -> TauAngle {
+public func / (lhs: TauAngle, rhs: Int) -> TauAngle {
   return TauAngle(lhs.value / Double(rhs))
 }
 
-func * (lhs: TauAngle, rhs: Int) -> TauAngle {
+public func * (lhs: TauAngle, rhs: Int) -> TauAngle {
   return TauAngle(lhs.value * Double(rhs))
 }

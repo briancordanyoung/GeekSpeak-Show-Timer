@@ -1,4 +1,5 @@
 import UIKit
+import AngleGear
 
 
 enum TimerLabelDisplay: String, CustomStringConvertible {
