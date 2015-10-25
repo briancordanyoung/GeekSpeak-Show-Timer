@@ -98,6 +98,8 @@ class RingLayer : CALayer {
     endAngle   = CGFloat(TauAngle(degrees: 360))
     ringWidth  = CGFloat(0.2)
     fillScale  = CGFloat(1.0)
+    backgroundColor = UIColor.clearColor().CGColor
+    opaque = false
     self.needsDisplay()
   }
   
@@ -114,6 +116,9 @@ class RingLayer : CALayer {
       ringWidth  = CGFloat(0.2)
       fillScale  = CGFloat(1.0)
     }
+    backgroundColor = UIColor.clearColor().CGColor
+    opaque = false
+    self.needsDisplay()
   }
   
   init?(startAngle: CGFloat,
@@ -126,6 +131,8 @@ class RingLayer : CALayer {
     self.endAngle   = endAngle
     self.ringWidth  = ringWidth
     self._colors    = colors
+    backgroundColor = UIColor.clearColor().CGColor
+    opaque = false
     self.needsDisplay()
   }
   
@@ -147,6 +154,8 @@ class RingLayer : CALayer {
     endAngle   = CGFloat(aDecoder.decodeDoubleForKey(Constants.EndAngle))
     ringWidth  = CGFloat( aDecoder.decodeDoubleForKey(Constants.RingWidth))
     fillScale  = CGFloat( aDecoder.decodeDoubleForKey(Constants.FillScale))
+    backgroundColor = UIColor.clearColor().CGColor
+    opaque = false
     switch aDecoder.decodeIntForKey(Constants.RingStyle) {
     case 0:
       ringStyle = .Rounded
