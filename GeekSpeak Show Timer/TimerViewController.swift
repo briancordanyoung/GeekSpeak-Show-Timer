@@ -171,6 +171,8 @@ final class TimerViewController: UIViewController {
     timerChangedCountingStatus()
     timerDurationChanged()
     layoutViewsForSize(layoutSize)
+    
+    
   }
   
   
@@ -236,13 +238,26 @@ final class TimerViewController: UIViewController {
   }
   
   func setupButtonLayout(timer: Timer) {
-    updateButtonLayout(timer)
+    switch timer.state {
+    case .Ready,
+         .Paused,
+         .PausedAfterComplete:
+      startPauseButton.startPauseView?.label.text = "Start Timer"
+      startPauseButton.startPauseView?.currentButton = .Start
+      startPauseButton.startPauseView?.unhighlight()
+      
+    case .Counting,
+         .CountingAfterComplete:
+      startPauseButton.startPauseView?.label.text = "Pause Timer"
+      startPauseButton.startPauseView?.currentButton = .Pause
+      startPauseButton.startPauseView?.unhighlight()
+    }
+    
+    setNextButtonState(timer)
   }
 
   
   func updateButtonLayout(timer: Timer) {
-
-    
     // StartPause Button
     switch timer.state {
     case .Ready,
@@ -259,6 +274,10 @@ final class TimerViewController: UIViewController {
       startPauseButton.startPauseView?.unhighlight()
     }
     
+    setNextButtonState(timer)
+  }
+  
+  func setNextButtonState(timer: Timer) {
     // Next Button
     switch timer.state {
     case .Ready,
@@ -269,7 +288,6 @@ final class TimerViewController: UIViewController {
          .Paused:
       enableNextButton()
     }
-    
   }
   
   

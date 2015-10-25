@@ -77,6 +77,8 @@ extension Timer {
                      aDecoder.decodeDoubleForKey(Constants.ElapsedTime.Break2Id)
     timing.timeElapsed.postShow =
                    aDecoder.decodeDoubleForKey(Constants.ElapsedTime.PostShowId)
+    
+    incrementTimer()
   }
   
   

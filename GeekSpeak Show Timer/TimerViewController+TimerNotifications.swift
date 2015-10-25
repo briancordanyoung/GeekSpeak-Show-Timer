@@ -99,60 +99,87 @@ extension TimerViewController {
   }
   
   
+  
+  // Reset all TimerViews using the current state of the timer
+  // TODO: Timer Class Refactor
+  // This is a hack.  Most of this needs to be refactored in to
+  // the NEW timer class when it is abstracted and generalized
+  // to use abitrary timings
   func displayAllTime() {
-    if let timer = timer {
+    guard let timer = timer else {return}
       
-      
-      if timer.timing.phase == .Break1 {
-        let secondsElapsed = timer.timing.timeElapsed.break1
-        let duration = timer.timing.durations.break1
-        let secondsRemaining = duration - secondsElapsed
-        let percentage = CGFloat(secondsRemaining / duration)
-        timerViews?.fill.progress    = percentage
-      }
-      if timer.timing.phase == .Break2 {
-        let secondsElapsed = timer.timing.timeElapsed.break2
-        let duration = timer.timing.durations.break2
-        let secondsRemaining = duration - secondsElapsed
-        let percentage = CGFloat(secondsRemaining / duration)
-        timerViews?.fill.progress    = percentage
-      }
-      
-      let secondsElapsed1 = timer.timing.timeElapsed.section1
-      let duration1 = timer.timing.durations.section1
-      let secondsRemaining1 = duration1 - secondsElapsed1
-      let percentage1 = CGFloat(1 - (secondsRemaining1 / duration1))
-      timerViews?.ring1fg.progress = percentage1
-      
-      let secondsElapsed2 = timer.timing.timeElapsed.section2
-      let duration2 = timer.timing.durations.section2
-      let secondsRemaining2 = duration2 - secondsElapsed2
-      let percentage2 = CGFloat(1 - (secondsRemaining2 / duration2))
-      timerViews?.ring2fg.progress = percentage2
+    let useDemoDurations = NSUserDefaults
+                           .standardUserDefaults()
+                           .boolForKey(Timer.Constants.UseDemoDurations)
 
-      let secondsElapsed3 = timer.timing.timeElapsed.section3
-      let duration3 = timer.timing.durations.section3
-      let secondsRemaining3 = duration3 - secondsElapsed3
-      let percentage3 = CGFloat(1 - (secondsRemaining3 / duration3))
-      timerViews?.ring3fg.progress = percentage3
-
-      var segmentLabelText: String
-      switch timer.timing.phase {
-      case .PreShow:  segmentLabelText = " Pre Show"
-      case .Section1: segmentLabelText = "Section 1"
-      case .Break1:   segmentLabelText = "    Break"
-      case .Section2: segmentLabelText = "Section 2"
-      case .Break2:   segmentLabelText = "    Break"
-      case .Section3: segmentLabelText = "Section 3"
-      case .PostShow: segmentLabelText = "Post Show"
-      }
-        
-      segmentLabel.text =  padString( segmentLabelText,
-                         totalLength: 15,
-                                 pad: " ",
-                         inDirection: .Right)
+    var durations: Timer.Durations
+    if useDemoDurations {
+      durations = Timer.Durations()
+      durations.useDemoDurations()
+    } else {
+      durations = Timer.Durations()
     }
+      
+    if timer.timing.phase == .Break1 {
+      let secondsElapsed = timer.timing.timeElapsed.break1
+      let secondsRemaining = durations.break1 - secondsElapsed
+      let percentage = CGFloat(secondsRemaining / durations.break1)
+      timerViews?.fill.progress    = percentage
+    }
+    if timer.timing.phase == .Break2 {
+      let secondsElapsed = timer.timing.timeElapsed.break2
+      let secondsRemaining = durations.break2 - secondsElapsed
+      let percentage = CGFloat(secondsRemaining / durations.break2)
+      timerViews?.fill.progress    = percentage
+    }
+    
+    
+    let planedDuration1 = durations.section1
+    let secondsElapsed1 = timer.timing.timeElapsed.section1
+    let difference1 = planedDuration1 - secondsElapsed1
+    let secondsRemaining1 = planedDuration1 - secondsElapsed1
+    let percentage1 = CGFloat(1 - (secondsRemaining1 / planedDuration1))
+    timerViews?.ring1fg.progress = percentage1
+    
+    durations.section1 -= difference1
+    durations.section2 += difference1
+    
+    let planedDuration2 = durations.section2
+    let secondsElapsed2 = timer.timing.timeElapsed.section2
+    let difference2 = planedDuration2 - secondsElapsed2
+    let secondsRemaining2 = planedDuration2 - secondsElapsed2
+    let percentage2 = CGFloat(1 - (secondsRemaining2 / planedDuration2))
+    timerViews?.ring2fg.progress = percentage2
+
+    durations.section2 -= difference2
+    durations.section3 += difference2
+    
+    let secondsElapsed3 = timer.timing.timeElapsed.section3
+    let secondsRemaining3 = durations.section3 - secondsElapsed3
+    let percentage3 = CGFloat(1 - (secondsRemaining3 / durations.section3))
+    timerViews?.ring3fg.progress = percentage3
+
+    var segmentLabelText: String
+    switch timer.timing.phase {
+    case .PreShow:  segmentLabelText = " Pre Show"
+    case .Section1: segmentLabelText = "Section 1"
+    case .Break1:   segmentLabelText = "    Break"
+    case .Section2: segmentLabelText = "Section 2"
+    case .Break2:   segmentLabelText = "    Break"
+    case .Section3: segmentLabelText = "Section 3"
+    case .PostShow: segmentLabelText = "Post Show"
+    }
+      
+    segmentLabel.text =  padString( segmentLabelText,
+                       totalLength: 15,
+                               pad: " ",
+                       inDirection: .Right)
   }
+  
+  
+  
+  
+  
   
   
   // TODO: This fuction is being called at about 60fps,
