@@ -45,6 +45,7 @@
 		D353A2E31BDD921300BFFA65 /* NextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D353A2DE1BDD921300BFFA65 /* NextView.swift */; };
 		D353A2E41BDD921300BFFA65 /* PieLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D353A2DF1BDD921300BFFA65 /* PieLayer.swift */; };
 		D353A2E51BDD921300BFFA65 /* StartPauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D353A2E01BDD921300BFFA65 /* StartPauseView.swift */; };
+		D353A2E71BDD930800BFFA65 /* flash.png in Resources */ = {isa = PBXBuildFile; fileRef = D353A2E61BDD930800BFFA65 /* flash.png */; };
 		D367427F1B9CDDED00EE13F7 /* Array+Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D367427E1B9CDDED00EE13F7 /* Array+Bool.swift */; };
 		D36742811B9D33FE00EE13F7 /* NextSegmentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36742801B9D33FE00EE13F7 /* NextSegmentButton.swift */; };
 		D36742831B9D343100EE13F7 /* ShapesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36742821B9D343100EE13F7 /* ShapesButton.swift */; };
@@ -62,7 +63,6 @@
 		D3991DC71B9FBF1B00C63286 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3991DC51B9FBF1B00C63286 /* LaunchScreen.xib */; };
 		D3991DD31B9FBF1B00C63286 /* RingLayerPlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3991DD21B9FBF1B00C63286 /* RingLayerPlayTests.swift */; };
 		D39DAD1A1B917229007D797C /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39DAD191B917229007D797C /* Appearance.swift */; };
-		D3A845A51BA39E8B00062B02 /* flash.png in Resources */ = {isa = PBXBuildFile; fileRef = D3A845A41BA39E8B00062B02 /* flash.png */; };
 		D3C0807B1B9BB6290020A4A0 /* PlayPauseWipeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EC191B1B94EB5000A8E426 /* PlayPauseWipeButton.swift */; };
 		D3C487B31B726F3300B8067E /* Timer+StatePreservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */; };
 		D3C8F10D1BD4ABA3009E2A61 /* ButtonShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C8F10C1BD4ABA3009E2A61 /* ButtonShapes.swift */; };
@@ -150,6 +150,7 @@
 		D353A2DE1BDD921300BFFA65 /* NextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextView.swift; sourceTree = "<group>"; };
 		D353A2DF1BDD921300BFFA65 /* PieLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieLayer.swift; sourceTree = "<group>"; };
 		D353A2E01BDD921300BFFA65 /* StartPauseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartPauseView.swift; sourceTree = "<group>"; };
+		D353A2E61BDD930800BFFA65 /* flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flash.png; path = ../Graphics/flash.png; sourceTree = "<group>"; };
 		D367427E1B9CDDED00EE13F7 /* Array+Bool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Bool.swift"; sourceTree = "<group>"; };
 		D36742801B9D33FE00EE13F7 /* NextSegmentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextSegmentButton.swift; sourceTree = "<group>"; };
 		D36742821B9D343100EE13F7 /* ShapesButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapesButton.swift; sourceTree = "<group>"; };
@@ -171,7 +172,6 @@
 		D3991DD11B9FBF1B00C63286 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3991DD21B9FBF1B00C63286 /* RingLayerPlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingLayerPlayTests.swift; sourceTree = "<group>"; };
 		D39DAD191B917229007D797C /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
-		D3A845A41BA39E8B00062B02 /* flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash.png; sourceTree = "<group>"; };
 		D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timer+StatePreservation.swift"; sourceTree = "<group>"; };
 		D3C8F10C1BD4ABA3009E2A61 /* ButtonShapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonShapes.swift; sourceTree = "<group>"; };
 		D3C8F10E1BD4AD74009E2A61 /* ControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
@@ -273,7 +273,7 @@
 				D320C3601B6FF5E90046F785 /* UIImage+ImageEffects.m */,
 				D3463F671B713E0D002C68A8 /* Settings.bundle */,
 				D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */,
-				D3A845A41BA39E8B00062B02 /* flash.png */,
+				D353A2E61BDD930800BFFA65 /* flash.png */,
 				D340CC811B6D3E7600BB17E3 /* LaunchScreen.xib */,
 				D34C13E61BBCFB9500649676 /* Accelerate.framework */,
 				D340CC761B6D3E7600BB17E3 /* Supporting Files */,
@@ -573,7 +573,7 @@
 				D3463F681B713E0D002C68A8 /* Settings.bundle in Resources */,
 				D340CC7E1B6D3E7600BB17E3 /* Main.storyboard in Resources */,
 				D340CC831B6D3E7600BB17E3 /* LaunchScreen.xib in Resources */,
-				D3A845A51BA39E8B00062B02 /* flash.png in Resources */,
+				D353A2E71BDD930800BFFA65 /* flash.png in Resources */,
 				D340CC801B6D3E7600BB17E3 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
