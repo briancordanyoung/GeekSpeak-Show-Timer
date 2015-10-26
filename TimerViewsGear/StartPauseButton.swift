@@ -1,25 +1,25 @@
 import UIKit
 
 
-class StartPauseButton: UIButton {
+final public class StartPauseButton: UIButton {
   
-  var startPauseView: StartPauseView?
+  public var startPauseView: StartPauseView?
   
   // MARK:
   // MARK: UIControl Methods
-  override func beginTrackingWithTouch(touch: UITouch,
+  public override func beginTrackingWithTouch(touch: UITouch,
     withEvent event: UIEvent?) -> Bool {
       let superResult =  super.beginTrackingWithTouch(touch, withEvent: event)
       startPauseView?.highlight()
       return superResult
   }
   
-  override func cancelTrackingWithEvent(event: UIEvent?) {
+  public override func cancelTrackingWithEvent(event: UIEvent?) {
     super.cancelTrackingWithEvent(event)
     startPauseView?.unhighlight()
   }
   
-  override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
+  public override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
     super.endTrackingWithTouch(touch, withEvent: event)
     
     if touchInside {

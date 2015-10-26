@@ -9,14 +9,20 @@ import AngleGear
 //             Before the portion property is used, it is compared to all the
 //             other RingColors in an array and translated to a ColorSection.
 
-struct RingColor {
-  let portion: CGFloat
-  let color: UIColor
+public struct RingColor {
+  public let portion: CGFloat
+  public let color: UIColor
+  
+  public init( portion: CGFloat,
+                 color: UIColor) {
+    self.portion = portion
+    self.color   = color
+  }
 }
 
 
 
-class RingLayer : CALayer {
+final class RingLayer : CALayer {
 
   // ColorSection - The ColorSection is a simple container for a color and
   //                how much of the ring the color fills.

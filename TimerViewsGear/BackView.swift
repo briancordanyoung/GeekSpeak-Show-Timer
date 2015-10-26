@@ -1,8 +1,8 @@
 import UIKit
 
-class BackView: UIView {
+final public class BackView: UIView {
   
-  var highlightColor = UIColor.whiteColor() {
+  public var highlightColor = UIColor.whiteColor() {
     didSet(oldColor) {
       // If the current drawing color is the same as the old highlightColor
       // then redraw the highlight
@@ -12,7 +12,7 @@ class BackView: UIView {
     }
   }
   
-  override var tintColor: UIColor! {
+  public override var tintColor: UIColor! {
     didSet(oldColor) {
       // If the current drawing color is the same as the old tintColor
       // then redraw the tintColor
@@ -22,14 +22,14 @@ class BackView: UIView {
     }
   }
   
-  enum highlightState {
+  public enum highlightState {
     case Highlighted
     case Unhighlighted
   }
   
   // The highlight state is derived from the current color used to draw
   // the back image.
-  var highlighted: highlightState {
+  public var highlighted: highlightState {
     if color.isEqual(tintColor) {
       return .Highlighted
     } else {
@@ -37,17 +37,17 @@ class BackView: UIView {
     }
   }
   
-  let origSizeX = CGFloat(17.5)
-  let origSizeY = CGFloat(23)
+  private let origSizeX = CGFloat(17.5)
+  private let origSizeY = CGFloat(23)
   
   private var color = UIColor.whiteColor()
   
-  override func intrinsicContentSize() -> CGSize {
+  public override func intrinsicContentSize() -> CGSize {
     return CGSize(width: origSizeX, height: origSizeY)
   }
   
   
-  override func drawRect(rect: CGRect) {
+  public override func drawRect(rect: CGRect) {
     
     color.setStroke()
     
@@ -68,12 +68,12 @@ class BackView: UIView {
     //    UIRectFrame(rect)
   }
   
-  func highlight() {
+  public func highlight() {
     color = highlightColor
     setNeedsDisplay()
   }
   
-  func unhighlight() {
+  public func unhighlight() {
     color = tintColor
     setNeedsDisplay()
   }

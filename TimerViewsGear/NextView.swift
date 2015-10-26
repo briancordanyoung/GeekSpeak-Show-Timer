@@ -4,7 +4,7 @@ import UIKit
 // MARK: -
 // MARK: UnselectedNextView
 
-class UnselectedNextView: ControlsView {
+final class UnselectedNextView: ControlsView {
   override func drawRect(rect: CGRect) {
     color.setStroke()
     NextShapes.rightBezier().stroke()
@@ -16,7 +16,7 @@ class UnselectedNextView: ControlsView {
 // MARK: -
 // MARK: SelectedNextView
 
-class SelectedNextView: ControlsView {
+final class SelectedNextView: ControlsView {
   override func drawRect(rect: CGRect) {
     color.setFill()
     NextShapes.rightBezier().fill()
@@ -29,16 +29,16 @@ class SelectedNextView: ControlsView {
 // MARK: -
 // MARK: NextView
 
-class NextView: UIStackView {
+final public class NextView: UIStackView {
   
-  var unhighlightDuration = Appearance.Constants.ButtonFadeDuration
+  public var unhighlightDuration = Appearance.Constants.ButtonFadeDuration
   
-  enum UnhighlightBehavior {
+  public enum UnhighlightBehavior {
     case Instant
     case Fade
   }
   
-  enum highlightState {
+  public enum highlightState {
     case Highlighted
     case Unhighlighted
     case Transitioning
@@ -46,13 +46,13 @@ class NextView: UIStackView {
   
   
   
-  var highlightColor = UIColor.whiteColor() {
+  public var highlightColor = UIColor.whiteColor() {
     didSet(oldColor) {
       selectedView.color = highlightColor
     }
   }
   
-  override var tintColor: UIColor! {
+  public override var tintColor: UIColor! {
     didSet(oldColor) {
       unselectedView.color = tintColor
     }
@@ -60,7 +60,7 @@ class NextView: UIStackView {
   
   
   // The highlight state is derived from the current alpha of the 2 views.
-  var highlighted: highlightState {
+  public var highlighted: highlightState {
     let   selected = unselectedView.alpha == 0.0
     let unselected =   selectedView.alpha == 0.0
     
@@ -74,7 +74,7 @@ class NextView: UIStackView {
     }
   }
   
-  let label = UILabel()
+  public let label = UILabel()
   
   private let dimention = Appearance.Constants.ButtonDimension
   private let symbolContainer = UIView()
@@ -88,12 +88,12 @@ class NextView: UIStackView {
   
   // MARK: -
   // MARK: Setup
-  override init(frame: CGRect) {
+  public override init(frame: CGRect) {
     super.init(frame: frame)
     setupView()
   }
   
-  convenience init() {
+  public convenience init() {
     let defaultRect = CGRect(x: CGFloat(0),
                              y: CGFloat(0),
                          width: CGFloat(Appearance.Constants.ButtonDimension),
@@ -102,12 +102,12 @@ class NextView: UIStackView {
     self.init(frame: defaultRect)
   }
   
-  required init?(coder aDecoder: NSCoder) {
+  public required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setupView()
   }
   
-  func setupView() {
+  private func setupView() {
     translatesAutoresizingMaskIntoConstraints = false
     axis          = .Vertical
     alignment     = .Center
@@ -143,12 +143,12 @@ class NextView: UIStackView {
   
   // MARK: -
   // MARK: Actions
-  func highlight() {
+  public func highlight() {
     selectedView.alpha   = 1.0
     unselectedView.alpha = 0.0
   }
   
-  func unhighlight() {
+  public func unhighlight() {
     selectedView.alpha   = 0.0
     unselectedView.alpha = 1.0
   }
@@ -161,7 +161,7 @@ class NextView: UIStackView {
     }
   }
   
-  func unhighlightUsingBehavior(behavior: UnhighlightBehavior) {
+  public func unhighlightUsingBehavior(behavior: UnhighlightBehavior) {
     switch behavior {
       case .Instant:
         unhighlight()

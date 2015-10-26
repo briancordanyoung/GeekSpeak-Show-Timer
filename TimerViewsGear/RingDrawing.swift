@@ -4,36 +4,36 @@ import AngleGear
 
 
 
-class RingDrawing: NSObject {
+public class RingDrawing: NSObject {
   
-  struct Constant {
+  public struct Constant {
     static let Quarter = CGFloat(M_PI / 2)
   }
   
-  struct GuideTypes {
+  public struct GuideTypes {
     let lines: Bool
     let points: Bool
     let controlPoints: Bool
   }
   
-  enum Style {
+  public enum Style {
     case Rounded
     case RoundedWithGuides(GuideTypes)
     case Sharp
   }
   
   
-  let center:      RingPoint
-  let outerRadius: CGFloat
-  let ringWidth:   CGFloat
-  let startAngle:  TauAngle
-  let endAngle:    TauAngle
-  var fillColor  = UIColor.whiteColor()
-  var lineColor  = UIColor.clearColor()
-  var lineWidth  = CGFloat(0)
-  var style      = Style.Sharp
+  public let center:      RingPoint
+  public let outerRadius: CGFloat
+  public let ringWidth:   CGFloat
+  public let startAngle:  TauAngle
+  public let endAngle:    TauAngle
+  public var fillColor  = UIColor.whiteColor()
+  public var lineColor  = UIColor.clearColor()
+  public var lineWidth  = CGFloat(0)
+  public var style      = Style.Sharp
 
-  init(     center: RingPoint,
+  public init(     center: RingPoint,
        outerRadius: CGFloat,
          ringWidth: CGFloat,
         startAngle: TauAngle,
@@ -45,7 +45,7 @@ class RingDrawing: NSObject {
             self.endAngle    = endAngle
   }
 
-  convenience init(     center: RingPoint,
+  public convenience init(     center: RingPoint,
        outerRadius: CGFloat,
          ringWidth: CGFloat ) {
     self.init(center: center,
@@ -56,11 +56,11 @@ class RingDrawing: NSObject {
   }
   
   // CGFloat calculated of Angle properties
-  var start: CGFloat {
+  public var start: CGFloat {
     return CGFloat(startAngle) - Constant.Quarter
   }
   
-  var end: CGFloat {
+  public var end: CGFloat {
     if abs(CGFloat(startAngle) - CGFloat(endAngle)) < CGFloat(minimumAngle) {
       return CGFloat(startAngle) +
              CGFloat(minimumAngle) +
@@ -176,8 +176,8 @@ class RingDrawing: NSObject {
   
   
   enum Direction {
-    case clockwise
-    case counterClockwise
+    case Clockwise
+    case CounterClockwise
   }
   
   func pointOnCircle(circle: RingCircle,
@@ -202,13 +202,13 @@ class RingDrawing: NSObject {
       }
       
       switch (angle0 > angle1 , direction) {
-      case (true, .clockwise):
+      case (true, .Clockwise):
         newPoint = points[0]
-      case (true, .counterClockwise):
+      case (true, .CounterClockwise):
         newPoint = points[1]
-      case (false, .clockwise):
+      case (false, .Clockwise):
         newPoint = points[1]
-      case (false, .counterClockwise):
+      case (false, .CounterClockwise):
         newPoint = points[0]
       }
       
@@ -222,21 +222,21 @@ class RingDrawing: NSObject {
     return pointOnCircle( innerCircle,
               atDistance: midOffset * innerOuterRingRatio,
                fromPoint: innerStart,
-             inDirection: .clockwise)
+             inDirection: .Clockwise)
   }
   
   var innerBezStartControlPoint: RingPoint {
     return pointOnCircle( innerCircle,
               atDistance: controlPointOffset * innerOuterRingRatio,
                fromPoint: innerStart,
-             inDirection: .clockwise)
+             inDirection: .Clockwise)
   }
   
   var outerBezStart: RingPoint {
     return pointOnCircle( outerCircle,
               atDistance: midOffset,
                fromPoint: outerStart,
-             inDirection: .clockwise)
+             inDirection: .Clockwise)
   }
   
   
@@ -255,21 +255,21 @@ class RingDrawing: NSObject {
     return pointOnCircle( innerCircle,
               atDistance: midOffset * innerOuterRingRatio,
                fromPoint: innerEnd,
-             inDirection: .counterClockwise)
+             inDirection: .CounterClockwise)
   }
   
   var innerBezEndControlPoint: RingPoint {
     return pointOnCircle( innerCircle,
               atDistance: controlPointOffset * innerOuterRingRatio,
                fromPoint: innerEnd,
-             inDirection: .counterClockwise)
+             inDirection: .CounterClockwise)
   }
   
   var outerBezEnd: RingPoint {
     return pointOnCircle( outerCircle,
               atDistance: midOffset,
                fromPoint: outerEnd,
-             inDirection: .counterClockwise)
+             inDirection: .CounterClockwise)
   }
   
   var outerBezEndControlPoint: RingPoint {

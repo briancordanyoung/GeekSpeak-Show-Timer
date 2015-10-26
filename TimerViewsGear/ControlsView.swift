@@ -45,6 +45,5 @@ class ControlsView: UIView {
     centerYAnchor.constraintEqualToAnchor(parent.centerYAnchor).active = true
   }
   
-  
 }
 

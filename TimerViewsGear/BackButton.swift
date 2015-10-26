@@ -1,32 +1,32 @@
 import UIKit
 
-class BackButton: UIButton {
+final public class BackButton: UIButton {
   
-  var backView: BackView?
+  public var backView: BackView?
   
-  override init(frame: CGRect) {
+  public override init(frame: CGRect) {
     super.init(frame: frame)
   }
   
-  required init?(coder aDecoder: NSCoder) {
+  public required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
 
   // MARK:
   // MARK: UIControl Methods
-  override func beginTrackingWithTouch(touch: UITouch,
+  public override func beginTrackingWithTouch(touch: UITouch,
                                             withEvent event: UIEvent?) -> Bool {
     let superResult =  super.beginTrackingWithTouch(touch, withEvent: event)
     backView?.highlight()
     return superResult
   }
   
-  override func cancelTrackingWithEvent(event: UIEvent?) {
+  public override func cancelTrackingWithEvent(event: UIEvent?) {
     super.cancelTrackingWithEvent(event)
     backView?.unhighlight()
   }
   
-  override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
+  public override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
     super.endTrackingWithTouch(touch, withEvent: event)
     backView?.unhighlight()
   }

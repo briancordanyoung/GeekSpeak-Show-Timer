@@ -1,7 +1,7 @@
 import UIKit
 import AngleGear
 
-class BreakView: UIView {
+final public class BreakView: UIView {
   
   private var startAngle: TauAngle {
     get {
@@ -21,7 +21,7 @@ class BreakView: UIView {
     }
   }
   
-  var fillColor: UIColor {
+  public var fillColor: UIColor {
     get {
       return pieLayer.fillColor
     }
@@ -34,12 +34,12 @@ class BreakView: UIView {
   // MARK:
   // MARK: Init
   
-  override init(frame: CGRect) {
+  public override init(frame: CGRect) {
     super.init(frame: frame)
     setup()
   }
   
-  required init?(coder aDecoder: NSCoder) {
+  public required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setup()
   }
@@ -53,7 +53,7 @@ class BreakView: UIView {
   
   
   // MARK:
-  var progress: CGFloat {
+  public var progress: CGFloat {
     get {
       let minAngle = min(startAngle,endAngle)
       let maxAngle = max(startAngle,endAngle)
@@ -76,7 +76,7 @@ class BreakView: UIView {
   
   
   
-  override class func layerClass() -> AnyClass {
+  public override class func layerClass() -> AnyClass {
     return PieLayer.self
   }
   
@@ -85,7 +85,7 @@ class BreakView: UIView {
   }
   
   // MARK: UIView Methods
-  override func didMoveToSuperview() {
+  public override func didMoveToSuperview() {
     super.didMoveToSuperview()
     guard let parent = superview else {return}
     

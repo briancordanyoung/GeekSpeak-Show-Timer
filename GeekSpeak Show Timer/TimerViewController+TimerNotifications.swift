@@ -1,4 +1,5 @@
 import UIKit
+import TimerViewsGear
 
 extension TimerViewController {
 
@@ -124,13 +125,13 @@ extension TimerViewController {
       let secondsElapsed = timer.timing.timeElapsed.break1
       let secondsRemaining = durations.break1 - secondsElapsed
       let percentage = CGFloat(secondsRemaining / durations.break1)
-      timerViews?.fill.progress    = percentage
+      timerViews?.breakView.progress    = percentage
     }
     if timer.timing.phase == .Break2 {
       let secondsElapsed = timer.timing.timeElapsed.break2
       let secondsRemaining = durations.break2 - secondsElapsed
       let percentage = CGFloat(secondsRemaining / durations.break2)
-      timerViews?.fill.progress    = percentage
+      timerViews?.breakView.progress    = percentage
     }
     
     
@@ -206,14 +207,14 @@ extension TimerViewController {
       
       switch phase {
       case .PreShow:
-        timerViews?.fill.progress    = timer.percentageComplete
+        timerViews?.breakView.progress    = timer.percentageComplete
         timerViews?.ring1fg.progress = 0.0
         timerViews?.ring2fg.progress = 0.0
         timerViews?.ring3fg.progress = 0.0
         segmentLabelText = " Pre Show"
         
       case .Section1:
-        timerViews?.fill.progress    = 0.0
+        timerViews?.breakView.progress    = 0.0
         timerViews?.ring1fg.progress = timer.percentageCompleteUnlimited //timer.percentageComplete(.Section1)
         timerViews?.ring2fg.progress = 0.0
         timerViews?.ring3fg.progress = 0.0
@@ -221,13 +222,13 @@ extension TimerViewController {
         
       case .Break1:
 //        timerViews?.ring1fg.progress = timer.percentageComplete(.Section1)
-        timerViews?.fill.progress    = timer.percentageComplete
+        timerViews?.breakView.progress    = timer.percentageComplete
         timerViews?.ring2fg.progress = 0.0
         timerViews?.ring3fg.progress = 0.0
         segmentLabelText = "    Break"
         
       case .Section2:
-        timerViews?.fill.progress    = 0.0
+        timerViews?.breakView.progress    = 0.0
 //        timerViews?.ring1fg.progress = timer.percentageComplete(.Section1)
         timerViews?.ring2fg.progress = timer.percentageCompleteUnlimited // timer.percentageComplete(.Section2)
         timerViews?.ring3fg.progress = 0.0
@@ -236,12 +237,12 @@ extension TimerViewController {
       case .Break2:
 //        timerViews?.ring1fg.progress = timer.percentageComplete(.Section1)
 //        timerViews?.ring2fg.progress =  timer.percentageComplete(.Section2)
-        timerViews?.fill.progress    = timer.percentageComplete
+        timerViews?.breakView.progress    = timer.percentageComplete
         timerViews?.ring3fg.progress = 0.0
         segmentLabelText = "    Break"
         
       case .Section3:
-        timerViews?.fill.progress    = 0.0
+        timerViews?.breakView.progress    = 0.0
 //        timerViews?.ring1fg.progress = timer.percentageComplete(.Section1)
 //        timerViews?.ring2fg.progress = timer.percentageComplete(.Section2)
         timerViews?.ring3fg.progress = timer.percentageComplete // timer.percentageComplete(.Section3)
@@ -274,7 +275,7 @@ extension TimerViewController {
 //        timerViews?.ring1fg.progress = timer.percentageComplete(.Section1)
 //        timerViews?.ring2fg.progress = timer.percentageComplete(.Section2)
 //        timerViews?.ring3fg.progress = timer.percentageComplete(.Section3)
-        timerViews?.fill.progress = 0.0
+        timerViews?.breakView.progress = 0.0
         segmentLabelText = "Post Show"
       }
       

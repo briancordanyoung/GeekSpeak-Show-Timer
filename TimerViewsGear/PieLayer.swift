@@ -1,7 +1,7 @@
 import UIKit
 import AngleGear
 
-class PieLayer: CALayer {
+final class PieLayer: CALayer {
   
   struct Constants {
     static let StartAngle   = "pieLayerStartAngleId"

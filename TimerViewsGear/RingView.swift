@@ -1,7 +1,7 @@
 import UIKit
 import AngleGear
 
-class RingView: SizeToSuperView {
+final public class RingView: SizeToSuperView {
   
   private var progressPastCompleted = CGFloat(0) {
     didSet {
@@ -10,7 +10,7 @@ class RingView: SizeToSuperView {
     }
   }
   
-  convenience init() {
+  public convenience init() {
     self.init(frame: CGRectMake(0,0,100,100))
   }
   
@@ -22,12 +22,12 @@ class RingView: SizeToSuperView {
   }
   
 
-  required init?(coder aDecoder: NSCoder) {
+  public required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   
   
-  var startAngle: TauAngle {
+  public var startAngle: TauAngle {
     get {
       return TauAngle(ringLayer.startAngle)
     }
@@ -36,7 +36,7 @@ class RingView: SizeToSuperView {
     }
   }
   
-  var endAngle: TauAngle {
+  public var endAngle: TauAngle {
     get {
       return TauAngle(ringLayer.endAngle)
     }
@@ -45,7 +45,7 @@ class RingView: SizeToSuperView {
     }
   }
   
-  var ringWidth: CGFloat {
+  public var ringWidth: CGFloat {
     get {
       return ringLayer.ringWidth
     }
@@ -54,7 +54,7 @@ class RingView: SizeToSuperView {
     }
   }
   
-  var fillScale: CGFloat {
+  public var fillScale: CGFloat {
     get {
       return ringLayer.fillScale
     }
@@ -63,7 +63,7 @@ class RingView: SizeToSuperView {
     }
   }
   
-  var ringStyle: RingDrawing.Style {
+  public var ringStyle: RingDrawing.Style {
     get {
       return ringLayer.ringStyle
     }
@@ -73,7 +73,7 @@ class RingView: SizeToSuperView {
   }
 
   
-  var color: UIColor {
+  public var color: UIColor {
     get {
       return ringLayer.color
     }
@@ -82,7 +82,7 @@ class RingView: SizeToSuperView {
     }
   }
   
-  var colors: [RingColor] {
+  public var colors: [RingColor] {
     get {
       return ringLayer.colors
     }
@@ -113,7 +113,7 @@ class RingView: SizeToSuperView {
   // 0 + 5 + the degrees past 360 that the endAngle is at.
   // This makes a 5 degree gap in the circle the indicates the progress
   // past 100%
-  var progress: CGFloat {
+  public var progress: CGFloat {
     get {
       let minAngle = min(startAngle,endAngle)
       let maxAngle = max(startAngle,endAngle)
@@ -135,7 +135,7 @@ class RingView: SizeToSuperView {
   
 
   
-  override class func layerClass() -> AnyClass {
+  public override class func layerClass() -> AnyClass {
     return RingLayer.self
   }
   

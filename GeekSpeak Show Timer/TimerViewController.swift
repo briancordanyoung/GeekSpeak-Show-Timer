@@ -1,5 +1,6 @@
 import UIKit
 import AngleGear
+import TimerViewsGear
 
 
 enum TimerLabelDisplay: String, CustomStringConvertible {
@@ -160,7 +161,7 @@ final class TimerViewController: UIViewController {
                               ring2fg: ring2fg,
                               ring3bg: ring3bg,
                               ring3fg: ring3fg,
-                                 fill: breakView)
+                            breakView: breakView)
     
     registerForTimerNotifications()
     displayAllTime()

@@ -1,22 +1,22 @@
-import Foundation
+import UIKit
 
-class RingCircle: NSObject {
+public class RingCircle: NSObject {
   
-  let center : RingPoint
-  let radius : CGFloat
+  public let center : RingPoint
+  public let radius : CGFloat
   
-  init( center: RingPoint,
+  public init( center: RingPoint,
         radius: CGFloat) {
     self.center  = center
     self.radius = radius
   }
   
-  override init() {
+  public override init() {
       center  = RingPoint(x:0,y:0)
       radius = CGFloat(1)
   }
   
-  func intersecetions(circle: RingCircle) -> [RingPoint]{
+  public func intersecetions(circle: RingCircle) -> [RingPoint]{
     let distance = self.center.distance(circle.center)
     let a = (radius * radius -
              circle.radius * circle.radius +
@@ -43,7 +43,7 @@ class RingCircle: NSObject {
     return points
   }
   
-  override var description: String {
+  public override var description: String {
     return "center: (\(center)) y: \(radius))"
   }
 

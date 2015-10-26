@@ -1,6 +1,6 @@
 import UIKit
 
-class ActivityView: UIView {
+final public class ActivityView: UIView {
   enum Parity {
     case Even
     case Odd
@@ -9,13 +9,13 @@ class ActivityView: UIView {
   // If there is no change in the activity value, and fadeoutWithoutActivity is
   // true, then animate this view to transparent.
 
-  var fadeoutWithoutActivity = true
-  var fadeoutDelay    = NSTimeInterval(1)
-  var fadeoutDuration = NSTimeInterval(1)
+  public var fadeoutWithoutActivity = true
+  public var fadeoutDelay    = NSTimeInterval(1)
+  public var fadeoutDuration = NSTimeInterval(1)
   
   private var timer = NSTimer()
   
-  var activity = CGFloat(0) {
+  public var activity = CGFloat(0) {
     didSet(oldActivity) {
       resetFadeAnimation()
       
@@ -32,7 +32,7 @@ class ActivityView: UIView {
     }
   }
   
-  var fillColor: UIColor {
+  public var fillColor: UIColor {
     get {
       return pieLayer.fillColor
     }
@@ -45,17 +45,17 @@ class ActivityView: UIView {
   // MARK:
   // MARK: Init
 
-  override init(frame: CGRect) {
+  public override init(frame: CGRect) {
     super.init(frame: frame)
     setup()
   }
   
-  required init?(coder aDecoder: NSCoder) {
+  public required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setup()
   }
   
-  func setup() {
+  private func setup() {
     opaque = false
     pieLayer.polarity = .Negative
   }
@@ -104,7 +104,7 @@ class ActivityView: UIView {
   
   
   
-  override class func layerClass() -> AnyClass {
+  public override class func layerClass() -> AnyClass {
     return PieLayer.self
   }
   
