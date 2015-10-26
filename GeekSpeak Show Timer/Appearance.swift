@@ -28,11 +28,8 @@ class Appearance {
                                            blue: 166/255,
                                           alpha: 1.0)
     
-    static let RingWidth              = (CGFloat(90) / CGFloat(736)) * (1 / 0.95) * 2
+    static let RingWidth              = CGFloat(0.257)
     static let RingDarkeningFactor    = CGFloat(1.0)
-    
-    static let ButtonFadeDuration    = NSTimeInterval(1.0)
-    static let ButtonDimension       = CGFloat(75)
   }
 
   
