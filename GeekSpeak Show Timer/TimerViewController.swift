@@ -124,12 +124,8 @@ final class TimerViewController: UIViewController {
     setupDescriptionLabelContraints(totalLabel)
     setupDescriptionLabelContraints(segmentLabel)
     
-    let breakView  = PieShapeView()
-    breakView.opaque     = false
-    breakView.startAngle = TauAngle(degrees: 0)
-    breakView.endAngle   = TauAngle(degrees: 0)
-    breakView.color      = Appearance.Constants.BreakColor
-    breakView.pieLayer.clipToCircle = true
+    let breakView  = BreakView()
+    breakView.fillColor  = Appearance.Constants.BreakColor
     timerCirclesView.addSubview(breakView)
     
     let ring1bg   = configureBGRing( RingView(),

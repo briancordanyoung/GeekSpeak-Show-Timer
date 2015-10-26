@@ -57,6 +57,7 @@ class ActivityView: UIView {
   
   func setup() {
     opaque = false
+    pieLayer.polarity = .Negative
   }
 
   

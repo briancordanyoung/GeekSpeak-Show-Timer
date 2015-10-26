@@ -10,11 +10,17 @@ class PieLayer: CALayer {
     static let FillColor    = "pieLayerFillColorId"
   }
   
+  enum Polarity {
+    case Positive
+    case Negative
+  }
+  
   @NSManaged var startAngle: CGFloat
   @NSManaged var endAngle: CGFloat
   
   var clipToCircle = true
   var fillColor = UIColor.whiteColor()
+  var polarity: Polarity = .Positive
   
   
   
@@ -116,7 +122,14 @@ class PieLayer: CALayer {
       center.y + radius * sin(start))
     CGContextAddLineToPoint(ctx, p1.x, p1.y)
     
-    let clockwise = start > end ? Int32(0) : Int32(1)
+    let clockwise: Int32
+    
+    if polarity == .Positive {
+      clockwise = start > end ? Int32(1) : Int32(0)
+    } else {
+      clockwise = start > end ? Int32(0) : Int32(1)
+    }
+    
     CGContextAddArc(ctx, center.x, center.y, radius,
       start,      end, clockwise)
     
@@ -134,7 +147,7 @@ class PieLayer: CALayer {
   // Allows CoreAnimation to animate these parameters.
   override class func needsDisplayForKey(key: String) -> Bool {
     if key == "startAngle" ||
-      key == "endAngle" {
+      key == "endAngle"      {
         return true
     } else {
       return false

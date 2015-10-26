@@ -7,6 +7,6 @@ struct TimerViews {
   let ring2fg: RingView
   let ring3bg: RingView
   let ring3fg: RingView
-  let fill:    PieShapeView
+  let fill:    BreakView
 }
 

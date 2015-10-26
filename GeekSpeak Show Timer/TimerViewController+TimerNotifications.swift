@@ -274,7 +274,7 @@ extension TimerViewController {
 //        timerViews?.ring1fg.progress = timer.percentageComplete(.Section1)
 //        timerViews?.ring2fg.progress = timer.percentageComplete(.Section2)
 //        timerViews?.ring3fg.progress = timer.percentageComplete(.Section3)
-        timerViews?.fill.percent = 0.0
+        timerViews?.fill.progress = 0.0
         segmentLabelText = "Post Show"
       }
       
