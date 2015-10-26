@@ -1,6 +1,6 @@
 import UIKit
 
-// TODO: Refaction and abstract out the following hard coded time.
+// TODO: Refactor and abstract out the following hard coded time.
 //       These structs and enums were a quick and dirty way to get the
 //       Timer up and running.  This should be abstrated out and use
 //       some sort of configuration file that allows the timer to have
@@ -66,38 +66,24 @@ extension Timer {
     var elapsed: NSTimeInterval {
       get {
         switch phase {
-        case .PreShow:
-          return timeElapsed.preShow
-        case .Section1:
-          return timeElapsed.section1
-        case .Break1:
-          return timeElapsed.break1
-        case .Section2:
-          return timeElapsed.section2
-        case .Break2:
-          return timeElapsed.break2
-        case .Section3:
-          return timeElapsed.section3
-        case .PostShow:
-          return timeElapsed.postShow
+        case .PreShow:  return timeElapsed.preShow
+        case .Section1: return timeElapsed.section1
+        case .Break1:   return timeElapsed.break1
+        case .Section2: return timeElapsed.section2
+        case .Break2:   return timeElapsed.break2
+        case .Section3: return timeElapsed.section3
+        case .PostShow: return timeElapsed.postShow
         }
       }
       set(newElapsed) {
         switch phase {
-        case .PreShow:
-          timeElapsed.preShow  = newElapsed
-        case .Section1:
-          timeElapsed.section1 = newElapsed
-        case .Break1:
-          timeElapsed.break1   = newElapsed
-        case .Section2:
-          timeElapsed.section2 = newElapsed
-        case .Break2:
-          timeElapsed.break2   = newElapsed
-        case .Section3:
-          timeElapsed.section3 = newElapsed
-        case .PostShow:
-          timeElapsed.postShow = newElapsed
+        case .PreShow:  timeElapsed.preShow  = newElapsed
+        case .Section1: timeElapsed.section1 = newElapsed
+        case .Break1:   timeElapsed.break1   = newElapsed
+        case .Section2: timeElapsed.section2 = newElapsed
+        case .Break2:   timeElapsed.break2   = newElapsed
+        case .Section3: timeElapsed.section3 = newElapsed
+        case .PostShow: timeElapsed.postShow = newElapsed
         }
       }
     }
@@ -105,38 +91,24 @@ extension Timer {
     var duration: NSTimeInterval {
       get {
         switch phase {
-        case .PreShow:
-          return durations.preShow
-        case .Section1:
-          return durations.section1
-        case .Break1:
-          return durations.break1
-        case .Section2:
-          return durations.section2
-        case .Break2:
-          return durations.break2
-        case .Section3:
-          return durations.section3
-        case .PostShow:
-          return NSTimeInterval(0.0)
+        case .PreShow:  return durations.preShow
+        case .Section1: return durations.section1
+        case .Break1:   return durations.break1
+        case .Section2: return durations.section2
+        case .Break2:   return durations.break2
+        case .Section3: return durations.section3
+        case .PostShow: return NSTimeInterval(0.0)
         }
       }
       set(newDuration) {
         switch phase {
-        case .PreShow:
-          durations.preShow  = newDuration
-        case .Section1:
-          durations.section1 = newDuration
-        case .Break1:
-          durations.break1   = newDuration
-        case .Section2:
-          durations.section2 = newDuration
-        case .Break2:
-          durations.break2   = newDuration
-        case .Section3:
-          durations.section3 = newDuration
-        case .PostShow:
-          break
+        case .PreShow:  durations.preShow  = newDuration
+        case .Section1: durations.section1 = newDuration
+        case .Break1:   durations.break1   = newDuration
+        case .Section2: durations.section2 = newDuration
+        case .Break2:   durations.break2   = newDuration
+        case .Section3: durations.section3 = newDuration
+        case .PostShow: break
         }
       }
     }
@@ -181,7 +153,6 @@ extension Timer {
       let roundedInterval = Int(interval)
       let seconds = roundedInterval % 60
       let minutes = (roundedInterval / 60) % 60
-//      let hours   = (roundedInterval / 3600)
       let subSeconds = formatter.stringFromNumber(interval * 100)!
       return String(format: "%02d:%02d:\(subSeconds)",  minutes, seconds)
     }
@@ -190,7 +161,6 @@ extension Timer {
       let roundedInterval = Int(interval)
       let seconds = roundedInterval % 60
       let minutes = (roundedInterval / 60) % 60
-//      let hours   = (roundedInterval / 3600)
       return String(format: "%02d:%02d",  minutes, seconds)
     }
     
@@ -232,12 +202,18 @@ extension Timer {
 
     
     mutating func useDemoDurations() {
-      preShow  =  5.0
-      section1 = 10.0
-      break1   =  5.0
-      section2 = 10.0
-      break2   =  5.0
-      section3 = 10.0
+//      preShow  =  5.0
+//      section1 = 10.0
+//      break1   =  5.0
+//      section2 = 10.0
+//      break2   =  5.0
+//      section3 = 10.0
+      preShow  =  2.0
+      section1 = 30.0
+      break1   =  2.0
+      section2 = 30.0
+      break2   =  2.0
+      section3 = 30.0
     }
     
     mutating func useGeekSpeakDurations() {

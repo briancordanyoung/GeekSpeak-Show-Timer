@@ -1,4 +1,6 @@
 import UIKit
+import AngleGear
+import TimerViewsGear
 
 
 enum TimerLabelDisplay: String, CustomStringConvertible {
@@ -12,6 +14,7 @@ enum TimerLabelDisplay: String, CustomStringConvertible {
 
 final class TimerViewController: UIViewController {
   
+  var timer: Timer?
   var timerViews: TimerViews?
   var timerLabelDisplay: TimerLabelDisplay = .Remaining {
     didSet {
@@ -32,7 +35,6 @@ final class TimerViewController: UIViewController {
     return self.layoutSize.width < self.layoutSize.height
   }
   
-  var timer: Timer?
   
   // Required on load
   @IBOutlet weak var timerCirclesView: UIView!
@@ -52,8 +54,13 @@ final class TimerViewController: UIViewController {
   
   @IBOutlet weak var activityView: ActivityView!
 
+  
+  private var controlsInOrder: [UIButton] = []
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    controlsInOrder = [startPauseButton, nextButton]
+    activityView.fillColor = Appearance.Constants.GeekSpeakBlueColor
     addSwipeGesture()
     setupBackButton()
     setupStartPauseButton()
@@ -118,12 +125,8 @@ final class TimerViewController: UIViewController {
     setupDescriptionLabelContraints(totalLabel)
     setupDescriptionLabelContraints(segmentLabel)
     
-    let breakView  = PieShapeView()
-    breakView.opaque     = false
-    breakView.startAngle = TauAngle(degrees: 0)
-    breakView.endAngle   = TauAngle(degrees: 0)
-    breakView.color      = Appearance.Constants.BreakColor
-    breakView.pieLayer.clipToCircle = true
+    let breakView  = BreakView()
+    breakView.fillColor  = Appearance.Constants.BreakColor
     timerCirclesView.addSubview(breakView)
     
     let ring1bg   = configureBGRing( RingView(),
@@ -158,13 +161,16 @@ final class TimerViewController: UIViewController {
                               ring2fg: ring2fg,
                               ring3bg: ring3bg,
                               ring3fg: ring3fg,
-                                 fill: breakView)
+                            breakView: breakView)
     
     registerForTimerNotifications()
+    displayAllTime()
     timerUpdatedTime()
     timerChangedCountingStatus()
     timerDurationChanged()
     layoutViewsForSize(layoutSize)
+    
+    
   }
   
   
@@ -230,13 +236,26 @@ final class TimerViewController: UIViewController {
   }
   
   func setupButtonLayout(timer: Timer) {
-    updateButtonLayout(timer)
+    switch timer.state {
+    case .Ready,
+         .Paused,
+         .PausedAfterComplete:
+      startPauseButton.startPauseView?.label.text = "Start Timer"
+      startPauseButton.startPauseView?.currentButton = .Start
+      startPauseButton.startPauseView?.unhighlight()
+      
+    case .Counting,
+         .CountingAfterComplete:
+      startPauseButton.startPauseView?.label.text = "Pause Timer"
+      startPauseButton.startPauseView?.currentButton = .Pause
+      startPauseButton.startPauseView?.unhighlight()
+    }
+    
+    setNextButtonState(timer)
   }
 
   
   func updateButtonLayout(timer: Timer) {
-
-    
     // StartPause Button
     switch timer.state {
     case .Ready,
@@ -253,6 +272,10 @@ final class TimerViewController: UIViewController {
       startPauseButton.startPauseView?.unhighlight()
     }
     
+    setNextButtonState(timer)
+  }
+  
+  func setNextButtonState(timer: Timer) {
     // Next Button
     switch timer.state {
     case .Ready,
@@ -263,7 +286,6 @@ final class TimerViewController: UIViewController {
          .Paused:
       enableNextButton()
     }
-    
   }
   
   
@@ -310,11 +332,19 @@ final class TimerViewController: UIViewController {
   func setContraintsForVerticalLayout() {
     containerStackView.axis = .Vertical
     controlsStackView.axis = .Horizontal
+    flipControlViews(controlsInOrder)
   }
   
   func setContraintsForHorizontalLayout() {
     containerStackView.axis = .Horizontal
     controlsStackView.axis = .Vertical
+    flipControlViews(controlsInOrder.reverse())
+  }
+  
+  func flipControlViews(controls : [UIButton]) {
+    let arrangedViews = controlsStackView.arrangedSubviews.reverse()
+    arrangedViews.forEach {controlsStackView.removeArrangedSubview($0)}
+    controls.forEach {controlsStackView.addArrangedSubview($0)}
   }
   
   

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Y3X-YD-CP4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Y3X-YD-CP4">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -29,11 +29,11 @@
                                     <constraint firstAttribute="width" secondItem="5o7-Gc-suh" secondAttribute="height" multiplier="1:1" id="Duc-Ea-NmZ" userLabel="Aspect-1:1"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZGB-kc-n9R" userLabel="activityView" customClass="ActivityView" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
-                                <rect key="frame" x="730" y="28" width="35" height="35"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZGB-kc-n9R" userLabel="ActivityView" customClass="ActivityView" customModule="TimerViewsGear">
+                                <rect key="frame" x="733" y="33" width="25" height="25"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="31o-zx-nPQ"/>
+                                    <constraint firstAttribute="width" constant="25" id="31o-zx-nPQ"/>
                                     <constraint firstAttribute="width" secondItem="ZGB-kc-n9R" secondAttribute="height" multiplier="1:1" id="Hb1-gG-xQo"/>
                                 </constraints>
                             </view>
@@ -105,7 +105,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="e0T-08-1gm" userLabel="ControlsStackView">
                                         <rect key="frame" x="0.0" y="728" width="728" height="276"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PdP-pn-H8o" userLabel="startPauseButton" customClass="StartPauseButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PdP-pn-H8o" userLabel="startPauseButton" customClass="StartPauseButton" customModule="TimerViewsGear">
                                                 <rect key="frame" x="0.0" y="0.0" width="364" height="276"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="2qE-n8-vjG" userLabel="minWidth"/>
@@ -121,7 +121,7 @@
                                                     <action selector="startPauseButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FBb-9X-obi"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jIB-5T-jtJ" userLabel="nextButton" customClass="NextButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jIB-5T-jtJ" userLabel="nextButton" customClass="NextButton" customModule="TimerViewsGear">
                                                 <rect key="frame" x="364" y="0.0" width="364" height="276"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" priority="265" constant="10000" id="6OX-6U-HTJ"/>
@@ -141,7 +141,7 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-5J-yaK" userLabel="NextButtonOverlay" customClass="NextButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-5J-yaK" userLabel="NextButtonOverlay" customClass="NextButton" customModule="TimerViewsGear">
                                 <rect key="frame" x="20" y="20" width="728" height="728"/>
                                 <state key="normal">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -154,7 +154,7 @@
                                     <action selector="nextButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yBt-cb-bvj"/>
                                 </connections>
                             </button>
-                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddp-73-GXt" customClass="BackView" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddp-73-GXt" customClass="BackView" customModule="TimerViewsGear">
                                 <rect key="frame" x="12" y="34" width="18" height="23"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -162,8 +162,8 @@
                                     <constraint firstAttribute="width" constant="17.5" id="fBU-Qh-MoI"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12Z-1g-lxX" userLabel="BackButton" customClass="BackButton" customModule="GeekSpeak_Show_Timer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="200" height="51"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12Z-1g-lxX" userLabel="BackButton" customClass="BackButton" customModule="TimerViewsGear">
+                                <rect key="frame" x="0.0" y="24" width="200" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="olv-qc-IeD"/>
                                 </constraints>
@@ -178,7 +178,6 @@
                             <constraint firstItem="12Z-1g-lxX" firstAttribute="height" secondItem="iLg-Ok-lxM" secondAttribute="height" priority="750" id="2QY-hY-qXA"/>
                             <constraint firstItem="eTm-Vw-Y1W" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="DLG-GC-nCU"/>
                             <constraint firstItem="5o7-Gc-suh" firstAttribute="width" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="2" id="EFt-aX-Gnm"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ZGB-kc-n9R" secondAttribute="trailing" constant="-17" id="Klq-2l-Oh0"/>
                             <constraint firstItem="ddp-73-GXt" firstAttribute="top" relation="greaterThanOrEqual" secondItem="12Z-1g-lxX" secondAttribute="top" id="MKM-sh-OaF"/>
                             <constraint firstItem="12Z-1g-lxX" firstAttribute="left" secondItem="8bC-Xf-vdC" secondAttribute="left" id="RL1-de-b1D"/>
                             <constraint firstItem="edy-5J-yaK" firstAttribute="width" secondItem="tY2-lc-OlN" secondAttribute="width" id="Td8-du-2QA"/>
@@ -190,10 +189,11 @@
                             <constraint firstAttribute="bottomMargin" secondItem="eTm-Vw-Y1W" secondAttribute="bottom" id="gDE-6i-I3S"/>
                             <constraint firstItem="ddp-73-GXt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-8" id="jOh-ZK-HRJ"/>
                             <constraint firstItem="edy-5J-yaK" firstAttribute="centerY" secondItem="tY2-lc-OlN" secondAttribute="centerY" id="kh0-vG-Xys"/>
-                            <constraint firstItem="12Z-1g-lxX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="lSb-Fp-BxO"/>
+                            <constraint firstItem="12Z-1g-lxX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="4" id="lSb-Fp-BxO"/>
                             <constraint firstItem="edy-5J-yaK" firstAttribute="centerX" secondItem="tY2-lc-OlN" secondAttribute="centerX" id="qiS-2P-5DQ"/>
                             <constraint firstItem="ZGB-kc-n9R" firstAttribute="centerY" secondItem="ddp-73-GXt" secondAttribute="centerY" id="rJg-bf-8Ua"/>
                             <constraint firstItem="5o7-Gc-suh" firstAttribute="height" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="2" id="tJj-ZM-AgQ"/>
+                            <constraint firstItem="ZGB-kc-n9R" firstAttribute="leading" secondItem="fhW-lj-LnF" secondAttribute="trailing" constant="5" id="y3J-J6-evm"/>
                             <constraint firstItem="5o7-Gc-suh" firstAttribute="centerX" secondItem="tY2-lc-OlN" secondAttribute="centerX" id="ysM-uQ-vZK"/>
                         </constraints>
                     </view>
@@ -267,7 +267,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="308" height="84"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="firstBaseline" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nl4-3W-YJe" userLabel="Segment1">
-                                                                <rect key="frame" x="89" y="0.0" width="130" height="21"/>
+                                                                <rect key="frame" x="70" y="0.0" width="169" height="21"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Section 1:" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ttH-ST-Owg">
                                                                         <rect key="frame" x="0.0" y="0.0" width="82" height="21"/>
@@ -276,7 +276,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enZ-yY-nPJ" userLabel="Segment1Time">
-                                                                        <rect key="frame" x="87" y="0.0" width="43" height="21"/>
+                                                                        <rect key="frame" x="87" y="0.0" width="82" height="21"/>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -284,7 +284,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="firstBaseline" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BHD-N1-lQR" userLabel="Segment2">
-                                                                <rect key="frame" x="89" y="21" width="130" height="21"/>
+                                                                <rect key="frame" x="70" y="21" width="169" height="21"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Section 2:" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DD0-ad-hT1">
                                                                         <rect key="frame" x="0.0" y="0.0" width="82" height="21"/>
@@ -293,7 +293,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fHF-7j-CuN" userLabel="Segment2Time">
-                                                                        <rect key="frame" x="87" y="0.0" width="43" height="21"/>
+                                                                        <rect key="frame" x="87" y="0.0" width="82" height="21"/>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -301,7 +301,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="firstBaseline" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="2xY-k6-Dx5" userLabel="Segment3">
-                                                                <rect key="frame" x="89" y="42" width="130" height="21"/>
+                                                                <rect key="frame" x="70" y="42" width="169" height="21"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Section 3:" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ixv-6d-Pbc">
                                                                         <rect key="frame" x="0.0" y="0.0" width="82" height="21"/>
@@ -310,7 +310,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLl-wL-nDt" userLabel="Segment3Time">
-                                                                        <rect key="frame" x="87" y="0.0" width="43" height="21"/>
+                                                                        <rect key="frame" x="87" y="0.0" width="82" height="21"/>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -318,7 +318,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="firstBaseline" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ws4-VC-clQ" userLabel="PostShow">
-                                                                <rect key="frame" x="89" y="63" width="130" height="21"/>
+                                                                <rect key="frame" x="70" y="63" width="169" height="21"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post Show:" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EK0-aT-lcZ">
                                                                         <rect key="frame" x="0.0" y="0.0" width="82" height="21"/>
@@ -327,7 +327,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSU-AR-jve" userLabel="Segment4Time">
-                                                                        <rect key="frame" x="87" y="0.0" width="43" height="21"/>
+                                                                        <rect key="frame" x="87" y="0.0" width="82" height="21"/>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>

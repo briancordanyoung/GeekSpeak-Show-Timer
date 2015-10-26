@@ -1,0 +1,422 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D353A2F61BDD942500BFFA65 /* AngleGear.h in Headers */ = {isa = PBXBuildFile; fileRef = D353A2F51BDD942500BFFA65 /* AngleGear.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D353A2FD1BDD942500BFFA65 /* AngleGear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D353A2F21BDD942500BFFA65 /* AngleGear.framework */; };
+		D353A3021BDD942500BFFA65 /* AngleGearTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D353A3011BDD942500BFFA65 /* AngleGearTests.swift */; };
+		D353A3101BDD945000BFFA65 /* AccumulatedAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D353A30C1BDD945000BFFA65 /* AccumulatedAngle.swift */; };
+		D353A3111BDD945000BFFA65 /* AccumulatedAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D353A30C1BDD945000BFFA65 /* AccumulatedAngle.swift */; };
+		D353A3121BDD945000BFFA65 /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D353A30D1BDD945000BFFA65 /* Angle.swift */; };
+		D353A3131BDD945000BFFA65 /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D353A30D1BDD945000BFFA65 /* Angle.swift */; };
+		D353A3141BDD945000BFFA65 /* AngularType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D353A30E1BDD945000BFFA65 /* AngularType.swift */; };
+		D353A3151BDD945000BFFA65 /* AngularType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D353A30E1BDD945000BFFA65 /* AngularType.swift */; };
+		D353A3161BDD945000BFFA65 /* TauAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D353A30F1BDD945000BFFA65 /* TauAngle.swift */; };
+		D353A3171BDD945000BFFA65 /* TauAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D353A30F1BDD945000BFFA65 /* TauAngle.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D353A2FE1BDD942500BFFA65 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D353A2E91BDD942500BFFA65 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D353A2F11BDD942500BFFA65;
+			remoteInfo = AngleGear;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D353A2F21BDD942500BFFA65 /* AngleGear.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AngleGear.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D353A2F51BDD942500BFFA65 /* AngleGear.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AngleGear.h; sourceTree = "<group>"; };
+		D353A2F71BDD942500BFFA65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D353A2FC1BDD942500BFFA65 /* AngleGearTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AngleGearTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D353A3011BDD942500BFFA65 /* AngleGearTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleGearTests.swift; sourceTree = "<group>"; };
+		D353A3031BDD942500BFFA65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D353A30C1BDD945000BFFA65 /* AccumulatedAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccumulatedAngle.swift; sourceTree = "<group>"; };
+		D353A30D1BDD945000BFFA65 /* Angle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Angle.swift; sourceTree = "<group>"; };
+		D353A30E1BDD945000BFFA65 /* AngularType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AngularType.swift; sourceTree = "<group>"; };
+		D353A30F1BDD945000BFFA65 /* TauAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TauAngle.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D353A2EE1BDD942500BFFA65 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D353A2F91BDD942500BFFA65 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D353A2FD1BDD942500BFFA65 /* AngleGear.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D353A2E81BDD942500BFFA65 = {
+			isa = PBXGroup;
+			children = (
+				D353A2F41BDD942500BFFA65 /* AngleGear */,
+				D353A3001BDD942500BFFA65 /* AngleGearTests */,
+				D353A2F31BDD942500BFFA65 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D353A2F31BDD942500BFFA65 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D353A2F21BDD942500BFFA65 /* AngleGear.framework */,
+				D353A2FC1BDD942500BFFA65 /* AngleGearTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D353A2F41BDD942500BFFA65 /* AngleGear */ = {
+			isa = PBXGroup;
+			children = (
+				D353A30E1BDD945000BFFA65 /* AngularType.swift */,
+				D353A30D1BDD945000BFFA65 /* Angle.swift */,
+				D353A30F1BDD945000BFFA65 /* TauAngle.swift */,
+				D353A30C1BDD945000BFFA65 /* AccumulatedAngle.swift */,
+				D353A2F51BDD942500BFFA65 /* AngleGear.h */,
+				D353A2F71BDD942500BFFA65 /* Info.plist */,
+			);
+			path = AngleGear;
+			sourceTree = "<group>";
+		};
+		D353A3001BDD942500BFFA65 /* AngleGearTests */ = {
+			isa = PBXGroup;
+			children = (
+				D353A3011BDD942500BFFA65 /* AngleGearTests.swift */,
+				D353A3031BDD942500BFFA65 /* Info.plist */,
+			);
+			path = AngleGearTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D353A2EF1BDD942500BFFA65 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D353A2F61BDD942500BFFA65 /* AngleGear.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D353A2F11BDD942500BFFA65 /* AngleGear */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D353A3061BDD942500BFFA65 /* Build configuration list for PBXNativeTarget "AngleGear" */;
+			buildPhases = (
+				D353A2ED1BDD942500BFFA65 /* Sources */,
+				D353A2EE1BDD942500BFFA65 /* Frameworks */,
+				D353A2EF1BDD942500BFFA65 /* Headers */,
+				D353A2F01BDD942500BFFA65 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AngleGear;
+			productName = AngleGear;
+			productReference = D353A2F21BDD942500BFFA65 /* AngleGear.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D353A2FB1BDD942500BFFA65 /* AngleGearTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D353A3091BDD942500BFFA65 /* Build configuration list for PBXNativeTarget "AngleGearTests" */;
+			buildPhases = (
+				D353A2F81BDD942500BFFA65 /* Sources */,
+				D353A2F91BDD942500BFFA65 /* Frameworks */,
+				D353A2FA1BDD942500BFFA65 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D353A2FF1BDD942500BFFA65 /* PBXTargetDependency */,
+			);
+			name = AngleGearTests;
+			productName = AngleGearTests;
+			productReference = D353A2FC1BDD942500BFFA65 /* AngleGearTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D353A2E91BDD942500BFFA65 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Brian Young";
+				TargetAttributes = {
+					D353A2F11BDD942500BFFA65 = {
+						CreatedOnToolsVersion = 7.1;
+					};
+					D353A2FB1BDD942500BFFA65 = {
+						CreatedOnToolsVersion = 7.1;
+					};
+				};
+			};
+			buildConfigurationList = D353A2EC1BDD942500BFFA65 /* Build configuration list for PBXProject "AngleGear" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D353A2E81BDD942500BFFA65;
+			productRefGroup = D353A2F31BDD942500BFFA65 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D353A2F11BDD942500BFFA65 /* AngleGear */,
+				D353A2FB1BDD942500BFFA65 /* AngleGearTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D353A2F01BDD942500BFFA65 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D353A2FA1BDD942500BFFA65 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D353A2ED1BDD942500BFFA65 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D353A3101BDD945000BFFA65 /* AccumulatedAngle.swift in Sources */,
+				D353A3121BDD945000BFFA65 /* Angle.swift in Sources */,
+				D353A3161BDD945000BFFA65 /* TauAngle.swift in Sources */,
+				D353A3141BDD945000BFFA65 /* AngularType.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D353A2F81BDD942500BFFA65 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D353A3151BDD945000BFFA65 /* AngularType.swift in Sources */,
+				D353A3111BDD945000BFFA65 /* AccumulatedAngle.swift in Sources */,
+				D353A3131BDD945000BFFA65 /* Angle.swift in Sources */,
+				D353A3021BDD942500BFFA65 /* AngleGearTests.swift in Sources */,
+				D353A3171BDD945000BFFA65 /* TauAngle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D353A2FF1BDD942500BFFA65 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D353A2F11BDD942500BFFA65 /* AngleGear */;
+			targetProxy = D353A2FE1BDD942500BFFA65 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D353A3041BDD942500BFFA65 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D353A3051BDD942500BFFA65 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D353A3071BDD942500BFFA65 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = AngleGear/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.BrianCordanYoung.AngleGear;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D353A3081BDD942500BFFA65 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = AngleGear/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.BrianCordanYoung.AngleGear;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		D353A30A1BDD942500BFFA65 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = AngleGearTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.BrianCordanYoung.AngleGearTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D353A30B1BDD942500BFFA65 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = AngleGearTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.BrianCordanYoung.AngleGearTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D353A2EC1BDD942500BFFA65 /* Build configuration list for PBXProject "AngleGear" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D353A3041BDD942500BFFA65 /* Debug */,
+				D353A3051BDD942500BFFA65 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D353A3061BDD942500BFFA65 /* Build configuration list for PBXNativeTarget "AngleGear" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D353A3071BDD942500BFFA65 /* Debug */,
+				D353A3081BDD942500BFFA65 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D353A3091BDD942500BFFA65 /* Build configuration list for PBXNativeTarget "AngleGearTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D353A30A1BDD942500BFFA65 /* Debug */,
+				D353A30B1BDD942500BFFA65 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D353A2E91BDD942500BFFA65 /* Project object */;
+}

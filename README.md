@@ -9,12 +9,6 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly placed breaks
 
 ## Todo:
 
-- Remove SplitViewController and use REFrostedViewController
-- Switch to fading play button
-- Add next button
-	- max button size 100
-	- min button size 50
-- add spacing to timerView number lables
 - Create About viewController to explain
 	- what GeepSeak is
 	- who I am
@@ -28,22 +22,6 @@ During the recording of GeekSpeak, we need to plan for 2 inexactly placed breaks
 - Add tracking of all pause/play events
 	
 - Add GameKit discovery and networking between timers on multiple devices
-- SplitViewController Subclass issues
-	- iPhone: swipping back does not animate, but pops instead
-	- iPhone: navigation controller buttons get confussed
-	- iPhone 6+:
-		- when rotating, keep same viewController in view (master will collaps over detail when going horizontally compact)
-		- when transitioning between rotations the  TimerViewController.layoutViewsForSize() is not being called when it needs to be
-	- NavigationBar issues to correct:
-		- iPhone
-			- timer view controller: change 'back' button to 'settings'
-			- why does the 'back' button not animated the view over the timer view controller?
-		- iPhone 6+
-			- Settings View Controller is not always setting the button to 'Show timer' instead of 'hide'
-		- iPad
-			- Add a 'settings' button to the nav bar
-		- All devices
-			- Adjust layout based on navbar height on viewWillAppear and viewWillTransitionToSize:withTransitionCoordinator: 
 - Layout issues
 	- Fix labels under show times to scale based on text width
 - Abstract out the hard coded definition of 3 segments with one minute breaks, into a definition file. Auto generate views based on this definition, allowing multiple show formats
