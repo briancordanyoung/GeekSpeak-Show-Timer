@@ -1,7 +1,7 @@
 import UIKit
 import AngleGear
 
-final public class RingView: SizeToSuperView {
+final public class RingView: UIView {
   
   private var progressPastCompleted = CGFloat(0) {
     didSet {
@@ -142,4 +142,17 @@ final public class RingView: SizeToSuperView {
   var ringLayer: RingLayer {
     return self.layer as! RingLayer
   }
+  
+  // MARK: UIView Methods
+  public override func didMoveToSuperview() {
+    super.didMoveToSuperview()
+    guard let parent = superview else {return}
+    
+    self.translatesAutoresizingMaskIntoConstraints = false
+    centerXAnchor.constraintEqualToAnchor(parent.centerXAnchor).active = true
+    centerYAnchor.constraintEqualToAnchor(parent.centerYAnchor).active = true
+    heightAnchor.constraintEqualToAnchor(parent.heightAnchor).active = true
+    widthAnchor.constraintEqualToAnchor(parent.widthAnchor).active = true
+  }
+  
 }

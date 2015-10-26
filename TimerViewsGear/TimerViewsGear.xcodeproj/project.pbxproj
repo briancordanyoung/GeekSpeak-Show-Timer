@@ -25,7 +25,6 @@
 		D3CA206C1BDDC85E00DBC458 /* StartPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA205B1BDDC85E00DBC458 /* StartPauseButton.swift */; };
 		D3CA206D1BDDC85E00DBC458 /* StartPauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA205C1BDDC85E00DBC458 /* StartPauseView.swift */; };
 		D3CA206E1BDDC85E00DBC458 /* TimerViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA205D1BDDC85E00DBC458 /* TimerViews.swift */; };
-		D3CA20701BDDC8A000DBC458 /* SizeToSuperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA206F1BDDC8A000DBC458 /* SizeToSuperView.swift */; };
 		D3CA20771BDDCE4600DBC458 /* RingCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA20731BDDCE4600DBC458 /* RingCircle.swift */; };
 		D3CA20781BDDCE4600DBC458 /* RingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA20741BDDCE4600DBC458 /* RingPoint.swift */; };
 		D3CA20791BDDCE4600DBC458 /* RingRadialPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA20751BDDCE4600DBC458 /* RingRadialPoint.swift */; };
@@ -66,7 +65,6 @@
 		D3CA205B1BDDC85E00DBC458 /* StartPauseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartPauseButton.swift; path = ../StartPauseButton.swift; sourceTree = "<group>"; };
 		D3CA205C1BDDC85E00DBC458 /* StartPauseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartPauseView.swift; path = ../StartPauseView.swift; sourceTree = "<group>"; };
 		D3CA205D1BDDC85E00DBC458 /* TimerViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimerViews.swift; path = ../TimerViews.swift; sourceTree = "<group>"; };
-		D3CA206F1BDDC8A000DBC458 /* SizeToSuperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SizeToSuperView.swift; path = ../SizeToSuperView.swift; sourceTree = "<group>"; };
 		D3CA20731BDDCE4600DBC458 /* RingCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingCircle.swift; sourceTree = "<group>"; };
 		D3CA20741BDDCE4600DBC458 /* RingPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingPoint.swift; sourceTree = "<group>"; };
 		D3CA20751BDDCE4600DBC458 /* RingRadialPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingRadialPoint.swift; sourceTree = "<group>"; };
@@ -196,7 +194,6 @@
 		D3CA20801BDDD06E00DBC458 /* TimerViews */ = {
 			isa = PBXGroup;
 			children = (
-				D3CA206F1BDDC8A000DBC458 /* SizeToSuperView.swift */,
 				D3CA20711BDDC8BB00DBC458 /* Ring Views */,
 				D3CA205D1BDDC85E00DBC458 /* TimerViews.swift */,
 			);
@@ -323,7 +320,6 @@
 				D3CA20651BDDC85E00DBC458 /* NextView.swift in Sources */,
 				D3CA207A1BDDCE4600DBC458 /* RoundedRing.swift in Sources */,
 				D3CA20611BDDC85E00DBC458 /* BreakView.swift in Sources */,
-				D3CA20701BDDC8A000DBC458 /* SizeToSuperView.swift in Sources */,
 				D3CA20631BDDC85E00DBC458 /* ControlsView.swift in Sources */,
 				D3CA20691BDDC85E00DBC458 /* RingLayer.swift in Sources */,
 				D3CA20791BDDCE4600DBC458 /* RingRadialPoint.swift in Sources */,
@@ -519,6 +515,7 @@
 				D3CA203E1BDDC79400DBC458 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D3CA203F1BDDC79400DBC458 /* Build configuration list for PBXNativeTarget "TimerViewsGearTests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +524,7 @@
 				D3CA20411BDDC79400DBC458 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
