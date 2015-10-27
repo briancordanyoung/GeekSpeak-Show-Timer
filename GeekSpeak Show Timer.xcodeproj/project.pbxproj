@@ -26,7 +26,10 @@
 		D34C13E51BBCF03500649676 /* PrimaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C13E41BBCF03500649676 /* PrimaryViewController.swift */; };
 		D353A2E71BDD930800BFFA65 /* flash.png in Resources */ = {isa = PBXBuildFile; fileRef = D353A2E61BDD930800BFFA65 /* flash.png */; };
 		D367427F1B9CDDED00EE13F7 /* Array+Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D367427E1B9CDDED00EE13F7 /* Array+Bool.swift */; };
-		D36DF9311BDD9C92008FF3F5 /* AngleGear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D350AAB01BDD9C21001DF008 /* AngleGear.framework */; };
+		D38377AC1BDF46F500C98D7E /* TimerViewsGear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3CA204A1BDDC79600DBC458 /* TimerViewsGear.framework */; };
+		D38377AD1BDF46F500C98D7E /* TimerViewsGear.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D3CA204A1BDDC79600DBC458 /* TimerViewsGear.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D38377B11BDF46FA00C98D7E /* AngleGear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D350AAB01BDD9C21001DF008 /* AngleGear.framework */; };
+		D38377B21BDF46FA00C98D7E /* AngleGear.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D350AAB01BDD9C21001DF008 /* AngleGear.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D384BC541B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384BC531B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift */; };
 		D384BC561B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384BC551B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift */; };
 		D3912C711B6E93B7003B42F1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */; };
@@ -35,7 +38,6 @@
 		D3912C771B6F1476003B42F1 /* Timer+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C761B6F1476003B42F1 /* Timer+Types.swift */; };
 		D39DAD1A1B917229007D797C /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39DAD191B917229007D797C /* Appearance.swift */; };
 		D3C487B31B726F3300B8067E /* Timer+StatePreservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */; };
-		D3CA20951BDDD7A800DBC458 /* TimerViewsGear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3CA204A1BDDC79600DBC458 /* TimerViewsGear.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,20 @@
 			remoteGlobalIDString = D353A2FC1BDD942500BFFA65;
 			remoteInfo = AngleGearTests;
 		};
+		D38377AE1BDF46F500C98D7E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D3CA20421BDDC79400DBC458 /* TimerViewsGear.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D3CA20271BDDC79400DBC458;
+			remoteInfo = TimerViewsGear;
+		};
+		D38377B31BDF46FA00C98D7E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D350AAAA1BDD9C21001DF008 /* AngleGear.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D353A2F11BDD942500BFFA65;
+			remoteInfo = AngleGear;
+		};
 		D3CA20491BDDC79600DBC458 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D3CA20421BDDC79400DBC458 /* TimerViewsGear.xcodeproj */;
@@ -75,6 +91,21 @@
 			remoteInfo = TimerViewsGearTests;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D38377B01BDF46F500C98D7E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D38377AD1BDF46F500C98D7E /* TimerViewsGear.framework in Embed Frameworks */,
+				D38377B21BDF46FA00C98D7E /* AngleGear.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D320C35F1B6FF5E90046F785 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
@@ -126,8 +157,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3CA20951BDDD7A800DBC458 /* TimerViewsGear.framework in Frameworks */,
-				D36DF9311BDD9C92008FF3F5 /* AngleGear.framework in Frameworks */,
+				D38377AC1BDF46F500C98D7E /* TimerViewsGear.framework in Frameworks */,
+				D38377B11BDF46FA00C98D7E /* AngleGear.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,10 +305,13 @@
 				D340CC701B6D3E7600BB17E3 /* Frameworks */,
 				D340CC711B6D3E7600BB17E3 /* Resources */,
 				D3C487B11B71BFF800B8067E /* ShellScript */,
+				D38377B01BDF46F500C98D7E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D38377AF1BDF46F500C98D7E /* PBXTargetDependency */,
+				D38377B41BDF46FA00C98D7E /* PBXTargetDependency */,
 			);
 			name = "GeekSpeak Show Timer";
 			productName = "GeekSpeak Show Timer";
@@ -465,6 +499,16 @@
 			target = D340CC721B6D3E7600BB17E3 /* GeekSpeak Show Timer */;
 			targetProxy = D340CC891B6D3E7600BB17E3 /* PBXContainerItemProxy */;
 		};
+		D38377AF1BDF46F500C98D7E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TimerViewsGear;
+			targetProxy = D38377AE1BDF46F500C98D7E /* PBXContainerItemProxy */;
+		};
+		D38377B41BDF46FA00C98D7E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AngleGear;
+			targetProxy = D38377B31BDF46FA00C98D7E /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -578,6 +622,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "GeekSpeak Show Timer/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -593,6 +638,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "GeekSpeak Show Timer/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
