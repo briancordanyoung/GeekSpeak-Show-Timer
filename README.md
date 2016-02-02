@@ -3,6 +3,9 @@
 During the recording of GeekSpeak, we need to plan for 2 inexactly placed breaks and a precise show length.  This is the timer we use to make that as easy as possible.
 
 
+Now with a timer of 57 minutes
+=============================
+3 equal sections at 19 mintes each.
 
 =======
 
