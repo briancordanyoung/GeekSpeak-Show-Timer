@@ -218,9 +218,9 @@ extension Timer {
     
     mutating func useGeekSpeakDurations() {
       preShow  =  1.0 * oneMinute
-      section1 = 14.0 * oneMinute
+      section1 = 19.0 * oneMinute
       break1   =  1.0 * oneMinute
-      section2 = 18.0 * oneMinute
+      section2 = 19.0 * oneMinute
       break2   =  1.0 * oneMinute
       section3 = 19.0 * oneMinute
     }
