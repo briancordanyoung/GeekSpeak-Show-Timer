@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D38377B51BDF471B00C98D7E /* AngleGear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38377A31BDF432000C98D7E /* AngleGear.framework */; };
 		D3CA202C1BDDC79400DBC458 /* TimerViewsGear.h in Headers */ = {isa = PBXBuildFile; fileRef = D3CA202B1BDDC79400DBC458 /* TimerViewsGear.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D3CA20331BDDC79400DBC458 /* TimerViewsGear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3CA20281BDDC79400DBC458 /* TimerViewsGear.framework */; };
 		D3CA20381BDDC79400DBC458 /* TimerViewsGearTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA20371BDDC79400DBC458 /* TimerViewsGearTests.swift */; };
@@ -30,7 +31,6 @@
 		D3CA20791BDDCE4600DBC458 /* RingRadialPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA20751BDDCE4600DBC458 /* RingRadialPoint.swift */; };
 		D3CA207A1BDDCE4600DBC458 /* RoundedRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA20761BDDCE4600DBC458 /* RoundedRing.swift */; };
 		D3CA207C1BDDCF7800DBC458 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA207B1BDDCF7800DBC458 /* Appearance.swift */; };
-		D3CA20941BDDD73800DBC458 /* AngleGear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3CA20931BDDD73800DBC458 /* AngleGear.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D38377A31BDF432000C98D7E /* AngleGear.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AngleGear.framework; path = "../../../../Library/Developer/Xcode/DerivedData/GeekSpeak_Show_Timer-bqrmwjfzcswsbagkiuxzwofwahbj/Build/Products/Debug-iphoneos/AngleGear.framework"; sourceTree = "<group>"; };
 		D3CA20281BDDC79400DBC458 /* TimerViewsGear.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TimerViewsGear.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3CA202B1BDDC79400DBC458 /* TimerViewsGear.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimerViewsGear.h; sourceTree = "<group>"; };
 		D3CA202D1BDDC79400DBC458 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -70,7 +71,6 @@
 		D3CA20751BDDCE4600DBC458 /* RingRadialPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingRadialPoint.swift; sourceTree = "<group>"; };
 		D3CA20761BDDCE4600DBC458 /* RoundedRing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedRing.swift; sourceTree = "<group>"; };
 		D3CA207B1BDDCF7800DBC458 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Appearance.swift; path = ../Appearance.swift; sourceTree = "<group>"; };
-		D3CA20931BDDD73800DBC458 /* AngleGear.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AngleGear.framework; path = "../AngleGear/build/Debug-iphoneos/AngleGear.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3CA20941BDDD73800DBC458 /* AngleGear.framework in Frameworks */,
+				D38377B51BDF471B00C98D7E /* AngleGear.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +98,7 @@
 			children = (
 				D3CA202A1BDDC79400DBC458 /* TimerViewsGear */,
 				D3CA20361BDDC79400DBC458 /* TimerViewsGearTests */,
-				D3CA20931BDDD73800DBC458 /* AngleGear.framework */,
+				D38377A31BDF432000C98D7E /* AngleGear.framework */,
 				D3CA20291BDDC79400DBC458 /* Products */,
 			);
 			sourceTree = "<group>";
