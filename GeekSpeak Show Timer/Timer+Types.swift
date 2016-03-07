@@ -178,8 +178,20 @@ extension Timer {
     var break2:            NSTimeInterval = 0
     var section3:          NSTimeInterval = 0
 
+    /**
+     Setup struct with timer durations
+     
+     - returns: Timer Duractions Struct
+     
+     -note: Until a real preferences mechenism is built for the
+     
+     Lyle: The Pledge Drive Durations are currently active.
+           Remember to switch them back to the standard "useGeekSpeakDurations()"
+     
+     */
     init() {
-      useGeekSpeakDurations()
+//      useGeekSpeakDurations()
+      useGeekSpeakPledgeDriveDurations()
     }
     
     var totalShowTime: NSTimeInterval {
@@ -202,12 +214,6 @@ extension Timer {
 
     
     mutating func useDemoDurations() {
-//      preShow  =  5.0
-//      section1 = 10.0
-//      break1   =  5.0
-//      section2 = 10.0
-//      break2   =  5.0
-//      section3 = 10.0
       preShow  =  2.0
       section1 = 30.0
       break1   =  2.0
@@ -215,7 +221,22 @@ extension Timer {
       break2   =  2.0
       section3 = 30.0
     }
-    
+
+    /**
+     The timings used for GeekSpeak before KUSP changed format (51 minutes)
+     */
+    mutating func useOldGeekSpeakDurations() {
+        preShow  =  1.0 * oneMinute
+        section1 = 14.0 * oneMinute
+        break1   =  1.0 * oneMinute
+        section2 = 19.0 * oneMinute
+        break2   =  1.0 * oneMinute
+        section3 = 18.0 * oneMinute
+    }
+
+    /**
+     The current timings used for GeekSpeak after KUSP changed format (57 minutes)
+     */
     mutating func useGeekSpeakDurations() {
       preShow  =  1.0 * oneMinute
       section1 = 19.0 * oneMinute
@@ -225,6 +246,20 @@ extension Timer {
       section3 = 19.0 * oneMinute
     }
 
+    /**
+     timings used for GeekSpeak pledge drives after KUSP changed format (40 minutes)
+     
+     Lyle: change durations for pledge drive here.
+     */
+    mutating func useGeekSpeakPledgeDriveDurations() {
+        preShow  =  1.0 * oneMinute
+        section1 = 13.0 * oneMinute
+        break1   =  1.0 * oneMinute
+        section2 = 14.0 * oneMinute
+        break2   =  1.0 * oneMinute
+        section3 = 13.0 * oneMinute
+    }
+    
   }
   
   
