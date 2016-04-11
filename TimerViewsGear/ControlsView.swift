@@ -1,12 +1,5 @@
 import UIKit
 
-extension CGSize {
-  var maxLeg: CGFloat {
-    return max(self.width,self.height)
-  }
-}
-
-
 class ControlsView: UIView {
   
   var color = UIColor.whiteColor() {
