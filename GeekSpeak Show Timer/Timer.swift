@@ -7,7 +7,7 @@ let timerUpdateInterval   = NSTimeInterval(0.01)
 
 // MARK: -
 // MARK: Timer class
-final class Timer: NSObject, NSCoding {
+final class Timer: NSObject {
   
   struct Constants {
     static let TimeChange            = "kGPTTimeChange"
@@ -178,11 +178,6 @@ final class Timer: NSObject, NSCoding {
   // MARK: Initialization
   override init() {
     super.init()
-  }
-  
-  init?(coder aDecoder: NSCoder) {
-    super.init()
-    decodeWithCoder(coder: aDecoder)
   }
   
   

@@ -2,10 +2,17 @@ import UIKit
 
 
 
-extension Timer {
+extension Timer: NSCoding {
   
   // MARK: -
   // MARK: State Preservation and Restoration
+    convenience init?(coder aDecoder: NSCoder) {
+        self.init()
+        decodeWithCoder(coder: aDecoder)
+    }
+    
+    
+    
   func decodeWithCoder(coder aDecoder: NSCoder) {
 
     let decodedObject = aDecoder.decodeObjectForKey(Constants.UUIDId) as! NSUUID
