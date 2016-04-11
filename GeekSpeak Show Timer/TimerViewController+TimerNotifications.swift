@@ -274,15 +274,12 @@ extension TimerViewController {
         segmentLabelText = "Post Show"
       }
       
-      segmentLabel.text =  segmentLabelText.pad(" ", totalLength: 15, side: .Right)
-
-      
-      totalTimeLabel.text     = timing.asShortString(timer.totalShowTimeElapsed)
+      segmentLabel.text   = segmentLabelText.pad(" ", totalLength: 15,
+                                                             side: .Right)
+      totalTimeLabel.text = timing.asShortString(timer.totalShowTimeElapsed)
       
       updateTimerLabels()
-      
       activityView.activity = CGFloat(timer.secondsElapsed)
-
       }
     }
   
