@@ -133,7 +133,8 @@ final public class NextView: UIStackView {
     
     label.text = "Next Section"
     label.textColor = tintColor
-    if let font = UIFont(name: "Helvetica Neue", size: 12) {
+    if let font = UIFont(name: Appearance.Constants.ButtonTextFont,
+                         size: Appearance.Constants.ButtonTextFontSize) {
       label.font = font
     }
   }

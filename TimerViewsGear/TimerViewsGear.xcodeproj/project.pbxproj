@@ -73,7 +73,7 @@
 		D3CA20751BDDCE4600DBC458 /* RingRadialPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingRadialPoint.swift; sourceTree = "<group>"; };
 		D3CA20761BDDCE4600DBC458 /* RoundedRing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedRing.swift; sourceTree = "<group>"; };
 		D3CA207B1BDDCF7800DBC458 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Appearance.swift; path = ../Appearance.swift; sourceTree = "<group>"; };
-		D3E0BB381CBB350B006E664F /* CGSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
+		D3E0BB381CBB350B006E664F /* CGSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CGSize.swift; path = ../CGSize.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +99,6 @@
 		D3CA201E1BDDC79400DBC458 = {
 			isa = PBXGroup;
 			children = (
-				D3E0BB381CBB350B006E664F /* CGSize.swift */,
 				D3CA202A1BDDC79400DBC458 /* TimerViewsGear */,
 				D3CA20361BDDC79400DBC458 /* TimerViewsGearTests */,
 				D38377A31BDF432000C98D7E /* AngleGear.framework */,
@@ -125,6 +124,7 @@
 				D3CA20501BDDC85E00DBC458 /* BreakView.swift */,
 				D3CA204D1BDDC85E00DBC458 /* ActivityView.swift */,
 				D3CA20551BDDC85E00DBC458 /* PieLayer.swift */,
+				D3E0BB381CBB350B006E664F /* CGSize.swift */,
 				D3CA202B1BDDC79400DBC458 /* TimerViewsGear.h */,
 				D3CA202D1BDDC79400DBC458 /* Info.plist */,
 			);
@@ -198,8 +198,8 @@
 		D3CA20801BDDD06E00DBC458 /* TimerViews */ = {
 			isa = PBXGroup;
 			children = (
-				D3CA20711BDDC8BB00DBC458 /* Ring Views */,
 				D3CA205D1BDDC85E00DBC458 /* TimerViews.swift */,
+				D3CA20711BDDC8BB00DBC458 /* Ring Views */,
 			);
 			name = TimerViews;
 			sourceTree = "<group>";
