@@ -38,6 +38,8 @@
 		D3912C771B6F1476003B42F1 /* Timer+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3912C761B6F1476003B42F1 /* Timer+Types.swift */; };
 		D39DAD1A1B917229007D797C /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39DAD191B917229007D797C /* Appearance.swift */; };
 		D3C487B31B726F3300B8067E /* Timer+StatePreservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */; };
+		D3E0BB341CBB3155006E664F /* String+Pad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E0BB331CBB3155006E664F /* String+Pad.swift */; };
+		D3E0BB351CBB3155006E664F /* String+Pad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E0BB331CBB3155006E664F /* String+Pad.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +152,7 @@
 		D39DAD191B917229007D797C /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		D3C487B21B726F3300B8067E /* Timer+StatePreservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timer+StatePreservation.swift"; sourceTree = "<group>"; };
 		D3CA20421BDDC79400DBC458 /* TimerViewsGear.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TimerViewsGear.xcodeproj; path = TimerViewsGear/TimerViewsGear.xcodeproj; sourceTree = "<group>"; };
+		D3E0BB331CBB3155006E664F /* String+Pad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Pad.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +216,7 @@
 				D384BC551B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift */,
 				D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */,
 				D384BC531B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift */,
+				D3E0BB331CBB3155006E664F /* String+Pad.swift */,
 				D34C13D11BBCEEB400649676 /* REFrostedViewController */,
 				D30230711B77D93D00148E74 /* Timer */,
 				D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */,
@@ -478,6 +482,7 @@
 				D3912C711B6E93B7003B42F1 /* SettingsViewController.swift in Sources */,
 				D34C13E21BBCEEB500649676 /* UIView+REFrostedViewController.m in Sources */,
 				D384BC561B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift in Sources */,
+				D3E0BB341CBB3155006E664F /* String+Pad.swift in Sources */,
 				D340CCB31B6D91FF00BB17E3 /* TimerViewController.swift in Sources */,
 				D340CC791B6D3E7600BB17E3 /* AppDelegate.swift in Sources */,
 				D367427F1B9CDDED00EE13F7 /* Array+Bool.swift in Sources */,
@@ -488,6 +493,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3E0BB351CBB3155006E664F /* String+Pad.swift in Sources */,
 				D340CC8F1B6D3E7600BB17E3 /* GeekSpeak_Show_TimerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

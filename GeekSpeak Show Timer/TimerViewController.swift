@@ -512,37 +512,5 @@ final class TimerViewController: UIViewController {
   }
   
   
-  
-  // MARK: -
-  // MARK: Utility
-  enum Direction {
-    case Left
-    case Right
-  }
-  
-  func padString(var string: String,
-                totalLength: Int, pad: Character,
-      inDirection direction: Direction) -> String {
-        
-    let i = string.characters.count
-    
-    let amountToPad = totalLength - i
-    if amountToPad < 1 {
-      return string
-    }
-    let padString = String(pad)
-    for _ in 1...amountToPad {
-      switch direction {
-        case .Left:
-          string = string + padString
-        case .Right:
-          string = padString + string
-      }
-    }
-    return string
-  }
-
-  
-
 }
 

@@ -171,10 +171,7 @@ extension TimerViewController {
     case .PostShow: segmentLabelText = "Post Show"
     }
       
-    segmentLabel.text =  padString( segmentLabelText,
-                       totalLength: 15,
-                               pad: " ",
-                       inDirection: .Right)
+    segmentLabel.text = segmentLabelText.pad(" ", totalLength: 15, side: .Right)
   }
   
   
@@ -193,10 +190,8 @@ extension TimerViewController {
     if let timer = timer {
       let timing    = timer.timing
       let totalTime = timing.asShortString(timing.durations.totalShowTime)
-      let labelText = padString( "Total: \(totalTime)",
-                    totalLength: 15,
-                            pad: " ",
-                    inDirection: .Left)
+      let labelText = "Total: \(totalTime)"
+                                        .pad(" ", totalLength: 15, side: .Left)
       totalLabel.text = labelText
       
       // TODO: check if current section reaches 100% (1.0) 
@@ -279,10 +274,8 @@ extension TimerViewController {
         segmentLabelText = "Post Show"
       }
       
-      segmentLabel.text =  padString( segmentLabelText,
-                         totalLength: 15,
-                                 pad: " ",
-                         inDirection: .Right)
+      segmentLabel.text =  segmentLabelText.pad(" ", totalLength: 15, side: .Right)
+
       
       totalTimeLabel.text     = timing.asShortString(timer.totalShowTimeElapsed)
       
