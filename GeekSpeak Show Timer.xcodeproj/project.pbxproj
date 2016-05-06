@@ -216,15 +216,9 @@
 				D384BC551B7F001F0024BCB0 /* SettingsViewController+TimerNotifications.swift */,
 				D340CCB21B6D91FF00BB17E3 /* TimerViewController.swift */,
 				D384BC531B7EF41C0024BCB0 /* TimerViewController+TimerNotifications.swift */,
-				D3E0BB331CBB3155006E664F /* String+Pad.swift */,
 				D34C13D11BBCEEB400649676 /* REFrostedViewController */,
 				D30230711B77D93D00148E74 /* Timer */,
-				D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */,
-				D367427E1B9CDDED00EE13F7 /* Array+Bool.swift */,
-				D32B9DEC1B77F6740098DCCF /* UIImage+WithColor.swift */,
-				D340CCB41B6D939F00BB17E3 /* UIColor+DarkenColor.swift */,
-				D320C35F1B6FF5E90046F785 /* UIImage+ImageEffects.h */,
-				D320C3601B6FF5E90046F785 /* UIImage+ImageEffects.m */,
+				D3E0BB3E1CBB3D6B006E664F /* Extensions */,
 				D3463F671B713E0D002C68A8 /* Settings.bundle */,
 				D340CC7F1B6D3E7600BB17E3 /* Images.xcassets */,
 				D353A2E61BDD930800BFFA65 /* flash.png */,
@@ -296,6 +290,20 @@
 				D3CA204C1BDDC79600DBC458 /* TimerViewsGearTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D3E0BB3E1CBB3D6B006E664F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */,
+				D3E0BB331CBB3155006E664F /* String+Pad.swift */,
+				D367427E1B9CDDED00EE13F7 /* Array+Bool.swift */,
+				D32B9DEC1B77F6740098DCCF /* UIImage+WithColor.swift */,
+				D340CCB41B6D939F00BB17E3 /* UIColor+DarkenColor.swift */,
+				D320C35F1B6FF5E90046F785 /* UIImage+ImageEffects.h */,
+				D320C3601B6FF5E90046F785 /* UIImage+ImageEffects.m */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
