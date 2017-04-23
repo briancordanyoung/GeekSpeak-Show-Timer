@@ -27,7 +27,7 @@ extension String
             if amountToPad < 1 {
                 return string
             }
-            let padString = String(describing: pad)
+            let padString = String(describing: character)
             for _ in 1...amountToPad {
                 switch side {
                 case .left:  string = string + padString

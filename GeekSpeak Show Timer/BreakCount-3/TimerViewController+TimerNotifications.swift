@@ -112,12 +112,9 @@ extension TimerViewController {
     let useDemoDurations = UserDefaults.standard
                            .bool(forKey: Timer.Constants.UseDemoDurations)
 
-    var durations: Timer.Durations
+    var durations = Timer.Durations()
     if useDemoDurations {
-      durations = Timer.Durations()
       durations.useDemoDurations()
-    } else {
-      durations = Timer.Durations()
     }
       
     if timer.timing.phase == .Break1 {

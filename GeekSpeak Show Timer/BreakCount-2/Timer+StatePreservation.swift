@@ -48,11 +48,9 @@ extension Timer: NSCoding {
     switch int {
     case 1:  phase = .PreShow
     case 2:  phase = .Section1
-    case 3:  phase = .Break2
+    case 3:  phase = .Break1
     case 4:  phase = .Section2
-    case 5:  phase = .Break2
-    case 6:  phase = .Section3
-    case 7:  phase = .PostShow
+    case 5:  phase = .PostShow
     default: phase = .PreShow
     }
     timing.phase = phase
@@ -63,12 +61,8 @@ extension Timer: NSCoding {
                      aDecoder.decodeDouble(forKey: Constants.Durations.Section1Id)
     timing.durations.section2 =
                      aDecoder.decodeDouble(forKey: Constants.Durations.Section2Id)
-    timing.durations.section3 =
-                     aDecoder.decodeDouble(forKey: Constants.Durations.Section3Id)
     timing.durations.break1   =
                        aDecoder.decodeDouble(forKey: Constants.Durations.Break1Id)
-    timing.durations.break2   =
-                       aDecoder.decodeDouble(forKey: Constants.Durations.Break2Id)
     
     timing.timeElapsed.preShow  =
                     aDecoder.decodeDouble(forKey: Constants.ElapsedTime.PreShowId)
@@ -76,12 +70,8 @@ extension Timer: NSCoding {
                    aDecoder.decodeDouble(forKey: Constants.ElapsedTime.Section1Id)
     timing.timeElapsed.section2 =
                    aDecoder.decodeDouble(forKey: Constants.ElapsedTime.Section2Id)
-    timing.timeElapsed.section3 =
-                   aDecoder.decodeDouble(forKey: Constants.ElapsedTime.Section3Id)
     timing.timeElapsed.break1   =
                      aDecoder.decodeDouble(forKey: Constants.ElapsedTime.Break1Id)
-    timing.timeElapsed.break2   =
-                     aDecoder.decodeDouble(forKey: Constants.ElapsedTime.Break2Id)
     timing.timeElapsed.postShow =
                    aDecoder.decodeDouble(forKey: Constants.ElapsedTime.PostShowId)
     
@@ -130,9 +120,7 @@ extension Timer: NSCoding {
     case .Section1: int = 2
     case .Break1:   int = 3
     case .Section2: int = 4
-    case .Break2:   int = 5
-    case .Section3: int = 6
-    case .PostShow: int = 7
+    case .PostShow: int = 5
     }
 
     aCoder.encodeCInt(int, forKey: Constants.PhaseId)
@@ -143,16 +131,12 @@ extension Timer: NSCoding {
     aCoder.encode(d.section1, forKey: Constants.Durations.Section1Id)
     aCoder.encode(d.break1,   forKey: Constants.Durations.Break1Id)
     aCoder.encode(d.section2, forKey: Constants.Durations.Section2Id)
-    aCoder.encode(d.break2,   forKey: Constants.Durations.Break2Id)
-    aCoder.encode(d.section3, forKey: Constants.Durations.Section3Id)
     
     let t = timing.timeElapsed
     aCoder.encode(t.preShow,  forKey: Constants.ElapsedTime.PreShowId)
     aCoder.encode(t.section1, forKey: Constants.ElapsedTime.Section1Id)
     aCoder.encode(t.break1,   forKey: Constants.ElapsedTime.Break1Id)
     aCoder.encode(t.section2, forKey: Constants.ElapsedTime.Section2Id)
-    aCoder.encode(t.break2,   forKey: Constants.ElapsedTime.Break2Id)
-    aCoder.encode(t.section3, forKey: Constants.ElapsedTime.Section3Id)
     aCoder.encode(t.postShow, forKey: Constants.ElapsedTime.PostShowId)
   }
   
