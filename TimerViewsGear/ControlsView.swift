@@ -1,15 +1,8 @@
 import UIKit
 
-extension CGSize {
-  var maxLeg: CGFloat {
-    return max(self.width,self.height)
-  }
-}
-
-
 class ControlsView: UIView {
   
-  var color = UIColor.whiteColor() {
+  var color = UIColor.white {
     didSet {
       setNeedsDisplay()
     }
@@ -27,11 +20,11 @@ class ControlsView: UIView {
   
   func setup() {
     clipsToBounds = false
-    opaque        = false
+    isOpaque        = false
     translatesAutoresizingMaskIntoConstraints = false
     
-    self.heightAnchor.constraintEqualToConstant(frame.size.maxLeg).active = true
-    self.widthAnchor.constraintEqualToConstant(frame.size.maxLeg).active  = true
+    self.heightAnchor.constraint(equalToConstant: frame.size.maxLeg).isActive = true
+    self.widthAnchor.constraint(equalToConstant: frame.size.maxLeg).isActive  = true
   }
   
   override func didMoveToSuperview() {
@@ -41,8 +34,8 @@ class ControlsView: UIView {
       return
     }
     
-    centerXAnchor.constraintEqualToAnchor(parent.centerXAnchor).active = true
-    centerYAnchor.constraintEqualToAnchor(parent.centerYAnchor).active = true
+    centerXAnchor.constraint(equalTo: parent.centerXAnchor).isActive = true
+    centerYAnchor.constraint(equalTo: parent.centerYAnchor).isActive = true
   }
   
 }

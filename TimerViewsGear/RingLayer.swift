@@ -35,7 +35,7 @@ final class RingLayer : CALayer {
   
   
   struct Constants {
-    static let DefaultColor = UIColor.whiteColor()
+    static let DefaultColor = UIColor.white
     static let Tau = CGFloat(M_PI) * 2
     static let Quarter = CGFloat(M_PI) * 0.5
     static let StartAngle = "ringViewStartAngleId"
@@ -49,9 +49,9 @@ final class RingLayer : CALayer {
   @NSManaged var endAngle:   CGFloat // radians
   @NSManaged var ringWidth:  CGFloat // percentage of the view size (0-1)
   @NSManaged var fillScale:  CGFloat // percentage of the view size (0-1)
-  private var _colors: [RingColor] = [RingColor(portion: 1.0,
+  fileprivate var _colors: [RingColor] = [RingColor(portion: 1.0,
                                                   color: Constants.DefaultColor)]
-  var ringStyle: RingDrawing.Style = .Rounded {
+  var ringStyle: RingDrawing.Style = .rounded {
     didSet {
       setNeedsDisplay()
     }
@@ -84,7 +84,7 @@ final class RingLayer : CALayer {
   // Translate the RingColor array to a ColorSection array
   var colorSections: [ColorSection] {
     get {
-      let portionTotal = colors.reduce(CGFloat(0), combine: {$0 + $1.portion})
+      let portionTotal = colors.reduce(CGFloat(0), {$0 + $1.portion})
       var sections: [ColorSection] = []
       var portionTally = CGFloat(0)
       
@@ -105,12 +105,12 @@ final class RingLayer : CALayer {
     endAngle   = CGFloat(TauAngle(degrees: 360))
     ringWidth  = CGFloat(0.2)
     fillScale  = CGFloat(1.0)
-    backgroundColor = UIColor.clearColor().CGColor
-    opaque = false
+    backgroundColor = UIColor.clear.cgColor
+    isOpaque = false
     self.needsDisplay()
   }
   
-  override init(layer: AnyObject) {
+  override init(layer: Any) {
     super.init(layer: layer)
     if let layer = layer as? RingLayer {
       startAngle = layer.startAngle
@@ -123,8 +123,8 @@ final class RingLayer : CALayer {
       ringWidth  = CGFloat(0.2)
       fillScale  = CGFloat(1.0)
     }
-    backgroundColor = UIColor.clearColor().CGColor
-    opaque = false
+    backgroundColor = UIColor.clear.cgColor
+    isOpaque = false
     self.needsDisplay()
   }
   
@@ -138,8 +138,8 @@ final class RingLayer : CALayer {
     self.endAngle   = endAngle
     self.ringWidth  = ringWidth
     self._colors    = colors
-    backgroundColor = UIColor.clearColor().CGColor
-    opaque = false
+    backgroundColor = UIColor.clear.cgColor
+    isOpaque = false
     self.needsDisplay()
   }
   
@@ -157,36 +157,36 @@ final class RingLayer : CALayer {
 
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    startAngle = CGFloat(aDecoder.decodeDoubleForKey(Constants.StartAngle))
-    endAngle   = CGFloat(aDecoder.decodeDoubleForKey(Constants.EndAngle))
-    ringWidth  = CGFloat( aDecoder.decodeDoubleForKey(Constants.RingWidth))
-    fillScale  = CGFloat( aDecoder.decodeDoubleForKey(Constants.FillScale))
-    backgroundColor = UIColor.clearColor().CGColor
-    opaque = false
-    switch aDecoder.decodeIntForKey(Constants.RingStyle) {
+    startAngle = CGFloat(aDecoder.decodeDouble(forKey: Constants.StartAngle))
+    endAngle   = CGFloat(aDecoder.decodeDouble(forKey: Constants.EndAngle))
+    ringWidth  = CGFloat( aDecoder.decodeDouble(forKey: Constants.RingWidth))
+    fillScale  = CGFloat( aDecoder.decodeDouble(forKey: Constants.FillScale))
+    backgroundColor = UIColor.clear.cgColor
+    isOpaque = false
+    switch aDecoder.decodeCInt(forKey: Constants.RingStyle) {
     case 0:
-      ringStyle = .Rounded
+      ringStyle = .rounded
     case 1:
-      ringStyle = .Sharp
+      ringStyle = .sharp
     default:
-      ringStyle = .Rounded
+      ringStyle = .rounded
     }
     // TODO: Add encoder/decoder for colors
   }
   
   
-  override func encodeWithCoder(aCoder: NSCoder) {
-    super.encodeWithCoder(aCoder)
-    aCoder.encodeDouble(Double(startAngle), forKey: Constants.StartAngle)
-    aCoder.encodeDouble(Double(endAngle),   forKey: Constants.EndAngle)
-    aCoder.encodeDouble(Double(ringWidth),  forKey: Constants.RingWidth)
-    aCoder.encodeDouble(Double(fillScale),  forKey: Constants.FillScale)
+  override func encode(with aCoder: NSCoder) {
+    super.encode(with: aCoder)
+    aCoder.encode(Double(startAngle), forKey: Constants.StartAngle)
+    aCoder.encode(Double(endAngle),   forKey: Constants.EndAngle)
+    aCoder.encode(Double(ringWidth),  forKey: Constants.RingWidth)
+    aCoder.encode(Double(fillScale),  forKey: Constants.FillScale)
     switch ringStyle {
-    case .Rounded,
-         .RoundedWithGuides:
-      aCoder.encodeInt(0, forKey: Constants.RingStyle)
-    case .Sharp:
-      aCoder.encodeInt(1, forKey: Constants.RingStyle)
+    case .rounded,
+         .roundedWithGuides:
+      aCoder.encodeCInt(0, forKey: Constants.RingStyle)
+    case .sharp:
+      aCoder.encodeCInt(1, forKey: Constants.RingStyle)
     }
   }
 
@@ -195,15 +195,15 @@ final class RingLayer : CALayer {
   // MARK: Internal Computed Properties
   // Internally offset the angles so that they start drawing at the top
   
-  private var start: TauAngle {
+  fileprivate var start: TauAngle {
     return TauAngle(startAngle)
   }
   
-  private var end: TauAngle {
+  fileprivate var end: TauAngle {
     return TauAngle(endAngle)
   }
     
-  private var center: RingPoint {
+  fileprivate var center: RingPoint {
     let width  = self.bounds.size.width
     let height = self.bounds.size.height
     
@@ -227,47 +227,47 @@ final class RingLayer : CALayer {
     return point
   }
   
-  private var maxRingRadius: CGFloat {
+  fileprivate var maxRingRadius: CGFloat {
     return min(self.bounds.size.width , self.bounds.size.height) / 2
   }
   
-  private var ringRadius: CGFloat {
+  fileprivate var ringRadius: CGFloat {
     return maxRingRadius * fillScale
   }
   
   
   // MARK: Drawing
-  override func drawInContext(ctx: CGContext) {
+  override func draw(in ctx: CGContext) {
     
     maskRingInContext(ctx)
     
     let percentVisible = endAngle / Constants.Tau
     
-    for section in colorSections.reverse() {
+    for section in colorSections.reversed() {
       drawRing(       section.color,
           fromStartTo: min(section.percentToEnd, percentVisible),
             inContext: ctx)
     }
   }
   
-  func maskRingInContext(ctx: CGContext) {
-    guard let maskCTX   = CGBitmapContextCreate( nil,
-                          CGBitmapContextGetWidth(ctx),
-                          CGBitmapContextGetHeight(ctx),
-                          CGBitmapContextGetBitsPerComponent(ctx),
-                          CGBitmapContextGetBytesPerRow(ctx),
-                          CGColorSpaceCreateDeviceGray(),
-                          UInt32(0) /* kCGImageAlphaNone */) else {return}
+  func maskRingInContext(_ ctx: CGContext) {
+    guard let maskCTX   = CGContext( data: nil,
+                          width: ctx.width,
+                          height: ctx.height,
+                          bitsPerComponent: ctx.bitsPerComponent,
+                          bytesPerRow: ctx.bytesPerRow,
+                          space: CGColorSpaceCreateDeviceGray(),
+                          bitmapInfo: UInt32(0) /* kCGImageAlphaNone */) else {return}
     
-    let rect = CGRectMake(0 , 0,
-                          CGFloat(CGBitmapContextGetWidth(ctx)),
-                          CGFloat(CGBitmapContextGetHeight(ctx)))
+    let rect = CGRect(x: 0 , y: 0,
+                          width: CGFloat(ctx.width),
+                          height: CGFloat(ctx.height))
     
-    let maskOutColor = UIColor.blackColor().CGColor
-    let maskInColor  = UIColor.whiteColor()
+    let maskOutColor = UIColor.black.cgColor
+    let maskInColor  = UIColor.white
     
-    CGContextSetFillColorWithColor(maskCTX, maskOutColor)
-    CGContextFillRect(maskCTX, rect)
+    maskCTX.setFillColor(maskOutColor)
+    maskCTX.fill(rect)
     
     let maxRingWidthInPoints = maxRingRadius * ringWidth
     let ringWidthInPoints  = min(ringRadius, maxRingWidthInPoints)
@@ -281,13 +281,13 @@ final class RingLayer : CALayer {
     maskDrawing.style     = ringStyle
     
     maskDrawing.drawInContext(maskCTX)
-    let ringMask = CGBitmapContextCreateImage(maskCTX)
+    let ringMask = maskCTX.makeImage()
     
-    CGContextClipToMask(ctx, rect, ringMask)
+    ctx.clip(to: rect, mask: ringMask!)
   }
   
 
-  func drawRing(    color: UIColor,
+  func drawRing(    _ color: UIColor,
     fromStartTo percentage: CGFloat,
     inContext ctx: CGContext) {
 
@@ -300,7 +300,7 @@ final class RingLayer : CALayer {
                                 startAngle: TauAngle(degrees: 0),
                                   endAngle: TauAngle(degrees: (360 * percentage)))
       maskDrawing.fillColor = color
-      maskDrawing.style     = .Sharp
+      maskDrawing.style     = .sharp
       
       maskDrawing.drawInContext(ctx)
   }
@@ -309,7 +309,7 @@ final class RingLayer : CALayer {
   
   // MARK: Animation
   // Allows CoreAnimation to animate these parameters.
-  override class func needsDisplayForKey(key: String) -> Bool {
+  override class func needsDisplay(forKey key: String) -> Bool {
     if key == "startAngle" ||
        key == "endAngle" ||
        key == "ringWidth" {
@@ -319,9 +319,9 @@ final class RingLayer : CALayer {
     }
   }
   
-  func makeAnimationForKey(key: String) -> CABasicAnimation {
+  func makeAnimationForKey(_ key: String) -> CABasicAnimation {
     let anim = CABasicAnimation(keyPath: key)
-    anim.fromValue = presentationLayer()?.valueForKey(key)
+    anim.fromValue = presentation()?.value(forKey: key)
     anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
     anim.duration = 0.0
     return anim

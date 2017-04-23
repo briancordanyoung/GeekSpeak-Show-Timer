@@ -23,17 +23,17 @@ class PrimaryViewController: REFrostedViewController,
     
 
     let timerViewController = storyboard
-                 .instantiateViewControllerWithIdentifier("timerViewController")
+                 .instantiateViewController(withIdentifier: "timerViewController")
     
     let settingsViewController = storyboard
-              .instantiateViewControllerWithIdentifier("settingsViewController")
+              .instantiateViewController(withIdentifier: "settingsViewController")
     
     contentViewController = timerViewController
     menuViewController    = settingsViewController
     
     panGestureEnabled         = true
-    direction                 = .Left
-    liveBlurBackgroundStyle   = .Dark
+    direction                 = .left
+    liveBlurBackgroundStyle   = .dark
     liveBlur                  = false
     limitMenuViewSize         = true
     backgroundFadeAmount      = CGFloat(1)
@@ -41,39 +41,39 @@ class PrimaryViewController: REFrostedViewController,
     delegate                  = self
     blurRadius                = 0
     blurSaturationDeltaFactor = 0
-    blurTintColor             = UIColor.clearColor()
+    blurTintColor             = UIColor.clear
   }
   
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     injectTimerIntoContainedViewControllers()
   }
   
   
-  func frostedViewController(frostedViewController: REFrostedViewController!,
+  func frostedViewController(_ frostedViewController: REFrostedViewController!,
               didHideMenuViewController menuViewController: UIViewController!) {
     
   }
   
-  func frostedViewController(frostedViewController: REFrostedViewController!,
+  func frostedViewController(_ frostedViewController: REFrostedViewController!,
               didShowMenuViewController menuViewController: UIViewController!) {
     
   }
   
-  func frostedViewController(frostedViewController: REFrostedViewController!,
+  func frostedViewController(_ frostedViewController: REFrostedViewController!,
              willHideMenuViewController menuViewController: UIViewController!) {
     
   }
   
-  func frostedViewController(frostedViewController: REFrostedViewController!,
+  func frostedViewController(_ frostedViewController: REFrostedViewController!,
              willShowMenuViewController menuViewController: UIViewController!) {
     
   }
   
-  func frostedViewController(frostedViewController: REFrostedViewController!,
-      willAnimateRotationToInterfaceOrientation toInterfaceOrientation: UIInterfaceOrientation,
-                                          duration: NSTimeInterval) {
+  func frostedViewController(_ frostedViewController: REFrostedViewController!,
+      willAnimateRotationTo toInterfaceOrientation: UIInterfaceOrientation,
+                                          duration: TimeInterval) {
                                             
-      UIView.animateWithDuration(duration,
+      UIView.animate(withDuration: duration,
         animations: {},
         completion: { finished in
           self.updateSettingViewControllerBlurredBackground()
@@ -86,18 +86,18 @@ class PrimaryViewController: REFrostedViewController,
     }
   }
   
-  func frostedViewController(frostedViewController: REFrostedViewController!,
+  func frostedViewController(_ frostedViewController: REFrostedViewController!,
                    didRecognizePanGesture recognizer: UIPanGestureRecognizer!) {
   }
   
 
   func injectTimerIntoContainedViewControllers() {
     if let timerViewController = contentViewController as? TimerViewController,
-        settingsViewController = menuViewController as? SettingsViewController {
+        let settingsViewController = menuViewController as? SettingsViewController {
         
         settingsViewController.timerViewController = timerViewController
         
-        if let appDelegate = UIApplication.sharedApplication().delegate
+        if let appDelegate = UIApplication.shared.delegate
                                                               as? AppDelegate  {
             let timer = appDelegate.timer
             timerViewController.timer    = timer

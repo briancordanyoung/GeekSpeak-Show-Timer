@@ -23,15 +23,15 @@ final class TimerViewController: UIViewController {
   }
   
   
-  private var layoutSize: CGSize {
+  fileprivate var layoutSize: CGSize {
     return view.frame.size
   }
   
-  private var layoutIsVertical: Bool {
+  fileprivate var layoutIsVertical: Bool {
     return self.layoutSize.width < self.layoutSize.height
   }
   
-  private var layoutIsHorizontal: Bool {
+  fileprivate var layoutIsHorizontal: Bool {
     return self.layoutSize.width < self.layoutSize.height
   }
   
@@ -55,7 +55,7 @@ final class TimerViewController: UIViewController {
   @IBOutlet weak var activityView: ActivityView!
 
   
-  private var controlsInOrder: [UIButton] = []
+  fileprivate var controlsInOrder: [UIButton] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -114,7 +114,7 @@ final class TimerViewController: UIViewController {
   }
   
   
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     
     if let timer = timer {
       setupButtonLayout(timer)
@@ -175,21 +175,21 @@ final class TimerViewController: UIViewController {
   
   
   
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
   }
   
   
-  override func viewDidDisappear(animated: Bool) {
+  override func viewDidDisappear(_ animated: Bool) {
     unregisterForTimerNotifications()
   }
   
-  override func viewWillTransitionToSize(size: CGSize,
-        withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-    super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+  override func viewWillTransition(to size: CGSize,
+        with coordinator: UIViewControllerTransitionCoordinator) {
+    super.viewWillTransition(to: size, with: coordinator)
     
-    let duration = coordinator.transitionDuration()
+    let duration = coordinator.transitionDuration
     layoutViewsForSize(size, animateWithDuration: duration)
           
   }
@@ -208,20 +208,20 @@ final class TimerViewController: UIViewController {
   
   // MARK: -
   // MARK: Actions
-  @IBAction func backButtonPressed(sender: AnyObject) {
-    if let primaryViewController = parentViewController
+  @IBAction func backButtonPressed(_ sender: AnyObject) {
+    if let primaryViewController = parent
                                                      as? PrimaryViewController {
                                                   
       primaryViewController.presentMenuViewController()
     }
   }
   
-  @IBAction func nextButtonPressed(sender: NextButton) {
+  @IBAction func nextButtonPressed(_ sender: NextButton) {
     timer?.next()
   }
   
   
-  @IBAction func startPauseButtonPressed(sender: StartPauseButton) {
+  @IBAction func startPauseButtonPressed(_ sender: StartPauseButton) {
     if let timer = timer {
       switch timer.state {
       case .Ready,
@@ -235,19 +235,19 @@ final class TimerViewController: UIViewController {
     }
   }
   
-  func setupButtonLayout(timer: Timer) {
+  func setupButtonLayout(_ timer: Timer) {
     switch timer.state {
     case .Ready,
          .Paused,
          .PausedAfterComplete:
       startPauseButton.startPauseView?.label.text = "Start Timer"
-      startPauseButton.startPauseView?.currentButton = .Start
+      startPauseButton.startPauseView?.currentButton = .start
       startPauseButton.startPauseView?.unhighlight()
       
     case .Counting,
          .CountingAfterComplete:
       startPauseButton.startPauseView?.label.text = "Pause Timer"
-      startPauseButton.startPauseView?.currentButton = .Pause
+      startPauseButton.startPauseView?.currentButton = .pause
       startPauseButton.startPauseView?.unhighlight()
     }
     
@@ -255,7 +255,7 @@ final class TimerViewController: UIViewController {
   }
 
   
-  func updateButtonLayout(timer: Timer) {
+  func updateButtonLayout(_ timer: Timer) {
     // StartPause Button
     switch timer.state {
     case .Ready,
@@ -268,14 +268,14 @@ final class TimerViewController: UIViewController {
     }
     
     if timer.state == .Ready {
-      startPauseButton.startPauseView?.currentButton = .Start
+      startPauseButton.startPauseView?.currentButton = .start
       startPauseButton.startPauseView?.unhighlight()
     }
     
     setNextButtonState(timer)
   }
   
-  func setNextButtonState(timer: Timer) {
+  func setNextButtonState(_ timer: Timer) {
     // Next Button
     switch timer.state {
     case .Ready,
@@ -291,8 +291,8 @@ final class TimerViewController: UIViewController {
   
   func disableNextButton() {
     let inactiveColor = Appearance.Constants.GeekSpeakBlueInactiveColor
-    nextButton.enabled = false
-    nextButtonTimerOverlay.enabled = false
+    nextButton.isEnabled = false
+    nextButtonTimerOverlay.isEnabled = false
     nextButton.nextView?.tintColor       = inactiveColor
     nextButton.nextView?.highlightColor  = inactiveColor
     nextButton.nextView?.label.textColor = inactiveColor
@@ -301,8 +301,8 @@ final class TimerViewController: UIViewController {
   
   func enableNextButton() {
     let activeColor = Appearance.Constants.GeekSpeakBlueColor
-    nextButton.enabled = true
-    nextButtonTimerOverlay.enabled = true
+    nextButton.isEnabled = true
+    nextButtonTimerOverlay.isEnabled = true
     nextButton.nextView?.tintColor       = activeColor
     nextButton.nextView?.highlightColor  = activeColor
     nextButton.nextView?.label.textColor = activeColor
@@ -314,13 +314,13 @@ final class TimerViewController: UIViewController {
   // MARK: View Layout
   
   
-  func layoutViewsForSize( size: CGSize) {
+  func layoutViewsForSize( _ size: CGSize) {
     layoutViewsForSize(size, animateWithDuration: 0.0)
   }
       
   
-  func layoutViewsForSize(          size: CGSize,
-            animateWithDuration duration: NSTimeInterval) {
+  func layoutViewsForSize(          _ size: CGSize,
+            animateWithDuration duration: TimeInterval) {
 
     if size.width < size.height {
       self.setContraintsForVerticalLayout()
@@ -330,39 +330,39 @@ final class TimerViewController: UIViewController {
   }
   
   func setContraintsForVerticalLayout() {
-    containerStackView.axis = .Vertical
-    controlsStackView.axis = .Horizontal
+    containerStackView.axis = .vertical
+    controlsStackView.axis = .horizontal
     flipControlViews(controlsInOrder)
   }
   
   func setContraintsForHorizontalLayout() {
-    containerStackView.axis = .Horizontal
-    controlsStackView.axis = .Vertical
-    flipControlViews(controlsInOrder.reverse())
+    containerStackView.axis = .horizontal
+    controlsStackView.axis = .vertical
+    flipControlViews(controlsInOrder.reversed())
   }
   
-  func flipControlViews(controls : [UIButton]) {
-    let arrangedViews = controlsStackView.arrangedSubviews.reverse()
+  func flipControlViews(_ controls : [UIButton]) {
+    let arrangedViews = controlsStackView.arrangedSubviews.reversed()
     arrangedViews.forEach {controlsStackView.removeArrangedSubview($0)}
     controls.forEach {controlsStackView.addArrangedSubview($0)}
   }
   
   
-  func centerView(view: UIView, ToView toView: UIView, WithContraintParent parent: UIView) {
+  func centerView(_ view: UIView, ToView toView: UIView, WithContraintParent parent: UIView) {
     
     let y =      NSLayoutConstraint(item: view,
-                               attribute: .CenterY,
-                               relatedBy: .Equal,
+                               attribute: .centerY,
+                               relatedBy: .equal,
                                   toItem: toView,
-                               attribute: .CenterY,
+                               attribute: .centerY,
                               multiplier: 1.0,
                                 constant: 0.0)
 
     let x =      NSLayoutConstraint(item: view,
-                               attribute: .CenterX,
-                               relatedBy: .Equal,
+                               attribute: .centerX,
+                               relatedBy: .equal,
                                   toItem: toView,
-                               attribute: .CenterX,
+                               attribute: .centerX,
                               multiplier: 1.0,
                                 constant: 0.0)
     parent.addConstraints([x,y])
@@ -378,13 +378,13 @@ final class TimerViewController: UIViewController {
   
   func addSwipeGesture() {
     let gesture = UIScreenEdgePanGestureRecognizer(target: self,
-                                                action: "panGestureRecognized:")
-    gesture.edges = .Left
+                                                action: #selector(TimerViewController.panGestureRecognized(_:)))
+    gesture.edges = .left
     view.addGestureRecognizer(gesture)
   }
   
-  func panGestureRecognized(sender: UIPanGestureRecognizer) {
-    guard let primaryViewController = UIApplication.sharedApplication()
+  func panGestureRecognized(_ sender: UIPanGestureRecognizer) {
+    guard let primaryViewController = UIApplication.shared
                  .keyWindow?.rootViewController as? PrimaryViewController else {
       assertionFailure("Could not find PrimaryViewController as root View controller")
       return
@@ -399,13 +399,13 @@ final class TimerViewController: UIViewController {
   // MARK: -
   // MARK: Warning Animation
   
-  var warningDuration = NSTimeInterval(0.75)
-  private var warningStartTime = NSDate().timeIntervalSince1970
-  private var warningAnimationInProgress = false
+  var warningDuration = TimeInterval(0.75)
+  fileprivate var warningStartTime = Date().timeIntervalSince1970
+  fileprivate var warningAnimationInProgress = false
 
   func animateWarning() {
     if !warningAnimationInProgress {
-      warningStartTime = NSDate().timeIntervalSince1970
+      warningStartTime = Date().timeIntervalSince1970
       warningAnimationInProgress = true
       flashImageView.alpha = 0.0
       animateBlackToWhite()
@@ -413,7 +413,7 @@ final class TimerViewController: UIViewController {
   }
   
   func animateBlackToWhite() {
-    UIView.animateWithDuration( 0.05,
+    UIView.animate( withDuration: 0.05,
       delay: 0.0,
       options: [],
       animations: {
@@ -421,30 +421,30 @@ final class TimerViewController: UIViewController {
         self.view.backgroundColor = Appearance.Constants.BreakColor
       },
       completion: { completed in
-        if (self.warningStartTime + self.warningDuration) > NSDate().timeIntervalSince1970 {
+        if (self.warningStartTime + self.warningDuration) > Date().timeIntervalSince1970 {
           self.animateWhiteToBlack()
         } else {
           self.warningAnimationInProgress = false
-          self.view.backgroundColor = UIColor.blackColor()
+          self.view.backgroundColor = UIColor.black
           self.flashImageView.alpha = 0.0
         }
     })
   }
   
   func animateWhiteToBlack() {
-    UIView.animateWithDuration( 0.05,
+    UIView.animate( withDuration: 0.05,
       delay: 0.0,
       options: [],
       animations: {
         self.flashImageView.alpha = 0.0
-        self.view.backgroundColor = UIColor.blackColor()
+        self.view.backgroundColor = UIColor.black
       },
       completion: { completed in
-        if (self.warningStartTime + self.warningDuration) > NSDate().timeIntervalSince1970 {
+        if (self.warningStartTime + self.warningDuration) > Date().timeIntervalSince1970 {
           self.animateBlackToWhite()
         } else {
           self.warningAnimationInProgress = false
-          self.view.backgroundColor = UIColor.blackColor()
+          self.view.backgroundColor = UIColor.black
           self.flashImageView.alpha = 0.0
         }
     })
@@ -454,42 +454,42 @@ final class TimerViewController: UIViewController {
   
   // MARK: -
   // MARK: Setup
-  func configureFGRing(ringView: RingView, withColor color: UIColor)
+  func configureFGRing(_ ringView: RingView, withColor color: UIColor)
                                                                    -> RingView {
                                                                     
     ringView.color          = color
     ringView.startAngle     = TauAngle(degrees: 0)
     ringView.endAngle       = TauAngle(degrees: 0)
-    ringView.ringStyle      = .Rounded
+    ringView.ringStyle      = .rounded
     configureRing(ringView)
     return ringView
   }
   
-  func configureBGRing(ringView: RingView, withColor color: UIColor)
+  func configureBGRing(_ ringView: RingView, withColor color: UIColor)
                                                                    -> RingView {
     let darkenBy = Appearance.Constants.RingDarkeningFactor
     ringView.color          = color.darkenColorWithMultiplier(darkenBy)
     ringView.startAngle     = TauAngle(degrees: 0)
     ringView.endAngle       = TauAngle(degrees: 360)
-    ringView.ringStyle      = .Sharp
+    ringView.ringStyle      = .sharp
 
     configureRing(ringView)
     return ringView
   }
   
-  func configureRing(ringView: RingView) {
+  func configureRing(_ ringView: RingView) {
     ringView.ringWidth = Appearance.Constants.RingWidth
     timerCirclesView.addSubview(ringView)
-    ringView.opaque              = false
+    ringView.isOpaque              = false
   }
 
-  func setupTimeLabelContraints(label: UILabel) {
+  func setupTimeLabelContraints(_ label: UILabel) {
     
     let width =  NSLayoutConstraint(item: label,
-                               attribute: .Width,
-                               relatedBy: .Equal,
+                               attribute: .width,
+                               relatedBy: .equal,
                                   toItem: label.superview,
-                               attribute: .Width,
+                               attribute: .width,
                               multiplier: 160 / 736,
                                 constant: 0.0)
     width.priority = 1000
@@ -497,13 +497,13 @@ final class TimerViewController: UIViewController {
     
   }
   
-  func setupDescriptionLabelContraints(label: UILabel) {
+  func setupDescriptionLabelContraints(_ label: UILabel) {
     if let labelSuperView = label.superview {
           let height =  NSLayoutConstraint(item: label,
-                                      attribute: .Height,
-                                      relatedBy: .Equal,
+                                      attribute: .height,
+                                      relatedBy: .equal,
                                          toItem: labelSuperView,
-                                      attribute: .Height,
+                                      attribute: .height,
                                      multiplier: 20 / 736,
                                        constant: 0.0)
       height.priority = 1000
@@ -512,37 +512,5 @@ final class TimerViewController: UIViewController {
   }
   
   
-  
-  // MARK: -
-  // MARK: Utility
-  enum Direction {
-    case Left
-    case Right
-  }
-  
-  func padString(var string: String,
-                totalLength: Int, pad: Character,
-      inDirection direction: Direction) -> String {
-        
-    let i = string.characters.count
-    
-    let amountToPad = totalLength - i
-    if amountToPad < 1 {
-      return string
-    }
-    let padString = String(pad)
-    for _ in 1...amountToPad {
-      switch direction {
-        case .Left:
-          string = string + padString
-        case .Right:
-          string = padString + string
-      }
-    }
-    return string
-  }
-
-  
-
 }
 

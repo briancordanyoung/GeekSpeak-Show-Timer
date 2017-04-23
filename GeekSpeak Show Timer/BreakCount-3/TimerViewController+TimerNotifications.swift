@@ -4,26 +4,26 @@ import TimerViewsGear
 extension TimerViewController {
 
   func registerForTimerNotifications() {
-    let notifyCenter = NSNotificationCenter.defaultCenter()
+    let notifyCenter = NotificationCenter.default
     
     notifyCenter.addObserver( self,
-                    selector: "timerUpdatedTime",
-                        name: Timer.Constants.TimeChange,
+                    selector: #selector(TimerViewController.timerUpdatedTime),
+                        name: NSNotification.Name(rawValue: Timer.Constants.TimeChange),
                       object: timer)
     
     notifyCenter.addObserver( self,
-                    selector: "timerChangedCountingStatus",
-                        name: Timer.Constants.CountingStatusChanged,
+                    selector: #selector(TimerViewController.timerChangedCountingStatus),
+                        name: NSNotification.Name(rawValue: Timer.Constants.CountingStatusChanged),
                       object: timer)
 
     notifyCenter.addObserver( self,
-                    selector: "timerDurationChanged",
-                        name: Timer.Constants.DurationChanged,
+                    selector: #selector(TimerViewController.timerDurationChanged),
+                        name: NSNotification.Name(rawValue: Timer.Constants.DurationChanged),
                       object: timer)
   }
 
   func unregisterForTimerNotifications() {
-    let notifyCenter = NSNotificationCenter.defaultCenter()
+    let notifyCenter = NotificationCenter.default
 // TODO: When I explicitly remove each observer it throws an execption. why?
 //    notifyCenter.removeObserver( self,
 //                     forKeyPath: Timer.Constants.TimeChange)
@@ -51,8 +51,8 @@ extension TimerViewController {
     //       is abstracted out to some sort of generalized definition
     
 // TODO: Move to new TimerView
-    let section2Seconds: NSTimeInterval
-    let section3Seconds: NSTimeInterval
+    let section2Seconds: TimeInterval
+    let section3Seconds: TimeInterval
     
     if let timer = timer {
       if timer.demoTimings {
@@ -88,8 +88,8 @@ extension TimerViewController {
            .Section1,
            .Section2:
         timerLabelDisplay = .Remaining
-        sectionTimeLabel.textColor = UIColor.whiteColor()
-        totalTimeLabel.textColor   = UIColor.whiteColor()
+        sectionTimeLabel.textColor = UIColor.white
+        totalTimeLabel.textColor   = UIColor.white
         
       case .PostShow:
         timerLabelDisplay = .Elapsed
@@ -109,16 +109,12 @@ extension TimerViewController {
   func displayAllTime() {
     guard let timer = timer else {return}
       
-    let useDemoDurations = NSUserDefaults
-                           .standardUserDefaults()
-                           .boolForKey(Timer.Constants.UseDemoDurations)
+    let useDemoDurations = UserDefaults.standard
+                           .bool(forKey: Timer.Constants.UseDemoDurations)
 
-    var durations: Timer.Durations
+    var durations = Timer.Durations()
     if useDemoDurations {
-      durations = Timer.Durations()
       durations.useDemoDurations()
-    } else {
-      durations = Timer.Durations()
     }
       
     if timer.timing.phase == .Break1 {
@@ -171,10 +167,7 @@ extension TimerViewController {
     case .PostShow: segmentLabelText = "Post Show"
     }
       
-    segmentLabel.text =  padString( segmentLabelText,
-                       totalLength: 15,
-                               pad: " ",
-                       inDirection: .Right)
+    segmentLabel.text = segmentLabelText.pad(" ", totalLength: 15, side: .right)
   }
   
   
@@ -193,10 +186,8 @@ extension TimerViewController {
     if let timer = timer {
       let timing    = timer.timing
       let totalTime = timing.asShortString(timing.durations.totalShowTime)
-      let labelText = padString( "Total: \(totalTime)",
-                    totalLength: 15,
-                            pad: " ",
-                    inDirection: .Left)
+      let labelText = "Total: \(totalTime)"
+                                        .pad(" ", totalLength: 15, side: .left)
       totalLabel.text = labelText
       
       // TODO: check if current section reaches 100% (1.0) 
@@ -279,17 +270,12 @@ extension TimerViewController {
         segmentLabelText = "Post Show"
       }
       
-      segmentLabel.text =  padString( segmentLabelText,
-                         totalLength: 15,
-                                 pad: " ",
-                         inDirection: .Right)
-      
-      totalTimeLabel.text     = timing.asShortString(timer.totalShowTimeElapsed)
+      segmentLabel.text   = segmentLabelText.pad(" ", totalLength: 15,
+                                                             side: .right)
+      totalTimeLabel.text = timing.asShortString(timer.totalShowTimeElapsed)
       
       updateTimerLabels()
-      
       activityView.activity = CGFloat(timer.secondsElapsed)
-
       }
     }
   
@@ -305,8 +291,8 @@ extension TimerViewController {
     }
   }
   
-  func timeInterval(time: NSTimeInterval, isBetweenA a: NSTimeInterval,
-                                                andB b:NSTimeInterval) -> Bool {
+  func timeInterval(_ time: TimeInterval, isBetweenA a: TimeInterval,
+                                                andB b:TimeInterval) -> Bool {
     
     let small = min(a,b)
     let large = max(a,b)

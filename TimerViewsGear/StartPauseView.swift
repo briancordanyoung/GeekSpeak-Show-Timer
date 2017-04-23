@@ -4,7 +4,7 @@ import UIKit
 // MARK: UnselectedStartView
 
 final class UnselectedStartView: ControlsView {
-  override func drawRect(rect: CGRect) {
+  override func draw(_ rect: CGRect) {
     color.setStroke()
     StartPauseShapes.startBezier().stroke()
   }
@@ -15,7 +15,7 @@ final class UnselectedStartView: ControlsView {
 // MARK: SelectedStartView
 
 final class SelectedStartView: ControlsView {
-  override func drawRect(rect: CGRect) {
+  override func draw(_ rect: CGRect) {
     color.setFill()
     StartPauseShapes.startBezier().fill()
   }
@@ -26,7 +26,7 @@ final class SelectedStartView: ControlsView {
 // MARK: UnselectedPauseView
 
 final class UnselectedPauseView: ControlsView {
-  override func drawRect(rect: CGRect) {
+  override func draw(_ rect: CGRect) {
     color.setStroke()
     StartPauseShapes.leftPauseBezier().stroke()
     StartPauseShapes.rightPauseBezier().stroke()
@@ -38,7 +38,7 @@ final class UnselectedPauseView: ControlsView {
 // MARK: SelectedPauseView
 
 final class SelectedPauseView: ControlsView {
-  override func drawRect(rect: CGRect) {
+  override func draw(_ rect: CGRect) {
     color.setFill()
     StartPauseShapes.leftPauseBezier().fill()
     StartPauseShapes.rightPauseBezier().fill()
@@ -56,24 +56,24 @@ final public class StartPauseView: UIStackView {
   public var unhighlightDuration = Appearance.Constants.ButtonFadeDuration
   
   public enum UnhighlightBehavior {
-    case Instant
-    case Fade
+    case instant
+    case fade
   }
   
   public enum highlightState {
-    case Highlighted
-    case Unhighlighted
-    case Transitioning
+    case highlighted
+    case unhighlighted
+    case transitioning
   }
   
   public enum ButtonState {
-    case Start
-    case Pause
+    case start
+    case pause
   }
   
-  public var currentButton = ButtonState.Start
+  public var currentButton = ButtonState.start
   
-  public var highlightColor = UIColor.whiteColor() {
+  public var highlightColor = UIColor.white {
     didSet(oldColor) {
       selectedStartView.color = highlightColor
       selectedPauseView.color = highlightColor
@@ -95,29 +95,29 @@ final public class StartPauseView: UIStackView {
     
     switch (unselected,selected) {
     case (true,false):
-      return .Unhighlighted
+      return .unhighlighted
     case (false,true):
-      return .Highlighted
+      return .highlighted
     case (_,_):
-      return .Transitioning
+      return .transitioning
     }
   }
   
   public let label = UILabel()
   
-  private let dimention = Appearance.Constants.ButtonDimension
-  private let symbolContainer = UIView()
-  private let unselectedStartView  = UnselectedStartView(frame: CGRect(x:0, y:0,
+  fileprivate let dimention = Appearance.Constants.ButtonDimension
+  fileprivate let symbolContainer = UIView()
+  fileprivate let unselectedStartView  = UnselectedStartView(frame: CGRect(x:0, y:0,
                                    width: Appearance.Constants.ButtonDimension,
                                   height: Appearance.Constants.ButtonDimension))
-  private let selectedStartView    = SelectedStartView(frame: CGRect(x:0, y:0,
+  fileprivate let selectedStartView    = SelectedStartView(frame: CGRect(x:0, y:0,
                                    width: Appearance.Constants.ButtonDimension,
                                   height: Appearance.Constants.ButtonDimension))
   
-  private let unselectedPauseView  = UnselectedPauseView(frame: CGRect(x:0, y:0,
+  fileprivate let unselectedPauseView  = UnselectedPauseView(frame: CGRect(x:0, y:0,
                                    width: Appearance.Constants.ButtonDimension,
                                   height: Appearance.Constants.ButtonDimension))
-  private let selectedPauseView    = SelectedPauseView(frame: CGRect(x:0, y:0,
+  fileprivate let selectedPauseView    = SelectedPauseView(frame: CGRect(x:0, y:0,
                                    width: Appearance.Constants.ButtonDimension,
                                   height: Appearance.Constants.ButtonDimension))
   
@@ -138,25 +138,25 @@ final public class StartPauseView: UIStackView {
     
     self.init(frame: defaultRect)
   }
-  
-  public required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    setupView()
-  }
-  
+    
+    required public init(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+
   func setupView() {
     translatesAutoresizingMaskIntoConstraints = false
-    axis          = .Vertical
-    alignment     = .Center
-    distribution  = .Fill
+    axis          = .vertical
+    alignment     = .center
+    distribution  = .fill
     spacing       = CGFloat(5)
     addArrangedSubview(symbolContainer)
     addArrangedSubview(label)
     
     symbolContainer.translatesAutoresizingMaskIntoConstraints = false
-    symbolContainer.heightAnchor.constraintEqualToConstant(dimention).active = true
-    symbolContainer.widthAnchor.constraintEqualToConstant(dimention).active  = true
-    symbolContainer.opaque = false
+    symbolContainer.heightAnchor.constraint(equalToConstant: dimention).isActive = true
+    symbolContainer.widthAnchor.constraint(equalToConstant: dimention).isActive  = true
+    symbolContainer.isOpaque = false
     
     symbolContainer.addSubview(unselectedStartView)
     symbolContainer.addSubview(selectedStartView)
@@ -172,7 +172,8 @@ final public class StartPauseView: UIStackView {
     
     label.text = "Start Timer"
     label.textColor = tintColor
-    if let font = UIFont(name: "Helvetica Neue", size: 12) {
+    if let font = UIFont(name: Appearance.Constants.ButtonTextFont,
+                         size: Appearance.Constants.ButtonTextFontSize) {
       label.font = font
     }
   }
@@ -184,12 +185,12 @@ final public class StartPauseView: UIStackView {
   // MARK: Actions
   public func highlight() {
     switch currentButton {
-      case .Start:
+      case .start:
         selectedStartView.alpha   = 1.0
         unselectedStartView.alpha = 0.0
         selectedPauseView.alpha   = 0.0
         unselectedPauseView.alpha = 0.0
-      case .Pause:
+      case .pause:
         selectedStartView.alpha   = 0.0
         unselectedStartView.alpha = 0.0
         selectedPauseView.alpha   = 1.0
@@ -199,12 +200,12 @@ final public class StartPauseView: UIStackView {
   
   public func unhighlight() {
     switch currentButton {
-    case .Start:
+    case .start:
       selectedStartView.alpha   = 0.0
       unselectedStartView.alpha = 1.0
       selectedPauseView.alpha   = 0.0
       unselectedPauseView.alpha = 0.0
-    case .Pause:
+    case .pause:
       selectedStartView.alpha   = 0.0
       unselectedStartView.alpha = 0.0
       selectedPauseView.alpha   = 0.0
@@ -213,21 +214,21 @@ final public class StartPauseView: UIStackView {
     
   }
   
-  private func unhighlightWithFade() {
+  fileprivate func unhighlightWithFade() {
     selectedStartView.layer.removeAllAnimations()
     unselectedStartView.layer.removeAllAnimations()
     selectedPauseView.layer.removeAllAnimations()
     unselectedPauseView.layer.removeAllAnimations()
-    UIView.animateWithDuration(unhighlightDuration) {
+    UIView.animate(withDuration: unhighlightDuration, animations: {
       self.unhighlight()
-    }
+    }) 
   }
   
-  public func unhighlightUsingBehavior(behavior: UnhighlightBehavior) {
+  public func unhighlightUsingBehavior(_ behavior: UnhighlightBehavior) {
     switch behavior {
-    case .Instant:
+    case .instant:
       unhighlight()
-    case .Fade:
+    case .fade:
       unhighlightWithFade()
     }
   }

@@ -3,21 +3,21 @@ import UIKit
 extension SettingsViewController {
 
   func registerForTimerNotifications() {
-    let notifyCenter = NSNotificationCenter.defaultCenter()
+    let notifyCenter = NotificationCenter.default
     
     notifyCenter.addObserver( self,
-                    selector: "updateElapsedTimeLabels",
-                        name: Timer.Constants.TimeChange,
+                    selector: #selector(SettingsViewController.updateElapsedTimeLabels),
+                        name: NSNotification.Name(rawValue: Timer.Constants.TimeChange),
                       object: timer)
     
     notifyCenter.addObserver( self,
-                    selector: "updateElapsedTimeLabels",
-                        name: Timer.Constants.DurationChanged,
+                    selector: #selector(SettingsViewController.updateElapsedTimeLabels),
+                        name: NSNotification.Name(rawValue: Timer.Constants.DurationChanged),
                       object: timer)
   }
 
   func unregisterForTimerNotifications() {
-    let notifyCenter = NSNotificationCenter.defaultCenter()
+    let notifyCenter = NotificationCenter.default
 // TODO: When I explicitly remove each observer it throws an execption. why?
 //    notifyCenter.removeObserver( self,
 //                     forKeyPath: Timer.Constants.TimeChange)
