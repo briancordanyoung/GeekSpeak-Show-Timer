@@ -377,6 +377,7 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = YJ4PN236TF;
 						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
 					};
 					D340CC871B6D3E7600BB17E3 = {
 						CreatedOnToolsVersion = 6.4;
@@ -661,6 +662,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = YJ4PN236TF;
 				INFOPLIST_FILE = "GeekSpeak Show Timer/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -681,6 +683,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = YJ4PN236TF;
 				INFOPLIST_FILE = "GeekSpeak Show Timer/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
