@@ -94,15 +94,16 @@ public struct TauAngle: AngularType {
 // Angle conversions:
 // degrees <--> radians
 extension TauAngle {
-  static func radians2Degrees(radians:Double) -> Double {
+  static func radians2Degrees(_ radians:Double) -> Double {
     return radians * 180.0 / Double(M_PI)
   }
   
-  static func degrees2radians(degrees:Double) -> Double {
+  static func degrees2radians(_ degrees:Double) -> Double {
     return degrees * Double(M_PI) / 180.0
   }
 
-  static func limit(var angle:Double) -> Double {
+  static func limit(_ angle:Double) -> Double {
+    var angle = angle
     let tau = M_PI * 2
     
     if angle >  tau {
@@ -129,13 +130,13 @@ extension CGFloat {
 
 
 // MARK: Protocol Conformance
-extension TauAngle: IntegerLiteralConvertible {
+extension TauAngle: ExpressibleByIntegerLiteral {
   public init(integerLiteral: IntegerLiteralType) {
     self.init(Double(integerLiteral))
   }
 }
 
-extension TauAngle: FloatLiteralConvertible {
+extension TauAngle: ExpressibleByFloatLiteral {
   public init(floatLiteral: FloatLiteralType) {
     self.init(Double(floatLiteral))
   }
@@ -165,7 +166,7 @@ extension TauAngle {
 
 // MARK: Static Methods
 extension TauAngle {
-  static func preset(preset: Preset) -> TauAngle {
+  static func preset(_ preset: Preset) -> TauAngle {
     switch preset {
     case .fullCircle,
          .tau:
@@ -205,7 +206,7 @@ extension TauAngle {
 // MARK: Angle & Int specific overloads
 
 public func % (lhs: TauAngle, rhs: Int) -> TauAngle {
-  return TauAngle(lhs.value % Double(rhs))
+  return TauAngle(lhs.value.truncatingRemainder(dividingBy: Double(rhs)))
 }
 
 
@@ -246,11 +247,11 @@ public func == (lhs: TauAngle, rhs: Int) -> Bool {
 
 
 
-public func += (inout lhs: TauAngle, rhs: Int) {
+public func += (lhs: inout TauAngle, rhs: Int) {
   lhs.value = lhs.value + Double(rhs)
 }
 
-public func -= (inout lhs: TauAngle, rhs: Int) {
+public func -= (lhs: inout TauAngle, rhs: Int) {
   lhs.value = lhs.value - Double(rhs)
 }
 

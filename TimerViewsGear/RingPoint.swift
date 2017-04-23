@@ -2,10 +2,10 @@ import UIKit
 import AngleGear
 
 
-public class RingPoint: NSObject {
+open class RingPoint: NSObject {
   
-  public let x: CGFloat
-  public let y: CGFloat
+  open let x: CGFloat
+  open let y: CGFloat
   
   public init( x: CGFloat,
         y: CGFloat) {
@@ -17,41 +17,44 @@ public class RingPoint: NSObject {
       self.x = CGFloat(0)
       self.y = CGFloat(0)
   }
-
   
-  public func subtract(point: RingPoint) -> RingPoint {
+  open var point: CGPoint {
+    return CGPoint(x: self.x, y: self.y)
+  }
+  
+  open func subtract(_ point: RingPoint) -> RingPoint {
     return RingPoint(x: x - point.x,
                      y: y - point.y)
   }
   
-  public func add(point: RingPoint) -> RingPoint {
+  open func add(_ point: RingPoint) -> RingPoint {
     return RingPoint( x: x + point.x,
                       y: y + point.y)
   }
   
-  public func scale(multiple: CGFloat) -> RingPoint {
+  open func scale(_ multiple: CGFloat) -> RingPoint {
     return RingPoint(x: x * multiple,
                      y: y * multiple)
   }
   
-  public func distance(point: RingPoint) -> CGFloat {
+  open func distance(_ point: RingPoint) -> CGFloat {
     return sqrt((x - point.x)*(x - point.x) +
                 (y - point.y)*(y - point.y))
   }
   
- public  func angleBetweenPoint( point: RingPoint, fromMutualCenter center: RingPoint)
+ open func angleBetweenPoint( _ point: RingPoint, fromMutualCenter center: RingPoint)
                                                                    -> TauAngle {
-    let selfAngle  = self.dynamicType.angleFrom2Points(self,center)
-    let otherAngle = self.dynamicType.angleFrom2Points(point,center)
+    let selfAngle  = type(of: self).angleFrom2Points(self,center)
+    let otherAngle = type(of: self).angleFrom2Points(point,center)
     
     return selfAngle - otherAngle
   }
   
-  public func angleFromCenter(center: RingPoint)  -> TauAngle {
-    return self.dynamicType.angleFrom2Points(self,center)
+  open func angleFromCenter(_ center: RingPoint)  -> TauAngle {
+    return type(of: self).angleFrom2Points(self,center)
   }
   
-  public class func angleFrom2Points(point1: RingPoint, _ point2: RingPoint)
+  open class func angleFrom2Points(_ point1: RingPoint, _ point2: RingPoint)
                                                                    -> TauAngle {
     let dx = point1.x - point2.x
     let dy = point1.y - point2.y
@@ -59,7 +62,7 @@ public class RingPoint: NSObject {
     return TauAngle(radian)
   }
 
-  public func ringRadialPointUsingCenter(center: RingPoint) -> RingRadialPoint {
+  open func ringRadialPointUsingCenter(_ center: RingPoint) -> RingRadialPoint {
     let angle  = angleFromCenter(center)
     let radius = distance(center)
     return RingRadialPoint(center: center,
@@ -67,7 +70,7 @@ public class RingPoint: NSObject {
                             angle: angle  )
   }
   
-  public override var description: String {
+  open override var description: String {
     return "x: \(x) y: \(y))"
   }
 }

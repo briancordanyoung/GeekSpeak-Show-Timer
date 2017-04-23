@@ -5,7 +5,7 @@ import UIKit
 // MARK: UnselectedNextView
 
 final class UnselectedNextView: ControlsView {
-  override func drawRect(rect: CGRect) {
+  override func draw(_ rect: CGRect) {
     color.setStroke()
     NextShapes.rightBezier().stroke()
     NextShapes.leftBezier().stroke()
@@ -17,7 +17,7 @@ final class UnselectedNextView: ControlsView {
 // MARK: SelectedNextView
 
 final class SelectedNextView: ControlsView {
-  override func drawRect(rect: CGRect) {
+  override func draw(_ rect: CGRect) {
     color.setFill()
     NextShapes.rightBezier().fill()
     NextShapes.leftBezier().fill()
@@ -34,19 +34,19 @@ final public class NextView: UIStackView {
   public var unhighlightDuration = Appearance.Constants.ButtonFadeDuration
   
   public enum UnhighlightBehavior {
-    case Instant
-    case Fade
+    case instant
+    case fade
   }
   
   public enum highlightState {
-    case Highlighted
-    case Unhighlighted
-    case Transitioning
+    case highlighted
+    case unhighlighted
+    case transitioning
   }
   
   
   
-  public var highlightColor = UIColor.whiteColor() {
+  public var highlightColor = UIColor.white {
     didSet(oldColor) {
       selectedView.color = highlightColor
     }
@@ -66,22 +66,22 @@ final public class NextView: UIStackView {
     
     switch (unselected,selected) {
     case (true,false):
-      return .Unhighlighted
+      return .unhighlighted
     case (false,true):
-      return .Highlighted
+      return .highlighted
     case (_,_):
-      return .Transitioning
+      return .transitioning
     }
   }
   
   public let label = UILabel()
   
-  private let dimention = Appearance.Constants.ButtonDimension
-  private let symbolContainer = UIView()
-  private let unselectedView  = UnselectedNextView(frame: CGRect(x:0, y:0,
+  fileprivate let dimention = Appearance.Constants.ButtonDimension
+  fileprivate let symbolContainer = UIView()
+  fileprivate let unselectedView  = UnselectedNextView(frame: CGRect(x:0, y:0,
                                    width: Appearance.Constants.ButtonDimension,
                                   height: Appearance.Constants.ButtonDimension))
-  private let selectedView    = SelectedNextView(frame: CGRect(x:0, y:0,
+  fileprivate let selectedView    = SelectedNextView(frame: CGRect(x:0, y:0,
                                    width: Appearance.Constants.ButtonDimension,
                                   height: Appearance.Constants.ButtonDimension))
   
@@ -102,26 +102,26 @@ final public class NextView: UIStackView {
     self.init(frame: defaultRect)
   }
   
-  public required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
+  required public init(coder: NSCoder) {
+    super.init(coder: coder)
     setupView()
   }
   
-  private func setupView() {
+  fileprivate func setupView() {
     translatesAutoresizingMaskIntoConstraints = false
-    axis          = .Vertical
-    alignment     = .Center
-    distribution  = .Fill
+    axis          = .vertical
+    alignment     = .center
+    distribution  = .fill
     spacing       = CGFloat(5)
     addArrangedSubview(symbolContainer)
     addArrangedSubview(label)
 
     symbolContainer.translatesAutoresizingMaskIntoConstraints = false
     symbolContainer.heightAnchor
-                             .constraintEqualToConstant(dimention).active = true
+                             .constraint(equalToConstant: dimention).isActive = true
     symbolContainer.widthAnchor
-                            .constraintEqualToConstant(dimention).active  = true
-    symbolContainer.opaque = false
+                            .constraint(equalToConstant: dimention).isActive  = true
+    symbolContainer.isOpaque = false
 
     symbolContainer.addSubview(unselectedView)
     symbolContainer.addSubview(selectedView)
@@ -154,19 +154,19 @@ final public class NextView: UIStackView {
     unselectedView.alpha = 1.0
   }
 
-  private func unhighlightWithFade() {
+  fileprivate func unhighlightWithFade() {
     selectedView.layer.removeAllAnimations()
     unselectedView.layer.removeAllAnimations()
-    UIView.animateWithDuration(unhighlightDuration) {
+    UIView.animate(withDuration: unhighlightDuration, animations: {
       self.unhighlight()
-    }
+    }) 
   }
   
-  public func unhighlightUsingBehavior(behavior: UnhighlightBehavior) {
+  public func unhighlightUsingBehavior(_ behavior: UnhighlightBehavior) {
     switch behavior {
-      case .Instant:
+      case .instant:
         unhighlight()
-      case .Fade:
+      case .fade:
         unhighlightWithFade()
     }
 

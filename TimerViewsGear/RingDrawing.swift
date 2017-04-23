@@ -4,7 +4,7 @@ import AngleGear
 
 
 
-public class RingDrawing: NSObject {
+open class RingDrawing: NSObject {
   
   public struct Constant {
     static let Quarter = CGFloat(M_PI / 2)
@@ -17,21 +17,21 @@ public class RingDrawing: NSObject {
   }
   
   public enum Style {
-    case Rounded
-    case RoundedWithGuides(GuideTypes)
-    case Sharp
+    case rounded
+    case roundedWithGuides(GuideTypes)
+    case sharp
   }
   
   
-  public let center:      RingPoint
-  public let outerRadius: CGFloat
-  public let ringWidth:   CGFloat
-  public let startAngle:  TauAngle
-  public let endAngle:    TauAngle
-  public var fillColor  = UIColor.whiteColor()
-  public var lineColor  = UIColor.clearColor()
-  public var lineWidth  = CGFloat(0)
-  public var style      = Style.Sharp
+  open let center:      RingPoint
+  open let outerRadius: CGFloat
+  open let ringWidth:   CGFloat
+  open let startAngle:  TauAngle
+  open let endAngle:    TauAngle
+  open var fillColor  = UIColor.white
+  open var lineColor  = UIColor.clear
+  open var lineWidth  = CGFloat(0)
+  open var style      = Style.sharp
 
   public init(     center: RingPoint,
        outerRadius: CGFloat,
@@ -56,11 +56,11 @@ public class RingDrawing: NSObject {
   }
   
   // CGFloat calculated of Angle properties
-  public var start: CGFloat {
+  open var start: CGFloat {
     return CGFloat(startAngle) - Constant.Quarter
   }
   
-  public var end: CGFloat {
+  open var end: CGFloat {
     if abs(CGFloat(startAngle) - CGFloat(endAngle)) < CGFloat(minimumAngle) {
       return CGFloat(startAngle) +
              CGFloat(minimumAngle) +
@@ -77,10 +77,10 @@ public class RingDrawing: NSObject {
     let roundedMinimumAngle = abs(roundedEndWidth) * 2
     
     switch style {
-      case .Rounded,
-           .RoundedWithGuides:
+      case .rounded,
+           .roundedWithGuides:
         return roundedMinimumAngle
-      case .Sharp:
+      case .sharp:
         return TauAngle(degrees: 0)
     }
   }
@@ -180,7 +180,7 @@ public class RingDrawing: NSObject {
     case counterClockwise
   }
   
-  func pointOnCircle(circle: RingCircle,
+  func pointOnCircle(_ circle: RingCircle,
         atDistance distance: CGFloat,
             fromPoint point: RingPoint,
       inDirection direction: Direction) -> RingPoint {
@@ -325,12 +325,12 @@ public class RingDrawing: NSObject {
   }
   
 
-  var arcDirection: Int32 {
-    return start > end ? 1 : 0
+  var arcDirection: Bool {
+    return start > end ? true : false
   }
   
-  var reverseArcDirection: Int32 {
-    return start > end ? 0 : 1
+  var reverseArcDirection: Bool {
+    return start > end ? false : true
   }
   
   
@@ -362,112 +362,117 @@ public class RingDrawing: NSObject {
   
   // MARK:
   // MARK: Drawing
-  func drawInContext(context: CGContextRef) {
+  func drawInContext(_ context: CGContext) {
     switch style {
-    case .Rounded:
+    case .rounded:
       drawRoundedRing(context)
-    case .RoundedWithGuides(let guides):
+    case .roundedWithGuides(let guides):
       drawRoundedRing(context)
       drawGuides(guides, inContext: context)
-    case .Sharp:
+    case .sharp:
       drawRing(context)
     }
   }
 
-  private func drawGuides(guides: GuideTypes, inContext context: CGContextRef) {
+  fileprivate func drawGuides(_ guides: GuideTypes, inContext context: CGContext) {
     if guides.lines         { drawGuides(context)}
     if guides.points        { drawPoints(context)}
     if guides.controlPoints { drawControlPoints(context)}
   }
   
-  private func drawRoundedRing(context: CGContextRef) {
+  fileprivate func drawRoundedRing(_ context: CGContext) {
     
-    CGContextMoveToPoint(context, innerBezStart.x, innerBezStart.y)
-    CGContextAddCurveToPoint(context,
-                      innerBezStartControlPoint.x, innerBezStartControlPoint.y,
-                      innerCapStartControlPoint.x, innerCapStartControlPoint.y,
-                                  innerCapStart.x, innerCapStart.y)
+    context.move(to: innerBezStart.point)
+    context.addCurve(to: innerCapStart.point,
+                     control1: innerBezStartControlPoint.point,
+                     control2: innerCapStartControlPoint.point)
+    
+    context.addLine(to: outerCapStart.point)
+    context.addCurve(to: outerBezStart.point,
+                     control1: outerCapStartControlPoint.point,
+                     control2: outerBezStartControlPoint.point)
+    
+    context.addArc(center: center.point,
+                   radius: outerRadius,
+                   startAngle: outerOffsetStart,
+                   endAngle: outerOffsetEnd,
+                   clockwise: arcDirection)
+    
+    context.addCurve(to: outerCapEnd.point,
+                     control1: outerBezEndControlPoint.point,
+                     control2: outerCapEndControlPoint.point)
 
-    
-    
-    CGContextAddLineToPoint(context, outerCapStart.x, outerCapStart.y)
-    CGContextAddCurveToPoint(context,
-                      outerCapStartControlPoint.x,  outerCapStartControlPoint.y,
-                      outerBezStartControlPoint.x,  outerBezStartControlPoint.y,
-                      outerBezStart.x,              outerBezStart.y)
-    
-    CGContextAddArc(context, center.x, center.y, outerRadius,
-                                   outerOffsetStart, outerOffsetEnd,
-                                                        arcDirection)
-    
-    CGContextAddCurveToPoint(context,
-                          outerBezEndControlPoint.x, outerBezEndControlPoint.y,
-                          outerCapEndControlPoint.x, outerCapEndControlPoint.y,
-                                      outerCapEnd.x, outerCapEnd.y)
-    
-    CGContextAddLineToPoint(context, innerCapEnd.x, innerCapEnd.y)
+    context.addLine(to: innerCapEnd.point)
 
-    CGContextAddCurveToPoint(context,
-                          innerCapEndControlPoint.x, innerCapEndControlPoint.y,
-                          innerBezEndControlPoint.x, innerBezEndControlPoint.y,
-                                      innerBezEnd.x, innerBezEnd.y)
+    context.addCurve(to: innerBezEnd.point,
+                     control1: innerCapEndControlPoint.point,
+                     control2: innerBezEndControlPoint.point)
 
+    context.addArc(center: center.point,
+                   radius: innerRadius,
+                   startAngle: innerOffsetEnd,
+                   endAngle: innerOffsetStart,
+                   clockwise: reverseArcDirection)
     
-    CGContextAddArc(context, center.x, center.y, innerRadius,
-                          innerOffsetEnd, innerOffsetStart, reverseArcDirection)
-    
-    CGContextClosePath(context)
+    context.closePath()
     
     // Color it
-    CGContextSetFillColorWithColor(context, fillColor.CGColor)
-    CGContextSetStrokeColorWithColor(context, lineColor.CGColor)
-    CGContextSetLineWidth(context, lineWidth)
+    context.setFillColor(fillColor.cgColor)
+    context.setStrokeColor(lineColor.cgColor)
+    context.setLineWidth(lineWidth)
     
     // Draw in context
-    CGContextDrawPath(context, .FillStroke)
+    context.drawPath(using: .fillStroke)
   }
   
-  private func drawRing(context: CGContextRef) {
-    CGContextMoveToPoint(context, innerStart.x, innerStart.y)
-    CGContextAddLineToPoint(context, outerStart.x, outerStart.y)
-    CGContextAddArc(context, center.x, center.y,
-      outerRadius,  start, end, arcDirection)
+  fileprivate func drawRing(_ context: CGContext) {
+    context.move(to: innerStart.point)
+    context.addLine(to: outerStart.point)
+    context.addArc(center: center.point,
+                   radius: outerRadius,
+                   startAngle: start,
+                   endAngle: end,
+                   clockwise: arcDirection)
+
     
-    CGContextAddLineToPoint(context, innerEnd.x, innerEnd.y)
-    CGContextAddArc(context, center.x, center.y, innerRadius,
-      end, start, reverseArcDirection)
+    context.addLine(to: innerEnd.point)
+    context.addArc(center: center.point,
+                   radius: innerRadius,
+                   startAngle: start,
+                   endAngle: end,
+                   clockwise: reverseArcDirection)
     
-    CGContextClosePath(context);
+    context.closePath();
     
     // Color it
-    CGContextSetFillColorWithColor(context, fillColor.CGColor)
-    CGContextSetStrokeColorWithColor(context, lineColor.CGColor)
-    CGContextSetLineWidth(context, lineWidth)
+    context.setFillColor(fillColor.cgColor)
+    context.setStrokeColor(lineColor.cgColor)
+    context.setLineWidth(lineWidth)
     
     // Draw in context
-    CGContextDrawPath(context, .FillStroke);
+    context.drawPath(using: .fillStroke);
   }
   
   
 
   // MARK:
   // MARK: Draw dubugging lines and points
-  private func drawDotInContext(context: CGContextRef, aroundPoint point: RingPoint) {
+  fileprivate func drawDotInContext(_ context: CGContext, aroundPoint point: RingPoint) {
     let rect = CGRect(x: point.x - 1,
                       y: point.y - 1,
                   width: 2,
                  height: 2)
-    let path = CGPathCreateMutable()
-    CGPathAddEllipseInRect(path, nil, rect)
-    CGContextAddPath(context, path)
-    CGContextSetLineWidth(context, 1.0)
-    CGContextDrawPath(context, .FillStroke)
+    let path = CGMutablePath()
+    path.addEllipse(in: rect)
+    context.addPath(path)
+    context.setLineWidth(1.0)
+    context.drawPath(using: .fillStroke)
   }
   
   
-  private func drawPoints(context: CGContextRef) {
-    CGContextSetStrokeColorWithColor(context, UIColor.redColor().CGColor)
-    CGContextSetFillColorWithColor(  context, UIColor.clearColor().CGColor)
+  fileprivate func drawPoints(_ context: CGContext) {
+    context.setStrokeColor(UIColor.red.cgColor)
+    context.setFillColor(UIColor.clear.cgColor)
     drawDotInContext(context, aroundPoint: outerStart)
     drawDotInContext(context, aroundPoint: outerEnd)
     drawDotInContext(context, aroundPoint: outerCapEnd)
@@ -484,9 +489,9 @@ public class RingDrawing: NSObject {
   
   }
 
-  private func drawControlPoints(context: CGContextRef) {
-    CGContextSetStrokeColorWithColor(context, UIColor.blueColor().CGColor)
-    CGContextSetFillColorWithColor(  context, UIColor.clearColor().CGColor)
+  fileprivate func drawControlPoints(_ context: CGContext) {
+    context.setStrokeColor(UIColor.blue.cgColor)
+    context.setFillColor(UIColor.clear.cgColor)
     drawDotInContext(context, aroundPoint: outerBezStartControlPoint)
     drawDotInContext(context, aroundPoint: outerCapEndControlPoint)
     drawDotInContext(context, aroundPoint: outerCapStartControlPoint)
@@ -502,24 +507,24 @@ public class RingDrawing: NSObject {
 
   
   
-  private func drawGuides(context: CGContextRef) {
-    CGContextSetStrokeColorWithColor(context, UIColor.redColor().CGColor)
-    CGContextSetLineWidth(context, 0.5)
+  fileprivate func drawGuides(_ context: CGContext) {
+    context.setStrokeColor(UIColor.red.cgColor)
+    context.setLineWidth(0.5)
 
-    CGContextMoveToPoint(context, center.x, center.y)
-    CGContextAddLineToPoint(context, outerBezStart.x, outerBezStart.y)
-    CGContextDrawPath(context, .FillStroke);
+    context.move(to: center.point)
+    context.addLine(to: outerBezStart.point)
+    context.drawPath(using: .fillStroke);
 
-    CGContextMoveToPoint(context, center.x, center.y)
-    CGContextAddLineToPoint(context, outerBezEnd.x, outerBezEnd.y)
-    CGContextDrawPath(context, .FillStroke);
+    context.move(to: center.point)
+    context.addLine(to: outerBezEnd.point)
+    context.drawPath(using: .fillStroke);
 
-    CGContextMoveToPoint(context, center.x, center.y)
-    CGContextAddLineToPoint(context, innerBezStart.x, innerBezStart.y)
-    CGContextDrawPath(context, .FillStroke);
+    context.move(to: center.point)
+    context.addLine(to: innerBezStart.point)
+    context.drawPath(using: .fillStroke);
     
-    CGContextMoveToPoint(context, center.x, center.y)
-    CGContextAddLineToPoint(context, innerBezEnd.x, innerBezEnd.y)
+    context.move(to: center.point)
+    context.addLine(to: innerBezEnd.point)
   }
   
   

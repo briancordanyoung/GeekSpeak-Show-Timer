@@ -7,31 +7,31 @@ final public class StartPauseButton: UIButton {
   
   // MARK:
   // MARK: UIControl Methods
-  public override func beginTrackingWithTouch(touch: UITouch,
-    withEvent event: UIEvent?) -> Bool {
-      let superResult =  super.beginTrackingWithTouch(touch, withEvent: event)
+  public override func beginTracking(_ touch: UITouch,
+    with event: UIEvent?) -> Bool {
+      let superResult =  super.beginTracking(touch, with: event)
       startPauseView?.highlight()
       return superResult
   }
   
-  public override func cancelTrackingWithEvent(event: UIEvent?) {
-    super.cancelTrackingWithEvent(event)
+  public override func cancelTracking(with event: UIEvent?) {
+    super.cancelTracking(with: event)
     startPauseView?.unhighlight()
   }
   
-  public override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
-    super.endTrackingWithTouch(touch, withEvent: event)
+  public override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+    super.endTracking(touch, with: event)
     
-    if touchInside {
+    if isTouchInside {
       if let startPauseView = startPauseView {
         switch startPauseView.currentButton {
-        case .Start:
-          startPauseView.currentButton = .Pause
-        case .Pause:
-          startPauseView.currentButton = .Start
+        case .start:
+          startPauseView.currentButton = .pause
+        case .pause:
+          startPauseView.currentButton = .start
         }
       }
-      startPauseView?.unhighlightUsingBehavior(.Fade)
+      startPauseView?.unhighlightUsingBehavior(.fade)
 
 
     } else {

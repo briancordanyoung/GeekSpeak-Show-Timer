@@ -2,18 +2,18 @@ import UIKit
 
 final public class ActivityView: UIView {
   enum Parity {
-    case Even
-    case Odd
+    case even
+    case odd
   }
 
   // If there is no change in the activity value, and fadeoutWithoutActivity is
   // true, then animate this view to transparent.
 
   public var fadeoutWithoutActivity = true
-  public var fadeoutDelay    = NSTimeInterval(1)
-  public var fadeoutDuration = NSTimeInterval(1)
+  public var fadeoutDelay    = TimeInterval(1)
+  public var fadeoutDuration = TimeInterval(1)
   
-  private var timer = NSTimer()
+  fileprivate var timer = Timer()
   
   public var activity = CGFloat(0) {
     didSet(oldActivity) {
@@ -22,10 +22,10 @@ final public class ActivityView: UIView {
       let angle = CGFloat(M_PI*2) * activityPercentage
       
       switch activityParity {
-      case .Even:
+      case .even:
         pieLayer.startAngle = 0
         pieLayer.endAngle   = angle
-      case .Odd:
+      case .odd:
         pieLayer.startAngle = angle
         pieLayer.endAngle   = CGFloat(M_PI*2)
       }
@@ -55,29 +55,29 @@ final public class ActivityView: UIView {
     setup()
   }
   
-  private func setup() {
-    opaque = false
-    pieLayer.polarity = .Negative
+  fileprivate func setup() {
+    isOpaque = false
+    pieLayer.polarity = .negative
   }
 
   
   // MARK:
   
-  private var activityPercentage: CGFloat {
+  fileprivate var activityPercentage: CGFloat {
     return percentageFromActivity(activity)
   }
   
-  private func percentageFromActivity(activity: CGFloat) -> CGFloat {
+  fileprivate func percentageFromActivity(_ activity: CGFloat) -> CGFloat {
     let rounded = floor(activity)
     return activity - rounded
   }
   
-  private var activityParity: Parity {
+  fileprivate var activityParity: Parity {
     let parity: Parity
     if Int(activity) % 2 == 0 {
-      parity = .Even
+      parity = .even
     } else {
-      parity = .Odd
+      parity = .odd
     }
     return parity
   }
@@ -87,9 +87,9 @@ final public class ActivityView: UIView {
     layer.removeAllAnimations()
     alpha = 1.0
     timer.invalidate()
-    timer = NSTimer.scheduledTimerWithTimeInterval( fadeoutDelay,
+    timer = Timer.scheduledTimer( timeInterval: fadeoutDelay,
                                             target: self,
-                                          selector: Selector("fadeAnimation"),
+                                          selector: #selector(ActivityView.fadeAnimation),
                                           userInfo: nil,
                                            repeats: false)
     timer.tolerance = fadeoutDelay / 2
@@ -97,18 +97,18 @@ final public class ActivityView: UIView {
   
   
   func fadeAnimation() {
-    UIView.animateWithDuration(fadeoutDuration) {
+    UIView.animate(withDuration: fadeoutDuration, animations: {
       self.alpha = 0
-    }
+    }) 
   }
   
   
   
-  public override class func layerClass() -> AnyClass {
+  public override class var layerClass : AnyClass {
     return PieLayer.self
   }
   
-  private var pieLayer: PieLayer {
+  fileprivate var pieLayer: PieLayer {
     return self.layer as! PieLayer
   }
 }

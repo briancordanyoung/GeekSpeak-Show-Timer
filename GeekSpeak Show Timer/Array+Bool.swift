@@ -5,19 +5,19 @@ import Swift
 
 
 extension Array {
-  func anyAreTrue(transform: (Element) -> Bool) -> Bool {
+  func anyAreTrue(_ transform: (Element) -> Bool) -> Bool {
     return self
             .map(transform)
-            .reduce(false, combine: {
+            .reduce(false, {
               return $1 ? true : $0
             })
   }
   
   
-  func anyAreFalse(transform: (Element) -> Bool) -> Bool {
+  func anyAreFalse(_ transform: (Element) -> Bool) -> Bool {
     return self
             .map(transform)
-            .reduce(false, combine: {
+            .reduce(false, {
               return $1 == false ? true : $0
             })
   }

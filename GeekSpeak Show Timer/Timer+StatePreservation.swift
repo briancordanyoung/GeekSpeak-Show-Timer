@@ -15,11 +15,11 @@ extension Timer: NSCoding {
     
   func decodeWithCoder(coder aDecoder: NSCoder) {
 
-    let decodedObject = aDecoder.decodeObjectForKey(Constants.UUIDId) as! NSUUID
+    let decodedObject = aDecoder.decodeObject(forKey: Constants.UUIDId) as! UUID
     uuid = decodedObject
-    demoTimings = aDecoder.decodeBoolForKey(Constants.DemoId)
+    demoTimings = aDecoder.decodeBool(forKey: Constants.DemoId)
     
-    let countingState = aDecoder.decodeIntForKey(Constants.StateId)
+    let countingState = aDecoder.decodeCInt(forKey: Constants.StateId)
     switch countingState {
     case 1:
       _state = .Ready
@@ -34,15 +34,15 @@ extension Timer: NSCoding {
 
     
     let countingStartTimeDecoded =
-                      aDecoder.decodeDoubleForKey(Constants.CountingStartTimeId)
+                      aDecoder.decodeDouble(forKey: Constants.CountingStartTimeId)
     if countingStartTimeDecoded == DBL_MAX {
-      countingStartTime = .None
+      countingStartTime = .none
     } else {
       countingStartTime = countingStartTimeDecoded
     }
     
     timing = ShowTiming()
-    let int = aDecoder.decodeIntForKey(Constants.PhaseId)
+    let int = aDecoder.decodeCInt(forKey: Constants.PhaseId)
     let phase: ShowPhase
     
     switch int {
@@ -58,32 +58,32 @@ extension Timer: NSCoding {
     timing.phase = phase
     
     timing.durations.preShow  =
-                      aDecoder.decodeDoubleForKey(Constants.Durations.PreShowId)
+                      aDecoder.decodeDouble(forKey: Constants.Durations.PreShowId)
     timing.durations.section1 =
-                     aDecoder.decodeDoubleForKey(Constants.Durations.Section1Id)
+                     aDecoder.decodeDouble(forKey: Constants.Durations.Section1Id)
     timing.durations.section2 =
-                     aDecoder.decodeDoubleForKey(Constants.Durations.Section2Id)
+                     aDecoder.decodeDouble(forKey: Constants.Durations.Section2Id)
     timing.durations.section3 =
-                     aDecoder.decodeDoubleForKey(Constants.Durations.Section3Id)
+                     aDecoder.decodeDouble(forKey: Constants.Durations.Section3Id)
     timing.durations.break1   =
-                       aDecoder.decodeDoubleForKey(Constants.Durations.Break1Id)
+                       aDecoder.decodeDouble(forKey: Constants.Durations.Break1Id)
     timing.durations.break2   =
-                       aDecoder.decodeDoubleForKey(Constants.Durations.Break2Id)
+                       aDecoder.decodeDouble(forKey: Constants.Durations.Break2Id)
     
     timing.timeElapsed.preShow  =
-                    aDecoder.decodeDoubleForKey(Constants.ElapsedTime.PreShowId)
+                    aDecoder.decodeDouble(forKey: Constants.ElapsedTime.PreShowId)
     timing.timeElapsed.section1 =
-                   aDecoder.decodeDoubleForKey(Constants.ElapsedTime.Section1Id)
+                   aDecoder.decodeDouble(forKey: Constants.ElapsedTime.Section1Id)
     timing.timeElapsed.section2 =
-                   aDecoder.decodeDoubleForKey(Constants.ElapsedTime.Section2Id)
+                   aDecoder.decodeDouble(forKey: Constants.ElapsedTime.Section2Id)
     timing.timeElapsed.section3 =
-                   aDecoder.decodeDoubleForKey(Constants.ElapsedTime.Section3Id)
+                   aDecoder.decodeDouble(forKey: Constants.ElapsedTime.Section3Id)
     timing.timeElapsed.break1   =
-                     aDecoder.decodeDoubleForKey(Constants.ElapsedTime.Break1Id)
+                     aDecoder.decodeDouble(forKey: Constants.ElapsedTime.Break1Id)
     timing.timeElapsed.break2   =
-                     aDecoder.decodeDoubleForKey(Constants.ElapsedTime.Break2Id)
+                     aDecoder.decodeDouble(forKey: Constants.ElapsedTime.Break2Id)
     timing.timeElapsed.postShow =
-                   aDecoder.decodeDoubleForKey(Constants.ElapsedTime.PostShowId)
+                   aDecoder.decodeDouble(forKey: Constants.ElapsedTime.PostShowId)
     
     incrementTimer()
   }
@@ -95,33 +95,33 @@ extension Timer: NSCoding {
   
   
   
-  func encodeWithCoder(aCoder: NSCoder) {
+  func encode(with aCoder: NSCoder) {
     
-    aCoder.encodeObject(uuid, forKey: Constants.UUIDId)
-    aCoder.encodeBool(demoTimings, forKey: Constants.DemoId)
+    aCoder.encode(uuid, forKey: Constants.UUIDId)
+    aCoder.encode(demoTimings, forKey: Constants.DemoId)
     
     switch _state {
     case .Ready:
-      aCoder.encodeInt(1, forKey: Constants.StateId)
+      aCoder.encodeCInt(1, forKey: Constants.StateId)
     case .Counting:
-      aCoder.encodeInt(2, forKey: Constants.StateId)
+      aCoder.encodeCInt(2, forKey: Constants.StateId)
     case .Paused:
-      aCoder.encodeInt(3, forKey: Constants.StateId)
+      aCoder.encodeCInt(3, forKey: Constants.StateId)
     case .PausedAfterComplete:
-      aCoder.encodeInt(4, forKey: Constants.StateId)
+      aCoder.encodeCInt(4, forKey: Constants.StateId)
     case .CountingAfterComplete:
-      aCoder.encodeInt(5, forKey: Constants.StateId)
+      aCoder.encodeCInt(5, forKey: Constants.StateId)
     }
     
     if let countingStartTime = countingStartTime {
-      aCoder.encodeDouble( countingStartTime,
+      aCoder.encode( countingStartTime,
                    forKey: Constants.CountingStartTimeId)
     } else {
-      aCoder.encodeDouble( DBL_MAX,
+      aCoder.encode( DBL_MAX,
                    forKey: Constants.CountingStartTimeId)
     }
     
-    aCoder.encodeBool(demoTimings, forKey: Constants.UseDemoDurations)
+    aCoder.encode(demoTimings, forKey: Constants.UseDemoDurations)
     
     let int: Int32
 
@@ -135,25 +135,25 @@ extension Timer: NSCoding {
     case .PostShow: int = 7
     }
 
-    aCoder.encodeInt(int, forKey: Constants.PhaseId)
+    aCoder.encodeCInt(int, forKey: Constants.PhaseId)
 
     
     let d = timing.durations
-    aCoder.encodeDouble(d.preShow,  forKey: Constants.Durations.PreShowId)
-    aCoder.encodeDouble(d.section1, forKey: Constants.Durations.Section1Id)
-    aCoder.encodeDouble(d.break1,   forKey: Constants.Durations.Break1Id)
-    aCoder.encodeDouble(d.section2, forKey: Constants.Durations.Section2Id)
-    aCoder.encodeDouble(d.break2,   forKey: Constants.Durations.Break2Id)
-    aCoder.encodeDouble(d.section3, forKey: Constants.Durations.Section3Id)
+    aCoder.encode(d.preShow,  forKey: Constants.Durations.PreShowId)
+    aCoder.encode(d.section1, forKey: Constants.Durations.Section1Id)
+    aCoder.encode(d.break1,   forKey: Constants.Durations.Break1Id)
+    aCoder.encode(d.section2, forKey: Constants.Durations.Section2Id)
+    aCoder.encode(d.break2,   forKey: Constants.Durations.Break2Id)
+    aCoder.encode(d.section3, forKey: Constants.Durations.Section3Id)
     
     let t = timing.timeElapsed
-    aCoder.encodeDouble(t.preShow,  forKey: Constants.ElapsedTime.PreShowId)
-    aCoder.encodeDouble(t.section1, forKey: Constants.ElapsedTime.Section1Id)
-    aCoder.encodeDouble(t.break1,   forKey: Constants.ElapsedTime.Break1Id)
-    aCoder.encodeDouble(t.section2, forKey: Constants.ElapsedTime.Section2Id)
-    aCoder.encodeDouble(t.break2,   forKey: Constants.ElapsedTime.Break2Id)
-    aCoder.encodeDouble(t.section3, forKey: Constants.ElapsedTime.Section3Id)
-    aCoder.encodeDouble(t.postShow, forKey: Constants.ElapsedTime.PostShowId)
+    aCoder.encode(t.preShow,  forKey: Constants.ElapsedTime.PreShowId)
+    aCoder.encode(t.section1, forKey: Constants.ElapsedTime.Section1Id)
+    aCoder.encode(t.break1,   forKey: Constants.ElapsedTime.Break1Id)
+    aCoder.encode(t.section2, forKey: Constants.ElapsedTime.Section2Id)
+    aCoder.encode(t.break2,   forKey: Constants.ElapsedTime.Break2Id)
+    aCoder.encode(t.section3, forKey: Constants.ElapsedTime.Section3Id)
+    aCoder.encode(t.postShow, forKey: Constants.ElapsedTime.PostShowId)
   }
   
   

@@ -1,9 +1,9 @@
 import UIKit
 
-public class RingCircle: NSObject {
+open class RingCircle: NSObject {
   
-  public let center : RingPoint
-  public let radius : CGFloat
+  open let center : RingPoint
+  open let radius : CGFloat
   
   public init( center: RingPoint,
         radius: CGFloat) {
@@ -16,7 +16,7 @@ public class RingCircle: NSObject {
       radius = CGFloat(1)
   }
   
-  public func intersecetions(circle: RingCircle) -> [RingPoint]{
+  open func intersecetions(_ circle: RingCircle) -> [RingPoint]{
     let distance = self.center.distance(circle.center)
     let a = (radius * radius -
              circle.radius * circle.radius +
@@ -43,7 +43,7 @@ public class RingCircle: NSObject {
     return points
   }
   
-  public override var description: String {
+  open override var description: String {
     return "center: (\(center)) y: \(radius))"
   }
 

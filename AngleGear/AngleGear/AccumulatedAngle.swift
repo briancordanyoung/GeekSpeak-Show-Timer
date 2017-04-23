@@ -83,13 +83,13 @@ public extension CGFloat {
 
 
 // MARK: Protocol Conformance
- extension AccumulatedAngle: IntegerLiteralConvertible {
+ extension AccumulatedAngle: ExpressibleByIntegerLiteral {
   public init(integerLiteral: IntegerLiteralType) {
     self.init(Double(integerLiteral))
   }
 }
 
- extension AccumulatedAngle: FloatLiteralConvertible {
+ extension AccumulatedAngle: ExpressibleByFloatLiteral {
   public init(floatLiteral: FloatLiteralType) {
     self.init(Double(floatLiteral))
   }
@@ -117,7 +117,7 @@ public extension AccumulatedAngle {
 
 // MARK: Class Methods
 public extension AccumulatedAngle {
-  public static func preset(preset: Preset) -> AccumulatedAngle {
+  public static func preset(_ preset: Preset) -> AccumulatedAngle {
     switch preset {
     case .circle,
          .tau:
@@ -162,7 +162,7 @@ public extension AccumulatedAngle {
 // MARK: AccumulatedAngle & Angle specific overloads
 
 public func % (lhs: AccumulatedAngle, rhs: Angle) -> AccumulatedAngle {
-  return AccumulatedAngle(lhs.value % rhs.value)
+  return AccumulatedAngle(lhs.value.truncatingRemainder(dividingBy: rhs.value))
 }
 
 
@@ -202,11 +202,11 @@ public func == (lhs: AccumulatedAngle, rhs: Angle) -> Bool {
 
 
 
-public func += (inout lhs: AccumulatedAngle, rhs: Angle) {
+public func += (lhs: inout AccumulatedAngle, rhs: Angle) {
   lhs.value = lhs.value + rhs.value
 }
 
-public func -= (inout lhs: AccumulatedAngle, rhs: Angle) {
+public func -= (lhs: inout AccumulatedAngle, rhs: Angle) {
   lhs.value = lhs.value - rhs.value
 }
 
@@ -224,7 +224,7 @@ public func * (lhs: AccumulatedAngle, rhs: Angle) -> AccumulatedAngle {
 // MARK: AccumulatedAngle & Int specific overloads
 
 public func % (lhs: AccumulatedAngle, rhs: Int) -> AccumulatedAngle {
-  return AccumulatedAngle(lhs.value % Double(rhs))
+  return AccumulatedAngle(lhs.value.truncatingRemainder(dividingBy: Double(rhs)))
 }
 
 
@@ -264,11 +264,11 @@ public func == (lhs: AccumulatedAngle, rhs: Int) -> Bool {
 
 
 
-public func += (inout lhs: AccumulatedAngle, rhs: Int) {
+public func += (lhs: inout AccumulatedAngle, rhs: Int) {
   lhs.value = lhs.value + Double(rhs)
 }
 
-public func -= (inout lhs: AccumulatedAngle, rhs: Int) {
+public func -= (lhs: inout AccumulatedAngle, rhs: Int) {
   lhs.value = lhs.value - Double(rhs)
 }
 

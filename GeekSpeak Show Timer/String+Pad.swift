@@ -11,11 +11,11 @@ import Foundation
 extension String
 {
     enum Direction {
-        case Left
-        case Right
+        case left
+        case right
     }
 
-    func pad(character: Character,
+    func pad(_ character: Character,
            totalLength: Int,
                   side: Direction) -> String {
             
@@ -27,11 +27,11 @@ extension String
             if amountToPad < 1 {
                 return string
             }
-            let padString = String(pad)
+            let padString = String(describing: pad)
             for _ in 1...amountToPad {
                 switch side {
-                case .Left:  string = string + padString
-                case .Right: string = padString + string
+                case .left:  string = string + padString
+                case .right: string = padString + string
                 }
             }
             return string

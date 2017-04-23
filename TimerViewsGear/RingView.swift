@@ -3,15 +3,15 @@ import AngleGear
 
 final public class RingView: UIView {
   
-  private var progressPastCompleted = CGFloat(0) {
+  fileprivate var progressPastCompleted = CGFloat(0) {
     didSet {
       let rotation = CGFloat(TauAngle.tau) * progressPastCompleted
-      transform = CGAffineTransformMakeRotation(rotation)
+      transform = CGAffineTransform(rotationAngle: rotation)
     }
   }
   
   public convenience init() {
-    self.init(frame: CGRectMake(0,0,100,100))
+    self.init(frame: CGRect(x: 0,y: 0,width: 100,height: 100))
   }
   
   override init(frame: CGRect) {
@@ -135,7 +135,7 @@ final public class RingView: UIView {
   
 
   
-  public override class func layerClass() -> AnyClass {
+  public override class var layerClass : AnyClass {
     return RingLayer.self
   }
   
@@ -149,10 +149,10 @@ final public class RingView: UIView {
     guard let parent = superview else {return}
     
     self.translatesAutoresizingMaskIntoConstraints = false
-    centerXAnchor.constraintEqualToAnchor(parent.centerXAnchor).active = true
-    centerYAnchor.constraintEqualToAnchor(parent.centerYAnchor).active = true
-    heightAnchor.constraintEqualToAnchor(parent.heightAnchor).active = true
-    widthAnchor.constraintEqualToAnchor(parent.widthAnchor).active = true
+    centerXAnchor.constraint(equalTo: parent.centerXAnchor).isActive = true
+    centerYAnchor.constraint(equalTo: parent.centerYAnchor).isActive = true
+    heightAnchor.constraint(equalTo: parent.heightAnchor).isActive = true
+    widthAnchor.constraint(equalTo: parent.widthAnchor).isActive = true
   }
   
 }
