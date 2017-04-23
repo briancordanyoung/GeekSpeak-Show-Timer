@@ -1,11 +1,11 @@
 # GeekSpeak-Show-Timer
 
-During the recording of GeekSpeak, we need to plan for 2 inexactly placed breaks and a precise show length.  This is the timer we use to make that as easy as possible.
+During the recording of GeekSpeak, we need to plan for an inexactly placed break and a precise show length.  This is the timer we use to make that as easy as possible.
 
 
-Now with a timer of 57 minutes
+Updated to KBCZ 2 section 57 minute timer
 =============================
-3 equal sections at 19 mintes each.
+2 equal sections at 28.5 mintes each.
 
 =======
 
