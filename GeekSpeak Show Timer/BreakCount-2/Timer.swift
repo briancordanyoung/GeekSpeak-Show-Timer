@@ -2,8 +2,8 @@ import Foundation
 import CoreGraphics
 
 
-let oneMinute             = NSTimeInterval(60)
-let timerUpdateInterval   = NSTimeInterval(0.01)
+let oneMinute             = TimeInterval(60)
+let timerUpdateInterval   = TimeInterval(0.06)
 
 // MARK: -
 // MARK: Timer class
@@ -26,25 +26,21 @@ final class Timer: NSObject {
       static let PreShowId  = "timerShowTimingDurationPreShowId"
       static let Section1Id = "timerShowTimingDurationSection1Id"
       static let Section2Id = "timerShowTimingDurationSection2Id"
-      static let Section3Id = "timerShowTimingDurationSection3Id"
       static let Break1Id   = "timerShowTimingDurationBreak1Id"
-      static let Break2Id   = "timerShowTimingDurationBreak2Id"
     }
     
     struct ElapsedTime {
       static let PreShowId   = "timerShowTimingElapsedPreShowId"
       static let Section1Id  = "timerShowTimingElapsedSection1Id"
       static let Section2Id  = "timerShowTimingElapsedSection2Id"
-      static let Section3Id  = "timerShowTimingElapsedSection3Id"
       static let Break1Id    = "timerShowTimingElapsedBreak1Id"
-      static let Break2Id    = "timerShowTimingElapsedBreak2Id"
       static let PostShowId  = "timerShowTimingElapsedPostShowId"
     }
   }
   
   // MARK: Properties
-  var uuid = NSUUID()
-  var countingStartTime: NSTimeInterval?
+  var uuid = UUID()
+  var countingStartTime: TimeInterval?
   var timing = ShowTiming()
   var demoTimings = false
   
@@ -58,7 +54,7 @@ final class Timer: NSObject {
     }
   }
   
-  var secondsElapsedAtPause: NSTimeInterval {
+  var secondsElapsedAtPause: TimeInterval {
     get {
       return timing.elapsed
     }
@@ -67,7 +63,7 @@ final class Timer: NSObject {
     }
   }
   
-  var duration: NSTimeInterval {
+  var duration: TimeInterval {
     get {
       return timing.duration
     }
@@ -78,10 +74,10 @@ final class Timer: NSObject {
     }
   }
   
-  var secondsElapsed: NSTimeInterval {
-    var secondsElapsed: NSTimeInterval
+  var secondsElapsed: TimeInterval {
+    var secondsElapsed: TimeInterval
     if let countingStartTime = countingStartTime {
-      let now = NSDate.timeIntervalSinceReferenceDate()
+      let now = Date.timeIntervalSinceReferenceDate
       secondsElapsed = now - countingStartTime + secondsElapsedAtPause
     } else {
       secondsElapsed = secondsElapsedAtPause
@@ -89,25 +85,25 @@ final class Timer: NSObject {
     return secondsElapsed
   }
   
-  var secondsRemaining: NSTimeInterval {
+  var secondsRemaining: TimeInterval {
     let seconds = duration - secondsElapsed
     return max(seconds,0)
   }
   
-  var totalShowTimeRemaining: NSTimeInterval {
+  var totalShowTimeRemaining: TimeInterval {
     switch timing.phase {
-    case .PreShow, .Break1, .Break2, .PostShow:
+    case .PreShow, .Break1, .PostShow:
       return max(timing.totalShowTimeRemaining,0)
-    case .Section1, .Section2, .Section3:
+    case .Section1, .Section2:
       return max(timing.totalShowTimeRemaining - secondsElapsed,0)
     }
   }
   
-  var totalShowTimeElapsed: NSTimeInterval {
+  var totalShowTimeElapsed: TimeInterval {
     switch timing.phase {
-    case .PreShow, .Break1, .Break2, .PostShow:
+    case .PreShow, .Break1, .PostShow:
       return max(timing.totalShowTimeElapsed,0)
-    case .Section1, .Section2, .Section3:
+    case .Section1, .Section2:
       return max(timing.totalShowTimeElapsed + secondsElapsed,0)
     }
   }
@@ -121,13 +117,12 @@ final class Timer: NSObject {
   }
   
   
-  func percentageComplete(phase: ShowPhase) -> CGFloat {
+  func percentageComplete(_ phase: ShowPhase) -> CGFloat {
     var percentageComplete = Double(0.0)
     
     switch phase {
     case .PreShow,
-         .Break1,
-         .Break2:
+         .Break1:
       percentageComplete = Double(self.percentageComplete)
     case .Section1:
 //      let a = timing.durations.section1
@@ -139,9 +134,6 @@ final class Timer: NSObject {
     case .Section2:
       percentageComplete =  (timing.durations.section2 - timing.timeElapsed.section2) /
                                           timing.durations.section2
-    case .Section3:
-      percentageComplete =  (timing.durations.section3 - timing.timeElapsed.section3) /
-                                          timing.durations.section3
     case .PostShow:
       percentageComplete = 0.0
     }
@@ -158,12 +150,12 @@ final class Timer: NSObject {
     return percentageComplete
   }
   
-  func percentageFromSeconds(seconds: NSTimeInterval) -> Double {
+  func percentageFromSeconds(_ seconds: TimeInterval) -> Double {
     let percent = seconds / duration
     return percent
   }
   
-  func percentageFromSecondsToEnd(seconds: NSTimeInterval) -> Double {
+  func percentageFromSecondsToEnd(_ seconds: TimeInterval) -> Double {
     let percent = 1 - (seconds / duration)
     return percent
   }
@@ -183,7 +175,7 @@ final class Timer: NSObject {
   
   // MARK: -
   // MARK: Timer Actions
-  func changeCountingState(state: CountingState) {
+  func changeCountingState(_ state: CountingState) {
     switch state {
     case .Ready:
       reset()
@@ -203,7 +195,7 @@ final class Timer: NSObject {
 
   func reset(usingDemoTiming demoTimings: Bool) {
     _state            = .Ready
-    countingStartTime = .None
+    countingStartTime = .none
     timing            = ShowTiming()
     if demoTimings {
       timing.durations.useDemoDurations()
@@ -220,7 +212,7 @@ final class Timer: NSObject {
     } else {
       _state = .CountingAfterComplete
     }
-    countingStartTime = NSDate.timeIntervalSinceReferenceDate()
+    countingStartTime = Date.timeIntervalSinceReferenceDate
     incrementTimer()
   }
   
@@ -235,7 +227,7 @@ final class Timer: NSObject {
 
   func next() {
     storeElapsedTimeAtPause()
-    countingStartTime = .None
+    countingStartTime = .none
     timing.incrementPhase()
     notifyTimerDurationUpdated()
 
@@ -263,7 +255,7 @@ final class Timer: NSObject {
   }
   
   
-  func addTimeBySeconds(seconds: NSTimeInterval) {
+  func addTimeBySeconds(_ seconds: TimeInterval) {
     timing.duration += seconds
     
     switch state {
@@ -279,21 +271,21 @@ final class Timer: NSObject {
   
   // MARK: -
   // MARK: Notify Observers
-  private func notifyTimerUpdated() {
-    NSNotificationCenter.defaultCenter()
-                        .postNotificationName( Constants.TimeChange,
+  fileprivate func notifyTimerUpdated() {
+    NotificationCenter.default
+                        .post( name: Notification.Name(rawValue: Constants.TimeChange),
                                        object: self)
   }
   
   func notifyCountingStateUpdated() {
-    NSNotificationCenter.defaultCenter()
-                        .postNotificationName( Constants.CountingStatusChanged,
+    NotificationCenter.default
+                        .post( name: Notification.Name(rawValue: Constants.CountingStatusChanged),
                                        object: self)
   }
   
-  private func notifyTimerDurationUpdated() {
-    NSNotificationCenter.defaultCenter()
-                        .postNotificationName( Constants.DurationChanged,
+  fileprivate func notifyTimerDurationUpdated() {
+    NotificationCenter.default
+                        .post( name: Notification.Name(rawValue: Constants.DurationChanged),
                                        object: self)
   }
   
@@ -329,23 +321,23 @@ final class Timer: NSObject {
     }
   }
   
-  private func incrementTimerAgain() {
-    NSTimer.scheduledTimerWithTimeInterval( timerUpdateInterval,
+  fileprivate func incrementTimerAgain() {
+    Foundation.Timer.scheduledTimer( timeInterval: timerUpdateInterval,
                                     target: self,
-                                  selector: Selector("incrementTimer"),
+                                  selector: #selector(Timer.incrementTimer),
                                   userInfo: nil,
                                    repeats: false)
   }
   
-  private func storeElapsedTimeAtPause() {
+  fileprivate func storeElapsedTimeAtPause() {
     secondsElapsedAtPause = secondsElapsed
-    countingStartTime     = .None
+    countingStartTime     = .none
   }
   
   // MARK: -
   // MARK: Helpers
   
-  private func secondsToPercentage(secondsRemaining: NSTimeInterval) -> CGFloat {
+  fileprivate func secondsToPercentage(_ secondsRemaining: TimeInterval) -> CGFloat {
     return CGFloat(secondsRemaining / duration)
   }
   
@@ -362,10 +354,10 @@ final class Timer: NSObject {
   //     secondsElapsed (computed)
   // To mitigate this case, the state callback is delayed until the next
   // runloop using NSTimer with a delay of 0.0.
-  private func onNextRunloopNotifyCountingStateUpdated() {
-    NSTimer.scheduledTimerWithTimeInterval( 0.0,
+  fileprivate func onNextRunloopNotifyCountingStateUpdated() {
+    Foundation.Timer.scheduledTimer( timeInterval: 0.0,
                                 target: self,
-                              selector: Selector("notifyCountingStateUpdated"),
+                              selector: #selector(Timer.notifyCountingStateUpdated),
                               userInfo: nil,
                                repeats: false)
   }

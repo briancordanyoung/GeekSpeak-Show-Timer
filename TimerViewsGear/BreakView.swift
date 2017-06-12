@@ -3,7 +3,7 @@ import AngleGear
 
 final public class BreakView: UIView {
   
-  private var startAngle: TauAngle {
+  fileprivate var startAngle: TauAngle {
     get {
       return TauAngle(pieLayer.startAngle)
     }
@@ -12,7 +12,7 @@ final public class BreakView: UIView {
     }
   }
   
-  private var endAngle: TauAngle {
+  fileprivate var endAngle: TauAngle {
     get {
       return TauAngle(pieLayer.endAngle)
     }
@@ -45,7 +45,7 @@ final public class BreakView: UIView {
   }
   
   func setup() {
-    opaque = false
+    isOpaque = false
     pieLayer.clipToCircle = false
     startAngle   = TauAngle(degrees: 0)
     endAngle     = TauAngle(degrees: 360)
@@ -76,11 +76,11 @@ final public class BreakView: UIView {
   
   
   
-  public override class func layerClass() -> AnyClass {
+  public override class var layerClass : AnyClass {
     return PieLayer.self
   }
   
-  private var pieLayer: PieLayer {
+  fileprivate var pieLayer: PieLayer {
     return self.layer as! PieLayer
   }
   
@@ -90,10 +90,10 @@ final public class BreakView: UIView {
     guard let parent = superview else {return}
     
     self.translatesAutoresizingMaskIntoConstraints = false
-    centerXAnchor.constraintEqualToAnchor(parent.centerXAnchor).active = true
-    centerYAnchor.constraintEqualToAnchor(parent.centerYAnchor).active = true
-    heightAnchor.constraintEqualToAnchor(parent.heightAnchor).active = true
-    widthAnchor.constraintEqualToAnchor(parent.widthAnchor).active = true
+    centerXAnchor.constraint(equalTo: parent.centerXAnchor).isActive = true
+    centerYAnchor.constraint(equalTo: parent.centerYAnchor).isActive = true
+    heightAnchor.constraint(equalTo: parent.heightAnchor).isActive = true
+    widthAnchor.constraint(equalTo: parent.widthAnchor).isActive = true
   }
 
 }

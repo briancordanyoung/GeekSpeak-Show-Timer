@@ -29,8 +29,6 @@ extension Timer {
     case Section1 = "Section1"
     case Break1   = "Break1"
     case Section2 = "Section2"
-    case Break2   = "Break2"
-    case Section3 = "Section3"
     case PostShow = "PostShow"
     
     var description: String {
@@ -46,8 +44,8 @@ extension Timer {
     var timeElapsed = TimeElapsed()
     var phase       = ShowPhase.PreShow
     
-    var formatter: NSNumberFormatter = {
-      let formatter = NSNumberFormatter()
+    var formatter: NumberFormatter = {
+      let formatter = NumberFormatter()
       formatter.minimumIntegerDigits  = 2
       formatter.maximumIntegerDigits  = 2
       formatter.minimumFractionDigits = 0
@@ -56,22 +54,20 @@ extension Timer {
       return formatter
       }()
     
-    var totalShowTimeElapsed: NSTimeInterval {
+    var totalShowTimeElapsed: TimeInterval {
       return timeElapsed.totalShowTime
     }
-    var totalShowTimeRemaining: NSTimeInterval {
+    var totalShowTimeRemaining: TimeInterval {
       return durations.totalShowTime - timeElapsed.totalShowTime
     }
     
-    var elapsed: NSTimeInterval {
+    var elapsed: TimeInterval {
       get {
         switch phase {
         case .PreShow:  return timeElapsed.preShow
         case .Section1: return timeElapsed.section1
         case .Break1:   return timeElapsed.break1
         case .Section2: return timeElapsed.section2
-        case .Break2:   return timeElapsed.break2
-        case .Section3: return timeElapsed.section3
         case .PostShow: return timeElapsed.postShow
         }
       }
@@ -81,23 +77,19 @@ extension Timer {
         case .Section1: timeElapsed.section1 = newElapsed
         case .Break1:   timeElapsed.break1   = newElapsed
         case .Section2: timeElapsed.section2 = newElapsed
-        case .Break2:   timeElapsed.break2   = newElapsed
-        case .Section3: timeElapsed.section3 = newElapsed
         case .PostShow: timeElapsed.postShow = newElapsed
         }
       }
     }
     
-    var duration: NSTimeInterval {
+    var duration: TimeInterval {
       get {
         switch phase {
         case .PreShow:  return durations.preShow
         case .Section1: return durations.section1
         case .Break1:   return durations.break1
         case .Section2: return durations.section2
-        case .Break2:   return durations.break2
-        case .Section3: return durations.section3
-        case .PostShow: return NSTimeInterval(0.0)
+        case .PostShow: return TimeInterval(0.0)
         }
       }
       set(newDuration) {
@@ -106,18 +98,16 @@ extension Timer {
         case .Section1: durations.section1 = newDuration
         case .Break1:   durations.break1   = newDuration
         case .Section2: durations.section2 = newDuration
-        case .Break2:   durations.break2   = newDuration
-        case .Section3: durations.section3 = newDuration
         case .PostShow: break
         }
       }
     }
     
-    var remaining: NSTimeInterval {
+    var remaining: TimeInterval {
       return max(duration - elapsed, 0)
     }
     
-    mutating func incrementPhase() -> ShowPhase {
+    @discardableResult mutating func incrementPhase() -> ShowPhase {
       switch phase {
       case .PreShow:
         phase = .Section1
@@ -132,16 +122,6 @@ extension Timer {
       case .Break1:
         phase = .Section2
       case .Section2:
-        // Before moving to the next phase of the show,
-        // get the difference between the planned duration and the elapsed time
-        // and add that to the next show section.
-        let difference = duration - elapsed
-        durations.section2 -= difference
-        durations.section3 += difference
-        phase = .Break2
-      case .Break2:
-        phase = .Section3
-      case .Section3:
         phase = .PostShow
       case .PostShow:
         break
@@ -149,15 +129,16 @@ extension Timer {
       return phase
     }
     
-    func asString(interval: NSTimeInterval) -> String {
+    func asString(_ interval: TimeInterval) -> String {
       let roundedInterval = Int(interval)
-      let seconds = roundedInterval % 60
-      let minutes = (roundedInterval / 60) % 60
-      let subSeconds = formatter.stringFromNumber(interval * 100)!
+      let seconds         = roundedInterval % 60
+      let minutes         = (roundedInterval / 60) % 60
+      let intervalNumber  = NSNumber(value: interval * TimeInterval(100))
+      let subSeconds = formatter.string(from: intervalNumber)!
       return String(format: "%02d:%02d:\(subSeconds)",  minutes, seconds)
     }
     
-    func asShortString(interval: NSTimeInterval) -> String {
+    func asShortString(_ interval: TimeInterval) -> String {
       let roundedInterval = Int(interval)
       let seconds = roundedInterval % 60
       let minutes = (roundedInterval / 60) % 60
@@ -171,12 +152,10 @@ extension Timer {
 
   // Durations
   struct Durations {
-    var preShow:           NSTimeInterval = 0
-    var section1:          NSTimeInterval = 0
-    var break1:            NSTimeInterval = 0
-    var section2:          NSTimeInterval = 0
-    var break2:            NSTimeInterval = 0
-    var section3:          NSTimeInterval = 0
+    var preShow:           TimeInterval = 0
+    var section1:          TimeInterval = 0
+    var break1:            TimeInterval = 0
+    var section2:          TimeInterval = 0
 
     /**
      Setup struct with timer durations
@@ -190,23 +169,20 @@ extension Timer {
      
      */
     init() {
-//      useGeekSpeakDurations()
-      useGeekSpeakPledgeDriveDurations()
+      useKBCZDurations()
     }
     
-    var totalShowTime: NSTimeInterval {
-      return section1 + section2 + section3
+    var totalShowTime: TimeInterval {
+      return section1 + section2
     }
     
-    func advancePhaseOnCompletion(phase: ShowPhase) -> Bool {
+    func advancePhaseOnCompletion(_ phase: ShowPhase) -> Bool {
       switch phase {
       case .PreShow,
-           .Break1,
-           .Break2,
-           .Section3:
+           .Section2,
+           .Break1:
         return true
       case .Section1,
-           .Section2,
            .PostShow:
         return false
       }
@@ -218,63 +194,31 @@ extension Timer {
       section1 = 30.0
       break1   =  2.0
       section2 = 30.0
-      break2   =  2.0
-      section3 = 30.0
-    }
-
-    /**
-     The timings used for GeekSpeak before KUSP changed format (51 minutes)
-     */
-    mutating func useOldGeekSpeakDurations() {
-        preShow  =  1.0 * oneMinute
-        section1 = 14.0 * oneMinute
-        break1   =  1.0 * oneMinute
-        section2 = 19.0 * oneMinute
-        break2   =  1.0 * oneMinute
-        section3 = 18.0 * oneMinute
     }
 
     /**
      The current timings used for GeekSpeak after KUSP changed format (57 minutes)
      */
-    mutating func useGeekSpeakDurations() {
+    mutating func useKBCZDurations() {
       preShow  =  1.0 * oneMinute
-      section1 = 19.0 * oneMinute
+      section1 = 28.5 * oneMinute
       break1   =  1.0 * oneMinute
-      section2 = 19.0 * oneMinute
-      break2   =  1.0 * oneMinute
-      section3 = 19.0 * oneMinute
+      section2 = 28.5 * oneMinute
     }
 
-    /**
-     timings used for GeekSpeak pledge drives after KUSP changed format (40 minutes)
-     
-     Lyle: change durations for pledge drive here.
-     */
-    mutating func useGeekSpeakPledgeDriveDurations() {
-        preShow  =  1.0 * oneMinute
-        section1 = 13.0 * oneMinute
-        break1   =  1.0 * oneMinute
-        section2 = 14.0 * oneMinute
-        break2   =  1.0 * oneMinute
-        section3 = 13.0 * oneMinute
-    }
-    
   }
   
   
   // TimeElapsed
   struct TimeElapsed {
-    var preShow:  NSTimeInterval = 0.0
-    var section1: NSTimeInterval = 0.0
-    var break1:   NSTimeInterval = 0.0
-    var section2: NSTimeInterval = 0.0
-    var break2:   NSTimeInterval = 0.0
-    var section3: NSTimeInterval = 0.0
-    var postShow: NSTimeInterval = 0.0
+    var preShow:  TimeInterval = 0.0
+    var section1: TimeInterval = 0.0
+    var break1:   TimeInterval = 0.0
+    var section2: TimeInterval = 0.0
+    var postShow: TimeInterval = 0.0
 
-    var totalShowTime: NSTimeInterval {
-      return section1 + section2 + section3
+    var totalShowTime: TimeInterval {
+      return section1 + section2
     }
   }
   

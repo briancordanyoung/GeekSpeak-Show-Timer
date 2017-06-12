@@ -33,22 +33,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       _timer = timer
     }
   }
-  private var _timer: Timer?
+  fileprivate var _timer: Timer?
   
   // Convenience property to make intentions clear what is gonig on.
   var allowDeviceToSleepDisplay: Bool {
     get {
-      return !UIApplication.sharedApplication().idleTimerDisabled
+      return !UIApplication.shared.isIdleTimerDisabled
     }
     set(allowed) {
-      UIApplication.sharedApplication().idleTimerDisabled = !allowed
+      UIApplication.shared.isIdleTimerDisabled = !allowed
     }
   }
   
   
   // MARK: App Delegate
-  func application(application: UIApplication,
-       didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?)
+  func application(_ application: UIApplication,
+       didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?)
                                                                        -> Bool {
     registerUserDefaults()
     Appearance.apply()
@@ -59,8 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
-  func application(application: UIApplication,
-          willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?)
+  func application(_ application: UIApplication,
+          willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?)
                                                                        -> Bool {
     self.window?.makeKeyAndVisible()
     return true
@@ -68,37 +68,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
 
   
-  func applicationWillEnterForeground(application: UIApplication) {
+  func applicationWillEnterForeground(_ application: UIApplication) {
     resetTimerIfShowTimeIsZero()
 //    setAllowDeviceToSleepDisplayForTimer(timer)
   }
 
-  func applicationDidBecomeActive(application: UIApplication) {
+  func applicationDidBecomeActive(_ application: UIApplication) {
     timerChangedCountingStatus()
   }
   
-  func applicationWillResignActive(application: UIApplication) {
+  func applicationWillResignActive(_ application: UIApplication) {
     writeCurrentTimer()
   }
 
-  func applicationDidEnterBackground(application: UIApplication) {
+  func applicationDidEnterBackground(_ application: UIApplication) {
     allowDeviceToSleepDisplay = true
   }
 
-  func applicationDidReceiveMemoryWarning(application: UIApplication) {
+  func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
     writeCurrentTimer()
   }
   
-  func applicationWillTerminate(application: UIApplication) {
+  func applicationWillTerminate(_ application: UIApplication) {
   }
   
-  func application(application: UIApplication, shouldSaveApplicationState
+  func application(_ application: UIApplication, shouldSaveApplicationState
                          coder: NSCoder) -> Bool {
     unregisterForTimerNotifications()
     return true
   }
 
-  func application(application: UIApplication, shouldRestoreApplicationState
+  func application(_ application: UIApplication, shouldRestoreApplicationState
                          coder: NSCoder) -> Bool {
     registerForTimerNotifications()
     return true
@@ -107,63 +107,61 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   // MARK: -
   // MARK: Timer Persistance
-  var applicationDocumentsDirectory: NSURL {
-   return NSFileManager.defaultManager()
-                     .URLsForDirectory( .DocumentDirectory,
-                             inDomains: .UserDomainMask)
+  var applicationDocumentsDirectory: URL {
+   return FileManager.default
+                     .urls( for: .documentDirectory,
+                             in: .userDomainMask)
                      .last!
   }
   
-  var savedTimer: NSURL {
+  var savedTimer: URL {
     return applicationDocumentsDirectory
-                    .URLByAppendingPathComponent(Constants.CurrentTimerFileName)
+                    .appendingPathComponent(Constants.CurrentTimerFileName)
   }
   
   func writeCurrentTimer() {
     writeCurrentTimer(timer)
   }
   
-  func writeCurrentTimer(timer: Timer) {
-    if let name = savedTimer.lastPathComponent,
-      directory = savedTimer.URLByDeletingLastPathComponent {
-        
-      let backupName = "\(name) Backup"
-      let backupURL = directory.URLByAppendingPathComponent(backupName)
+  func writeCurrentTimer(_ timer: Timer) {
+    let name = savedTimer.lastPathComponent
+    let directory = savedTimer.deletingLastPathComponent()
+      
+    let backupName = "\(name) Backup"
+    let backupURL = directory.appendingPathComponent(backupName)
 
-      if let path = savedTimer.path,
-       backupPath = backupURL.path {
-        let fileManager = NSFileManager.defaultManager()
-        
-        do {
-          if fileManager.fileExistsAtPath(backupPath) {
-            try fileManager.removeItemAtPath(backupPath)
-          }
-          if fileManager.fileExistsAtPath(path) {
-            try fileManager.moveItemAtPath(path, toPath: backupPath)
-          }
-          if !NSKeyedArchiver.archiveRootObject(timer, toFile: path) {
-            print("Warning: Timer could not be archived to the disk.")
-          }
-        } catch let error as NSError {
-          print("Timer not writen: \(error.localizedDescription)")
-        }
+    let path = savedTimer.path
+    let backupPath = backupURL.path
+    let fileManager = FileManager.default
+
+    do {
+      if fileManager.fileExists(atPath: backupPath) {
+        try fileManager.removeItem(atPath: backupPath)
       }
+      if fileManager.fileExists(atPath: path) {
+        try fileManager.moveItem(atPath: path, toPath: backupPath)
+      }
+      if !NSKeyedArchiver.archiveRootObject(timer, toFile: path) {
+        print("Warning: Timer could not be archived to the disk.")
+      }
+    } catch let error as NSError {
+      print("Timer not writen: \(error.localizedDescription)")
     }
   }
 
   func readCurrentTimer() -> Timer? {
-    var timer: Timer? = .None
+    var timer: Timer? = .none
     
-    let fileManager = NSFileManager.defaultManager()
+    let fileManager = FileManager.default
     
-    if let path = savedTimer.path {
-      if fileManager.fileExistsAtPath(path) {
-        let readTimer = NSKeyedUnarchiver.unarchiveObjectWithFile(path)
-        if let readTimer = readTimer as? Timer {
-          timer = readTimer
-        }
+    let path = savedTimer.path
+    if fileManager.fileExists(atPath: path) {
+      let readTimer = NSKeyedUnarchiver.unarchiveObject(withFile: path)
+      if let readTimer = readTimer as? Timer {
+        timer = readTimer
       }
     }
+
     return timer
   }
   
@@ -180,16 +178,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
   
   func registerForTimerNotifications() {
-    let notifyCenter = NSNotificationCenter.defaultCenter()
+    let notifyCenter = NotificationCenter.default
     notifyCenter.addObserver( self,
-                    selector: "timerChangedCountingStatus",
-                        name: Timer.Constants.CountingStatusChanged,
+                    selector: #selector(AppDelegate.timerChangedCountingStatus),
+                        name: NSNotification.Name(rawValue: Timer.Constants.CountingStatusChanged),
                       object: timer)
 
   }
   
   func unregisterForTimerNotifications() {
-    let notifyCenter = NSNotificationCenter.defaultCenter()
+    let notifyCenter = NotificationCenter.default
     // TODO: When I explicitly remove each observer it throws an execption. why?
     //    notifyCenter.removeObserver( self,
     //                     forKeyPath: Timer.Constants.CountingStatusChanged)
@@ -200,7 +198,7 @@ extension AppDelegate {
     setAllowDeviceToSleepDisplayForTimer(timer)
   }
   
-  func setAllowDeviceToSleepDisplayForTimer(timer: Timer) {
+  func setAllowDeviceToSleepDisplayForTimer(_ timer: Timer) {
     writeCurrentTimer()
 
     switch timer.state {
@@ -220,9 +218,8 @@ extension AppDelegate {
   func resetTimerIfShowTimeIsZero() {
     // reset the timer if it hasn't started, so that it uses the UserDefaults
     // to set which timing to use (demo or show)
-    let useDemoDurations = NSUserDefaults
-                                   .standardUserDefaults()
-                                   .boolForKey(Timer.Constants.UseDemoDurations)
+    let useDemoDurations = UserDefaults.standard
+                                   .bool(forKey: Timer.Constants.UseDemoDurations)
     if timer.totalShowTimeElapsed == 0 {
       if useDemoDurations {
         timer.reset(usingDemoTiming: true)
@@ -244,10 +241,10 @@ extension AppDelegate {
     #endif
     
     let defaults: [String:AnyObject] = [
-      Timer.Constants.UseDemoDurations: useDebugTimings
+      Timer.Constants.UseDemoDurations: useDebugTimings as AnyObject
     ]
     
-    NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
+    UserDefaults.standard.register(defaults: defaults)
   }
 
   

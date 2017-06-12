@@ -94,15 +94,16 @@ public struct Angle: AngularType {
 // Angle conversions:
 // degrees <--> radians
 extension Angle {
-  static func radians2Degrees(radians:Double) -> Double {
+  static func radians2Degrees(_ radians:Double) -> Double {
     return radians * 180.0 / Double(M_PI)
   }
   
-  static func degrees2radians(degrees:Double) -> Double {
+  static func degrees2radians(_ degrees:Double) -> Double {
     return degrees * Double(M_PI) / 180.0
   }
 
-  static func limit(var angle:Double) -> Double {
+  static func limit(_ angle:Double) -> Double {
+    var angle = angle
     let pi  = M_PI
     let tau = M_PI * 2
     
@@ -134,13 +135,13 @@ extension CGFloat {
 
 
 // MARK: Protocol Conformance
-extension Angle: IntegerLiteralConvertible {
+extension Angle: ExpressibleByIntegerLiteral {
   public init(integerLiteral: IntegerLiteralType) {
     self.init(Double(integerLiteral))
   }
 }
 
-extension Angle: FloatLiteralConvertible {
+extension Angle: ExpressibleByFloatLiteral {
   public init(floatLiteral: FloatLiteralType) {
     self.init(Double(floatLiteral))
   }
@@ -157,7 +158,7 @@ extension Int {
 
 
 
-func isWithinAngleLimits(value: Double) -> Bool {
+func isWithinAngleLimits(_ value: Double) -> Bool {
   var isWithinLimits = true
   
   if value > M_PI {
@@ -171,7 +172,7 @@ func isWithinAngleLimits(value: Double) -> Bool {
   return isWithinLimits
 }
 
-func isWithinAngleLimits(value: CGFloat) -> Bool {
+func isWithinAngleLimits(_ value: CGFloat) -> Bool {
   var isWithinLimits = true
   
   if value > CGFloat(M_PI) {
@@ -197,7 +198,7 @@ extension Angle {
 
 // MARK: Static Methods
 extension Angle {
-  public static func preset(preset: Preset) -> Angle {
+  public static func preset(_ preset: Preset) -> Angle {
     switch preset {
     case .halfCircle,
          .pi:
@@ -226,7 +227,7 @@ extension Angle {
 // MARK: Angle & Int specific overloads
 
 public func % (lhs: Angle, rhs: Int) -> Angle {
-  return Angle(lhs.value % Double(rhs))
+  return Angle(lhs.value.truncatingRemainder(dividingBy: Double(rhs)))
 }
 
 
@@ -267,11 +268,11 @@ public func == (lhs: Angle, rhs: Int) -> Bool {
 
 
 
-public func += (inout lhs: Angle, rhs: Int) {
+public func += (lhs: inout Angle, rhs: Int) {
   lhs.value = lhs.value + Double(rhs)
 }
 
-public func -= (inout lhs: Angle, rhs: Int) {
+public func -= (lhs: inout Angle, rhs: Int) {
   lhs.value = lhs.value - Double(rhs)
 }
 

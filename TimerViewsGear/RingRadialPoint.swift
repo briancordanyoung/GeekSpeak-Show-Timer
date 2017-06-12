@@ -13,13 +13,13 @@ public struct RingRadialPoint {
     return RingPoint(x:x, y:y)
   }
   
-  public func ringRadialPointRotatedBy(rotateBy: TauAngle) -> RingRadialPoint {
+  public func ringRadialPointRotatedBy(_ rotateBy: TauAngle) -> RingRadialPoint {
     return RingRadialPoint( center: center,
                             radius: radius,
                              angle: angle + rotateBy)
   }
   
-  public func ringPointRotatedBy(rotateBy: TauAngle) -> RingPoint {
+  public func ringPointRotatedBy(_ rotateBy: TauAngle) -> RingPoint {
     let x = center.x + radius * cos(CGFloat(angle + rotateBy))
     let y = center.y + radius * sin(CGFloat(angle + rotateBy))
     return RingPoint(x:x, y:y)

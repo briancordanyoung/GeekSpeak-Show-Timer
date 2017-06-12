@@ -34,9 +34,6 @@ class Appearance {
 
   
   class func apply() {
-    UIApplication.sharedApplication().setStatusBarStyle( .LightContent,
-                                                                animated: false)
-    
     UIButton.appearance().tintColor = Constants.GeekSpeakBlueColor
   }
 }

@@ -2,7 +2,7 @@ import UIKit
 
 final public class BackView: UIView {
   
-  public var highlightColor = UIColor.whiteColor() {
+  public var highlightColor = UIColor.white {
     didSet(oldColor) {
       // If the current drawing color is the same as the old highlightColor
       // then redraw the highlight
@@ -23,31 +23,31 @@ final public class BackView: UIView {
   }
   
   public enum highlightState {
-    case Highlighted
-    case Unhighlighted
+    case highlighted
+    case unhighlighted
   }
   
   // The highlight state is derived from the current color used to draw
   // the back image.
   public var highlighted: highlightState {
     if color.isEqual(tintColor) {
-      return .Highlighted
+      return .highlighted
     } else {
-      return .Unhighlighted
+      return .unhighlighted
     }
   }
   
-  private let origSizeX = CGFloat(17.5)
-  private let origSizeY = CGFloat(23)
+  fileprivate let origSizeX = CGFloat(17.5)
+  fileprivate let origSizeY = CGFloat(23)
   
-  private var color = UIColor.whiteColor()
+  fileprivate var color = UIColor.white
   
-  public override func intrinsicContentSize() -> CGSize {
+  public override var intrinsicContentSize : CGSize {
     return CGSize(width: origSizeX, height: origSizeY)
   }
   
   
-  public override func drawRect(rect: CGRect) {
+  public override func draw(_ rect: CGRect) {
     
     color.setStroke()
     
@@ -55,15 +55,15 @@ final public class BackView: UIView {
     let yOffset = (bounds.height / 2) - (origSizeY / 2)
     
     let backPath = UIBezierPath()
-    backPath.moveToPoint(     CGPointMake(13.5  + xOffset,  2 + yOffset))
-    backPath.addCurveToPoint( CGPointMake( 4    + xOffset, 12 + yOffset),
-               controlPoint1: CGPointMake( 4    + xOffset, 12 + yOffset),
-               controlPoint2: CGPointMake( 4    + xOffset, 12 + yOffset))
-    backPath.addLineToPoint(  CGPointMake(13.5  + xOffset, 21 + yOffset))
+    backPath.move(     to: CGPoint(x: 13.5  + xOffset,  y: 2 + yOffset))
+    backPath.addCurve( to: CGPoint( x: 4    + xOffset, y: 12 + yOffset),
+               controlPoint1: CGPoint( x: 4    + xOffset, y: 12 + yOffset),
+               controlPoint2: CGPoint( x: 4    + xOffset, y: 12 + yOffset))
+    backPath.addLine(  to: CGPoint(x: 13.5  + xOffset, y: 21 + yOffset))
     backPath.lineWidth = 3.5
     backPath.stroke()
     
-    UIColor.yellowColor().setStroke()
+    UIColor.yellow.setStroke()
     
     //    UIRectFrame(rect)
   }

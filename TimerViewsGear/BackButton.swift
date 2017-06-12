@@ -14,20 +14,20 @@ final public class BackButton: UIButton {
 
   // MARK:
   // MARK: UIControl Methods
-  public override func beginTrackingWithTouch(touch: UITouch,
-                                            withEvent event: UIEvent?) -> Bool {
-    let superResult =  super.beginTrackingWithTouch(touch, withEvent: event)
+  public override func beginTracking(_ touch: UITouch,
+                                            with event: UIEvent?) -> Bool {
+    let superResult =  super.beginTracking(touch, with: event)
     backView?.highlight()
     return superResult
   }
   
-  public override func cancelTrackingWithEvent(event: UIEvent?) {
-    super.cancelTrackingWithEvent(event)
+  public override func cancelTracking(with event: UIEvent?) {
+    super.cancelTracking(with: event)
     backView?.unhighlight()
   }
   
-  public override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
-    super.endTrackingWithTouch(touch, withEvent: event)
+  public override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+    super.endTracking(touch, with: event)
     backView?.unhighlight()
   }
   

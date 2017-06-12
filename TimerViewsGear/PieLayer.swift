@@ -11,21 +11,21 @@ final class PieLayer: CALayer {
   }
   
   enum Polarity {
-    case Positive
-    case Negative
+    case positive
+    case negative
   }
   
   @NSManaged var startAngle: CGFloat
   @NSManaged var endAngle: CGFloat
   
   var clipToCircle = true
-  var fillColor = UIColor.whiteColor()
-  var polarity: Polarity = .Positive
+  var fillColor = UIColor.white
+  var polarity: Polarity = .positive
   
   
   
   // MARK: Internal Computed Properties
-  private var center: CGPoint {
+  fileprivate var center: CGPoint {
     let width  = self.bounds.size.width
     let height = self.bounds.size.height
     
@@ -49,7 +49,7 @@ final class PieLayer: CALayer {
     return point
   }
   
-  private var radius: CGFloat {
+  fileprivate var radius: CGFloat {
     return min(self.bounds.size.width , self.bounds.size.height) / 2
   }
   
@@ -64,7 +64,7 @@ final class PieLayer: CALayer {
     self.needsDisplay()
   }
   
-  override init(layer: AnyObject) {
+  override init(layer: Any) {
     super.init(layer: layer)
     if let layer = layer as? PieLayer {
       startAngle   = layer.startAngle
@@ -89,18 +89,18 @@ final class PieLayer: CALayer {
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    startAngle   = CGFloat(aDecoder.decodeDoubleForKey(Constants.StartAngle))
-    endAngle     = CGFloat(aDecoder.decodeDoubleForKey(Constants.EndAngle))
-    clipToCircle = aDecoder.decodeBoolForKey(Constants.ClipToCircle)
+    startAngle   = CGFloat(aDecoder.decodeDouble(forKey: Constants.StartAngle))
+    endAngle     = CGFloat(aDecoder.decodeDouble(forKey: Constants.EndAngle))
+    clipToCircle = aDecoder.decodeBool(forKey: Constants.ClipToCircle)
     // TODO: decode Color
   }
   
   
-  override func encodeWithCoder(aCoder: NSCoder) {
-    super.encodeWithCoder(aCoder)
-    aCoder.encodeDouble(Double(startAngle), forKey: Constants.StartAngle)
-    aCoder.encodeDouble(Double(endAngle),   forKey: Constants.EndAngle)
-    aCoder.encodeBool(clipToCircle,         forKey: Constants.ClipToCircle)
+  override func encode(with aCoder: NSCoder) {
+    super.encode(with: aCoder)
+    aCoder.encode(Double(startAngle), forKey: Constants.StartAngle)
+    aCoder.encode(Double(endAngle),   forKey: Constants.EndAngle)
+    aCoder.encode(clipToCircle,         forKey: Constants.ClipToCircle)
     // TODO: encode Color
   }
   
@@ -108,44 +108,47 @@ final class PieLayer: CALayer {
   
   
   // MARK: Drawing
-  override func drawInContext(ctx: CGContext) {
+  override func draw(in ctx: CGContext) {
     
     let halfPi = (M_PI / 2)
     let offset = startAngle > endAngle ? CGFloat(halfPi) : -CGFloat(halfPi)
     let start = startAngle + offset
     let end   = endAngle   + offset
     
-    CGContextBeginPath(ctx)
-    CGContextMoveToPoint(ctx, center.x, center.y)
+    ctx.beginPath()
+    ctx.move(to: CGPoint(x: center.x, y: center.y))
     
-    let p1 = CGPointMake(center.x + radius * cos(start),
-      center.y + radius * sin(start))
-    CGContextAddLineToPoint(ctx, p1.x, p1.y)
+    let p1 = CGPoint(x: center.x + radius * cos(start),
+      y: center.y + radius * sin(start))
+    ctx.addLine(to: CGPoint(x: p1.x, y: p1.y))
     
-    let clockwise: Int32
+    let clockwise: Bool
     
-    if polarity == .Positive {
-      clockwise = start > end ? Int32(1) : Int32(0)
+    if polarity == .positive {
+      clockwise = start > end ? true : false
     } else {
-      clockwise = start > end ? Int32(0) : Int32(1)
+      clockwise = start > end ? false : true
     }
     
-    CGContextAddArc(ctx, center.x, center.y, radius,
-      start,      end, clockwise)
+    ctx.addArc(center: center,
+                   radius: radius,
+                   startAngle: start,
+                   endAngle: end,
+                   clockwise: clockwise)
+
+    ctx.closePath();
     
-    CGContextClosePath(ctx);
+    ctx.setFillColor(self.fillColor.cgColor)
+    ctx.setStrokeColor(self.fillColor.cgColor)
+    ctx.setLineWidth(2.0)
     
-    CGContextSetFillColorWithColor(ctx, self.fillColor.CGColor)
-    CGContextSetStrokeColorWithColor(ctx, self.fillColor.CGColor)
-    CGContextSetLineWidth(ctx, 2.0)
-    
-    CGContextDrawPath(ctx, .Fill)
+    ctx.drawPath(using: .fill)
     
   }
   
   // MARK: Animation
   // Allows CoreAnimation to animate these parameters.
-  override class func needsDisplayForKey(key: String) -> Bool {
+  override class func needsDisplay(forKey key: String) -> Bool {
     if key == "startAngle" ||
       key == "endAngle"      {
         return true
@@ -154,9 +157,9 @@ final class PieLayer: CALayer {
     }
   }
   
-  func makeAnimationForKey(key: String) -> CABasicAnimation {
+  func makeAnimationForKey(_ key: String) -> CABasicAnimation {
     let anim = CABasicAnimation(keyPath: key)
-    anim.fromValue = presentationLayer()?.valueForKey(key)
+    anim.fromValue = presentation()?.value(forKey: key)
     anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
     anim.duration = 0.0
     return anim
