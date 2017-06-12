@@ -95,16 +95,16 @@ public struct TauAngle: AngularType {
 // degrees <--> radians
 extension TauAngle {
   static func radians2Degrees(_ radians:Double) -> Double {
-    return radians * 180.0 / Double(M_PI)
+    return radians * 180.0 / Double(Double.pi)
   }
   
   static func degrees2radians(_ degrees:Double) -> Double {
-    return degrees * Double(M_PI) / 180.0
+    return degrees * Double(Double.pi) / 180.0
   }
 
   static func limit(_ angle:Double) -> Double {
     var angle = angle
-    let tau = M_PI * 2
+    let tau = Double.pi * 2
     
     if angle >  tau {
       let totalRotations = floor(angle / tau)
@@ -170,12 +170,12 @@ extension TauAngle {
     switch preset {
     case .fullCircle,
          .tau:
-      return TauAngle(M_PI * 2)
+      return TauAngle(Double.pi * 2)
     case .halfCircle,
          .pi:
-      return TauAngle(M_PI)
+      return TauAngle(Double.pi)
     case .quarterCircle:
-      return TauAngle(M_PI * 0.50)
+      return TauAngle(Double.pi * 0.50)
     }
   }
   

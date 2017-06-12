@@ -383,7 +383,7 @@ final class TimerViewController: UIViewController {
     view.addGestureRecognizer(gesture)
   }
   
-  func panGestureRecognized(_ sender: UIPanGestureRecognizer) {
+  @objc func panGestureRecognized(_ sender: UIPanGestureRecognizer) {
     guard let primaryViewController = UIApplication.shared
                  .keyWindow?.rootViewController as? PrimaryViewController else {
       assertionFailure("Could not find PrimaryViewController as root View controller")
@@ -492,7 +492,7 @@ final class TimerViewController: UIViewController {
                                attribute: .width,
                               multiplier: 160 / 736,
                                 constant: 0.0)
-    width.priority = 1000
+    width.priority = UILayoutPriority(rawValue: 1000)
     label.superview?.addConstraint(width)
     
   }
@@ -506,7 +506,7 @@ final class TimerViewController: UIViewController {
                                       attribute: .height,
                                      multiplier: 20 / 736,
                                        constant: 0.0)
-      height.priority = 1000
+      height.priority = UILayoutPriority(rawValue: 1000)
       labelSuperView.addConstraint(height)
     }
   }
