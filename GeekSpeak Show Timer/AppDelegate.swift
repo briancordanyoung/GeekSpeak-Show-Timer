@@ -1,79 +1,252 @@
-//
-//  AppDelegate.swift
-//  GeekSpeak Show Timer
-//
-//  Created by Brian Cordan Young on 8/1/15.
-//  Copyright (c) 2015 Brian Young. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+  struct Constants {
+    static let CurrentTimerFileName = "Current Timer"
+    static let TimerId              = "timerViewControllerTimerId"
+    static let TimerNotificationKey = "com.geekspeak.timerNotificationKey"
+    static let TimerDataPath        = "TimerData.plist"
+  }
+  
+  
   var window: UIWindow?
 
-
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+  var timer: Timer {
+    get {
+      if let timer = _timer {
+        return timer
+      }
+      
+      if let timer = readCurrentTimer() {
+        _timer = timer
+        return timer
+      } else {
+        let timer = Timer()
+        _timer = timer
+        return timer
+      }
+      
+    }
+    set(timer) {
+      _timer = timer
+    }
+  }
+  fileprivate var _timer: Timer?
+  
+  // Convenience property to make intentions clear what is gonig on.
+  var allowDeviceToSleepDisplay: Bool {
+    get {
+      return !UIApplication.shared.isIdleTimerDisabled
+    }
+    set(allowed) {
+      UIApplication.shared.isIdleTimerDisabled = !allowed
+    }
+  }
+  
+  
+  // MARK: App Delegate
+  func application(_ application: UIApplication,
+       didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?)
+                                                                       -> Bool {
     registerUserDefaults()
+    Appearance.apply()
+    resetTimerIfShowTimeIsZero()
+    registerForTimerNotifications()
     return true
   }
 
-  func application(application: UIApplication,
-          willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?)
+
+
+  func application(_ application: UIApplication,
+          willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?)
                                                                        -> Bool {
     self.window?.makeKeyAndVisible()
-    UIApplication.sharedApplication()
-                 .setStatusBarStyle( UIStatusBarStyle.Default,
-                           animated: false)
     return true
   }
   
-  func applicationWillResignActive(application: UIApplication) {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+
+  
+  func applicationWillEnterForeground(_ application: UIApplication) {
+    resetTimerIfShowTimeIsZero()
+//    setAllowDeviceToSleepDisplayForTimer(timer)
   }
 
-  func applicationDidEnterBackground(application: UIApplication) {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-  }
-
-  func applicationWillEnterForeground(application: UIApplication) {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-  }
-
-  func applicationDidBecomeActive(application: UIApplication) {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-  }
-
-  func applicationWillTerminate(application: UIApplication) {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+  func applicationDidBecomeActive(_ application: UIApplication) {
+    timerChangedCountingStatus()
   }
   
-  func application(application: UIApplication, shouldSaveApplicationState
+  func applicationWillResignActive(_ application: UIApplication) {
+    writeCurrentTimer()
+  }
+
+  func applicationDidEnterBackground(_ application: UIApplication) {
+    allowDeviceToSleepDisplay = true
+  }
+
+  func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
+    writeCurrentTimer()
+  }
+  
+  func applicationWillTerminate(_ application: UIApplication) {
+  }
+  
+  func application(_ application: UIApplication, shouldSaveApplicationState
                          coder: NSCoder) -> Bool {
+    unregisterForTimerNotifications()
     return true
   }
 
-  func application(application: UIApplication, shouldRestoreApplicationState
+  func application(_ application: UIApplication, shouldRestoreApplicationState
                          coder: NSCoder) -> Bool {
+    registerForTimerNotifications()
     return true
+  }
+  
+  
+  // MARK: -
+  // MARK: Timer Persistance
+  var applicationDocumentsDirectory: URL {
+   return FileManager.default
+                     .urls( for: .documentDirectory,
+                             in: .userDomainMask)
+                     .last!
+  }
+  
+  var savedTimer: URL {
+    return applicationDocumentsDirectory
+                    .appendingPathComponent(Constants.CurrentTimerFileName)
+  }
+  
+  func writeCurrentTimer() {
+    writeCurrentTimer(timer)
+  }
+  
+  func writeCurrentTimer(_ timer: Timer) {
+    let name = savedTimer.lastPathComponent
+    let directory = savedTimer.deletingLastPathComponent()
+      
+    let backupName = "\(name) Backup"
+    let backupURL = directory.appendingPathComponent(backupName)
+
+    let path = savedTimer.path
+    let backupPath = backupURL.path
+    let fileManager = FileManager.default
+
+    do {
+      if fileManager.fileExists(atPath: backupPath) {
+        try fileManager.removeItem(atPath: backupPath)
+      }
+      if fileManager.fileExists(atPath: path) {
+        try fileManager.moveItem(atPath: path, toPath: backupPath)
+      }
+      if !NSKeyedArchiver.archiveRootObject(timer, toFile: path) {
+        print("Warning: Timer could not be archived to the disk.")
+      }
+    } catch let error as NSError {
+      print("Timer not writen: \(error.localizedDescription)")
+    }
+  }
+
+  func readCurrentTimer() -> Timer? {
+    var timer: Timer? = .none
+    
+    let fileManager = FileManager.default
+    
+    let path = savedTimer.path
+    if fileManager.fileExists(atPath: path) {
+      let readTimer = NSKeyedUnarchiver.unarchiveObject(withFile: path)
+      if let readTimer = readTimer as? Timer {
+        timer = readTimer
+      }
+    }
+
+    return timer
+  }
+  
+  func restoreAnySavedTimer() {
+    if let restoredTimer = readCurrentTimer() {
+      timer = restoredTimer
+    }
   }
 
 }
 
+// MARK: Additional
 
-// Setup the default defaults in app memory
 extension AppDelegate {
   
+  func registerForTimerNotifications() {
+    let notifyCenter = NotificationCenter.default
+    notifyCenter.addObserver( self,
+                    selector: #selector(AppDelegate.timerChangedCountingStatus),
+                        name: NSNotification.Name(rawValue: Timer.Constants.CountingStatusChanged),
+                      object: timer)
+
+  }
+  
+  func unregisterForTimerNotifications() {
+    let notifyCenter = NotificationCenter.default
+    // TODO: When I explicitly remove each observer it throws an execption. why?
+    //    notifyCenter.removeObserver( self,
+    //                     forKeyPath: Timer.Constants.CountingStatusChanged)
+    notifyCenter.removeObserver(self)
+  }
+
+  func timerChangedCountingStatus() {
+    setAllowDeviceToSleepDisplayForTimer(timer)
+  }
+  
+  func setAllowDeviceToSleepDisplayForTimer(_ timer: Timer) {
+    writeCurrentTimer()
+
+    switch timer.state {
+    
+    case .Ready,
+         .Paused,
+         .PausedAfterComplete:
+      allowDeviceToSleepDisplay = true
+      
+    case .Counting,
+         .CountingAfterComplete:
+      allowDeviceToSleepDisplay = false
+    }
+
+  }
+
+  func resetTimerIfShowTimeIsZero() {
+    // reset the timer if it hasn't started, so that it uses the UserDefaults
+    // to set which timing to use (demo or show)
+    let useDemoDurations = UserDefaults.standard
+                                   .bool(forKey: Timer.Constants.UseDemoDurations)
+    if timer.totalShowTimeElapsed == 0 {
+      if useDemoDurations {
+        timer.reset(usingDemoTiming: true)
+      } else {
+        timer.reset(usingDemoTiming: false)
+      }
+    }
+  }
+  
+
+  
+  // Setup the default defaults in app memory
   func registerUserDefaults() {
+    let useDebugTimings: Bool
+    #if DEBUG
+      useDebugTimings = true
+    #else
+      useDebugTimings = false
+    #endif
+    
     let defaults: [String:AnyObject] = [
-      Timer.Constants.UseDemoDurations: false
+      Timer.Constants.UseDemoDurations: useDebugTimings as AnyObject
     ]
     
-    NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
+    UserDefaults.standard.register(defaults: defaults)
   }
+
   
 }
 

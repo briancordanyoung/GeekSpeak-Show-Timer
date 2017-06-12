@@ -1,6 +1,6 @@
 
 
-func comments(() -> ()) {
+func comments(_: () -> ()) {
     // This is a no-op function created to use the trailing closure syntax
     // to wrap up a bunch of comments for 
 }
@@ -14,10 +14,10 @@ extension Optional {
     }
   }
   
-  func hasValue<T>(value: T?) -> Bool {
+  func hasValue<T>(_ value: T?) -> Bool {
     switch (value) {
-    case .Some(_): return true
-    case .None:    return false
+    case .some(_): return true
+    case .none:    return false
     }
   }
   
@@ -27,7 +27,7 @@ extension Optional {
     }
   }
 
-  func hasNoValue<T>(value: T?) -> Bool {
+  func hasNoValue<T>(_ value: T?) -> Bool {
     let result = hasValue(value)
     return !result
   }
