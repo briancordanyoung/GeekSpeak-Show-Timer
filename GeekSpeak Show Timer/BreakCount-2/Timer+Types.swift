@@ -197,13 +197,13 @@ extension Timer {
     }
 
     /**
-     The current timings used for GeekSpeak after KUSP changed format (57 minutes)
+     The current KBCZ timings (59 minutes)
      */
     mutating func useKBCZDurations() {
       preShow  =  1.0 * oneMinute
-      section1 = 28.5 * oneMinute
+      section1 = 29.5 * oneMinute
       break1   =  1.0 * oneMinute
-      section2 = 28.5 * oneMinute
+      section2 = 29.5 * oneMinute
     }
 
   }
