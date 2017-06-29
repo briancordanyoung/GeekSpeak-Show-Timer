@@ -1,7 +1,7 @@
 import Swift
 import Foundation
 
-public protocol AngularType : Comparable, ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, SignedNumber {
+public protocol AngularType : Comparable, ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral {
   var value: Double { set get }
   init(_ value: Double)
 }

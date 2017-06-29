@@ -194,7 +194,7 @@ extension AppDelegate {
     notifyCenter.removeObserver(self)
   }
 
-  func timerChangedCountingStatus() {
+  @objc func timerChangedCountingStatus() {
     setAllowDeviceToSleepDisplayForTimer(timer)
   }
   

@@ -36,8 +36,8 @@ final class RingLayer : CALayer {
   
   struct Constants {
     static let DefaultColor = UIColor.white
-    static let Tau = CGFloat(M_PI) * 2
-    static let Quarter = CGFloat(M_PI) * 0.5
+    static let Tau = CGFloat(Double.pi) * 2
+    static let Quarter = CGFloat(Double.pi) * 0.5
     static let StartAngle = "ringViewStartAngleId"
     static let EndAngle   = "ringViewEndAngleId"
     static let FillScale  = "ringViewFillScaleId"

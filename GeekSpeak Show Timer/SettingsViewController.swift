@@ -99,7 +99,7 @@ class SettingsViewController: UIViewController {
   
   
 
-  func generateBlurredBackground() {
+  @objc func generateBlurredBackground() {
 
     if backgroundBlurringInProgress { return }
     

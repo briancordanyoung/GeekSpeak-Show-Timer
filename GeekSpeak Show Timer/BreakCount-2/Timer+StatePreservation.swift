@@ -35,7 +35,7 @@ extension Timer: NSCoding {
     
     let countingStartTimeDecoded =
                       aDecoder.decodeDouble(forKey: Constants.CountingStartTimeId)
-    if countingStartTimeDecoded == DBL_MAX {
+    if countingStartTimeDecoded == .greatestFiniteMagnitude {
       countingStartTime = .none
     } else {
       countingStartTime = countingStartTimeDecoded
@@ -107,7 +107,7 @@ extension Timer: NSCoding {
       aCoder.encode( countingStartTime,
                    forKey: Constants.CountingStartTimeId)
     } else {
-      aCoder.encode( DBL_MAX,
+      aCoder.encode( Double.greatestFiniteMagnitude,
                    forKey: Constants.CountingStartTimeId)
     }
     

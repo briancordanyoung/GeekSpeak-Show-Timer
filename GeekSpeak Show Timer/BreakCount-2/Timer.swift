@@ -277,7 +277,7 @@ final class Timer: NSObject {
                                        object: self)
   }
   
-  func notifyCountingStateUpdated() {
+  @objc func notifyCountingStateUpdated() {
     NotificationCenter.default
                         .post( name: Notification.Name(rawValue: Constants.CountingStatusChanged),
                                        object: self)
@@ -298,7 +298,7 @@ final class Timer: NSObject {
   
   // MARK: -
   // MARK: Timer
-  func incrementTimer() {
+  @objc func incrementTimer() {
     switch state {
     case .Ready:
       break
