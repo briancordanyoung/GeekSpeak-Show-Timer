@@ -201,9 +201,9 @@ extension Timer {
      */
     mutating func useKBCZDurations() {
       preShow  =  1.0 * oneMinute
-      section1 = 28.5 * oneMinute
+      section1 = 29.5 * oneMinute
       break1   =  1.0 * oneMinute
-      section2 = 28.5 * oneMinute
+      section2 = 29.5 * oneMinute
     }
 
   }
