@@ -104,7 +104,7 @@ extension TauAngle {
 
   static func limit(_ angle:Double) -> Double {
     var angle = angle
-    let tau = Double.pi * 2
+    let tau = Double.tau
     
     if angle >  tau {
       let totalRotations = floor(angle / tau)
@@ -170,7 +170,7 @@ extension TauAngle {
     switch preset {
     case .fullCircle,
          .tau:
-      return TauAngle(Double.pi * 2)
+      return TauAngle(Double.tau)
     case .halfCircle,
          .pi:
       return TauAngle(Double.pi)

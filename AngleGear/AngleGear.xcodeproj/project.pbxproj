@@ -18,6 +18,7 @@
 		D353A3151BDD945000BFFA65 /* AngularType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D353A30E1BDD945000BFFA65 /* AngularType.swift */; };
 		D353A3161BDD945000BFFA65 /* TauAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D353A30F1BDD945000BFFA65 /* TauAngle.swift */; };
 		D353A3171BDD945000BFFA65 /* TauAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D353A30F1BDD945000BFFA65 /* TauAngle.swift */; };
+		D379987D1F09F47A00C19461 /* Double+Tau.swift in Sources */ = {isa = PBXBuildFile; fileRef = D379987C1F09F47A00C19461 /* Double+Tau.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		D353A30D1BDD945000BFFA65 /* Angle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Angle.swift; sourceTree = "<group>"; };
 		D353A30E1BDD945000BFFA65 /* AngularType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AngularType.swift; sourceTree = "<group>"; };
 		D353A30F1BDD945000BFFA65 /* TauAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TauAngle.swift; sourceTree = "<group>"; };
+		D379987C1F09F47A00C19461 /* Double+Tau.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Tau.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				D353A30C1BDD945000BFFA65 /* AccumulatedAngle.swift */,
 				D353A2F51BDD942500BFFA65 /* AngleGear.h */,
 				D353A2F71BDD942500BFFA65 /* Info.plist */,
+				D379987C1F09F47A00C19461 /* Double+Tau.swift */,
 			);
 			path = AngleGear;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D379987D1F09F47A00C19461 /* Double+Tau.swift in Sources */,
 				D353A3101BDD945000BFFA65 /* AccumulatedAngle.swift in Sources */,
 				D353A3121BDD945000BFFA65 /* Angle.swift in Sources */,
 				D353A3161BDD945000BFFA65 /* TauAngle.swift in Sources */,

@@ -121,7 +121,7 @@ public extension AccumulatedAngle {
     switch preset {
     case .circle,
          .tau:
-      return AccumulatedAngle(Double.pi * 2)
+      return AccumulatedAngle(Double.tau)
     case .halfCircle,
          .pi:
       return AccumulatedAngle(Double.pi)

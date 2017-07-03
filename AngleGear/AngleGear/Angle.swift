@@ -105,7 +105,7 @@ extension Angle {
   static func limit(_ angle:Double) -> Double {
     var angle = angle
     let pi  = Double.pi
-    let tau = Double.pi * 2
+    let tau = Double.tau
     
     if angle >  pi {
       angle += pi
