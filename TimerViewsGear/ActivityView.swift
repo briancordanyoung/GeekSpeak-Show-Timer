@@ -19,7 +19,7 @@ final public class ActivityView: UIView {
     didSet(oldActivity) {
       resetFadeAnimation()
       
-      let angle = CGFloat(M_PI*2) * activityPercentage
+      let angle = CGFloat(Double.pi*2) * activityPercentage
       
       switch activityParity {
       case .even:
@@ -27,7 +27,7 @@ final public class ActivityView: UIView {
         pieLayer.endAngle   = angle
       case .odd:
         pieLayer.startAngle = angle
-        pieLayer.endAngle   = CGFloat(M_PI*2)
+        pieLayer.endAngle   = CGFloat(Double.pi*2)
       }
     }
   }
@@ -96,7 +96,7 @@ final public class ActivityView: UIView {
   }
   
   
-  func fadeAnimation() {
+  @objc func fadeAnimation() {
     UIView.animate(withDuration: fadeoutDuration, animations: {
       self.alpha = 0
     }) 

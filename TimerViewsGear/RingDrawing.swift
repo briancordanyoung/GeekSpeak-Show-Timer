@@ -7,7 +7,7 @@ import AngleGear
 open class RingDrawing: NSObject {
   
   public struct Constant {
-    static let Quarter = CGFloat(M_PI / 2)
+    static let Quarter = CGFloat(Double.pi / 2)
   }
   
   public struct GuideTypes {

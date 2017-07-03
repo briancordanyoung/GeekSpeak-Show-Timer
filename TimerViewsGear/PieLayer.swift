@@ -110,7 +110,7 @@ final class PieLayer: CALayer {
   // MARK: Drawing
   override func draw(in ctx: CGContext) {
     
-    let halfPi = (M_PI / 2)
+    let halfPi = (Double.pi / 2)
     let offset = startAngle > endAngle ? CGFloat(halfPi) : -CGFloat(halfPi)
     let start = startAngle + offset
     let end   = endAngle   + offset

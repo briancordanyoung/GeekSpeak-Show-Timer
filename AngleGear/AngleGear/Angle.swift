@@ -95,17 +95,17 @@ public struct Angle: AngularType {
 // degrees <--> radians
 extension Angle {
   static func radians2Degrees(_ radians:Double) -> Double {
-    return radians * 180.0 / Double(M_PI)
+    return radians * 180.0 / Double(Double.pi)
   }
   
   static func degrees2radians(_ degrees:Double) -> Double {
-    return degrees * Double(M_PI) / 180.0
+    return degrees * Double(Double.pi) / 180.0
   }
 
   static func limit(_ angle:Double) -> Double {
     var angle = angle
-    let pi  = M_PI
-    let tau = M_PI * 2
+    let pi  = Double.pi
+    let tau = Double.pi * 2
     
     if angle >  pi {
       angle += pi
@@ -161,11 +161,11 @@ extension Int {
 func isWithinAngleLimits(_ value: Double) -> Bool {
   var isWithinLimits = true
   
-  if value > M_PI {
+  if value > Double.pi {
     isWithinLimits = false
   }
   
-  if value < -M_PI {
+  if value < -Double.pi {
     isWithinLimits = false
   }
   
@@ -175,11 +175,11 @@ func isWithinAngleLimits(_ value: Double) -> Bool {
 func isWithinAngleLimits(_ value: CGFloat) -> Bool {
   var isWithinLimits = true
   
-  if value > CGFloat(M_PI) {
+  if value > CGFloat(Double.pi) {
     isWithinLimits = false
   }
   
-  if value < CGFloat(-M_PI) {
+  if value < CGFloat(-Double.pi) {
     isWithinLimits = false
   }
   
@@ -202,9 +202,9 @@ extension Angle {
     switch preset {
     case .halfCircle,
          .pi:
-      return Angle(M_PI)
+      return Angle(Double.pi)
     case .quarterCircle:
-      return Angle(M_PI * 0.50)
+      return Angle(Double.pi * 0.50)
     }
   }
   

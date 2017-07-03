@@ -28,7 +28,7 @@ extension SettingsViewController {
   }
   
   // MARK: Actions
-  func updateElapsedTimeLabels() {
+  @objc func updateElapsedTimeLabels() {
     if let timer = timer {
       
       let timing   = timer.timing

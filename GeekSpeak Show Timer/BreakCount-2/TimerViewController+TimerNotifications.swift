@@ -40,13 +40,13 @@ extension TimerViewController {
   // MARK: Timer callback funtions
   
   
-  func timerChangedCountingStatus() {
+  @objc func timerChangedCountingStatus() {
     if let timer = timer {
       updateButtonLayout(timer)
     }
   }
   
-  func timerDurationChanged() {
+  @objc func timerDurationChanged() {
     // TODO: Remove this logic and replace it when the ShowTiming struct
     //       is abstracted out to some sort of generalized definition
     
@@ -163,7 +163,7 @@ extension TimerViewController {
   //       be concerned with doing too much. look in to CPU usage and determine
   //       if it is worth doing something 'more clever'.
   
-  func timerUpdatedTime() {
+  @objc func timerUpdatedTime() {
     if let timer = timer {
       let timing    = timer.timing
       let totalTime = timing.asShortString(timing.durations.totalShowTime)
