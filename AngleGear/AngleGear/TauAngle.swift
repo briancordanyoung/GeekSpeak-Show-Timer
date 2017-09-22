@@ -143,7 +143,7 @@ extension TauAngle: ExpressibleByFloatLiteral {
 }
 
 
-// MARK: Extend Int to initialize with an Angle
+// MARK: Extend Int to initialize with a TauAngle
 extension Int {
   public init(_ angle: TauAngle) {
     self = Int(angle.value)
