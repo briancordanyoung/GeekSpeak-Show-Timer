@@ -30,7 +30,6 @@
 		D34C13E31BBCEEB500649676 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D34C13DD1BBCEEB500649676 /* UIViewController+REFrostedViewController.m */; };
 		D34C13E51BBCF03500649676 /* PrimaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C13E41BBCF03500649676 /* PrimaryViewController.swift */; };
 		D353A2E71BDD930800BFFA65 /* flash.png in Resources */ = {isa = PBXBuildFile; fileRef = D353A2E61BDD930800BFFA65 /* flash.png */; };
-		D367427F1B9CDDED00EE13F7 /* Array+Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D367427E1B9CDDED00EE13F7 /* Array+Bool.swift */; };
 		D38377AC1BDF46F500C98D7E /* TimerViewsGear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3CA204A1BDDC79600DBC458 /* TimerViewsGear.framework */; };
 		D38377AD1BDF46F500C98D7E /* TimerViewsGear.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D3CA204A1BDDC79600DBC458 /* TimerViewsGear.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D38377B11BDF46FA00C98D7E /* AngleGear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D350AAB01BDD9C21001DF008 /* AngleGear.framework */; };
@@ -154,7 +153,6 @@
 		D34C13E61BBCFB9500649676 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		D350AAAA1BDD9C21001DF008 /* AngleGear.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AngleGear.xcodeproj; path = AngleGear/AngleGear.xcodeproj; sourceTree = "<group>"; };
 		D353A2E61BDD930800BFFA65 /* flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flash.png; path = ../Graphics/flash.png; sourceTree = "<group>"; };
-		D367427E1B9CDDED00EE13F7 /* Array+Bool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Bool.swift"; sourceTree = "<group>"; };
 		D3912C701B6E93B7003B42F1 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCYStandardLibrary.swift; sourceTree = "<group>"; };
 		D39DAD191B917229007D797C /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
@@ -242,7 +240,6 @@
 				D3E0BB331CBB3155006E664F /* String+Pad.swift */,
 				D34C13D11BBCEEB400649676 /* REFrostedViewController */,
 				D3912C741B6E9D73003B42F1 /* BCYStandardLibrary.swift */,
-				D367427E1B9CDDED00EE13F7 /* Array+Bool.swift */,
 				D32B9DEC1B77F6740098DCCF /* UIImage+WithColor.swift */,
 				D340CCB41B6D939F00BB17E3 /* UIColor+DarkenColor.swift */,
 				D320C35F1B6FF5E90046F785 /* UIImage+ImageEffects.h */,
@@ -510,7 +507,6 @@
 				D3E0BB341CBB3155006E664F /* String+Pad.swift in Sources */,
 				D32FA1A81EAD1FD2006554CF /* SettingsViewController+TimerNotifications.swift in Sources */,
 				D340CC791B6D3E7600BB17E3 /* AppDelegate.swift in Sources */,
-				D367427F1B9CDDED00EE13F7 /* Array+Bool.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
