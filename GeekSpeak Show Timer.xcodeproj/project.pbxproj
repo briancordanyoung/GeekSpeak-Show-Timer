@@ -135,7 +135,7 @@
 		D340CC8E1B6D3E7600BB17E3 /* GeekSpeak_Show_TimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeekSpeak_Show_TimerTests.swift; sourceTree = "<group>"; };
 		D340CC9A1B6D504400BB17E3 /* GeekSpeak Show Timer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GeekSpeak Show Timer-Bridging-Header.h"; sourceTree = "<group>"; };
 		D340CCB41B6D939F00BB17E3 /* UIColor+DarkenColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+DarkenColor.swift"; sourceTree = "<group>"; };
-		D343C2E11EAD29B200726895 /* RingViewTest.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RingViewTest.playground; sourceTree = "<group>"; };
+		D343C2E11EAD29B200726895 /* RingViewTest.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RingViewTest.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D3463F671B713E0D002C68A8 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D34C13D21BBCEEB400649676 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		D34C13D31BBCEEB400649676 /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
